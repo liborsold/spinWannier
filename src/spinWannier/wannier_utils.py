@@ -1086,6 +1086,8 @@ def fermi_surface_spin_texture(kpoints2D, bands2D, Sx2D, Sy2D, Sz2D, ax=None, E=
     include_kpoint = np.any(energy_distances <= E_thr, axis=1)
     closest_band = np.argmin(energy_distances, axis=1)[include_kpoint]
 
+    print('got here')
+
     # get the cartesian (kx, ky) and polar (k, phi) coordinates of the kpoints
     kx = kpoints2D[include_kpoint,0]
     ky = kpoints2D[include_kpoint,1]
@@ -1098,9 +1100,13 @@ def fermi_surface_spin_texture(kpoints2D, bands2D, Sx2D, Sy2D, Sz2D, ax=None, E=
                        'Sx': Sx2D[include_kpoint, closest_band], \
                         'Sy': Sy2D[include_kpoint, closest_band], 'Sz': Sz2D[include_kpoint, closest_band]})
     
+    print('got here 2')
+
     # save the mean radius for each corresponding band
     df_bands = pd.DataFrame()
     df_bands['k_mean'] = df.groupby('closest_band')['k'].mean()
+
+    print('got here 3')
 
     # get the closest integer number of points for each band divisible by 6
     df_bands['n_points'] = df_bands['k_mean'].apply(lambda x: (int(x * n_points_for_one_angstrom_radius) // 6)*6)
@@ -1121,7 +1127,9 @@ def fermi_surface_spin_texture(kpoints2D, bands2D, Sx2D, Sy2D, Sz2D, ax=None, E=
         df_filtered = pd.concat([df_filtered, df_filtered_temp])
 
     # get the kx, ky, Sx, Sy, Sz values for the arrows
+    print('got here 4')
     kx_radial_filter = df_filtered['kx'].values
+    print('got here 5')
     ky_radial_filter = df_filtered['ky'].values
     Sx_radial_filter = df_filtered['Sx'].values
     Sy_radial_filter = df_filtered['Sy'].values

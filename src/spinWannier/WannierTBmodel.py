@@ -49,6 +49,7 @@ class WannierTBmodel():
         if save_folder_in_model_dir[-1] != "/": save_folder_in_model_dir += "/"
 
         save_folder = self.model_dir + save_folder_in_model_dir
+        self.real_space_save_folder = save_folder
 
         # create the save_folder if it does not exist
         if not exists(save_folder): makedirs(save_folder)
@@ -169,11 +170,11 @@ class WannierTBmodel():
         plot_bands_spin_texture(self.kpoints_rec['1D'], self.kpath['1D'], self.Eigs_k['1D'], self.S_mn_k_H_x['1D'], self.S_mn_k_H_y['1D'], self.S_mn_k_H_z['1D'], fout=fout, yaxis_lim=yaxis_lim)
     
 
-    def plot2D_spin_texture(fig_name="spin_texture_2D_home_made.jpg"):
+    def plot2D_spin_texture(self, fig_name="spin_texture_2D_home_made.jpg", E_to_cut=None):
         # ==========  USER DEFINED  ===============
-        fin_1D = "bands_spin.pickle" #"bands_spin_model.pickle" #"./tb_model_wann90/bands_spin.pickle" #"bands_spin_model.pickle" #
-        fin_2D = "bands_spin_2D.pickle" #"bands_spin_2D_model.pickle" #"./tb_model_wann90/bands_spin_2D.pickle" #"bands_spin_2D_model.pickle"
-        E_F = float(np.loadtxt('./FERMI_ENERGY.in')) #-2.31797502 # for CrTe2 with EFIELD: -2.31797166
+        fin_1D = self.real_space_save_folder+"bands_spin.pickle" #"bands_spin_model.pickle" #"./tb_model_wann90/bands_spin.pickle" #"bands_spin_model.pickle" #
+        fin_2D = self.real_space_save_folder+"bands_spin_2D.pickle" #"bands_spin_2D_model.pickle" #"./tb_model_wann90/bands_spin_2D.pickle" #"bands_spin_2D_model.pickle"
+        E_F = float(np.loadtxt(self.model_dir+'FERMI_ENERGY.in')) #-2.31797502 # for CrTe2 with EFIELD: -2.31797166
         E_to_cut_2D = E_F #E_F # + 1.44
         kmesh_limits = None #[-.5, .5] #None #   # unit 1/A; put 'None' if no limits should be applied
         colorbar_Sx_lim = [-1, 1] #[-0.2, 0.2] #None # put None if they should be determined automatically
@@ -200,9 +201,7 @@ class WannierTBmodel():
         contour_line_width = 1.5
         # ========================================
 
-        global kpoints2D, bands2D, Sx2D, Sy2D, Sz2D, kpoints1D, kpath1D, bands1D, Sx1D, Sy1D, Sz1D, quiver_scale
-
-        magmom_OOP = magmom_OOP_or_IP('../../sc/INCAR')
+        magmom_OOP = True #magmom_OOP_or_IP('../../sc/INCAR')
         quiver_scale = quiver_scale_magmom_OOP if magmom_OOP is True else quiver_scale_magmom_IP
 
         # load the data
@@ -235,6 +234,7 @@ class WannierTBmodel():
 
         # selected_band_plot(band)
         if E_to_cut is None: E_to_cut = E_to_cut_2D
+        
         fermi_surface_spin_texture(kpoints2D, bands2D, Sx2D, Sy2D, Sz2D, E=E_to_cut_2D, E_F=E_F, \
                                     E_thr=E_thr, savefig=True, \
                                     fig_name=fig_name, quiver_scale=quiver_scale, scatter_for_quiver=scatter_for_quiver, \
