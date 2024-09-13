@@ -12,6 +12,7 @@ import re
 import pandas as pd
 import pickle
 from os.path import exists
+from cmath import exp
 
 
 def get_kpoint_names(fwin="wannier90.win"):
@@ -476,7 +477,7 @@ def save_bands_and_spin_texture(kpoints_rec, kpoints_cart, kpath, Eigs_k, S_mn_k
         pickle.dump(bands_spin_dat, fw)
 
 
-def plot_bands_spin_texture(kpoints, kpath, Eigs_k, S_mn_k_H_x, S_mn_k_H_y, S_mn_k_H_z, E_F=0, fout='spin_texture_1D_home_made.jpg', fig_caption="home-made interpolation", ticks=None, tick_labels=None, yaxis_lim=[-1,1]):
+def plot_bands_spin_texture(kpoints, kpath, Eigs_k, S_mn_k_H_x, S_mn_k_H_y, S_mn_k_H_z, E_F=0, fout='spin_texture_1D_home_made.jpg', fig_caption="home-made interpolation", ticks=None, tick_labels=None, yaxis_lim=[-5,5]):
     """Output a figure with Sx, Sy, and Sz-projected band structure."""
     NW = len(Eigs_k[list(Eigs_k.keys())[0]])
 
@@ -1241,3 +1242,78 @@ def fermi_surface_spin_texture(kpoints2D, bands2D, Sx2D, Sy2D, Sz2D, ax=None, E=
         plt.close()
         if plot_to_external_axis is False:
             return fig, fig2
+        
+
+def interpolate_operator(operator_dict, u_dis_dict, u_dict, latt_params, reciprocal_latt_params, 
+                            R_grid, U_mn_k=None, hamiltonian=True, kpoints=[(0,0,0)], 
+                            save_real_space=False, real_space_fname="hr_R_dict.dat", \
+                                save_folder="./tb_model_wann90/", save_as_pickle=True):
+    """Takes operator O (Hamiltonian, spin-operator ...) evaluated on a coarse DFT k-mesh and Hamiltonian eigenstates
+        onto 'kpoints' using the 
+        (1) (semi)unitary transformation defined by U_dis*U from the Hamiltonian gauge (eigenstate gauge)
+             to the Wannier gauge, 
+        (2) performing Fourier transform to the real-space using a set of lattice vectors
+        (3) inverse Fourier transforming to the k-space for all the k-points from 'kpoints'."""
+    
+    global NW, NK
+
+    A = latt_params
+    G = reciprocal_latt_params
+    NK = len(u_dict.keys())
+
+    if NK != len(R_grid):
+        raise Exception("The number of R vectors for discrete Fourier needs to be the same as number of k-points from the DFT mesh!")
+    
+    NW = u_dict[list(u_dict.keys())[0]].shape[0]
+
+    # PROCEDURE TO GET AUTOMATICALLY THE REAL-SPACE MESH (from the reciprocal Monkhorst-Pack)
+
+    # the DFT k-point grid in direct coordinates
+    kpoints_coarse = operator_dict.keys()
+    Nq = len(kpoints_coarse)
+
+    # the DFT k-point grid in cartesian coordinates (units of 1/A)
+    kpoints_coarse_cart = [np.array(kpoint).T @ G for kpoint in kpoints_coarse]
+
+    # (1) get the operator in the Wannier gauge (see Eg. 16 in Ryoo 2019 PRB or for instance Eq. 30 in Qiao 2018 PRB)
+    #     see Eq. 16 in Qiao 2018 and express H(W) from that, use Eq. 10 for definition of U
+    #     alternatively see Eq. 15 in Qiao 2018
+    O_mn_q_W = {}
+    for kpoint, O_k in operator_dict.items():
+        kpoint = tuple(0.0 if kpoint[i] == 0.0 else kpoint[i] for i in range(3))
+        O_mn_q_W[kpoint] = u_dict[kpoint].conj().T @ u_dis_dict[kpoint].conj().T @ O_k @ u_dis_dict[kpoint] @ u_dict[kpoint]
+
+    # (2) Fourier transform in the range of real-space lattice vectors given by R_mesh_ijk
+    O_mn_R_W = {}
+    for Rijk in R_grid:
+        R = np.array(Rijk).T @ A
+        # Eq. 17 in Qiao 2018
+        O_mn_R_W[Rijk] = 1/Nq * np.sum( [exp(-1j*np.dot(R, k_cart)) * O_mn_q_W[k_direct] 
+                                                            for k_cart, k_direct in zip(kpoints_coarse_cart, kpoints_coarse)], 
+                                                            axis = 0)
+
+    # save real-space representation
+    if save_real_space is True:
+        if save_as_pickle is True:
+            with open(save_folder+real_space_fname, 'wb') as fw:
+                pickle.dump(O_mn_R_W, fw)
+        else:
+            O_mn_R_W_tosave = {}
+            for k, val in O_mn_R_W.items():
+                O_mn_R_W_tosave[k] = repr(O_mn_R_W[k]).replace('\n', '').replace(', dtype=complex64)', '').replace(',      dtype=complex64)', '').replace('array(', '').replace(']])', ']]') # << format
+            with open(save_folder+real_space_fname, 'w') as fw:
+                fw.write(str(O_mn_R_W_tosave).replace("\'", ""))
+
+    # (3a) inverse Fourier
+    O_mn_k_W = real_to_W_gauge(kpoints, O_mn_R_W)
+
+    # (3b) transformation to Hamiltonian gauge
+    # if Hamiltonian is being calculated, perform diagonalization
+    if hamiltonian is True:
+        Eigs_k, U_mn_k = W_gauge_to_H_gauge(O_mn_k_W, U_mn_k={}, hamiltonian=True)
+        return Eigs_k, U_mn_k
+    else:
+        O_mn_k_H = W_gauge_to_H_gauge(O_mn_k_W, U_mn_k=U_mn_k, hamiltonian=False)
+        return O_mn_k_H
+    
+
