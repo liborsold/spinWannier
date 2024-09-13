@@ -11,6 +11,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 import re
 import pandas as pd
 import pickle
+from os.path import exists
 
 
 def get_kpoint_names(fwin="wannier90.win"):
@@ -837,3 +838,406 @@ def band_with_spin_projection_under_threshold_for_kpoint(kpoint=(0.0, 0.0, 0.0),
     lowest_band_under_threshold = np.argmax(band_character_under_threshold[skip_lowest_bands:])
 
     return lowest_band_under_threshold
+
+
+def spn_to_dict(fwin="wannier90.win", fin="wannier90.spn_formatted", fout="spn_dict.pickle", text_file=False):
+    """Convert wannier90.spn file to a dictionary object and save as pickle. 
+    If 'text_file' == True, then save as a human-readable text file."""
+
+    spin_names = ['x', 'y', 'z']
+
+    # get number of bands and kpoints
+    with open(fin, 'r') as fr:
+        fr.readline()
+        NB = int(float(fr.readline()))
+        NK = int(float(fr.readline()))
+
+    # get the spin-projection matrices
+    with open(fin, 'r') as fr:
+        Sskmn = np.loadtxt(fr, dtype=np.complex64, skiprows=3)
+
+    # get names of k-points
+    kpoint_names = get_kpoint_names(fwin=fwin)
+
+    # construct dictionary
+    Sskmn_dict = {}
+
+    for ik, kpoint_name in enumerate(kpoint_names):
+        Smn = np.zeros((3, NB, NB), dtype=np.complex64)
+        # unflatten the upper-diagonal matrix and add hermitian conjugates
+        for n in range(NB):
+            for m in range(n+1):
+                for s in range(3):
+                    
+                    Smn[s,m,n] = Sskmn[ik, int(3*(n*(n+1)/2 + m) + s)]
+                    # hermitian conjugate
+                    Smn[s,n,m] = np.conj( Smn[s,m,n] )
+        
+        # save Smn to dictionary
+        for s in range(3):
+            Sskmn_dict[(kpoint_name, spin_names[s])] = Smn[s,:,:]
+
+    # write to file
+
+    #  <not implemented yet>  if binary is True:
+    #     f = h5py.File('test.hdf5', 'w')
+    #     grp = f.create_group('.spn file')
+    #     for kpoint in Sskmn_dict:
+    #         dset = grp.create_dataset(kpoint, data = Sskmn_dict[kpoint])
+    #         #print(grp_name, dset_name, data_dict[grp_name][dset_name])
+    #     f.close()
+    # else:
+
+    if text_file is True:
+        
+        for kpoint, Smn in Sskmn_dict.items(): 
+            Sskmn_dict[kpoint] = repr(Smn[s,:,:]).replace('\n', '').replace(', dtype=complex64)', '').replace('array(', '')
+
+        with open(fout, 'w') as fw:
+            fw.write(str(Sskmn_dict).replace("\'", "").replace("x", "\'x\'").replace("y", "\'y\'").replace("z", "\'z\'"))
+
+    else:
+        with open(fout, 'ab') as fw:
+            pickle.dump(Sskmn_dict, fw)
+
+
+def u_to_dict(fin="wannier90_u.mat", fout="u_dict.pickle", text_file=False, write_sparse=False):
+    """Convert _u.mat from wannier90 to pickled python dictionary."""
+    with open(fin, 'r') as fr:
+        fr.readline()
+        fr.readline()
+        a = fr.readline()
+
+    # get number of bands and kpoints
+    with open(fin, 'r') as fr:
+        fr.readline()
+        l = fr.readline().split()
+        n_k = int(l[0])
+        num_wann = int(l[1])
+        num_bands = int(l[2])
+
+    # parse the file
+    read = False
+    kpoint = None
+    Umnk = {}
+    with open(fin, 'r') as fr:
+        for j, line in enumerate(fr):
+            if read:
+            # .. skips the header
+                if kpoint:
+                # if kpoint is not None, save data-point to matrix
+                    l = line.split()
+                    Umn[i%num_bands, i//num_bands] = float(l[0]) + float(l[1]) * 1j
+                    i += 1
+                else:
+                # it's the k-point line
+                    # save kpoint
+                    kpoint = tuple(float(f"{float(item):.12f}") for item in line.split())
+                    i = 0
+            if j % (num_wann*num_bands+2) == 1:
+                if read:
+                # .. basically just skips the first empty line
+                    Umnk[kpoint] = Umn
+                read = True
+                Umn = np.zeros((num_bands, num_wann), dtype=np.complex64)
+                kpoint = None
+
+    # get the spin-projection matrices
+    if text_file is True:
+        Umnk_to_write = {}
+        for kpoint, Umn in Umnk.items(): 
+            Umnk_to_write[kpoint] = repr(Umn).replace('\n', '').replace(', dtype=complex64)', '').replace(',      dtype=complex64)', '').replace('array(', '') # << format
+        with open(fout, 'w') as fw:
+            fw.write(str(Umnk).replace("\'", ""))
+    else:
+        with open(fout, 'wb') as fw:
+            pickle.dump(Umnk, fw)
+
+    print(f"{fout} written!")
+    print("Umnk keys len", len(Umnk.keys()))
+
+    # if write_sparse is True:
+    #     with open(fin, 'r') as fr:
+    #         u_dict = ast.literal_eval(fr.read())
+    #     write_nonzero_elements(u_dict, fout=f"{fin.split('.')[0]}_sparse.dat")
+
+
+def files_wann90_to_dict_pickle(disentanglement=False):
+    """Convert wannier90 files to pickled dictionaries files."""
+    spn_to_dict()
+    u_to_dict(fin="wannier90_u.mat", fout="u_dict.pickle", text_file=False, write_sparse=False)
+    if disentanglement is True:
+        u_to_dict(fin="wannier90_u_dis.mat", fout="u_dis_dict.pickle", text_file=False, write_sparse=False)
+
+
+def selected_band_plot(band=0):
+    # -------------- SELECTED BAND plot ------------------
+
+    fig, axes = plt.subplots(1, 3, figsize=[14,4])
+    spin_name = ['Sx', 'Sy', 'Sz']
+
+    ax = axes[0]
+    ax.axhline(linestyle='--', color='k')
+    ax.set_xlim([min(kpath1D), max(kpath1D)])
+    ax.set_ylabel(r'$E - E_\mathrm{F}$ (eV)', fontsize=12)
+    ax.set_xlabel('k-path (1/$\mathrm{\AA}$)', fontsize=12)
+    ax.scatter(np.array([kpath1D for i in range(len(bands1D[0,:]))]).T, bands1D-E_F, c='grey', s=2)
+    sc = ax.scatter(kpath1D, bands1D[:,band-1]-E_F, c=Sz1D[:,band-1], cmap='seismic', s=2)
+    divider = make_axes_locatable(ax)
+    cax = divider.append_axes('right', size='5%', pad=0.05)
+    cbar = fig.colorbar(sc, cax=cax, orientation='vertical')
+    cbar.set_label(r'$S_\mathrm{z}$')
+    sc.set_clim(vmin=colorbar_Sz_lim[0], vmax=colorbar_Sz_lim[1])
+    ax.set_ylim(bands_ylim)
+    ax.set_title(r"$S_\mathrm{z}$")
+
+    sc = axes[1].scatter(kpoints2D[:,0], kpoints2D[:,1], s = scatter_size, c=bands2D[:,band-1]-E_F, cmap='copper')
+    divider = make_axes_locatable(axes[1])
+    cax = divider.append_axes('right', size='5%', pad=0.05)
+    cbar = fig.colorbar(sc, cax=cax, orientation='vertical')
+    cbar.set_label(r'$E-E_\mathrm{F}$ (eV)')
+    axes[1].set_title("energies")
+
+    if scatter_for_quiver is True:
+        axes[2].scatter(kpoints2D[:,0], kpoints2D[:,1], s=scatter_size_quiver, c='k')
+    reduce_by_factor_local = reduce_by_factor * 3
+    sc = axes[2].quiver(kpoints2D[:,0][::reduce_by_factor_local], kpoints2D[:,1][::reduce_by_factor_local], Sx2D[:,band-1][::reduce_by_factor_local],
+                             Sy2D[:,band-1][::reduce_by_factor_local], Sz2D[:,band-1][::reduce_by_factor_local], 
+                             scale=quiver_scale, cmap='seismic')
+    divider = make_axes_locatable(axes[2])
+    cax = divider.append_axes('right', size='5%', pad=0.05)
+    cbar = fig.colorbar(sc, cax=cax, orientation='vertical')
+    cbar.set_label(r'$S_\mathrm{z}$')
+    sc.set_clim(vmin=colorbar_Sz_lim[0], vmax=colorbar_Sz_lim[1])
+    # cbar.vmin = -1.0
+    # cbar.vmax = 1.0
+    axes[2].set_title(f"spin directions")
+    axes[2].set_facecolor("#777777")
+
+    for i in range(1,3):
+        axes[i].set_xlabel(r'$k_\mathrm{x}$ (1/$\mathrm{\AA}$)', fontsize=12)
+        axes[i].set_ylabel(r'$k_\mathrm{y}$ (1/$\mathrm{\AA}$)', fontsize=12)
+        axes[i].set_aspect('equal')
+        if kmesh_limits:
+            axes[i].set_xlim(kmesh_limits)
+            axes[i].set_ylim(kmesh_limits)
+
+    plt.suptitle(f"{os.getcwd()}\npyplot.quiver scale={quiver_scale}\nband {band}", fontsize=6)
+    plt.tight_layout()
+    fout = f"selected_band{band}_plot_E{bands_ylim[0]:.1f}-{bands_ylim[1]:.1f}eV.jpg"
+    # fout = check_file_exists(fout)
+    plt.savefig(fout, dpi=400)
+    # plt.show()
+    plt.close()
+
+
+def coerce_to_positive_angles(angles):
+    """Coerce angles to be positive (i.e., in the range [0, 2pi])"""
+    return np.where(angles < 0, angles + 2*np.pi, angles)
+
+
+def replace_middle_of_cmap_with_custom_color(color_middle=(0.85, 0.85, 0.85, 1.0), middle_range=0.10):
+    # create custom cmap going from blue through grey to red
+    cmap = plt.cm.get_cmap('seismic')
+    cmaplist = [cmap(i) for i in range(cmap.N)]
+    # change the 10% of values around the middle to interpolate from the value at cmap.N * 0.4 to the value at cmap.N * 0.6 through gray (0.5, 0.5, 0.5, 1.0)
+    #  i.e., from blue through gray to red
+    i_start = int(cmap.N * (0.5-middle_range))
+    i_middle = int(cmap.N * 0.5)
+    i_end = int(cmap.N * (0.5+middle_range))
+    for i in range(i_start, i_middle):
+        # linear interpolation
+        alpha = (i - i_start) / (i_middle - i_start)
+        cmaplist[i] = tuple([alpha * color_middle[j] + (1 - alpha) * cmaplist[i][j] for j in range(4)])
+    for i in range(i_middle, i_end):
+        # linear interpolation
+        alpha = (i - i_middle) / (i_end - i_middle)
+        cmaplist[i] = tuple([(1 - alpha) * color_middle[j] + alpha * cmaplist[i][j] for j in range(4)])
+    # create new cmap
+    cmap = cmap.from_list('seismic_through_gray', cmaplist, cmap.N)
+    return cmap
+
+
+def fermi_surface_spin_texture(kpoints2D, bands2D, Sx2D, Sy2D, Sz2D, ax=None, E=0, E_F=0, E_thr=0.01, fig_name=None, quiver_scale=1, \
+                                scatter_for_quiver=True, scatter_size_quiver=1, scatter_size=0.8, reduce_by_factor=1, \
+                                    kmesh_limits=None, savefig=True, colorbar_Sx_lim=[-1,1], colorbar_Sy_lim=[-1,1], \
+                                        colorbar_Sz_lim=[-1,1], n_points_for_one_angstrom_radius=120, ylim_margin=0.1, \
+                                            contour_for_quiver=True, contour_line_width=2.5, arrow_linewidth=0.005, \
+                                                arrow_head_width=3, quiver_angles='xy', quiver_scale_units='xy', \
+                                                    inset_with_units_of_arrows=True, color_middle=(0.85, 0.85, 0.85, 1.0)):
+    """Plot scatter points with a spin texture on a constant energy xy surface (probably at E=EF)
+        if the energy difference of each given point is lower than some threshold. 
+        If there is more such points, grab the one with minimum difference from the energy surface.
+        
+        - E and E_thr in eV
+        
+        kpoints2D: 2D array of shape (Nkpoints, 3)
+        bands2D: 2D array of shape (Nkpoints, Nbands)
+
+        circumf_distance_of_arrows: distance between the arrows on the circumference of the circle = k (1/Angstrom) * phi (rad)
+                        """
+    # make the cut at 'E'
+    energy_distances = np.abs(bands2D - E_F - E)
+    include_kpoint = np.any(energy_distances <= E_thr, axis=1)
+    closest_band = np.argmin(energy_distances, axis=1)[include_kpoint]
+
+    # get the cartesian (kx, ky) and polar (k, phi) coordinates of the kpoints
+    kx = kpoints2D[include_kpoint,0]
+    ky = kpoints2D[include_kpoint,1]
+    k = np.sqrt(kx**2 + ky**2)
+    # make phi start along the y-axis and go counterclockwise
+    phi = coerce_to_positive_angles(np.arctan2(ky, kx) - np.pi)
+
+    # convert to pandas dataframe
+    df = pd.DataFrame({'kx': kx, 'ky': ky, 'k': k, 'phi': phi, 'closest_band': closest_band, \
+                       'Sx': Sx2D[include_kpoint, closest_band], \
+                        'Sy': Sy2D[include_kpoint, closest_band], 'Sz': Sz2D[include_kpoint, closest_band]})
+    
+    # save the mean radius for each corresponding band
+    df_bands = pd.DataFrame()
+    df_bands['k_mean'] = df.groupby('closest_band')['k'].mean()
+
+    # get the closest integer number of points for each band divisible by 6
+    df_bands['n_points'] = df_bands['k_mean'].apply(lambda x: (int(x * n_points_for_one_angstrom_radius) // 6)*6)
+
+    # for each band
+    #   create numpy array of phi_anchors
+    #       for each point get the closest anchor and the difference from it
+    #           for each anchor (i.e., group by anchors) keep only the row with the minimum difference from this anchor
+    # include index of df as a column
+    df['index'] = df.index
+    df_filtered = pd.DataFrame()
+    for band in df_bands.index:
+        phi_anchors = np.linspace(0, 2*np.pi, df_bands.loc[band, 'n_points'], endpoint=False)
+        df_temp = df[df['closest_band'] == band]
+        df_temp['closest_anchor'] = df_temp['phi'].apply(lambda x: phi_anchors[np.argmin(np.abs(phi_anchors - x))])
+        df_temp['anchor_difference'] = (df_temp['phi'] - df_temp['closest_anchor']).abs()
+        df_filtered_temp = df_temp.groupby('closest_anchor').apply(lambda x: x.loc[x['anchor_difference'].idxmin()])
+        df_filtered = pd.concat([df_filtered, df_filtered_temp])
+
+    # get the kx, ky, Sx, Sy, Sz values for the arrows
+    kx_radial_filter = df_filtered['kx'].values
+    ky_radial_filter = df_filtered['ky'].values
+    Sx_radial_filter = df_filtered['Sx'].values
+    Sy_radial_filter = df_filtered['Sy'].values
+    Sz_radial_filter = df_filtered['Sz'].values
+
+    print('average Sz', np.mean(Sz_radial_filter))
+
+    # ARROWS Sz
+    if ax is None:
+        fig, ax = plt.subplots(1, 1, figsize=[5,5])
+        plot_to_external_axis = False
+    else:
+        plot_to_external_axis = True
+
+    if scatter_for_quiver is True:
+        ax.scatter(kx, ky, s=scatter_size_quiver, c='k', zorder=5)
+    
+    if contour_for_quiver is True:
+        for band in range(bands2D.shape[1]):
+            Nkpoints = int(len(kpoints2D[:,0]) ** (1/2))
+            x = kpoints2D[:,0].reshape(Nkpoints,Nkpoints)  # x-coordinates
+            y = kpoints2D[:,1].reshape(Nkpoints,Nkpoints)  # y-coordinates
+            z = bands2D[:, band].reshape(Nkpoints,Nkpoints)
+            ax.contour(x, y, z, levels=[E_F+E], colors='darkgray', linestyles='solid', linewidths=contour_line_width, zorder=0)
+
+    seismic_with_gray = replace_middle_of_cmap_with_custom_color(color_middle=color_middle, middle_range=0.07)
+
+    sc = ax.quiver(kx_radial_filter, ky_radial_filter, Sx_radial_filter, Sy_radial_filter, Sz_radial_filter, scale=quiver_scale, cmap=seismic_with_gray, \
+                   width=arrow_linewidth, headwidth=arrow_head_width, zorder=10, angles=quiver_angles, scale_units=quiver_scale_units)
+    ax.set_xlabel(r'$k_\mathrm{x}$ (1/$\mathrm{\AA}$)', fontsize=12)
+    ax.set_ylabel(r'$k_\mathrm{y}$ (1/$\mathrm{\AA}$)', fontsize=12)
+    ax.set_title(f"{os.getcwd()}\npyplot.quiver scale={quiver_scale}", fontsize=6)
+    # place inset text outside on the right always in the middle of the y axis, rotated 90 degrees clockwise
+    if inset_with_units_of_arrows is True:
+        ax.text(1.015, 0.5, r"[$S$] = " + f"{1/quiver_scale:.2f}" + r" $\mathrm{\AA}^{-1}$", fontsize=7, transform=ax.transAxes, rotation=90, va='center', ha='left')
+
+    # set the limits of the plot
+    if kmesh_limits:
+        ax.set_xlim(kmesh_limits)
+        ax.set_ylim(kmesh_limits)
+    else:
+        # take into account the margin
+        ax.set_xlim([min(kx) - (max(kx) - min(kx)) * ylim_margin, max(kx) + (max(kx) - min(kx)) * ylim_margin])
+        ax.set_ylim([min(ky) - (max(ky) - min(ky)) * ylim_margin, max(ky) + (max(ky) - min(ky)) * ylim_margin])
+
+    ax.set_aspect('equal')
+    # set ticks inside the plot
+    ax.tick_params(axis='both', direction='in', which='both', top=True, right=True)
+    # ax.set_facecolor("#777777")
+    if plot_to_external_axis is False:
+        divider = make_axes_locatable(ax)
+        cax = divider.append_axes('right', size='5%', pad=0.05)
+        cbar = fig.colorbar(sc, cax=cax, orientation='vertical')
+        cbar.set_label(r'$S_\mathrm{z}$')
+
+    if colorbar_Sz_lim:
+        sc.set_clim(vmin=colorbar_Sz_lim[0], vmax=colorbar_Sz_lim[1])
+    plt.tight_layout()
+    if fig_name is None: 
+        fig_name_all_one = f"spin_texture_2D_all_in_one_E-from-EF{E-E_F:.3f}eV.jpg"
+    else:
+        fig_name_split = fig_name.split('.')
+        fig_name_all_one = f"{''.join(fig_name_split[:-1])}_all_in_one_E-from-EF{E-E_F:.3f}eV.{fig_name_split[-1]}"
+    # fig_name_all_one = check_file_exists(fig_name_all_one)
+
+    if savefig is True:
+        plt.savefig(fig_name_all_one, dpi=400)
+        # plt.show()
+        plt.close()
+
+    fig2, axes = plt.subplots(1, 3, figsize=[12,4])
+
+    sc1 = axes[0].scatter(kx, ky, c=Sx2D[include_kpoint,closest_band], cmap='seismic', s=scatter_size)
+    divider = make_axes_locatable(axes[0])
+    cax = divider.append_axes('right', size='5%', pad=0.05)
+    cbar1 = fig2.colorbar(sc1, cax=cax, orientation='vertical')
+    cbar1.set_label(r'$S_\mathrm{x}$')
+    axes[0].set_title(r'$S_\mathrm{x}$')
+    if colorbar_Sx_lim:
+        sc1.set_clim(vmin=colorbar_Sx_lim[0], vmax=colorbar_Sx_lim[1])
+
+    sc2 = axes[1].scatter(kx, ky, c=Sy2D[include_kpoint,closest_band], cmap='seismic', s=scatter_size)
+    divider = make_axes_locatable(axes[1])
+    cax = divider.append_axes('right', size='5%', pad=0.05)
+    cbar2 = fig2.colorbar(sc2, cax=cax, orientation='vertical')
+    cbar2.set_label(r'$S_\mathrm{y}$')
+    axes[1].set_title(r'$S_\mathrm{y}$')
+    if colorbar_Sy_lim:
+        sc2.set_clim(vmin=colorbar_Sy_lim[0], vmax=colorbar_Sy_lim[1])
+
+    sc3 = axes[2].scatter(kx, ky, c=Sz2D[include_kpoint,closest_band], cmap='seismic', s=scatter_size)
+    divider = make_axes_locatable(axes[2])
+    cax = divider.append_axes('right', size='5%', pad=0.05)
+    cbar3 = fig2.colorbar(sc3, cax=cax, orientation='vertical')
+    cbar3.set_label(r'$S_\mathrm{z}$')
+    axes[2].set_title(r'$S_\mathrm{z}$')
+    if colorbar_Sz_lim:
+        sc3.set_clim(vmin=colorbar_Sz_lim[0], vmax=colorbar_Sz_lim[1])
+
+    for i in range(3):
+        axes[i].set_xlabel(r'$k_\mathrm{x}$ (1/$\mathrm{\AA}$)', fontsize=12)
+        axes[i].set_ylabel(r'$k_\mathrm{y}$ (1/$\mathrm{\AA}$)', fontsize=12)
+        axes[i].set_aspect('equal')
+        if kmesh_limits:
+            axes[i].set_xlim(kmesh_limits)
+            axes[i].set_ylim(kmesh_limits)
+
+    plt.suptitle(f"{os.getcwd()}", fontsize=6)
+    plt.tight_layout()
+    if fig_name is None: 
+        fig_name_Sxyz = f"spin_texture_2D_energy_cut_E-from-EF{E-E_F:.3f}eV.jpg"
+    else:
+        fig_name_split = fig_name.split('.')
+        fig_name_Sxyz = f"{''.join(fig_name_split[:-1])}_2D_energy_cut_E-from-EF{E-E_F:.3f}eV.{fig_name_split[-1]}"
+    fig_name_Sxyz = check_file_exists(fig_name_Sxyz)
+
+    if savefig is True:
+        plt.savefig(fig_name_Sxyz, dpi=400)
+        # plt.show()
+        plt.close()
+    else:
+        plt.close()
+        if plot_to_external_axis is False:
+            return fig, fig2
