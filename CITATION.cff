@@ -6,6 +6,7 @@ authors:
     orcid: https://orcid.org/0000-0002-9867-0592
 title: "spinWannier"
 version: 0.1.0
+url: "https://github.com/liborsold/spinWannier"
 # identifiers:
 #   - type: doi
 #     value: 10.5281/zenodo.1234
