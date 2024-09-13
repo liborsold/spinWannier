@@ -39,29 +39,34 @@ class WannierTBmodel():
         (3) inverse Fourier transform for an arbitrary k-point (dense k-point mesh).
     """
 
-    def __init__(self, save_folder="./tb_model_wann90/"):
+    def __init__(self, model_dir='./', save_folder_in_model_dir="./tb_model_wann90/"):
         """Initialize and load the model."""
 
-        # ensure that save_folder has a backslash at the end
-        if save_folder[-1] != "/": save_folder += "/"
+        self.model_dir = model_dir
+
+        # ensure that save_folder have a backslash at the end
+        if model_dir[-1] != "/": model_dir += "/"
+        if save_folder_in_model_dir[-1] != "/": save_folder_in_model_dir += "/"
+
+        save_folder = self.model_dir + save_folder_in_model_dir
 
         # create the save_folder if it does not exist
         if not exists(save_folder): makedirs(save_folder)
 
         # load the model files and convert to pickle dictionaries
-        disentanglement = exists('wannier90_u_dis.mat')
-        files_wann90_to_dict_pickle(disentanglement=disentanglement)
-        eig_dict = eigenval_dict(eigenval_file="wannier90.eig",  win_file="wannier90.win")
-        u_dict = load_dict(fin="u_dict.pickle")
+        disentanglement = exists(model_dir+'wannier90_u_dis.mat')
+        files_wann90_to_dict_pickle(model_dir=model_dir, disentanglement=disentanglement)
+        eig_dict = eigenval_dict(eigenval_file=model_dir+"wannier90.eig",  win_file=model_dir+"wannier90.win")
+        u_dict = load_dict(fin=model_dir+"u_dict.pickle")
         if disentanglement is True:
-            u_dis_dict = load_dict(fin="u_dis_dict.pickle")
+            u_dis_dict = load_dict(fin=model_dir+"u_dis_dict.pickle")
         else:
             u_dis_dict = copy.copy(u_dict)
             NW = int(u_dict[list(u_dict.keys())[0]].shape[0])
             for key in u_dis_dict.keys():
                 u_dis_dict[key] = np.eye(NW)
             self.NW = NW
-        spn_dict = load_dict(fin="spn_dict.pickle")
+        spn_dict = load_dict(fin=model_dir+"spn_dict.pickle")
 
         # store the model
         self.eig_dict = eig_dict
@@ -77,12 +82,15 @@ class WannierTBmodel():
         
 
         # store the real space grid
-        self.R_grid = uniform_real_space_grid(R_mesh_ijk=get_DFT_kgrid(fin="wannier90.win")) #real_space_grid_from_hr_dat(fname="wannier90_hr.dat") #
+        self.R_grid = uniform_real_space_grid(R_mesh_ijk=get_DFT_kgrid(fin=model_dir+"wannier90.win")) #real_space_grid_from_hr_dat(fname="wannier90_hr.dat") #
 
 
     def interpolate_bands_and_spin(self, kmesh_2D=False, kmesh_density=100, kmesh_2D_limits=[-0.5, 0.5], save_real_space_operators=True, \
-                                   save_folder="./tb_model_wann90/", save_bands_spin_texture=True):
+                                   save_folder_in_model_dir="tb_model_wann90/", save_bands_spin_texture=True):
         
+        save_folder = self.model_dir + save_folder_in_model_dir
+        if save_folder[-1] != "/": save_folder += "/"
+
         # create the kpoint_matrix if it does not exist
         if not 'kpoint_matrix' in locals():
             kpoint_matrix = [
@@ -91,7 +99,7 @@ class WannierTBmodel():
                 [(0.50, 0.00,  0.00),    (0.333333,  0.333333,  0.000000)]
             ]
 
-        A = load_lattice_vectors(win_file="wannier90.win")
+        A = load_lattice_vectors(win_file=self.model_dir+"wannier90.win")
         G = reciprocal_lattice_vectors(A)
 
         nD_tag = '2D' if kmesh_2D is True else '1D'
@@ -117,7 +125,7 @@ class WannierTBmodel():
         self.Eigs_k[nD_tag], self.U_mn_k = interpolate_operator(self.eig_dict, self.u_dis_dict, self.u_dict, hamiltonian=True, 
                                                 latt_params=A, reciprocal_latt_params=G, R_grid=self.R_grid, kpoints=self.kpoints_rec[nD_tag], 
                                                 save_real_space=save_real_space_operators, 
-                                                real_space_fname="hr_R_dict.pickle")
+                                                real_space_fname="hr_R_dict.pickle", save_folder=save_folder)
         
         spn_dict_x = {}
         spn_dict_y = {}

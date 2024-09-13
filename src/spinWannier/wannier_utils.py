@@ -841,9 +841,13 @@ def band_with_spin_projection_under_threshold_for_kpoint(kpoint=(0.0, 0.0, 0.0),
     return lowest_band_under_threshold
 
 
-def spn_to_dict(fwin="wannier90.win", fin="wannier90.spn_formatted", fout="spn_dict.pickle", text_file=False):
+def spn_to_dict(model_dir='./', fwin="wannier90.win", fin="wannier90.spn_formatted", fout="spn_dict.pickle", text_file=False):
     """Convert wannier90.spn file to a dictionary object and save as pickle. 
     If 'text_file' == True, then save as a human-readable text file."""
+
+    fwin = model_dir + fwin
+    fin = model_dir + fin
+    fout = model_dir + fout
 
     spin_names = ['x', 'y', 'z']
 
@@ -963,12 +967,12 @@ def u_to_dict(fin="wannier90_u.mat", fout="u_dict.pickle", text_file=False, writ
     #     write_nonzero_elements(u_dict, fout=f"{fin.split('.')[0]}_sparse.dat")
 
 
-def files_wann90_to_dict_pickle(disentanglement=False):
+def files_wann90_to_dict_pickle(model_dir='./', disentanglement=False):
     """Convert wannier90 files to pickled dictionaries files."""
-    spn_to_dict()
-    u_to_dict(fin="wannier90_u.mat", fout="u_dict.pickle", text_file=False, write_sparse=False)
+    spn_to_dict(model_dir=model_dir)
+    u_to_dict(fin=model_dir+"wannier90_u.mat", fout=model_dir+"u_dict.pickle", text_file=False, write_sparse=False)
     if disentanglement is True:
-        u_to_dict(fin="wannier90_u_dis.mat", fout="u_dis_dict.pickle", text_file=False, write_sparse=False)
+        u_to_dict(fin=model_dir+"wannier90_u_dis.mat", fout=model_dir+"u_dis_dict.pickle", text_file=False, write_sparse=False)
 
 
 def selected_band_plot(band=0):
