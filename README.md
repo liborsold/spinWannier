@@ -1,6 +1,10 @@
 # spinWannier
 **<i>Tools for handling Wannier models with a spin operator and spin-texture plotting.</i>**
 
+```
+pip install spinWannier
+```
+
 If you find this package useful, please cite [L. Vojáček*, J. M. Dueñas* _et al._, Nano Letters (2024)](https://pubs.acs.org/doi/10.1021/acs.nanolett.4c03029).
 
 
