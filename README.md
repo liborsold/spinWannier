@@ -26,6 +26,9 @@ Example of a spin-projected band structure plot by ``spinWannier`` in ``./exampl
 ... by ``spinWannier`` in ``./examples/spinWannier_use_example.ipynb``:
 <center><img src="https://github.com/user-attachments/assets/e7ce96ed-044a-4b7c-bdb0-e15146a24cee" alt="spin_projected_bands_example" width="950" /></center>
 
+The same, but _integrated over k-space_, plotted as a function of energy:
+<center><img src="https://github.com/user-attachments/assets/127f78fd-be19-4342-b679-a58cd11e945d" alt="spin_projected_bands_example" width="650" /></center>
+
 
 
 
