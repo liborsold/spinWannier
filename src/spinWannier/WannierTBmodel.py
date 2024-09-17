@@ -238,5 +238,9 @@ class WannierTBmodel():
                                 )
     
 
-    def wannier_quality():
-        wannier_quality()
+    def wannier_quality(self, kpoint_matrix, NK, num_wann, discard_first_bands=0, sc_dir='0_self-consistent', nsc_dir='1_non-self-consistent', wann_dir='2_wannier', \
+                    bands_dir='1_band_structure', tb_model_dir='2_wannier/tb_model_wann90', \
+                        band_for_Fermi_correction=None, kpoint_for_Fermi_correction='0.0000000E+00  0.0000000E+00  0.0000000E+00'):
+
+        wannier_quality(kpoint_matrix, NK, num_wann, discard_first_bands=discard_first_bands, sc_dir=sc_dir, nsc_dir=nsc_dir, wann_dir=wann_dir, \
+                        bands_dir=bands_dir, tb_model_dir=tb_model_dir, band_for_Fermi_correction=band_for_Fermi_correction, kpoint_for_Fermi_correction=kpoint_for_Fermi_correction)

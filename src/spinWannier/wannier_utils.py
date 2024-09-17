@@ -268,11 +268,11 @@ def matrix_to_dict(data_matrix, Rvecs, spin_index=False, spin_names=['x','y','z'
 def split_spn_dict(spn_dict, spin_names=['x','y','z']):
     """Split dictionary with keys as ((Rx, Ry, Rz), spin_component_name) to three dictionaries
             with keys as (Rx, Ry, Rz)."""
-    keys_no_spin = np.array(list(spn_dict.keys()))[:,0]
+    R_keys = list(set([key[0] for key in spn_dict.keys()]))
     spn_x_dict = {}
     spn_y_dict = {}
     spn_z_dict = {}
-    for key in keys_no_spin:
+    for key in R_keys:
         spn_x_dict[key] = spn_dict[tuple([key, spin_names[0]])]
         spn_y_dict[key] = spn_dict[tuple([key, spin_names[1]])]
         spn_z_dict[key] = spn_dict[tuple([key, spin_names[2]])]

@@ -6,8 +6,9 @@ import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 import shutil
-from spinWannier.wannier_utils import real_to_W_gauge, W_gauge_to_H_gauge
-from wannier_utils import split_spn_dict, get_kpoint_path, load_lattice_vectors, reciprocal_lattice_vectors, check_file_exists
+from spinWannier.wannier_utils import real_to_W_gauge, W_gauge_to_H_gauge, \
+                    split_spn_dict, get_kpoint_path, load_lattice_vectors, \
+                        reciprocal_lattice_vectors, check_file_exists
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 # import sys
@@ -176,7 +177,7 @@ def plot_err_vs_energy(error_by_energy, Ef, title="Wannierization RMS error vs. 
     plt.close()
 
 
-def plot_err_vs_bands(kpoints, kpath, Eigs_k, E_diff, S_diff, EF=0, fout='ERRORS_ALL_band_structure.jpg', ticks=None, tick_labels=None, yaxis_lim=None):
+def plot_err_vs_bands(kpoints, kpath, Eigs_k, E_diff, S_diff, E_F=0, fout='ERRORS_ALL_band_structure.jpg', ticks=None, tick_labels=None, yaxis_lim=None):
 
     """Output a figure with RMSE_E, RMSE_Sx, RMSE_Sy, and RMSE_Sz-projected band structure."""
     NW = len(Eigs_k[list(Eigs_k.keys())[0]])
@@ -274,7 +275,7 @@ def wannier_quality(kpoint_matrix, NK, num_wann, discard_first_bands=0, sc_dir='
     # =============================================================================================================================
 
     # ======================== GET HOME-MADE SPIN TEXTURE ================================ 
-    A = load_lattice_vectors(win_file="wannier90.win")
+    A = load_lattice_vectors(win_file=f"{wann_dir}/wannier90.win")
     G = reciprocal_lattice_vectors(A)
     kpoints, kpoints_cart, kpath = get_kpoint_path(kpoint_matrix, G, Nk=NK)
 
@@ -378,7 +379,7 @@ def wannier_quality(kpoint_matrix, NK, num_wann, discard_first_bands=0, sc_dir='
     E_diff = np.abs( dft_bands.reshape(-1) - E_to_compare_with_duplicates.reshape(-1) )
 
     # plot error-colored band structure
-    plot_err_vs_bands(kpoints, kpath, Eigs_k, E_diff, S_diff, EF=Fermi_nsc_wann, fout='ERRORS_ALL_band_structure_home-made_Fermi_corrected.jpg', ticks=None, tick_labels=None, yaxis_lim=None)
+    plot_err_vs_bands(kpoints, kpath, Eigs_k, E_diff, S_diff, E_F=Fermi_nsc_wann, fout='ERRORS_ALL_band_structure_home-made_Fermi_corrected.jpg', ticks=None, tick_labels=None, yaxis_lim=None)
 
     # E_F was already subtracted
     E = dft_bands.reshape(-1)
