@@ -502,12 +502,13 @@ def plot_bands_spin_texture(kpoints, kpath, kpath_ticks, Eigs_k, S_mn_k_H_x, S_m
             ax.axhline(linestyle='--', color='k')
             ax.set_ylim(yaxis_lim)
             ax.set_xlim([min(kpath), max(kpath)])
-            ax.set_title(spin_name[i])
+            # give title margin on bottom
+            ax.set_title(spin_name[i], fontsize=14, pad=10)
             if i == 0:
                 ax.set_ylabel(r'$E - E_\mathrm{F}$ (eV)', fontsize=13)
             secax = ax.secondary_xaxis('top')
             secax.tick_params(labelsize=9) #axis='both', which='major', 
-            secax.set_xlabel(r"$k$-distance (1/$\mathrm{\AA}$)", fontsize=9)
+            secax.set_xlabel(r"$k$-distance (1/$\mathrm{\AA}$)", fontsize=10)
             if ticks is not None and tick_labels is not None:
                 ax.set_xticks(ticks, tick_labels)
             sc = ax.scatter([[k_dist for i in range(NW)] for k_dist in kpath], [Eigs_k[kpoint] - E_F for kpoint in kpoints],
@@ -519,7 +520,10 @@ def plot_bands_spin_texture(kpoints, kpath, kpath_ticks, Eigs_k, S_mn_k_H_x, S_m
             idx = np.array(range(0, Nk*len(kpath_ticks), Nk))
             idx[-1] += -1
             ax.set_xticks(kpath[idx])
-            ax.set_xticklabels(kpath_ticks, fontsize=11)
+            ax.set_xticklabels(kpath_ticks, fontsize=12)
+            ax.yaxis.set_tick_params(labelsize=11)
+            for i in range(1, len(kpath_ticks)-1):
+                ax.axvline(x=kpath[i*Nk], color='#000000', linestyle='-', linewidth=0.75)
             #cbar.set_label(r'$S_\mathrm{z}$')
             #sc.set_clim(vmin=colorbar_Sz_lim[0], vmax=colorbar_Sz_lim[1])
 
