@@ -19,5 +19,13 @@ as calculated in [L. Vojáček*, J. M. Dueñas* et al., Nano Letters (2024)](htt
 <center><img src="https://github.com/user-attachments/assets/5204849c-0fa1-419f-9955-6c55c014babe" alt="spin_texture_example" width="480" /></center>
 
 ### 1D spin-projected band structure
-Example of a spin-projected band structure plot by ``spinWannier`` from ``./examples/spinWannier_use_example.ipynb``:
-<center><img src="https://github.com/user-attachments/assets/7650ba73-f920-4b5f-9682-f9bc3f972a6b" alt="spin_projected_bands_example" width="950" /></center>
+Example of a spin-projected band structure plot by ``spinWannier`` in ``./examples/spinWannier_use_example.ipynb``:
+<center><img src="https://github.com/user-attachments/assets/b9012f49-3ba0-41b4-b3ba-26c5315982ee" alt="spin_projected_bands_example" width="950" /></center>
+
+### Error of Wannier interpolation
+... by ``spinWannier`` in ``./examples/spinWannier_use_example.ipynb``:
+<center><img src="https://github.com/user-attachments/assets/e7ce96ed-044a-4b7c-bdb0-e15146a24cee" alt="spin_projected_bands_example" width="950" /></center>
+
+
+
+
