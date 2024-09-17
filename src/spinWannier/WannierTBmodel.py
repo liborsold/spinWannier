@@ -7,7 +7,7 @@ from spinWannier.wannier_utils import files_wann90_to_dict_pickle, eigenval_dict
                             get_kpoint_path, get_2D_kpoint_mesh, interpolate_operator, unite_spn_dict, save_bands_and_spin_texture, \
                                 uniform_real_space_grid, get_DFT_kgrid, plot_bands_spin_texture, magmom_OOP_or_IP, \
                                 fermi_surface_spin_texture, plot_bands_spin_texture
-from spinWannier.wannier_quality_utils import wannier_quality
+from spinWannier.wannier_quality_utils import wannier_quality_calculation, get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands
 
 class WannierTBmodel():
     """
@@ -38,41 +38,59 @@ class WannierTBmodel():
         (3) inverse Fourier transform for an arbitrary k-point (dense k-point mesh).
     """
 
-    def __init__(self, model_dir='./', save_folder_in_model_dir="./tb_model_wann90/"):
+    def __init__(self, sc_dir='0_self-consistent', nsc_dir='1_non-self-consistent', wann_dir='2_wannier', \
+                    bands_dir='1_band_structure', tb_model_dir='2_wannier/tb_model_wann90', discard_first_bands=0, \
+                    band_for_Fermi_correction=None, kpoint_for_Fermi_correction='0.0000000E+00  0.0000000E+00  0.0000000E+00'):
         """Initialize and load the model."""
 
-        self.model_dir = model_dir
-
         # ensure that directories have a backslash at the end
-        if model_dir[-1] != "/": model_dir += "/"
-        if save_folder_in_model_dir[-1] != "/": save_folder_in_model_dir += "/"
+        if sc_dir[-1] != "/": sc_dir += "/"
+        if nsc_dir[-1] != "/": nsc_dir += "/"
+        if wann_dir[-1] != "/": wann_dir += "/"
+        if bands_dir[-1] != "/": bands_dir += "/"
+        if tb_model_dir[-1] != "/": tb_model_dir += "/"
 
-        save_folder = self.model_dir + save_folder_in_model_dir
-        self.real_space_save_folder = save_folder
+        if band_for_Fermi_correction is None: band_for_Fermi_correction = discard_first_bands + 1
 
         # create the save_folder if it does not exist
-        if not exists(save_folder): makedirs(save_folder)
+        if not exists(tb_model_dir): makedirs(tb_model_dir)
 
         # load the model files and convert to pickle dictionaries
-        disentanglement = exists(model_dir+'wannier90_u_dis.mat')
-        files_wann90_to_dict_pickle(model_dir=model_dir, disentanglement=disentanglement)
-        eig_dict = eigenval_dict(eigenval_file=model_dir+"wannier90.eig",  win_file=model_dir+"wannier90.win")
-        u_dict = load_dict(fin=model_dir+"u_dict.pickle")
+        disentanglement = exists(wann_dir+'wannier90_u_dis.mat')
+        files_wann90_to_dict_pickle(model_dir=wann_dir, disentanglement=disentanglement)
+        eig_dict = eigenval_dict(eigenval_file=wann_dir+"wannier90.eig",  win_file=wann_dir+"wannier90.win")
+        u_dict = load_dict(fin=wann_dir+"u_dict.pickle")
         if disentanglement is True:
-            u_dis_dict = load_dict(fin=model_dir+"u_dis_dict.pickle")
+            u_dis_dict = load_dict(fin=wann_dir+"u_dis_dict.pickle")
         else:
             u_dis_dict = copy.copy(u_dict)
             NW = int(u_dict[list(u_dict.keys())[0]].shape[0])
             for key in u_dis_dict.keys():
                 u_dis_dict[key] = np.eye(NW)
             self.NW = NW
-        spn_dict = load_dict(fin=model_dir+"spn_dict.pickle")
+        spn_dict = load_dict(fin=wann_dir+"spn_dict.pickle")
 
+        # calculate the Fermi level
+           # get Fermi for the wannier non-self-consistent calculation
+        self.EF_nsc = get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands(path=".", \
+                                        nsc_calculation_path=nsc_dir, \
+                                        corrected_at_kpoint=kpoint_for_Fermi_correction, \
+                                            corrected_at_band=band_for_Fermi_correction, sc_calculation_path=sc_dir, \
+                                                fout_name="FERMI_ENERGY_corrected.in")
+
+        # store paths to directories
+        self.sc_dir = sc_dir
+        self.nsc_dir = nsc_dir
+        self.wann_dir = wann_dir
+        self.bands_dir = bands_dir
+        self.tb_model_dir = tb_model_dir
+        
         # store the model
         self.eig_dict = eig_dict
         self.u_dict = u_dict
         self.u_dis_dict = u_dis_dict
         self.spn_dict = spn_dict
+        self.discard_first_bands = discard_first_bands
 
         # define constants
         self.spn_x_R_dict_name = "spn_x_R_dict.pickle"
@@ -81,16 +99,16 @@ class WannierTBmodel():
         self.spn_R_dict_name   = "spn_R_dict.pickle"
         
         # store the real space grid
-        self.R_grid = uniform_real_space_grid(R_mesh_ijk=get_DFT_kgrid(fin=model_dir+"wannier90.win")) #real_space_grid_from_hr_dat(fname="wannier90_hr.dat") #
+        self.R_grid = uniform_real_space_grid(R_mesh_ijk=get_DFT_kgrid(fin=wann_dir+"wannier90.win")) #real_space_grid_from_hr_dat(fname="wannier90_hr.dat") #
 
 
     def interpolate_bands_and_spin(self, kpoint_matrix, kpath_ticks, kmesh_2D=False, kmesh_density=100, kmesh_2D_limits=[-0.5, 0.5], save_real_space_operators=True, \
                                    save_folder_in_model_dir="tb_model_wann90/", save_bands_spin_texture=True):
         
-        save_folder = self.model_dir + save_folder_in_model_dir
+        save_folder = self.wann_dir + save_folder_in_model_dir
         if save_folder[-1] != "/": save_folder += "/"
 
-        A = load_lattice_vectors(win_file=self.model_dir+"wannier90.win")
+        A = load_lattice_vectors(win_file=self.wann_dir+"wannier90.win")
         G = reciprocal_lattice_vectors(A)
 
         dimension = '2D' if kmesh_2D is True else '1D'
@@ -159,14 +177,14 @@ class WannierTBmodel():
     
 
     def plot1D_bands(self, fout='spin_texture_1D_home_made.jpg', yaxis_lim=[-8, 6]):
-        plot_bands_spin_texture(self.kpoints_rec['1D'], self.kpath['1D'], self.kpath_ticks, self.Eigs_k['1D'], self.S_mn_k_H_x['1D'], self.S_mn_k_H_y['1D'], self.S_mn_k_H_z['1D'], fout=fout, yaxis_lim=yaxis_lim)
+        plot_bands_spin_texture(self.kpoints_rec['1D'], self.kpath['1D'], self.kpath_ticks, self.Eigs_k['1D'], self.S_mn_k_H_x['1D'], self.S_mn_k_H_y['1D'], self.S_mn_k_H_z['1D'], E_F=self.EF_nsc, fout=fout, yaxis_lim=yaxis_lim)
     
 
     def plot2D_spin_texture(self, fig_name="spin_texture_2D_home_made.jpg", E_to_cut=None):
         # ==========  USER DEFINED  ===============
-        fin_1D = self.real_space_save_folder+"bands_spin.pickle" #"bands_spin_model.pickle" #"./tb_model_wann90/bands_spin.pickle" #"bands_spin_model.pickle" #
-        fin_2D = self.real_space_save_folder+"bands_spin_2D.pickle" #"bands_spin_2D_model.pickle" #"./tb_model_wann90/bands_spin_2D.pickle" #"bands_spin_2D_model.pickle"
-        E_F = float(np.loadtxt(self.model_dir+'FERMI_ENERGY.in')) #-2.31797502 # for CrTe2 with EFIELD: -2.31797166
+        fin_1D = self.tb_model_dir+"bands_spin.pickle" #"bands_spin_model.pickle" #"./tb_model_wann90/bands_spin.pickle" #"bands_spin_model.pickle" #
+        fin_2D = self.tb_model_dir+"bands_spin_2D.pickle" #"bands_spin_2D_model.pickle" #"./tb_model_wann90/bands_spin_2D.pickle" #"bands_spin_2D_model.pickle"
+        E_F = float(np.loadtxt(self.wann_dir+'FERMI_ENERGY.in')) #-2.31797502 # for CrTe2 with EFIELD: -2.31797166
         E_to_cut_2D = E_F #E_F # + 1.44
         kmesh_limits = None #[-.5, .5] #None #   # unit 1/A; put 'None' if no limits should be applied
         colorbar_Sx_lim = [-1, 1] #[-0.2, 0.2] #None # put None if they should be determined automatically
@@ -238,9 +256,10 @@ class WannierTBmodel():
                                 )
     
 
-    def wannier_quality(self, kpoint_matrix, NK, num_wann, discard_first_bands=0, sc_dir='0_self-consistent', nsc_dir='1_non-self-consistent', wann_dir='2_wannier', \
-                    bands_dir='1_band_structure', tb_model_dir='2_wannier/tb_model_wann90', \
-                        band_for_Fermi_correction=None, kpoint_for_Fermi_correction='0.0000000E+00  0.0000000E+00  0.0000000E+00'):
+    def wannier_quality(self, kpoint_matrix, NK, kpath_ticks, num_wann, \
+                        band_for_Fermi_correction=None, kpoint_for_Fermi_correction='0.0000000E+00  0.0000000E+00  0.0000000E+00', \
+                        yaxis_lim=[-10, 10]):
 
-        wannier_quality(kpoint_matrix, NK, num_wann, discard_first_bands=discard_first_bands, sc_dir=sc_dir, nsc_dir=nsc_dir, wann_dir=wann_dir, \
-                        bands_dir=bands_dir, tb_model_dir=tb_model_dir, band_for_Fermi_correction=band_for_Fermi_correction, kpoint_for_Fermi_correction=kpoint_for_Fermi_correction)
+        wannier_quality_calculation(kpoint_matrix, NK, kpath_ticks, num_wann, self.EF_nsc, discard_first_bands=self.discard_first_bands, sc_dir=self.sc_dir, nsc_dir=self.nsc_dir, wann_dir=self.wann_dir, \
+                        bands_dir=self.bands_dir, tb_model_dir=self.tb_model_dir, band_for_Fermi_correction=band_for_Fermi_correction, kpoint_for_Fermi_correction=kpoint_for_Fermi_correction, \
+                            yaxis_lim=yaxis_lim)

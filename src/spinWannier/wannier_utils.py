@@ -477,7 +477,7 @@ def save_bands_and_spin_texture(kpoints_rec, kpoints_cart, kpath, Eigs_k, S_mn_k
         pickle.dump(bands_spin_dat, fw)
 
 
-def plot_bands_spin_texture(kpoints, kpath, kpath_ticks, Eigs_k, S_mn_k_H_x, S_mn_k_H_y, S_mn_k_H_z, E_F=0, fout='spin_texture_1D_home_made.jpg', fig_caption="Wannier interpolation", ticks=None, tick_labels=None, yaxis_lim=[-5,5]):
+def plot_bands_spin_texture(kpoints, kpath, kpath_ticks, Eigs_k, S_mn_k_H_x, S_mn_k_H_y, S_mn_k_H_z, E_F=0, fout='spin_texture_1D_home_made.jpg', fig_caption="Wannier interpolation", yaxis_lim=[-5,5]):
     """Output a figure with Sx, Sy, and Sz-projected band structure."""
     NW = len(Eigs_k[list(Eigs_k.keys())[0]])
     Nk = len(kpoints)//(len(kpath_ticks)-1)
@@ -491,8 +491,6 @@ def plot_bands_spin_texture(kpoints, kpath, kpath_ticks, Eigs_k, S_mn_k_H_x, S_m
         ax.set_ylabel(r'$E - E_\mathrm{F}$ (eV)', fontsize=13)
         sc = ax.scatter([[k_dist for i in range(NW)] for k_dist in kpath], [Eigs_k[kpoint] - E_F for kpoint in kpoints],
                         c='b', s=0.2)
-        if ticks is not None and tick_labels is not None:
-            ax.set_xticks(ticks, tick_labels, fontsize=16)
 
     else:
         fig, axes = plt.subplots(1, 3, figsize=[11,4.5])
@@ -509,8 +507,6 @@ def plot_bands_spin_texture(kpoints, kpath, kpath_ticks, Eigs_k, S_mn_k_H_x, S_m
             secax = ax.secondary_xaxis('top')
             secax.tick_params(labelsize=9) #axis='both', which='major', 
             secax.set_xlabel(r"$k$-distance (1/$\mathrm{\AA}$)", fontsize=10)
-            if ticks is not None and tick_labels is not None:
-                ax.set_xticks(ticks, tick_labels)
             sc = ax.scatter([[k_dist for i in range(NW)] for k_dist in kpath], [Eigs_k[kpoint] - E_F for kpoint in kpoints],
                             c=[np.diag(S[kpoint]) for kpoint in kpoints], cmap='coolwarm', s=0.2, vmin=-1, vmax=1)
             divider = make_axes_locatable(ax)

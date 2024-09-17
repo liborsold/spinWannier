@@ -177,30 +177,56 @@ def plot_err_vs_energy(error_by_energy, Ef, title="Wannierization RMS error vs. 
     plt.close()
 
 
-def plot_err_vs_bands(kpoints, kpath, Eigs_k, E_diff, S_diff, E_F=0, fout='ERRORS_ALL_band_structure.jpg', ticks=None, tick_labels=None, yaxis_lim=None):
+def plot_err_vs_bands(kpoints, kpath, kpath_ticks, Eigs_k, E_diff, S_diff, fout='ERRORS_ALL_band_structure.jpg', yaxis_lim=None):
 
     """Output a figure with RMSE_E, RMSE_Sx, RMSE_Sy, and RMSE_Sz-projected band structure."""
     NW = len(Eigs_k[list(Eigs_k.keys())[0]])
+    Nk = len(kpoints)//(len(kpath_ticks)-1)
 
-    fig, axes = plt.subplots(2, 2, figsize=[9, 9])
-    spin_name = [r'RMSE($E$) [eV]', r'RMSE($S_z$)', r'RMSE($S_x$)', r'RMSE($S_y$)']
+    fig, axes = plt.subplots(2, 2, figsize=[9, 6])
+    fig.suptitle('Error of Wannier interpolation', fontsize=14)
+    spin_name = [r'Energy (eV)', r'$S_z$', r'$S_x$', r'$S_y$']
     for i, S in enumerate([E_diff, S_diff[:,2], S_diff[:,0], S_diff[:,1]]):
         ax = axes[i//2, i%2]
         ax.axhline(linestyle='--', color='k')
         if yaxis_lim:
                 ax.set_ylim(yaxis_lim)
         ax.set_xlim([min(kpath), max(kpath)])
-        ax.set_title(spin_name[i], fontsize=14)
+        ax.set_title(spin_name[i], fontsize=13, pad=8)
+         
         if i == 0:
-            ax.set_ylabel('E - E_F (eV)')
-        ax.set_xlabel('k-path (1/A)')
-        if ticks is not None and tick_labels is not None:
-            ax.set_xticks(ticks, tick_labels)
-        sc = ax.scatter([[k_dist for i in range(NW)] for k_dist in kpath], [Eigs_k[kpoint] - E_F for kpoint in kpoints],
-                        c=S.reshape(-1,NW), cmap='YlOrRd', s=0.2, vmin=0, vmax=0.1)
+            # colorbar limits for energy
+            vmin = 0
+            vmax = 0.002
+        else:
+            # colorbar limits for spin
+            vmin = 0
+            vmax = 0.05
+        sc = ax.scatter([[k_dist for i in range(NW)] for k_dist in kpath], [Eigs_k[kpoint] for kpoint in kpoints],
+                        c=S.reshape(-1,NW), cmap='YlOrRd', s=0.2, vmin=vmin, vmax=vmax)
         divider = make_axes_locatable(ax)
         cax = divider.append_axes('right', size='5%', pad=0.05)
         cbar = fig.colorbar(sc, cax=cax, orientation='vertical')
+
+        for j in range(1, len(kpath_ticks)-1):
+            ax.axvline(x=kpath[j*Nk], color='#000000', linestyle='-', linewidth=0.75)
+
+        # if i == 0 or i == 2:
+        ax.set_ylabel(r'$E - E_\mathrm{F}$ (eV)', fontsize=13)
+        # if i == 0 or i == 1:
+        secax = ax.secondary_xaxis('top')
+        secax.tick_params(labelsize=9) #axis='both', which='major', 
+        secax.set_xlabel(r"$k$-distance (1/$\mathrm{\AA}$)", fontsize=10)
+        # no primary x-axis
+        ax.set_xticks([])
+
+        # if i == 2 or i == 3:
+        idx = np.array(range(0, Nk*len(kpath_ticks), Nk))
+        idx[-1] += -1
+        ax.set_xticks(kpath[idx])
+        ax.set_xticklabels(kpath_ticks, fontsize=12)
+        ax.yaxis.set_tick_params(labelsize=11)
+
         #cbar.set_label(r'$S_\mathrm{z}$')
         #sc.set_clim(vmin=colorbar_Sz_lim[0], vmax=colorbar_Sz_lim[1])
 
@@ -237,9 +263,10 @@ def get_frozen_window_min_max(wannier90winfile='wannier90.win'):
     return dis_froz_min, dis_froz_max
 
 
-def wannier_quality(kpoint_matrix, NK, num_wann, discard_first_bands=0, sc_dir='0_self-consistent', nsc_dir='1_non-self-consistent', wann_dir='2_wannier', \
+def wannier_quality_calculation(kpoint_matrix, NK, kpath_ticks, num_wann, Fermi_nsc_wann, discard_first_bands=0, sc_dir='0_self-consistent', nsc_dir='1_non-self-consistent', wann_dir='2_wannier', \
                     bands_dir='1_band_structure', tb_model_dir='2_wannier/tb_model_wann90', \
-                        band_for_Fermi_correction=None, kpoint_for_Fermi_correction='0.0000000E+00  0.0000000E+00  0.0000000E+00'):
+                        band_for_Fermi_correction=None, kpoint_for_Fermi_correction='0.0000000E+00  0.0000000E+00  0.0000000E+00', \
+                            yaxis_lim=None):
     """Needed files from VASP:
 
         = nsc_calculation_path:
@@ -285,13 +312,6 @@ def wannier_quality(kpoint_matrix, NK, num_wann, discard_first_bands=0, sc_dir='
 
     H_k_W = real_to_W_gauge(kpoints, hr_R_dict)
     Eigs_k, U_mn_k = W_gauge_to_H_gauge(H_k_W, U_mn_k={}, hamiltonian=True)
-
-    # get Fermi for the wannier non-self-consistent calculation
-    Fermi_nsc_wann = get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands(path=".", \
-                                    nsc_calculation_path=nsc_dir, \
-                                    corrected_at_kpoint=kpoint_for_Fermi_correction, \
-                                        corrected_at_band=band_for_Fermi_correction, sc_calculation_path=sc_dir, \
-                                            fout_name="FERMI_ENERGY_corrected.in")
 
     shutil.copyfile(nsc_dir + "/FERMI_ENERGY_corrected.in", './FERMI_ENERGY_corrected.in')
     E_F = Fermi_nsc_wann
@@ -357,7 +377,8 @@ def wannier_quality(kpoint_matrix, NK, num_wann, discard_first_bands=0, sc_dir='
 
     error_by_energy = compare_eigs_bandstructure_at_exact_kpts(dft_bands, E_to_compare_with_duplicates, num_kpoints_dft, num_wann, f_name_out='home-made_quality_error_Fermi_corrected.dat')
 
-    plot_err_vs_energy(error_by_energy, Ef=0, title="Wannierization RMS error vs. energy", fig_name_out="wannier_quality_error_by_energy_home-made_Fermi_corrected.png")
+    plot_err_vs_energy(error_by_energy, Ef=0, title="Wannierization RMS error vs. energy", \
+                       fig_name_out="wannier_quality_error_by_energy_home-made_Fermi_corrected.png")
 
 
     # ------------- COMPARE spin texture --------------------
@@ -378,8 +399,12 @@ def wannier_quality(kpoint_matrix, NK, num_wann, discard_first_bands=0, sc_dir='
     S_diff = np.abs( S_DFT_to_compare.reshape(-1,3) - S_to_compare_with_duplicates.reshape(-1,3) )
     E_diff = np.abs( dft_bands.reshape(-1) - E_to_compare_with_duplicates.reshape(-1) )
 
+    print('!!!!!!!!!!!Fermi_nsc_wann', Fermi_nsc_wann)
+
     # plot error-colored band structure
-    plot_err_vs_bands(kpoints, kpath, Eigs_k, E_diff, S_diff, E_F=Fermi_nsc_wann, fout='ERRORS_ALL_band_structure_home-made_Fermi_corrected.jpg', ticks=None, tick_labels=None, yaxis_lim=None)
+    plot_err_vs_bands(kpoints, kpath, kpath_ticks, Eigs_k, E_diff, S_diff, \
+                      fout='ERRORS_ALL_band_structure_home-made_Fermi_corrected.jpg', \
+                        yaxis_lim=yaxis_lim)
 
     # E_F was already subtracted
     E = dft_bands.reshape(-1)
@@ -420,7 +445,7 @@ def wannier_quality(kpoint_matrix, NK, num_wann, discard_first_bands=0, sc_dir='
     plt.savefig("ERRORS_all_home-made_Fermi_corrected.png", dpi=400)
     plt.close()
 
-    dis_froz_min, dis_froz_max = get_frozen_window_min_max()
+    dis_froz_min, dis_froz_max = get_frozen_window_min_max(wannier90winfile=f"{wann_dir}/wannier90.win")
 
     Fermi_sc = float(np.loadtxt(f"{sc_dir}/FERMI_ENERGY.in"))
     mean_error_whole_range = integrate_error(error_E_S_by_energy, E_min=-1e6, E_max=1e6)
@@ -476,7 +501,3 @@ def wannier_quality(kpoint_matrix, NK, num_wann, discard_first_bands=0, sc_dir='
     plt.tight_layout()
     plt.savefig(plot_title+"_S_histogram_home-made_Fermi_corrected.png", dpi=400)
     plt.close()
-
-
-if __name__ == "__main__":
-    main()
