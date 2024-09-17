@@ -257,9 +257,9 @@ def get_frozen_window_min_max(wannier90winfile='wannier90.win'):
     with open(wannier90winfile, 'r') as fr:
         for line in fr:
             if "dis_froz_min" in line:
-                dis_froz_min = float(line.split('dis_froz_min')[1].split()[-1])
+                dis_froz_min = float(line.split('dis_froz_min')[1].split('=')[1].split(' ')[0])
             if "dis_froz_max" in line:
-                dis_froz_max = float(line.split('dis_froz_max')[1].split()[-1])
+                dis_froz_max = float(line.split('dis_froz_max')[1].split('=')[1].split(' ')[0])
     return dis_froz_min, dis_froz_max
 
 
