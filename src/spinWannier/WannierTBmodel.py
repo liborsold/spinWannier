@@ -1,14 +1,13 @@
 import numpy as np
 import pickle
-import sys
+from os import makedirs
+from os.path import exists
+import copy
 from spinWannier.wannier_utils import files_wann90_to_dict_pickle, eigenval_dict, load_dict, load_lattice_vectors, reciprocal_lattice_vectors, \
                             get_kpoint_path, get_2D_kpoint_mesh, interpolate_operator, unite_spn_dict, save_bands_and_spin_texture, \
                                 uniform_real_space_grid, get_DFT_kgrid, plot_bands_spin_texture, magmom_OOP_or_IP, \
                                 fermi_surface_spin_texture, plot_bands_spin_texture
-from os import makedirs
-from os.path import exists
-import copy
-
+from spinWannier.wannier_quality_utils import wannier_quality
 
 class WannierTBmodel():
     """
@@ -90,7 +89,7 @@ class WannierTBmodel():
         
         save_folder = self.model_dir + save_folder_in_model_dir
         if save_folder[-1] != "/": save_folder += "/"
-        
+
         A = load_lattice_vectors(win_file=self.model_dir+"wannier90.win")
         G = reciprocal_lattice_vectors(A)
 
@@ -158,6 +157,7 @@ class WannierTBmodel():
                                         self.S_mn_k_H_x[dimension], self.S_mn_k_H_y[dimension], self.S_mn_k_H_z[dimension], \
                                         save_folder=save_folder, kmesh_2D=kmesh_2D)
     
+
     def plot1D_bands(self, fout='spin_texture_1D_home_made.jpg', yaxis_lim=[-8, 6]):
         plot_bands_spin_texture(self.kpoints_rec['1D'], self.kpath['1D'], self.kpath_ticks, self.Eigs_k['1D'], self.S_mn_k_H_x['1D'], self.S_mn_k_H_y['1D'], self.S_mn_k_H_z['1D'], fout=fout, yaxis_lim=yaxis_lim)
     
@@ -237,5 +237,6 @@ class WannierTBmodel():
                                     arrow_linewidth=arrow_linewidth, contour_line_width=contour_line_width
                                 )
     
-    def Wannier_quality():
-        raise NotImplementedError
+
+    def wannier_quality():
+        wannier_quality()
