@@ -44,7 +44,7 @@ class WannierTBmodel():
 
         self.model_dir = model_dir
 
-        # ensure that save_folder have a backslash at the end
+        # ensure that directories have a backslash at the end
         if model_dir[-1] != "/": model_dir += "/"
         if save_folder_in_model_dir[-1] != "/": save_folder_in_model_dir += "/"
 
@@ -81,29 +81,20 @@ class WannierTBmodel():
         self.spn_z_R_dict_name = "spn_z_R_dict.pickle"
         self.spn_R_dict_name   = "spn_R_dict.pickle"
         
-
         # store the real space grid
         self.R_grid = uniform_real_space_grid(R_mesh_ijk=get_DFT_kgrid(fin=model_dir+"wannier90.win")) #real_space_grid_from_hr_dat(fname="wannier90_hr.dat") #
 
 
-    def interpolate_bands_and_spin(self, kmesh_2D=False, kmesh_density=100, kmesh_2D_limits=[-0.5, 0.5], save_real_space_operators=True, \
+    def interpolate_bands_and_spin(self, kpoint_matrix, kpath_ticks, kmesh_2D=False, kmesh_density=100, kmesh_2D_limits=[-0.5, 0.5], save_real_space_operators=True, \
                                    save_folder_in_model_dir="tb_model_wann90/", save_bands_spin_texture=True):
         
         save_folder = self.model_dir + save_folder_in_model_dir
         if save_folder[-1] != "/": save_folder += "/"
-
-        # create the kpoint_matrix if it does not exist
-        if not 'kpoint_matrix' in locals():
-            kpoint_matrix = [
-                [(0.333333,  0.333333,  0.000000),    (0.00,  0.00,  0.00)],
-                [(0.00,  0.00,  0.00),    (0.50, 0.00,  0.00)],
-                [(0.50, 0.00,  0.00),    (0.333333,  0.333333,  0.000000)]
-            ]
-
+        
         A = load_lattice_vectors(win_file=self.model_dir+"wannier90.win")
         G = reciprocal_lattice_vectors(A)
 
-        nD_tag = '2D' if kmesh_2D is True else '1D'
+        dimension = '2D' if kmesh_2D is True else '1D'
 
         # initialize local variables
         self.Eigs_k = {}
@@ -115,16 +106,17 @@ class WannierTBmodel():
         self.kpath = {}
 
         if kmesh_2D is True:
-            self.kpoints_rec[nD_tag], self.kpoints_cart[nD_tag] = get_2D_kpoint_mesh(G, limits=kmesh_2D_limits, Nk=kmesh_density)
-            self.kpath[nD_tag] = []
+            self.kpoints_rec[dimension], self.kpoints_cart[dimension] = get_2D_kpoint_mesh(G, limits=kmesh_2D_limits, Nk=kmesh_density)
+            self.kpath[dimension] = []
         else:
-            self.kpoints_rec[nD_tag], self.kpoints_cart[nD_tag], self.kpath[nD_tag] = get_kpoint_path(kpoint_matrix, G, Nk=kmesh_density)
+            self.kpoints_rec[dimension], self.kpoints_cart[dimension], self.kpath[dimension] = get_kpoint_path(kpoint_matrix, G, Nk=kmesh_density)
+            self.kpath_ticks = kpath_ticks
             # -> interpolate at the original k-points:
             # kpoints_rec = list(set([kpoint[0] for kpoint in list(spn_dict.keys())]))
             # kpath = list(range(len(kpoints_rec)))  # just to have some path
         
-        self.Eigs_k[nD_tag], self.U_mn_k = interpolate_operator(self.eig_dict, self.u_dis_dict, self.u_dict, hamiltonian=True, 
-                                                latt_params=A, reciprocal_latt_params=G, R_grid=self.R_grid, kpoints=self.kpoints_rec[nD_tag], 
+        self.Eigs_k[dimension], self.U_mn_k = interpolate_operator(self.eig_dict, self.u_dis_dict, self.u_dict, hamiltonian=True, 
+                                                latt_params=A, reciprocal_latt_params=G, R_grid=self.R_grid, kpoints=self.kpoints_rec[dimension], 
                                                 save_real_space=save_real_space_operators, 
                                                 real_space_fname="hr_R_dict.pickle", save_folder=save_folder)
         
@@ -136,16 +128,16 @@ class WannierTBmodel():
             spn_dict_y[k[0]] = self.spn_dict[(k[0], 'y')]
             spn_dict_z[k[0]] = self.spn_dict[(k[0], 'z')]
 
-        self.S_mn_k_H_x[nD_tag] = interpolate_operator(spn_dict_x, self.u_dis_dict, self.u_dict, hamiltonian=False, U_mn_k=self.U_mn_k, 
-                                            latt_params=A, reciprocal_latt_params=G, R_grid=self.R_grid, kpoints=self.kpoints_rec[nD_tag],
+        self.S_mn_k_H_x[dimension] = interpolate_operator(spn_dict_x, self.u_dis_dict, self.u_dict, hamiltonian=False, U_mn_k=self.U_mn_k, 
+                                            latt_params=A, reciprocal_latt_params=G, R_grid=self.R_grid, kpoints=self.kpoints_rec[dimension],
                                             save_real_space=save_real_space_operators, real_space_fname=self.spn_x_R_dict_name, 
                                             save_folder=save_folder)
-        self.S_mn_k_H_y[nD_tag] = interpolate_operator(spn_dict_y, self.u_dis_dict, self.u_dict, hamiltonian=False, U_mn_k=self.U_mn_k, 
-                                            latt_params=A, reciprocal_latt_params=G, R_grid=self.R_grid, kpoints=self.kpoints_rec[nD_tag],
+        self.S_mn_k_H_y[dimension] = interpolate_operator(spn_dict_y, self.u_dis_dict, self.u_dict, hamiltonian=False, U_mn_k=self.U_mn_k, 
+                                            latt_params=A, reciprocal_latt_params=G, R_grid=self.R_grid, kpoints=self.kpoints_rec[dimension],
                                             save_real_space=save_real_space_operators, real_space_fname=self.spn_y_R_dict_name, 
                                             save_folder=save_folder)
-        self.S_mn_k_H_z[nD_tag] = interpolate_operator(spn_dict_z, self.u_dis_dict, self.u_dict, hamiltonian=False, U_mn_k=self.U_mn_k, 
-                                            latt_params=A, reciprocal_latt_params=G, R_grid=self.R_grid, kpoints=self.kpoints_rec[nD_tag],
+        self.S_mn_k_H_z[dimension] = interpolate_operator(spn_dict_z, self.u_dis_dict, self.u_dict, hamiltonian=False, U_mn_k=self.U_mn_k, 
+                                            latt_params=A, reciprocal_latt_params=G, R_grid=self.R_grid, kpoints=self.kpoints_rec[dimension],
                                             save_real_space=save_real_space_operators, real_space_fname=self.spn_z_R_dict_name, 
                                             save_folder=save_folder)
 
@@ -162,12 +154,12 @@ class WannierTBmodel():
             pickle.dump(spn_dict, fw)
 
         if save_bands_spin_texture is True:
-            save_bands_and_spin_texture(self.kpoints_rec[nD_tag], self.kpoints_cart[nD_tag], self.kpath[nD_tag], self.Eigs_k[nD_tag], \
-                                        self.S_mn_k_H_x[nD_tag], self.S_mn_k_H_y[nD_tag], self.S_mn_k_H_z[nD_tag], \
+            save_bands_and_spin_texture(self.kpoints_rec[dimension], self.kpoints_cart[dimension], self.kpath[dimension], self.Eigs_k[dimension], \
+                                        self.S_mn_k_H_x[dimension], self.S_mn_k_H_y[dimension], self.S_mn_k_H_z[dimension], \
                                         save_folder=save_folder, kmesh_2D=kmesh_2D)
     
     def plot1D_bands(self, fout='spin_texture_1D_home_made.jpg', yaxis_lim=[-8, 6]):
-        plot_bands_spin_texture(self.kpoints_rec['1D'], self.kpath['1D'], self.Eigs_k['1D'], self.S_mn_k_H_x['1D'], self.S_mn_k_H_y['1D'], self.S_mn_k_H_z['1D'], fout=fout, yaxis_lim=yaxis_lim)
+        plot_bands_spin_texture(self.kpoints_rec['1D'], self.kpath['1D'], self.kpath_ticks, self.Eigs_k['1D'], self.S_mn_k_H_x['1D'], self.S_mn_k_H_y['1D'], self.S_mn_k_H_z['1D'], fout=fout, yaxis_lim=yaxis_lim)
     
 
     def plot2D_spin_texture(self, fig_name="spin_texture_2D_home_made.jpg", E_to_cut=None):

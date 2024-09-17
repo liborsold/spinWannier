@@ -477,9 +477,10 @@ def save_bands_and_spin_texture(kpoints_rec, kpoints_cart, kpath, Eigs_k, S_mn_k
         pickle.dump(bands_spin_dat, fw)
 
 
-def plot_bands_spin_texture(kpoints, kpath, Eigs_k, S_mn_k_H_x, S_mn_k_H_y, S_mn_k_H_z, E_F=0, fout='spin_texture_1D_home_made.jpg', fig_caption="home-made interpolation", ticks=None, tick_labels=None, yaxis_lim=[-5,5]):
+def plot_bands_spin_texture(kpoints, kpath, kpath_ticks, Eigs_k, S_mn_k_H_x, S_mn_k_H_y, S_mn_k_H_z, E_F=0, fout='spin_texture_1D_home_made.jpg', fig_caption="Wannier interpolation", ticks=None, tick_labels=None, yaxis_lim=[-5,5]):
     """Output a figure with Sx, Sy, and Sz-projected band structure."""
     NW = len(Eigs_k[list(Eigs_k.keys())[0]])
+    Nk = len(kpoints)//(len(kpath_ticks)-1)
 
     # if spin information missing, plot just bands
     if S_mn_k_H_x == {}:
@@ -487,16 +488,15 @@ def plot_bands_spin_texture(kpoints, kpath, Eigs_k, S_mn_k_H_x, S_mn_k_H_y, S_mn
         ax.axhline(linestyle='--', color='k')
         ax.set_ylim(yaxis_lim)
         ax.set_xlim([min(kpath), max(kpath)])
-        ax.set_ylabel('E - E_F (eV)')
-        ax.set_xlabel('k-path (1/A)')
+        ax.set_ylabel(r'$E - E_\mathrm{F}$ (eV)', fontsize=13)
         sc = ax.scatter([[k_dist for i in range(NW)] for k_dist in kpath], [Eigs_k[kpoint] - E_F for kpoint in kpoints],
                         c='b', s=0.2)
         if ticks is not None and tick_labels is not None:
-            ax.set_xticks(ticks, tick_labels)
+            ax.set_xticks(ticks, tick_labels, fontsize=16)
 
     else:
         fig, axes = plt.subplots(1, 3, figsize=[11,4.5])
-        spin_name = ['Sx', 'Sy', 'Sz']
+        spin_name = [r'$S_x$', r'$S_y$', r'$S_z$']
         for i, S in enumerate([S_mn_k_H_x, S_mn_k_H_y, S_mn_k_H_z]):
             ax = axes[i]
             ax.axhline(linestyle='--', color='k')
@@ -504,15 +504,22 @@ def plot_bands_spin_texture(kpoints, kpath, Eigs_k, S_mn_k_H_x, S_mn_k_H_y, S_mn
             ax.set_xlim([min(kpath), max(kpath)])
             ax.set_title(spin_name[i])
             if i == 0:
-                ax.set_ylabel('E - E_F (eV)')
-            ax.set_xlabel('k-path (1/A)')
+                ax.set_ylabel(r'$E - E_\mathrm{F}$ (eV)', fontsize=13)
+            secax = ax.secondary_xaxis('top')
+            secax.tick_params(labelsize=9) #axis='both', which='major', 
+            secax.set_xlabel(r"$k$-distance (1/$\mathrm{\AA}$)", fontsize=9)
             if ticks is not None and tick_labels is not None:
                 ax.set_xticks(ticks, tick_labels)
             sc = ax.scatter([[k_dist for i in range(NW)] for k_dist in kpath], [Eigs_k[kpoint] - E_F for kpoint in kpoints],
-                            c=[np.diag(S[kpoint]) for kpoint in kpoints], cmap='seismic', s=0.2, vmin=-1, vmax=1)
+                            c=[np.diag(S[kpoint]) for kpoint in kpoints], cmap='coolwarm', s=0.2, vmin=-1, vmax=1)
             divider = make_axes_locatable(ax)
             cax = divider.append_axes('right', size='5%', pad=0.05)
             cbar = fig.colorbar(sc, cax=cax, orientation='vertical')
+
+            idx = np.array(range(0, Nk*len(kpath_ticks), Nk))
+            idx[-1] += -1
+            ax.set_xticks(kpath[idx])
+            ax.set_xticklabels(kpath_ticks, fontsize=11)
             #cbar.set_label(r'$S_\mathrm{z}$')
             #sc.set_clim(vmin=colorbar_Sz_lim[0], vmax=colorbar_Sz_lim[1])
 
