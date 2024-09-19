@@ -88,8 +88,8 @@ def compare_eigs_bandstructure_at_exact_kpts(dft_bands, wann_bands, num_kpoints,
 def duplicate_kpoints_for_home_made(data, NK):
     """duplicate also the last k-point (in  dictionary the keys are unique, so actually the data in the dictionaries where keys are k-points contain only one of each k-point, so if k-path starts and ends with the same k-point, only the first one is recorded"""
     dimensions = list(np.array(data).shape)
-    print(dimensions[0])
-    print(NK)
+    # print(dimensions[0])
+    # print(NK)
     n_blocs = (dimensions[0])//(NK-1)
     dimensions[0] += n_blocs
 
@@ -329,8 +329,8 @@ def wannier_quality_calculation(kpoint_matrix, NK, kpath_ticks, Fermi_nsc_wann, 
     Sy_k_W = real_to_W_gauge(kpoints, S_mn_R_y)
     Sz_k_W = real_to_W_gauge(kpoints, S_mn_R_z)
 
-    print('len kpoints', len(kpoints))
-    print('len H_k_W', len(list(H_k_W.keys())))
+    # print('len kpoints', len(kpoints))
+    # print('len H_k_W', len(list(H_k_W.keys())))
 
     S_mn_k_H_x = W_gauge_to_H_gauge(Sx_k_W, U_mn_k=U_mn_k, hamiltonian=False)
     S_mn_k_H_y = W_gauge_to_H_gauge(Sy_k_W, U_mn_k=U_mn_k, hamiltonian=False)
@@ -356,8 +356,8 @@ def wannier_quality_calculation(kpoint_matrix, NK, kpath_ticks, Fermi_nsc_wann, 
     E_to_compare_with_duplicates = duplicate_kpoints_for_home_made(E_to_compare, NK)
     # print("E_to_compare_with_duplicates_shape", E_to_compare_with_duplicates.shape)
 
-    print("50", E_to_compare_with_duplicates[50,:])
-    print("51", E_to_compare_with_duplicates[51,:])
+    # print("50", E_to_compare_with_duplicates[50,:])
+    # print("51", E_to_compare_with_duplicates[51,:])
 
     S_mn_k_H_x_to_compare = duplicate_kpoints_for_home_made(np.array( [np.diag(S_mn_k_H_x[key]) for key in S_mn_k_H_x.keys()]), NK)
     S_mn_k_H_y_to_compare = duplicate_kpoints_for_home_made(np.array( [np.diag(S_mn_k_H_y[key]) for key in S_mn_k_H_y.keys()]), NK)
@@ -393,13 +393,13 @@ def wannier_quality_calculation(kpoint_matrix, NK, kpath_ticks, Fermi_nsc_wann, 
     # print("S_to_compare dimensions", S_to_compare_with_duplicates.shape)
     # print("S_to_compare", S_to_compare)
 
-    print("50", S_to_compare_with_duplicates[50,:,:])
-    print("51", S_to_compare_with_duplicates[51,:,:])
+    # print("50", S_to_compare_with_duplicates[50,:,:])
+    # print("51", S_to_compare_with_duplicates[51,:,:])
 
     S_diff = np.abs( S_DFT_to_compare.reshape(-1,3) - S_to_compare_with_duplicates.reshape(-1,3) )
     E_diff = np.abs( dft_bands.reshape(-1) - E_to_compare_with_duplicates.reshape(-1) )
 
-    print('!!!!!!!!!!!Fermi_nsc_wann', Fermi_nsc_wann)
+    # print('!!!!!!!!!!!Fermi_nsc_wann', Fermi_nsc_wann)
 
     # plot error-colored band structure
     plot_err_vs_bands(kpoints, kpath, kpath_ticks, Eigs_k, E_diff, S_diff, \

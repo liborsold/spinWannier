@@ -7,7 +7,7 @@ from spinWannier.wannier_utils import files_wann90_to_dict_pickle, eigenval_dict
                             get_kpoint_path, get_2D_kpoint_mesh, interpolate_operator, unite_spn_dict, save_bands_and_spin_texture, \
                                 uniform_real_space_grid, get_DFT_kgrid, plot_bands_spin_texture, magmom_OOP_or_IP, \
                                 fermi_surface_spin_texture, plot_bands_spin_texture, u_to_dict, spn_to_dict, \
-                                parse_KPOINTS_file
+                                parse_KPOINTS_file, save_bands_and_spin_texture_old
 from spinWannier.wannier_quality_utils import wannier_quality_calculation, get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands
 from spinWannier.vaspspn import vasp_to_spn
 class WannierTBmodel():
@@ -40,7 +40,7 @@ class WannierTBmodel():
     """
 
     def __init__(self, seedname='wannier90', sc_dir='0_self-consistent', nsc_dir='1_non-self-consistent', wann_dir='2_wannier', \
-                    bands_dir='1_band_structure', tb_model_dir='2_wannier/tb_model_wann90', discard_first_bands=0, \
+                    bands_dir='1_band_structure', tb_model_dir='2_wannier/tb_model_wann90', \
                     band_for_Fermi_correction=None, kpoint_for_Fermi_correction='0.0000000E+00  0.0000000E+00  0.0000000E+00'):
         """Initialize and load the model."""
 
@@ -50,8 +50,6 @@ class WannierTBmodel():
         if wann_dir[-1] != "/": wann_dir += "/"
         if bands_dir[-1] != "/": bands_dir += "/"
         if tb_model_dir[-1] != "/": tb_model_dir += "/"
-
-        if band_for_Fermi_correction is None: band_for_Fermi_correction = discard_first_bands + 1
 
         # load important info from wannier90.win
         discard_first_bands = 0
@@ -67,6 +65,8 @@ class WannierTBmodel():
                 if "num_bands" in line:
                     num_bands = int(line.split('=')[1].split('#')[0].strip())
         
+        if band_for_Fermi_correction is None: band_for_Fermi_correction = discard_first_bands + 1
+
         if num_wann == -1 or num_bands == -1:
             print("num_wann or num_bands not found in wannier90.win !")
             exit(1)
@@ -151,11 +151,13 @@ class WannierTBmodel():
         self.R_grid = uniform_real_space_grid(R_mesh_ijk=get_DFT_kgrid(fin=wann_dir+f"{seedname}.win")) #real_space_grid_from_hr_dat(fname=f"{seedname}_hr.dat") #
 
 
-    def interpolate_bands_and_spin(self, kpoint_matrix, kpath_ticks, kmesh_2D=False, kmesh_density=100, kmesh_2D_limits=[-0.5, 0.5], save_real_space_operators=True, \
+    def interpolate_bands_and_spin(self, kpoint_matrix, fout='bands_spin', kpath_ticks=None, kmesh_2D=False, kmesh_density=101, kmesh_2D_limits=[-0.5, 0.5], save_real_space_operators=True, \
                                    save_folder_in_model_dir="tb_model_wann90/", save_bands_spin_texture=True):
         
         save_folder = self.wann_dir + save_folder_in_model_dir
         if save_folder[-1] != "/": save_folder += "/"
+
+        fout = fout + ".pickle"
 
         A = load_lattice_vectors(win_file=self.wann_dir+f"{self.seedname}.win")
         G = reciprocal_lattice_vectors(A)
@@ -176,10 +178,24 @@ class WannierTBmodel():
             self.kpath[dimension] = []
         else:
             self.kpoints_rec[dimension], self.kpoints_cart[dimension], self.kpath[dimension] = get_kpoint_path(kpoint_matrix, G, Nk=kmesh_density)
+            if kpath_ticks is None:
+                kpath_ticks = [f'P{i}' for i in range(len(kpoint_matrix)+1)]
             self.kpath_ticks = kpath_ticks
             # -> interpolate at the original k-points:
             # kpoints_rec = list(set([kpoint[0] for kpoint in list(spn_dict.keys())]))
             # kpath = list(range(len(kpoints_rec)))  # just to have some path
+
+        # --- only calculate if the files do not exist ---
+        if exists(save_folder+fout):
+            print(f"The file {fout} already exists in f'{save_folder}'.\nSkipping the calculation, loading the data instead!\n")
+            # load the data
+            with open(save_folder+fout, 'rb') as fr:
+                bands_spin_dat = pickle.load(fr)
+            self.Eigs_k[dimension] = bands_spin_dat['bands']
+            self.S_mn_k_H_x[dimension] = bands_spin_dat['Sx']
+            self.S_mn_k_H_y[dimension] = bands_spin_dat['Sy']
+            self.S_mn_k_H_z[dimension] = bands_spin_dat['Sz']
+            return
         
         self.Eigs_k[dimension], self.U_mn_k = interpolate_operator(self.eig_dict, self.u_dis_dict, self.u_dict, hamiltonian=True, 
                                                 latt_params=A, reciprocal_latt_params=G, R_grid=self.R_grid, kpoints=self.kpoints_rec[dimension], 
@@ -219,20 +235,24 @@ class WannierTBmodel():
             spn_dict = unite_spn_dict(spn_x_dict, spn_y_dict, spn_z_dict, spin_names=['x','y','z'])
             pickle.dump(spn_dict, fw)
 
-        if save_bands_spin_texture is True:
+        if save_bands_spin_texture is True and kmesh_2D is False:
             save_bands_and_spin_texture(self.kpoints_rec[dimension], self.kpoints_cart[dimension], self.kpath[dimension], self.Eigs_k[dimension], \
                                         self.S_mn_k_H_x[dimension], self.S_mn_k_H_y[dimension], self.S_mn_k_H_z[dimension], \
-                                        save_folder=save_folder, kmesh_2D=kmesh_2D)
+                                        save_folder=save_folder, kmesh_2D=kmesh_2D, fout=fout)
+        elif save_bands_spin_texture is True and kmesh_2D is True:
+            save_bands_and_spin_texture_old(self.kpoints_rec[dimension], self.kpoints_cart[dimension], self.kpath[dimension], self.Eigs_k[dimension], \
+                                        self.S_mn_k_H_x[dimension], self.S_mn_k_H_y[dimension], self.S_mn_k_H_z[dimension], \
+                                        save_folder=save_folder, kmesh_2D=kmesh_2D, fout=fout)
     
 
     def plot1D_bands(self, fout='spin_texture_1D_home_made.jpg', yaxis_lim=[-8, 6]):
         plot_bands_spin_texture(self.kpoints_rec['1D'], self.kpath['1D'], self.kpath_ticks, self.Eigs_k['1D'], self.S_mn_k_H_x['1D'], self.S_mn_k_H_y['1D'], self.S_mn_k_H_z['1D'], E_F=self.EF_nsc, fout=fout, yaxis_lim=yaxis_lim)
     
 
-    def plot2D_spin_texture(self, fig_name="spin_texture_2D_home_made.jpg", E_to_cut=None):
+    def plot2D_spin_texture(self, fin_2D='bands_spin_2D', fin_1D='bands_spin', fig_name="spin_texture_2D_home_made.jpg", E_to_cut=None):
         # ==========  USER DEFINED  ===============
-        fin_1D = self.tb_model_dir+"bands_spin.pickle" #"bands_spin_model.pickle" #"./tb_model_wann90/bands_spin.pickle" #"bands_spin_model.pickle" #
-        fin_2D = self.tb_model_dir+"bands_spin_2D.pickle" #"bands_spin_2D_model.pickle" #"./tb_model_wann90/bands_spin_2D.pickle" #"bands_spin_2D_model.pickle"
+        fin_1D = self.tb_model_dir+fin_1D+".pickle" #"bands_spin_model.pickle" #"./tb_model_wann90/bands_spin.pickle" #"bands_spin_model.pickle" #
+        fin_2D = self.tb_model_dir+fin_2D+'.pickle' #"bands_spin_2D_model.pickle" #"./tb_model_wann90/bands_spin_2D.pickle" #"bands_spin_2D_model.pickle"
         E_F = float(np.loadtxt(self.wann_dir+'FERMI_ENERGY.in')) #-2.31797502 # for CrTe2 with EFIELD: -2.31797166
         E_to_cut_2D = E_F #E_F # + 1.44
         kmesh_limits = None #[-.5, .5] #None #   # unit 1/A; put 'None' if no limits should be applied

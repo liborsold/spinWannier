@@ -460,8 +460,8 @@ def W_gauge_to_H_gauge(O_mn_k_W, U_mn_k={}, hamiltonian=True):
         return O_mn_k_H
         
         
-def save_bands_and_spin_texture(kpoints_rec, kpoints_cart, kpath, Eigs_k, S_mn_k_H_x, S_mn_k_H_y, S_mn_k_H_z, kmesh_2D=False, 
-                                fout='bands_spin.pickle', fout2D='bands_spin_2D.pickle', save_folder='./tb_model_wann90/'):
+def save_bands_and_spin_texture_old(kpoints_rec, kpoints_cart, kpath, Eigs_k, S_mn_k_H_x, S_mn_k_H_y, S_mn_k_H_z, kmesh_2D=False, 
+                                fout='bands_spin.pickle', save_folder='./tb_model_wann90/'):
     """Save the bands and spin texture information for given kpoints."""
     bands_spin_dat = {}
     bands_spin_dat['kpoints'] = kpoints_cart
@@ -471,9 +471,24 @@ def save_bands_and_spin_texture(kpoints_rec, kpoints_cart, kpath, Eigs_k, S_mn_k
     bands_spin_dat['Sz'] = [np.diagonal(S_mn_k_H_z[kpoint]).real for kpoint in kpoints_rec]
     if kmesh_2D is not True:
         bands_spin_dat['kpath'] = kpath
-    bands_spin_name = fout2D if kmesh_2D is True else fout
-    print(save_folder+bands_spin_name)
-    with open(save_folder+bands_spin_name, 'wb') as fw:
+    print(save_folder+fout)
+    with open(save_folder+fout, 'wb') as fw:
+        pickle.dump(bands_spin_dat, fw)
+
+
+def save_bands_and_spin_texture(kpoints_rec, kpoints_cart, kpath, Eigs_k, S_mn_k_H_x, S_mn_k_H_y, S_mn_k_H_z, kmesh_2D=False, 
+                                fout='bands_spin.pickle', save_folder='./tb_model_wann90/'):
+    """Save the bands and spin texture information for given kpoints."""
+    bands_spin_dat = {}
+    bands_spin_dat['kpoints'] = kpoints_cart
+    bands_spin_dat['bands'] = Eigs_k
+    bands_spin_dat['Sx'] = S_mn_k_H_x
+    bands_spin_dat['Sy'] = S_mn_k_H_y
+    bands_spin_dat['Sz'] = S_mn_k_H_z
+    if kmesh_2D is not True:
+        bands_spin_dat['kpath'] = kpath
+    print(save_folder+fout)
+    with open(save_folder+fout, 'wb') as fw:
         pickle.dump(bands_spin_dat, fw)
 
 
@@ -1095,8 +1110,6 @@ def fermi_surface_spin_texture(kpoints2D, bands2D, Sx2D, Sy2D, Sz2D, ax=None, E=
     include_kpoint = np.any(energy_distances <= E_thr, axis=1)
     closest_band = np.argmin(energy_distances, axis=1)[include_kpoint]
 
-    print('got here')
-
     # get the cartesian (kx, ky) and polar (k, phi) coordinates of the kpoints
     kx = kpoints2D[include_kpoint,0]
     ky = kpoints2D[include_kpoint,1]
@@ -1108,14 +1121,10 @@ def fermi_surface_spin_texture(kpoints2D, bands2D, Sx2D, Sy2D, Sz2D, ax=None, E=
     df = pd.DataFrame({'kx': kx, 'ky': ky, 'k': k, 'phi': phi, 'closest_band': closest_band, \
                        'Sx': Sx2D[include_kpoint, closest_band], \
                         'Sy': Sy2D[include_kpoint, closest_band], 'Sz': Sz2D[include_kpoint, closest_band]})
-    
-    print('got here 2')
 
     # save the mean radius for each corresponding band
     df_bands = pd.DataFrame()
     df_bands['k_mean'] = df.groupby('closest_band')['k'].mean()
-
-    print('got here 3')
 
     # get the closest integer number of points for each band divisible by 6
     df_bands['n_points'] = df_bands['k_mean'].apply(lambda x: (int(x * n_points_for_one_angstrom_radius) // 6)*6)
@@ -1130,15 +1139,17 @@ def fermi_surface_spin_texture(kpoints2D, bands2D, Sx2D, Sy2D, Sz2D, ax=None, E=
     for band in df_bands.index:
         phi_anchors = np.linspace(0, 2*np.pi, df_bands.loc[band, 'n_points'], endpoint=False)
         df_temp = df[df['closest_band'] == band]
-        df_temp['closest_anchor'] = df_temp['phi'].apply(lambda x: phi_anchors[np.argmin(np.abs(phi_anchors - x))])
-        df_temp['anchor_difference'] = (df_temp['phi'] - df_temp['closest_anchor']).abs()
+        try:
+            df_temp['closest_anchor'] = df_temp['phi'].apply(lambda x: phi_anchors[np.argmin(np.abs(phi_anchors - x))])
+        except ValueError:
+            print(f'No points found at Fermi; increase the k-point meshing density!')
+            return -1
+        df_temp.loc[:,'anchor_difference'] = (df_temp.loc[:,'phi'] - df_temp.loc[:,'closest_anchor']).abs()
         df_filtered_temp = df_temp.groupby('closest_anchor').apply(lambda x: x.loc[x['anchor_difference'].idxmin()])
         df_filtered = pd.concat([df_filtered, df_filtered_temp])
 
     # get the kx, ky, Sx, Sy, Sz values for the arrows
-    print('got here 4')
     kx_radial_filter = df_filtered['kx'].values
-    print('got here 5')
     ky_radial_filter = df_filtered['ky'].values
     Sx_radial_filter = df_filtered['Sx'].values
     Sy_radial_filter = df_filtered['Sy'].values
@@ -1202,7 +1213,7 @@ def fermi_surface_spin_texture(kpoints2D, bands2D, Sx2D, Sy2D, Sz2D, ax=None, E=
     else:
         fig_name_split = fig_name.split('.')
         fig_name_all_one = f"{''.join(fig_name_split[:-1])}_all_in_one_E-from-EF{E-E_F:.3f}eV.{fig_name_split[-1]}"
-    # fig_name_all_one = check_file_exists(fig_name_all_one)
+    fig_name_all_one = check_file_exists(fig_name_all_one)
 
     if savefig is True:
         plt.savefig(fig_name_all_one, dpi=400)
