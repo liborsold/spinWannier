@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "plot_spin_texture_from_real_space_data.py", line 3, in <module>
+    from spin_texture_interpolated import real_to_W_gauge, W_gauge_to_H_gauge, save_bands_and_spin_texture, \
+  File "/W/lv268562/2D/CrXY/CrSTe/U_3.0/MAGMOM_0_0_1/EFIELD_0.00/2_wann_SOC_25x25_frozmaxmargin_0.2eV/spin_texture_interpolated.py", line 32, in <module>
+    from wannier_utils import check_file_exists, get_kpoint_names, eigenval_dict, load_dict, load_lattice_vectors, \
+  File "/home/lv268562/bin/python_scripts/wannier_to_tight_binding/wannier_utils.py", line 12, in <module>
+    import pandas as pd
+  File "/home/lv268562/.local/lib/python3.8/site-packages/pandas/__init__.py", line 22, in <module>
+    from pandas.compat import is_numpy_dev as _is_numpy_dev  # pyright: ignore # noqa:F401
+  File "/home/lv268562/.local/lib/python3.8/site-packages/pandas/compat/__init__.py", line 25, in <module>
+    from pandas.compat.numpy import (
+  File "/home/lv268562/.local/lib/python3.8/site-packages/pandas/compat/numpy/__init__.py", line 25, in <module>
+    raise ImportError(
+ImportError: this version of pandas is incompatible with numpy < 1.20.3
+your numpy version is 1.19.2.
+Please upgrade numpy to >= 1.20.3 to use this pandas version

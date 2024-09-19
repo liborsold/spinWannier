@@ -1,0 +1,64 @@
+
+Electronic minimization
+  ENCUT     = 330
+  EDIFF     = 1E-7
+  LORBIT    = 12
+
+  LREAL     = .False.
+  ICHARG    = 11
+  NELM      = 200
+  NELMIN    = 6
+  NELMDL    = -7
+  PREC      = Accurate
+  ALGO      = Fast
+  NBANDS    = 64
+
+Structural minimization
+  NSW       = 0
+  IBRION    = -1
+  ISIF      = 3
+  EDIFFG    = -0.001
+
+Potential
+  VOSKOWN   = 1
+  LASPH     = True
+  IVDW      = 12
+
+DOS
+  ISMEAR    = 2
+  SIGMA     = 0.05
+  NEDOS     = 2001
+  
+Magnetism
+  ISPIN     = 2
+  MAGMOM    = 0.0 0.0 5.0 -0.0 -0.0 -0.6 -0.0 -0.0 -0.6 # 5.0 0 0 -0.6 0 0 -0.6 0 0
+  ISYM      = -1
+  LSORBIT   = .TRUE.
+  SAXIS     = 0 0 1
+     
+E-field
+  EFIELD    = 0.00 # 0.00 # 0.00 # 0.00     # eV/A
+  IDIPOL    = 3       # number of the lattice vector that the E-field will be parallel to
+  LDIPOL    = .TRUE.  #dipole corrections, keep switched on
+  LVHAR=.TRUE.
+
+Mixer
+  AMIX      = 0.2
+  BMIX      = 0.00001
+  AMIX_MAG  = 0.8
+  BMIX_MAG  = 0.00001
+     
+GGA+U
+  LDAU      = .TRUE.
+  LDAUTYPE  = 2
+  LDAUL     = 2 -1 -1
+  LDAUU     = 3.0 0.00 0.00 # 2.10 0.00 0.00
+  LDAUJ     = 0.00 0.00 0.00 # 0.00 0.00 0.00
+  LDAUPRINT = 2
+  LMAXMIX   = 4 
+
+Output
+  LWAVE = .TRUE. #     = .FALSE.
+  
+Parallelization
+  NCORE     = 8  

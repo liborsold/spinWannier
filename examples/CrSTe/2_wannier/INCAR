@@ -1,0 +1,120 @@
+
+Electronic minimization
+  ENCUT     = 330
+  EDIFF     = 1E-7
+  LORBIT    = 12
+  LREAL     = .False.
+  #ICHARG    = 1
+  NELM      = 0
+  NELMIN    = 6
+  NELMDL    = -7
+  PREC      = Accurate
+  ALGO      = 2 #Fast
+  NBANDS    = 64
+
+Structural minimization
+  NSW       = 0
+  IBRION    = -1
+  ISIF      = 3
+  EDIFFG    = -0.001
+
+Potential
+  VOSKOWN   = 1
+  LASPH     = True
+  IVDW      = 12
+
+DOS
+  ISMEAR    = -5
+  SIGMA     = 0.05
+  NEDOS     = 2001
+  
+Magnetism
+  ISPIN     = 2
+  MAGMOM    = 0.0 0.0 5.0 -0.0 -0.0 -0.6 -0.0 -0.0 -0.6 # 5.0 0 0 -0.6 0 0 -0.6 0 0
+  ISYM      = -1
+  LSORBIT   = .TRUE.
+  SAXIS     = 0 0 1
+     
+E-field
+  EFIELD    = 0.00 # 0.00 # 0.00     # eV/A
+  IDIPOL    = 3       # number of the lattice vector that the E-field will be parallel to
+  LDIPOL    = .TRUE.  #dipole corrections, keep switched on
+  LVHAR=.TRUE.
+
+Mixer
+  AMIX      = 0.2
+  BMIX      = 0.00001
+  AMIX_MAG  = 0.8
+  BMIX_MAG  = 0.00001
+     
+GGA+U
+  LDAU      = .TRUE.
+  LDAUTYPE  = 2
+  LDAUL     = 2 -1 -1
+  LDAUU     = 3.0 0.00 0.00 # 2.10 0.00 0.00
+  LDAUJ     = 0.00 0.00 0.00 # 0.00 0.00 0.00
+  LDAUPRINT = 2
+  LMAXMIX   = 4 
+
+Output
+  LWAVE     = .FALSE.
+  
+Parallelization
+  NCORE     = 1  
+
+
+Wannier
+  LWANNIER90 = .TRUE.
+  NUM_WANN   = 22
+  WANNIER90_WIN = "
+Begin Projections
+Cr:d
+S:p
+Te:p
+End Projections
+
+# for TB2J package; write the postitions of WF
+write_xyz = true
+
+# for TB2J package; write the WF Hamiltonian (Note for W90 version<2.1, it is hr_plot)
+write_hr = true
+write_u_matrices = true
+write_rmn = true
+write_bvec = true
+
+dis_num_iter = 200
+num_iter     = 100
+
+exclude_bands = 1-10, 37-64
+
+dis_win_min=-8.714143 # 0 # -6eV
+dis_win_max=3.678299 # 0  # 4.8eV
+dis_froz_min=-8.713943 # 0 #-6eV
+dis_froz_max=0.677504 # 0 # 3.8eV
+
+fermi_energy=-3.02309656 #
+
+bands_plot = .true.
+
+# VISUALIZE BANDS
+wannier_plot = false
+wannier_plot_list = 1 2 3 4   # PLOT THESE SELECTED WFs
+wannier_plot_supercell = 1 # do not save larger than 3 (otherwise memory and performance issues?) 
+
+
+# PLOT WITH SPIN-TEXTURES
+spin_decomp = true
+spin_axis_azimuth = 0 #90 #0 #0 # deg
+spin_axis_polar = 0 #90 #90 #90 # deg
+iprint = 3
+kpath = true
+kpath_task = bands
+kpath_bands_colour = spin
+
+
+Begin Kpoint_Path
+K 0.333333 0.333333 0.000000    G 0.000000 0.000000 0.000000
+G 0.000000 0.000000 0.000000    M 0.500000 0.000000 0.000000
+M 0.500000 0.000000 0.000000    K 0.333333 0.333333 0.000000
+End Kpoint_Path
+" 

@@ -1,0 +1,15 @@
+#PBS -q short
+#PBS -N wann_berri
+#PBS -j oe     
+#PBS -l nodes=2:ppn=16        
+
+module load EXTRA
+module load python/3.8
+
+cd $PBS_O_WORKDIR
+
+conda activate wannier
+# python wannier_berri_AHC.py
+#python wannier_berri_AHC_fermiscan.py
+
+#python plot_AHC_fermiscan.py

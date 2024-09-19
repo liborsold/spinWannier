@@ -1,0 +1,13 @@
+#PBS -q huge
+#PBS -N CrTe_SOC_wann
+#PBS -j oe             
+#PBS -l nodes=1:ppn=64
+
+
+module load EXTRA
+module load wannier90/3.1.0
+
+cd $PBS_O_WORKDIR
+
+mpirun -np 64 wannier90.x wannier90
+

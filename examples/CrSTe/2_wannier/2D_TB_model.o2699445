@@ -1,0 +1,9 @@
+/home/lv268562/bin/python_scripts/wannier_to_tight_binding/wannier_utils.py:269: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  keys_no_spin = np.array(list(spn_dict.keys()))[:,0]
+./tb_model_wann90/bands_spin_2D_501x501.pickle
+Traceback (most recent call last):
+  File "/W/lv268562/2D/CrXY/CrSTe/U_3.0/MAGMOM_0_0_1/EFIELD_0.00/2_wann_SOC_25x25_frozmaxmargin_0.2eV/plot_spin_texture_from_real_space_data.py", line 95, in <module>
+    plot_bands_spin_texture(kpoints, kpath, Eigs_k, S_mn_k_H_x, S_mn_k_H_y, S_mn_k_H_z, EF=EF, fout=fout.split('.jpg')[0]+"_Sxyz.jpg", fig_caption=fig_caption)
+  File "/W/lv268562/2D/CrXY/CrSTe/U_3.0/MAGMOM_0_0_1/EFIELD_0.00/2_wann_SOC_25x25_frozmaxmargin_0.2eV/spin_texture_interpolated.py", line 217, in plot_bands_spin_texture
+    ax.set_xlim([min(kpath), max(kpath)])
+ValueError: min() arg is an empty sequence

@@ -1,0 +1,3000 @@
+ 
+             +---------------------------------------------------+
+             |                                                   |
+             |                   WANNIER90                       |
+             |                                                   |
+             +---------------------------------------------------+
+             |                                                   |
+             |        Welcome to the Maximally-Localized         |
+             |        Generalized Wannier Functions code         |
+             |            http://www.wannier.org                 |
+             |                                                   |
+             |                                                   |
+             |  Wannier90 Developer Group:                       |
+             |    Giovanni Pizzi    (EPFL)                       |
+             |    Valerio Vitale    (Cambridge)                  |
+             |    David Vanderbilt  (Rutgers University)         |
+             |    Nicola Marzari    (EPFL)                       |
+             |    Ivo Souza         (Universidad del Pais Vasco) |
+             |    Arash A. Mostofi  (Imperial College London)    |
+             |    Jonathan R. Yates (University of Oxford)       |
+             |                                                   |
+             |  For the full list of Wannier90 3.x authors,      |
+             |  please check the code documentation and the      |
+             |  README on the GitHub page of the code            |
+             |                                                   |
+             |                                                   |
+             |  Please cite                                      |
+             |                                                   |
+             |  [ref] "Wannier90 as a community code:            |
+             |        new features and applications",            |
+             |        G. Pizzi et al., J. Phys. Cond. Matt. 32,  |
+             |        165902 (2020).                             |
+             |        http://doi.org/10.1088/1361-648X/ab51ff    |
+             |                                                   |
+             |  in any publications arising from the use of      |
+             |  this code. For the method please cite            |
+             |                                                   |
+             |  [ref] "Maximally Localized Generalised Wannier   |
+             |         Functions for Composite Energy Bands"     |
+             |         N. Marzari and D. Vanderbilt              |
+             |         Phys. Rev. B 56 12847 (1997)              |
+             |                                                   |
+             |  [ref] "Maximally Localized Wannier Functions     |
+             |         for Entangled Energy Bands"               |
+             |         I. Souza, N. Marzari and D. Vanderbilt    |
+             |         Phys. Rev. B 65 035109 (2001)             |
+             |                                                   |
+             |                                                   |
+             | Copyright (c) 1996-2020                           |
+             |        The Wannier90 Developer Group and          |
+             |        individual contributors                    |
+             |                                                   |
+             |      Release: 3.1.0        5th March    2020      |
+             |                                                   |
+             | This program is free software; you can            |
+             | redistribute it and/or modify it under the terms  |
+             | of the GNU General Public License as published by |
+             | the Free Software Foundation; either version 2 of |
+             | the License, or (at your option) any later version|
+             |                                                   |
+             | This program is distributed in the hope that it   |
+             | will be useful, but WITHOUT ANY WARRANTY; without |
+             | even the implied warranty of MERCHANTABILITY or   |
+             | FITNESS FOR A PARTICULAR PURPOSE. See the GNU     |
+             | General Public License for more details.          |
+             |                                                   |
+             | You should have received a copy of the GNU General|
+             | Public License along with this program; if not,   |
+             | write to the Free Software Foundation, Inc.,      |
+             | 675 Mass Ave, Cambridge, MA 02139, USA.           |
+             |                                                   |
+             +---------------------------------------------------+
+             |    Execution started on 25Dec2023 at 18:38:05     |
+             +---------------------------------------------------+
+ 
+ ******************************************************************************
+ * -> Using CODATA 2006 constant values                                       *
+ *    (http://physics.nist.gov/cuu/Constants/index.html)                      *
+ * -> Using Bohr value from CODATA                                            *
+ ******************************************************************************
+ 
+
+ Running in parallel on  64 CPUs
+
+ 
+                                    ------
+                                    SYSTEM
+                                    ------
+ 
+                              Lattice Vectors (Ang)
+                    a_1     3.427808   0.000000   0.000000
+                    a_2    -1.713904   2.968569   0.000000
+                    a_3     0.000000   0.000000  31.066889
+ 
+                   Unit Cell Volume:     316.12686  (Ang^3)
+ 
+                        Reciprocal-Space Vectors (Ang^-1)
+                    b_1     1.833004   1.058285   0.000000
+                    b_2    -0.000000   2.116570   0.000000
+                    b_3     0.000000   0.000000   0.202247
+  
+ *----------------------------------------------------------------------------*
+ |   Site       Fractional Coordinate          Cartesian Coordinate (Ang)     |
+ +----------------------------------------------------------------------------+
+ | Cr   1   0.00000   0.00000   0.10924   |    0.00000   0.00000   3.39361    |
+ | S    1   0.66667   0.33333   0.06911   |    1.71391   0.98952   2.14694    |
+ | Te   1   0.33333   0.66667   0.17479   |    0.00000   1.97905   5.43024    |
+ *----------------------------------------------------------------------------*
+  
+  
+ *-------------------------------- POSTW90 -----------------------------------*
+ |  Number of Wannier Functions               :                22             |
+ |  Number of electrons per state             :                 1             |
+ |  Scissor shift applied to conduction bands :             0.000             |
+ |  Number of valence bands                   :       not defined             |
+ |  Spin decomposition                        :                 T             |
+ |  Compute Spin moment                       :                 F             |
+ |  Polar angle of spin quantisation axis     :            90.000             |
+ |  Azimuthal angle of spin quantisation axis :             0.000             |
+           |  Spn file-type                   :       unformatted             |
+           |  uHu file-type                   :       unformatted             |
+ |  Fermi energy (eV)                         :            -3.023             |
+ |  Output verbosity (1=low, 5=high)          :                 3             |
+ |  Timing Level (1=low, 5=high)              :                 1             |
+ |  Optimisation (0=memory, 3=speed)          :                 3             |
+ |  Length Unit                               :               Ang             |
+ *----------------------------------------------------------------------------*
+ *------------------------ Global Smearing Parameters ------------------------*
+ |  Adaptive width smearing                   :                 T             |
+ |  Adaptive smearing factor                  :             1.414             |
+ |  Maximum allowed smearing width (eV)       :             1.000             |
+ |  Smearing Function                                             Gaussian    |
+ |  Global interpolation k-points defined     :                 F             |
+ *----------------------------------------------------------------------------*
+ *---------------------------------- DOS -------------------------------------*
+ |  Plotting Density of States                :                 F             |
+ |  Compute Wannier Projected DOS             :                 T             |
+ |  Minimum energy range for DOS plot         :            -9.381             |
+ |  Maximum energy range for DOS plot         :             1.344             |
+ |  Energy step for DOS plot                  :             0.010             |
+ |  Using global smearing parameters                                          |
+ |  Using global k-point set for interpolation                                |
+ *----------------------------------------------------------------------------*
+ *--------------------------------- KPATH ------------------------------------*
+ |  Plot Properties along a path in k-space   :                 T             |
+ |  Divisions along first kpath section       :               100             |
+ |  Plot energy bands                         :                 T             |
+ |  Plot Berry curvature                      :                 F             |
+ |  Plot orbital magnetisation contribution   :                 F             |
+ |  Plot spin Hall conductivity contribution  :                 F             |
+ |  Property used to colour code the bands    :              spin             |
+ *----------------------------------------------------------------------------*
+ |   K-space path sections:                                                   |
+ |    From:  K    0.333  0.333  0.000     To:  G    0.000  0.000  0.000       |
+ |    From:  G    0.000  0.000  0.000     To:  M    0.500  0.000  0.000       |
+ |    From:  M    0.500  0.000  0.000     To:  K    0.333  0.333  0.000       |
+ *----------------------------------------------------------------------------*
+ *--------------------------------- KSLICE -----------------------------------*
+ |  Plot Properties along a slice in k-space  :                 F             |
+ |  Fermi level used for slice                :            -3.023             |
+ |  Divisions along first kpath section       :               100             |
+ |  Plot energy contours (fermi lines)        :                 T             |
+ |  Plot Berry curvature (sum over occ states):                 F             |
+ |  Plot orbital magnetisation contribution   :                 F             |
+ |  Plot spin Hall conductivity contribution  :                 F             |
+ |  Property used to colour code the lines    :              none             |
+ |  2D slice parameters (in reduced coordinates):                             |
+ |     Corner:      0.000   0.000   0.000                                     |
+ |    Vector1:      1.000   0.000   0.000            Divisions:    50         |
+ |    Vector2:      0.000   1.000   0.000            Divisions:    50         |
+ *----------------------------------------------------------------------------*
+ *--------------------------------- BERRY ------------------------------------*
+ |  Compute Berry Phase related properties    :                 F             |
+ |  Compute Optical Conductivity and JDOS     :                 F             |
+ |  Compute Anomalous Hall Conductivity       :                 F             |
+ |  Compute Shift Current                     :                 F             |
+ |  Compute Orbital Magnetisation             :                 F             |
+ |  Compute Spin Hall Conductivity            :                 F             |
+ |  Lower frequency for optical responses     :             0.000             |
+ |  Upper frequency for optical responses     :             4.367             |
+ |  Step size for optical responses           :             0.010             |
+ |  Upper eigenvalue for optical responses    :             1.344             |
+ |  Using global smearing parameters                                          |
+ |  Using global k-point set for interpolation                                |
+ |  Adaptive refinement                       :              none             |
+ *----------------------------------------------------------------------------*
+ *--------------------------------- GYROTROPIC   ------------------------------
+ | Compute Gyrotropic properties              :                 F             |
+ | gyrotropic_task                            :          all                  |
+ | calculate the D tensor                     :                 T             |
+ | calculate the tildeD tensor                :                 T             |
+ | calculate the C tensor                     :                 T             |
+ | calculate the K tensor                     :                 T             |
+ | calculate the interbad natural optical act :                 T             |
+ | calculate the density of states            :                 T             |
+ |  Lower frequency for tildeD,NOA            :             0.000             |
+ |  Upper frequency                           :             4.367             |
+ |  Step size for frequency                   :             0.010             |
+ |  Upper eigenvalue                          :             1.344             |
+ |  Using global smearing parameters                                          |
+ |  Fixed width smearing                      :                 T             |
+ |  Smearing width                            :             0.000             |
+ |  Smearing Function                                             Gaussian    |
+ |  degen_thresh                              :             0.000             |
+ |  Using global k-point set for interpolation                                |
+ |  Adaptive refinement                       :              not              |
+ *----------------------------------------------------------------------------*
+ *------------------------------- BOLTZWANN ----------------------------------*
+ |  Compute Boltzmann transport properties    :                 F             |
+ |  3d Structure                              :                 T             |
+ |  Relaxation Time (fs)                      :            10.000             |
+ |  Minimum Value of Chemical Potential (eV)  :          -999.000             |
+ |  Maximum Value of Chemical Potential (eV)  :          -999.000             |
+ |  Step size for Chemical Potential (eV)     :             0.000             |
+ |  Minimum Value of Temperature (K)          :          -999.000             |
+ |  Maximum Value of Temperature (K)          :          -999.000             |
+ |  Step size for Temperature (K)             :             0.000             |
+ |  Using global k-point set for interpolation                                |
+ |  Step size for TDF (eV)                    :             0.001             |
+ |  TDF Smearing Function                                         Gaussian    |
+ |  TDF fixed Smearing width                  :         unsmeared             |
+ |  Compute DOS at same time                  :                 F             |
+ *----------------------------------------------------------------------------*
+ *------------------------Generic Band Interpolation--------------------------*
+ |  Compute Properties at given k-points      :                 F             |
+ |  Calculate band gradients                  :                 F             |
+ |  Write data into a single file             :                 T             |
+ *----------------------------------------------------------------------------*
+ Time to read parameters        0.077 (sec)
+
+ *---------------------------------- K-MESH ----------------------------------*
+ +----------------------------------------------------------------------------+
+ |                    Distance to Nearest-Neighbour Shells                    |
+ |                    ------------------------------------                    |
+ |          Shell             Distance (Ang^-1)          Multiplicity         |
+ |          -----             -----------------          ------------         |
+ |             1                   0.084663                      6            |
+ |             2                   0.146640                      6            |
+ |             3                   0.169326                      6            |
+ |             4                   0.202247                      2            |
+ |             5                   0.219252                     12            |
+ |             6                   0.223997                     12            |
+ |             7                   0.249814                     12            |
+ |             8                   0.253988                      6            |
+ |             9                   0.263771                     12            |
+ |            10                   0.293281                      6            |
+ |            11                   0.301792                     24            |
+ |            12                   0.305256                     12            |
+ |            13                   0.324675                     12            |
+ |            14                   0.338651                      6            |
+ |            15                   0.356255                     12            |
+ |            16                   0.366176                     24            |
+ |            17                   0.369037                     12            |
+ |            18                   0.387974                     12            |
+ |            19                   0.394447                     12            |
+ |            20                   0.404494                      2            |
+ |            21                   0.413259                     12            |
+ |            22                   0.420823                     24            |
+ |            23                   0.423314                      6            |
+ |            24                   0.430254                     12            |
+ |            25                   0.437524                     24            |
+ |            26                   0.438505                     12            |
+ |            27                   0.439921                      6            |
+ |            28                   0.447994                     12            |
+ |            29                   0.462374                     24            |
+ |            30                   0.469147                     12            |
+ |            31                   0.471383                     12            |
+ |            32                   0.477625                     12            |
+ |            33                   0.484184                     12            |
+ |            34                   0.491530                     24            |
+ |            35                   0.499629                     12            |
+ |            36                   0.506751                     24            |
+ +----------------------------------------------------------------------------+
+ | The b-vectors are chosen automatically                                     |
+ | Shell:  1 Multiplicity:  6                                                 |
+ | b-vector 1 :        0.073320    0.042331    0.000000      (Ang^-1)         |
+ | b-vector 2 :       -0.073320   -0.042331    0.000000      (Ang^-1)         |
+ | b-vector 3 :       -0.000000    0.084663    0.000000      (Ang^-1)         |
+ | b-vector 4 :       -0.073320    0.042331    0.000000      (Ang^-1)         |
+ | b-vector 5 :        0.000000   -0.084663    0.000000      (Ang^-1)         |
+ | b-vector 6 :        0.073320   -0.042331    0.000000      (Ang^-1)         |
+ | Shell:  1 w_b   46.5043193      (Ang^2)                                    |
+ | B1 condition is not satisfied: Adding another shell                        |
+ | Shell:  2 Multiplicity:  6                                                 |
+ | b-vector 1 :        0.073320    0.126994    0.000000      (Ang^-1)         |
+ | b-vector 2 :       -0.146640   -0.000000    0.000000      (Ang^-1)         |
+ | b-vector 3 :       -0.073320    0.126994    0.000000      (Ang^-1)         |
+ | b-vector 4 :        0.073320   -0.126994    0.000000      (Ang^-1)         |
+ | b-vector 5 :        0.146640    0.000000    0.000000      (Ang^-1)         |
+ | b-vector 6 :       -0.073320   -0.126994    0.000000      (Ang^-1)         |
+ | SVD found small singular value, Rejecting this shell and trying the next   |
+ | Shell:  3 Multiplicity:  6                                                 |
+ | b-vector 1 :        0.146640    0.084663    0.000000      (Ang^-1)         |
+ | b-vector 2 :       -0.146640   -0.084663    0.000000      (Ang^-1)         |
+ | b-vector 3 :       -0.000000    0.169326    0.000000      (Ang^-1)         |
+ | b-vector 4 :       -0.146640    0.084663    0.000000      (Ang^-1)         |
+ | b-vector 5 :        0.000000   -0.169326    0.000000      (Ang^-1)         |
+ | b-vector 6 :        0.146640   -0.084663    0.000000      (Ang^-1)         |
+ | This shell is linearly dependent on existing shells: Trying next shell     |
+ | Shell:  4 Multiplicity:  2                                                 |
+ | b-vector 1 :        0.000000    0.000000    0.202247      (Ang^-1)         |
+ | b-vector 2 :        0.000000    0.000000   -0.202247      (Ang^-1)         |
+ | Shell:  1 w_b   46.5043193      (Ang^2)                                    |
+ | Shell:  2 w_b   12.2237875      (Ang^2)                                    |
+ | The following shells are used:   1,  4                                     |
+ +----------------------------------------------------------------------------+
+ |                        Shell   # Nearest-Neighbours                        |
+ |                        -----   --------------------                        |
+ |                          1               6                                 |
+ |                          4               2                                 |
+ +----------------------------------------------------------------------------+
+ | Completeness relation is fully satisfied [Eq. (B1), PRB 56, 12847 (1997)]  |
+ +----------------------------------------------------------------------------+
+ |                  b_k Vectors (Ang^-1) and Weights (Ang^2)                  |
+ |                  ----------------------------------------                  |
+ |            No.         b_k(x)      b_k(y)      b_k(z)        w_b           |
+ |            ---        --------------------------------     --------        |
+ |             1         0.073320    0.042331    0.000000    46.504319        |
+ |             2        -0.073320   -0.042331    0.000000    46.504319        |
+ |             3        -0.000000    0.084663    0.000000    46.504319        |
+ |             4        -0.073320    0.042331    0.000000    46.504319        |
+ |             5         0.000000   -0.084663    0.000000    46.504319        |
+ |             6         0.073320   -0.042331    0.000000    46.504319        |
+ |             7         0.000000    0.000000    0.202247    12.223787        |
+ |             8         0.000000    0.000000   -0.202247    12.223787        |
+ +----------------------------------------------------------------------------+
+ |                           b_k Directions (Ang^-1)                          |
+ |                           -----------------------                          |
+ |            No.           x           y           z                         |
+ |            ---        --------------------------------                     |
+ |             1         0.073320    0.042331    0.000000                     |
+ |             2        -0.000000    0.084663    0.000000                     |
+ |             3        -0.073320    0.042331    0.000000                     |
+ |             4         0.000000    0.000000    0.202247                     |
+ +----------------------------------------------------------------------------+
+  
+ Time to get kmesh              0.425 (sec)
+ Reading restart information from file wannier90.chk :
+ written on 25Dec2023 at 18:36:50 ... done
+
+  625 lattice points in Wigner-Seitz supercell:
+
+      vector -16  -9   0   degeneracy:  1
+      vector -16  -8   0   degeneracy:  1
+      vector -16  -7   0   degeneracy:  1
+      vector -15 -10   0   degeneracy:  1
+      vector -15  -9   0   degeneracy:  1
+      vector -15  -8   0   degeneracy:  1
+      vector -15  -7   0   degeneracy:  1
+      vector -15  -6   0   degeneracy:  1
+      vector -15  -5   0   degeneracy:  1
+      vector -14 -11   0   degeneracy:  1
+      vector -14 -10   0   degeneracy:  1
+      vector -14  -9   0   degeneracy:  1
+      vector -14  -8   0   degeneracy:  1
+      vector -14  -7   0   degeneracy:  1
+      vector -14  -6   0   degeneracy:  1
+      vector -14  -5   0   degeneracy:  1
+      vector -14  -4   0   degeneracy:  1
+      vector -14  -3   0   degeneracy:  1
+      vector -13 -12   0   degeneracy:  1
+      vector -13 -11   0   degeneracy:  1
+      vector -13 -10   0   degeneracy:  1
+      vector -13  -9   0   degeneracy:  1
+      vector -13  -8   0   degeneracy:  1
+      vector -13  -7   0   degeneracy:  1
+      vector -13  -6   0   degeneracy:  1
+      vector -13  -5   0   degeneracy:  1
+      vector -13  -4   0   degeneracy:  1
+      vector -13  -3   0   degeneracy:  1
+      vector -13  -2   0   degeneracy:  1
+      vector -13  -1   0   degeneracy:  1
+      vector -12 -12   0   degeneracy:  1
+      vector -12 -11   0   degeneracy:  1
+      vector -12 -10   0   degeneracy:  1
+      vector -12  -9   0   degeneracy:  1
+      vector -12  -8   0   degeneracy:  1
+      vector -12  -7   0   degeneracy:  1
+      vector -12  -6   0   degeneracy:  1
+      vector -12  -5   0   degeneracy:  1
+      vector -12  -4   0   degeneracy:  1
+      vector -12  -3   0   degeneracy:  1
+      vector -12  -2   0   degeneracy:  1
+      vector -12  -1   0   degeneracy:  1
+      vector -12   0   0   degeneracy:  1
+      vector -11 -13   0   degeneracy:  1
+      vector -11 -12   0   degeneracy:  1
+      vector -11 -11   0   degeneracy:  1
+      vector -11 -10   0   degeneracy:  1
+      vector -11  -9   0   degeneracy:  1
+      vector -11  -8   0   degeneracy:  1
+      vector -11  -7   0   degeneracy:  1
+      vector -11  -6   0   degeneracy:  1
+      vector -11  -5   0   degeneracy:  1
+      vector -11  -4   0   degeneracy:  1
+      vector -11  -3   0   degeneracy:  1
+      vector -11  -2   0   degeneracy:  1
+      vector -11  -1   0   degeneracy:  1
+      vector -11   0   0   degeneracy:  1
+      vector -11   1   0   degeneracy:  1
+      vector -11   2   0   degeneracy:  1
+      vector -10 -14   0   degeneracy:  1
+      vector -10 -13   0   degeneracy:  1
+      vector -10 -12   0   degeneracy:  1
+      vector -10 -11   0   degeneracy:  1
+      vector -10 -10   0   degeneracy:  1
+      vector -10  -9   0   degeneracy:  1
+      vector -10  -8   0   degeneracy:  1
+      vector -10  -7   0   degeneracy:  1
+      vector -10  -6   0   degeneracy:  1
+      vector -10  -5   0   degeneracy:  1
+      vector -10  -4   0   degeneracy:  1
+      vector -10  -3   0   degeneracy:  1
+      vector -10  -2   0   degeneracy:  1
+      vector -10  -1   0   degeneracy:  1
+      vector -10   0   0   degeneracy:  1
+      vector -10   1   0   degeneracy:  1
+      vector -10   2   0   degeneracy:  1
+      vector -10   3   0   degeneracy:  1
+      vector -10   4   0   degeneracy:  1
+      vector  -9 -15   0   degeneracy:  1
+      vector  -9 -14   0   degeneracy:  1
+      vector  -9 -13   0   degeneracy:  1
+      vector  -9 -12   0   degeneracy:  1
+      vector  -9 -11   0   degeneracy:  1
+      vector  -9 -10   0   degeneracy:  1
+      vector  -9  -9   0   degeneracy:  1
+      vector  -9  -8   0   degeneracy:  1
+      vector  -9  -7   0   degeneracy:  1
+      vector  -9  -6   0   degeneracy:  1
+      vector  -9  -5   0   degeneracy:  1
+      vector  -9  -4   0   degeneracy:  1
+      vector  -9  -3   0   degeneracy:  1
+      vector  -9  -2   0   degeneracy:  1
+      vector  -9  -1   0   degeneracy:  1
+      vector  -9   0   0   degeneracy:  1
+      vector  -9   1   0   degeneracy:  1
+      vector  -9   2   0   degeneracy:  1
+      vector  -9   3   0   degeneracy:  1
+      vector  -9   4   0   degeneracy:  1
+      vector  -9   5   0   degeneracy:  1
+      vector  -9   6   0   degeneracy:  1
+      vector  -8 -16   0   degeneracy:  1
+      vector  -8 -15   0   degeneracy:  1
+      vector  -8 -14   0   degeneracy:  1
+      vector  -8 -13   0   degeneracy:  1
+      vector  -8 -12   0   degeneracy:  1
+      vector  -8 -11   0   degeneracy:  1
+      vector  -8 -10   0   degeneracy:  1
+      vector  -8  -9   0   degeneracy:  1
+      vector  -8  -8   0   degeneracy:  1
+      vector  -8  -7   0   degeneracy:  1
+      vector  -8  -6   0   degeneracy:  1
+      vector  -8  -5   0   degeneracy:  1
+      vector  -8  -4   0   degeneracy:  1
+      vector  -8  -3   0   degeneracy:  1
+      vector  -8  -2   0   degeneracy:  1
+      vector  -8  -1   0   degeneracy:  1
+      vector  -8   0   0   degeneracy:  1
+      vector  -8   1   0   degeneracy:  1
+      vector  -8   2   0   degeneracy:  1
+      vector  -8   3   0   degeneracy:  1
+      vector  -8   4   0   degeneracy:  1
+      vector  -8   5   0   degeneracy:  1
+      vector  -8   6   0   degeneracy:  1
+      vector  -8   7   0   degeneracy:  1
+      vector  -8   8   0   degeneracy:  1
+      vector  -7 -16   0   degeneracy:  1
+      vector  -7 -15   0   degeneracy:  1
+      vector  -7 -14   0   degeneracy:  1
+      vector  -7 -13   0   degeneracy:  1
+      vector  -7 -12   0   degeneracy:  1
+      vector  -7 -11   0   degeneracy:  1
+      vector  -7 -10   0   degeneracy:  1
+      vector  -7  -9   0   degeneracy:  1
+      vector  -7  -8   0   degeneracy:  1
+      vector  -7  -7   0   degeneracy:  1
+      vector  -7  -6   0   degeneracy:  1
+      vector  -7  -5   0   degeneracy:  1
+      vector  -7  -4   0   degeneracy:  1
+      vector  -7  -3   0   degeneracy:  1
+      vector  -7  -2   0   degeneracy:  1
+      vector  -7  -1   0   degeneracy:  1
+      vector  -7   0   0   degeneracy:  1
+      vector  -7   1   0   degeneracy:  1
+      vector  -7   2   0   degeneracy:  1
+      vector  -7   3   0   degeneracy:  1
+      vector  -7   4   0   degeneracy:  1
+      vector  -7   5   0   degeneracy:  1
+      vector  -7   6   0   degeneracy:  1
+      vector  -7   7   0   degeneracy:  1
+      vector  -7   8   0   degeneracy:  1
+      vector  -6 -15   0   degeneracy:  1
+      vector  -6 -14   0   degeneracy:  1
+      vector  -6 -13   0   degeneracy:  1
+      vector  -6 -12   0   degeneracy:  1
+      vector  -6 -11   0   degeneracy:  1
+      vector  -6 -10   0   degeneracy:  1
+      vector  -6  -9   0   degeneracy:  1
+      vector  -6  -8   0   degeneracy:  1
+      vector  -6  -7   0   degeneracy:  1
+      vector  -6  -6   0   degeneracy:  1
+      vector  -6  -5   0   degeneracy:  1
+      vector  -6  -4   0   degeneracy:  1
+      vector  -6  -3   0   degeneracy:  1
+      vector  -6  -2   0   degeneracy:  1
+      vector  -6  -1   0   degeneracy:  1
+      vector  -6   0   0   degeneracy:  1
+      vector  -6   1   0   degeneracy:  1
+      vector  -6   2   0   degeneracy:  1
+      vector  -6   3   0   degeneracy:  1
+      vector  -6   4   0   degeneracy:  1
+      vector  -6   5   0   degeneracy:  1
+      vector  -6   6   0   degeneracy:  1
+      vector  -6   7   0   degeneracy:  1
+      vector  -6   8   0   degeneracy:  1
+      vector  -6   9   0   degeneracy:  1
+      vector  -5 -15   0   degeneracy:  1
+      vector  -5 -14   0   degeneracy:  1
+      vector  -5 -13   0   degeneracy:  1
+      vector  -5 -12   0   degeneracy:  1
+      vector  -5 -11   0   degeneracy:  1
+      vector  -5 -10   0   degeneracy:  1
+      vector  -5  -9   0   degeneracy:  1
+      vector  -5  -8   0   degeneracy:  1
+      vector  -5  -7   0   degeneracy:  1
+      vector  -5  -6   0   degeneracy:  1
+      vector  -5  -5   0   degeneracy:  1
+      vector  -5  -4   0   degeneracy:  1
+      vector  -5  -3   0   degeneracy:  1
+      vector  -5  -2   0   degeneracy:  1
+      vector  -5  -1   0   degeneracy:  1
+      vector  -5   0   0   degeneracy:  1
+      vector  -5   1   0   degeneracy:  1
+      vector  -5   2   0   degeneracy:  1
+      vector  -5   3   0   degeneracy:  1
+      vector  -5   4   0   degeneracy:  1
+      vector  -5   5   0   degeneracy:  1
+      vector  -5   6   0   degeneracy:  1
+      vector  -5   7   0   degeneracy:  1
+      vector  -5   8   0   degeneracy:  1
+      vector  -5   9   0   degeneracy:  1
+      vector  -4 -14   0   degeneracy:  1
+      vector  -4 -13   0   degeneracy:  1
+      vector  -4 -12   0   degeneracy:  1
+      vector  -4 -11   0   degeneracy:  1
+      vector  -4 -10   0   degeneracy:  1
+      vector  -4  -9   0   degeneracy:  1
+      vector  -4  -8   0   degeneracy:  1
+      vector  -4  -7   0   degeneracy:  1
+      vector  -4  -6   0   degeneracy:  1
+      vector  -4  -5   0   degeneracy:  1
+      vector  -4  -4   0   degeneracy:  1
+      vector  -4  -3   0   degeneracy:  1
+      vector  -4  -2   0   degeneracy:  1
+      vector  -4  -1   0   degeneracy:  1
+      vector  -4   0   0   degeneracy:  1
+      vector  -4   1   0   degeneracy:  1
+      vector  -4   2   0   degeneracy:  1
+      vector  -4   3   0   degeneracy:  1
+      vector  -4   4   0   degeneracy:  1
+      vector  -4   5   0   degeneracy:  1
+      vector  -4   6   0   degeneracy:  1
+      vector  -4   7   0   degeneracy:  1
+      vector  -4   8   0   degeneracy:  1
+      vector  -4   9   0   degeneracy:  1
+      vector  -4  10   0   degeneracy:  1
+      vector  -3 -14   0   degeneracy:  1
+      vector  -3 -13   0   degeneracy:  1
+      vector  -3 -12   0   degeneracy:  1
+      vector  -3 -11   0   degeneracy:  1
+      vector  -3 -10   0   degeneracy:  1
+      vector  -3  -9   0   degeneracy:  1
+      vector  -3  -8   0   degeneracy:  1
+      vector  -3  -7   0   degeneracy:  1
+      vector  -3  -6   0   degeneracy:  1
+      vector  -3  -5   0   degeneracy:  1
+      vector  -3  -4   0   degeneracy:  1
+      vector  -3  -3   0   degeneracy:  1
+      vector  -3  -2   0   degeneracy:  1
+      vector  -3  -1   0   degeneracy:  1
+      vector  -3   0   0   degeneracy:  1
+      vector  -3   1   0   degeneracy:  1
+      vector  -3   2   0   degeneracy:  1
+      vector  -3   3   0   degeneracy:  1
+      vector  -3   4   0   degeneracy:  1
+      vector  -3   5   0   degeneracy:  1
+      vector  -3   6   0   degeneracy:  1
+      vector  -3   7   0   degeneracy:  1
+      vector  -3   8   0   degeneracy:  1
+      vector  -3   9   0   degeneracy:  1
+      vector  -3  10   0   degeneracy:  1
+      vector  -2 -13   0   degeneracy:  1
+      vector  -2 -12   0   degeneracy:  1
+      vector  -2 -11   0   degeneracy:  1
+      vector  -2 -10   0   degeneracy:  1
+      vector  -2  -9   0   degeneracy:  1
+      vector  -2  -8   0   degeneracy:  1
+      vector  -2  -7   0   degeneracy:  1
+      vector  -2  -6   0   degeneracy:  1
+      vector  -2  -5   0   degeneracy:  1
+      vector  -2  -4   0   degeneracy:  1
+      vector  -2  -3   0   degeneracy:  1
+      vector  -2  -2   0   degeneracy:  1
+      vector  -2  -1   0   degeneracy:  1
+      vector  -2   0   0   degeneracy:  1
+      vector  -2   1   0   degeneracy:  1
+      vector  -2   2   0   degeneracy:  1
+      vector  -2   3   0   degeneracy:  1
+      vector  -2   4   0   degeneracy:  1
+      vector  -2   5   0   degeneracy:  1
+      vector  -2   6   0   degeneracy:  1
+      vector  -2   7   0   degeneracy:  1
+      vector  -2   8   0   degeneracy:  1
+      vector  -2   9   0   degeneracy:  1
+      vector  -2  10   0   degeneracy:  1
+      vector  -2  11   0   degeneracy:  1
+      vector  -1 -13   0   degeneracy:  1
+      vector  -1 -12   0   degeneracy:  1
+      vector  -1 -11   0   degeneracy:  1
+      vector  -1 -10   0   degeneracy:  1
+      vector  -1  -9   0   degeneracy:  1
+      vector  -1  -8   0   degeneracy:  1
+      vector  -1  -7   0   degeneracy:  1
+      vector  -1  -6   0   degeneracy:  1
+      vector  -1  -5   0   degeneracy:  1
+      vector  -1  -4   0   degeneracy:  1
+      vector  -1  -3   0   degeneracy:  1
+      vector  -1  -2   0   degeneracy:  1
+      vector  -1  -1   0   degeneracy:  1
+      vector  -1   0   0   degeneracy:  1
+      vector  -1   1   0   degeneracy:  1
+      vector  -1   2   0   degeneracy:  1
+      vector  -1   3   0   degeneracy:  1
+      vector  -1   4   0   degeneracy:  1
+      vector  -1   5   0   degeneracy:  1
+      vector  -1   6   0   degeneracy:  1
+      vector  -1   7   0   degeneracy:  1
+      vector  -1   8   0   degeneracy:  1
+      vector  -1   9   0   degeneracy:  1
+      vector  -1  10   0   degeneracy:  1
+      vector  -1  11   0   degeneracy:  1
+      vector   0 -12   0   degeneracy:  1
+      vector   0 -11   0   degeneracy:  1
+      vector   0 -10   0   degeneracy:  1
+      vector   0  -9   0   degeneracy:  1
+      vector   0  -8   0   degeneracy:  1
+      vector   0  -7   0   degeneracy:  1
+      vector   0  -6   0   degeneracy:  1
+      vector   0  -5   0   degeneracy:  1
+      vector   0  -4   0   degeneracy:  1
+      vector   0  -3   0   degeneracy:  1
+      vector   0  -2   0   degeneracy:  1
+      vector   0  -1   0   degeneracy:  1
+      vector   0   0   0   degeneracy:  1
+      vector   0   1   0   degeneracy:  1
+      vector   0   2   0   degeneracy:  1
+      vector   0   3   0   degeneracy:  1
+      vector   0   4   0   degeneracy:  1
+      vector   0   5   0   degeneracy:  1
+      vector   0   6   0   degeneracy:  1
+      vector   0   7   0   degeneracy:  1
+      vector   0   8   0   degeneracy:  1
+      vector   0   9   0   degeneracy:  1
+      vector   0  10   0   degeneracy:  1
+      vector   0  11   0   degeneracy:  1
+      vector   0  12   0   degeneracy:  1
+      vector   1 -11   0   degeneracy:  1
+      vector   1 -10   0   degeneracy:  1
+      vector   1  -9   0   degeneracy:  1
+      vector   1  -8   0   degeneracy:  1
+      vector   1  -7   0   degeneracy:  1
+      vector   1  -6   0   degeneracy:  1
+      vector   1  -5   0   degeneracy:  1
+      vector   1  -4   0   degeneracy:  1
+      vector   1  -3   0   degeneracy:  1
+      vector   1  -2   0   degeneracy:  1
+      vector   1  -1   0   degeneracy:  1
+      vector   1   0   0   degeneracy:  1
+      vector   1   1   0   degeneracy:  1
+      vector   1   2   0   degeneracy:  1
+      vector   1   3   0   degeneracy:  1
+      vector   1   4   0   degeneracy:  1
+      vector   1   5   0   degeneracy:  1
+      vector   1   6   0   degeneracy:  1
+      vector   1   7   0   degeneracy:  1
+      vector   1   8   0   degeneracy:  1
+      vector   1   9   0   degeneracy:  1
+      vector   1  10   0   degeneracy:  1
+      vector   1  11   0   degeneracy:  1
+      vector   1  12   0   degeneracy:  1
+      vector   1  13   0   degeneracy:  1
+      vector   2 -11   0   degeneracy:  1
+      vector   2 -10   0   degeneracy:  1
+      vector   2  -9   0   degeneracy:  1
+      vector   2  -8   0   degeneracy:  1
+      vector   2  -7   0   degeneracy:  1
+      vector   2  -6   0   degeneracy:  1
+      vector   2  -5   0   degeneracy:  1
+      vector   2  -4   0   degeneracy:  1
+      vector   2  -3   0   degeneracy:  1
+      vector   2  -2   0   degeneracy:  1
+      vector   2  -1   0   degeneracy:  1
+      vector   2   0   0   degeneracy:  1
+      vector   2   1   0   degeneracy:  1
+      vector   2   2   0   degeneracy:  1
+      vector   2   3   0   degeneracy:  1
+      vector   2   4   0   degeneracy:  1
+      vector   2   5   0   degeneracy:  1
+      vector   2   6   0   degeneracy:  1
+      vector   2   7   0   degeneracy:  1
+      vector   2   8   0   degeneracy:  1
+      vector   2   9   0   degeneracy:  1
+      vector   2  10   0   degeneracy:  1
+      vector   2  11   0   degeneracy:  1
+      vector   2  12   0   degeneracy:  1
+      vector   2  13   0   degeneracy:  1
+      vector   3 -10   0   degeneracy:  1
+      vector   3  -9   0   degeneracy:  1
+      vector   3  -8   0   degeneracy:  1
+      vector   3  -7   0   degeneracy:  1
+      vector   3  -6   0   degeneracy:  1
+      vector   3  -5   0   degeneracy:  1
+      vector   3  -4   0   degeneracy:  1
+      vector   3  -3   0   degeneracy:  1
+      vector   3  -2   0   degeneracy:  1
+      vector   3  -1   0   degeneracy:  1
+      vector   3   0   0   degeneracy:  1
+      vector   3   1   0   degeneracy:  1
+      vector   3   2   0   degeneracy:  1
+      vector   3   3   0   degeneracy:  1
+      vector   3   4   0   degeneracy:  1
+      vector   3   5   0   degeneracy:  1
+      vector   3   6   0   degeneracy:  1
+      vector   3   7   0   degeneracy:  1
+      vector   3   8   0   degeneracy:  1
+      vector   3   9   0   degeneracy:  1
+      vector   3  10   0   degeneracy:  1
+      vector   3  11   0   degeneracy:  1
+      vector   3  12   0   degeneracy:  1
+      vector   3  13   0   degeneracy:  1
+      vector   3  14   0   degeneracy:  1
+      vector   4 -10   0   degeneracy:  1
+      vector   4  -9   0   degeneracy:  1
+      vector   4  -8   0   degeneracy:  1
+      vector   4  -7   0   degeneracy:  1
+      vector   4  -6   0   degeneracy:  1
+      vector   4  -5   0   degeneracy:  1
+      vector   4  -4   0   degeneracy:  1
+      vector   4  -3   0   degeneracy:  1
+      vector   4  -2   0   degeneracy:  1
+      vector   4  -1   0   degeneracy:  1
+      vector   4   0   0   degeneracy:  1
+      vector   4   1   0   degeneracy:  1
+      vector   4   2   0   degeneracy:  1
+      vector   4   3   0   degeneracy:  1
+      vector   4   4   0   degeneracy:  1
+      vector   4   5   0   degeneracy:  1
+      vector   4   6   0   degeneracy:  1
+      vector   4   7   0   degeneracy:  1
+      vector   4   8   0   degeneracy:  1
+      vector   4   9   0   degeneracy:  1
+      vector   4  10   0   degeneracy:  1
+      vector   4  11   0   degeneracy:  1
+      vector   4  12   0   degeneracy:  1
+      vector   4  13   0   degeneracy:  1
+      vector   4  14   0   degeneracy:  1
+      vector   5  -9   0   degeneracy:  1
+      vector   5  -8   0   degeneracy:  1
+      vector   5  -7   0   degeneracy:  1
+      vector   5  -6   0   degeneracy:  1
+      vector   5  -5   0   degeneracy:  1
+      vector   5  -4   0   degeneracy:  1
+      vector   5  -3   0   degeneracy:  1
+      vector   5  -2   0   degeneracy:  1
+      vector   5  -1   0   degeneracy:  1
+      vector   5   0   0   degeneracy:  1
+      vector   5   1   0   degeneracy:  1
+      vector   5   2   0   degeneracy:  1
+      vector   5   3   0   degeneracy:  1
+      vector   5   4   0   degeneracy:  1
+      vector   5   5   0   degeneracy:  1
+      vector   5   6   0   degeneracy:  1
+      vector   5   7   0   degeneracy:  1
+      vector   5   8   0   degeneracy:  1
+      vector   5   9   0   degeneracy:  1
+      vector   5  10   0   degeneracy:  1
+      vector   5  11   0   degeneracy:  1
+      vector   5  12   0   degeneracy:  1
+      vector   5  13   0   degeneracy:  1
+      vector   5  14   0   degeneracy:  1
+      vector   5  15   0   degeneracy:  1
+      vector   6  -9   0   degeneracy:  1
+      vector   6  -8   0   degeneracy:  1
+      vector   6  -7   0   degeneracy:  1
+      vector   6  -6   0   degeneracy:  1
+      vector   6  -5   0   degeneracy:  1
+      vector   6  -4   0   degeneracy:  1
+      vector   6  -3   0   degeneracy:  1
+      vector   6  -2   0   degeneracy:  1
+      vector   6  -1   0   degeneracy:  1
+      vector   6   0   0   degeneracy:  1
+      vector   6   1   0   degeneracy:  1
+      vector   6   2   0   degeneracy:  1
+      vector   6   3   0   degeneracy:  1
+      vector   6   4   0   degeneracy:  1
+      vector   6   5   0   degeneracy:  1
+      vector   6   6   0   degeneracy:  1
+      vector   6   7   0   degeneracy:  1
+      vector   6   8   0   degeneracy:  1
+      vector   6   9   0   degeneracy:  1
+      vector   6  10   0   degeneracy:  1
+      vector   6  11   0   degeneracy:  1
+      vector   6  12   0   degeneracy:  1
+      vector   6  13   0   degeneracy:  1
+      vector   6  14   0   degeneracy:  1
+      vector   6  15   0   degeneracy:  1
+      vector   7  -8   0   degeneracy:  1
+      vector   7  -7   0   degeneracy:  1
+      vector   7  -6   0   degeneracy:  1
+      vector   7  -5   0   degeneracy:  1
+      vector   7  -4   0   degeneracy:  1
+      vector   7  -3   0   degeneracy:  1
+      vector   7  -2   0   degeneracy:  1
+      vector   7  -1   0   degeneracy:  1
+      vector   7   0   0   degeneracy:  1
+      vector   7   1   0   degeneracy:  1
+      vector   7   2   0   degeneracy:  1
+      vector   7   3   0   degeneracy:  1
+      vector   7   4   0   degeneracy:  1
+      vector   7   5   0   degeneracy:  1
+      vector   7   6   0   degeneracy:  1
+      vector   7   7   0   degeneracy:  1
+      vector   7   8   0   degeneracy:  1
+      vector   7   9   0   degeneracy:  1
+      vector   7  10   0   degeneracy:  1
+      vector   7  11   0   degeneracy:  1
+      vector   7  12   0   degeneracy:  1
+      vector   7  13   0   degeneracy:  1
+      vector   7  14   0   degeneracy:  1
+      vector   7  15   0   degeneracy:  1
+      vector   7  16   0   degeneracy:  1
+      vector   8  -8   0   degeneracy:  1
+      vector   8  -7   0   degeneracy:  1
+      vector   8  -6   0   degeneracy:  1
+      vector   8  -5   0   degeneracy:  1
+      vector   8  -4   0   degeneracy:  1
+      vector   8  -3   0   degeneracy:  1
+      vector   8  -2   0   degeneracy:  1
+      vector   8  -1   0   degeneracy:  1
+      vector   8   0   0   degeneracy:  1
+      vector   8   1   0   degeneracy:  1
+      vector   8   2   0   degeneracy:  1
+      vector   8   3   0   degeneracy:  1
+      vector   8   4   0   degeneracy:  1
+      vector   8   5   0   degeneracy:  1
+      vector   8   6   0   degeneracy:  1
+      vector   8   7   0   degeneracy:  1
+      vector   8   8   0   degeneracy:  1
+      vector   8   9   0   degeneracy:  1
+      vector   8  10   0   degeneracy:  1
+      vector   8  11   0   degeneracy:  1
+      vector   8  12   0   degeneracy:  1
+      vector   8  13   0   degeneracy:  1
+      vector   8  14   0   degeneracy:  1
+      vector   8  15   0   degeneracy:  1
+      vector   8  16   0   degeneracy:  1
+      vector   9  -6   0   degeneracy:  1
+      vector   9  -5   0   degeneracy:  1
+      vector   9  -4   0   degeneracy:  1
+      vector   9  -3   0   degeneracy:  1
+      vector   9  -2   0   degeneracy:  1
+      vector   9  -1   0   degeneracy:  1
+      vector   9   0   0   degeneracy:  1
+      vector   9   1   0   degeneracy:  1
+      vector   9   2   0   degeneracy:  1
+      vector   9   3   0   degeneracy:  1
+      vector   9   4   0   degeneracy:  1
+      vector   9   5   0   degeneracy:  1
+      vector   9   6   0   degeneracy:  1
+      vector   9   7   0   degeneracy:  1
+      vector   9   8   0   degeneracy:  1
+      vector   9   9   0   degeneracy:  1
+      vector   9  10   0   degeneracy:  1
+      vector   9  11   0   degeneracy:  1
+      vector   9  12   0   degeneracy:  1
+      vector   9  13   0   degeneracy:  1
+      vector   9  14   0   degeneracy:  1
+      vector   9  15   0   degeneracy:  1
+      vector  10  -4   0   degeneracy:  1
+      vector  10  -3   0   degeneracy:  1
+      vector  10  -2   0   degeneracy:  1
+      vector  10  -1   0   degeneracy:  1
+      vector  10   0   0   degeneracy:  1
+      vector  10   1   0   degeneracy:  1
+      vector  10   2   0   degeneracy:  1
+      vector  10   3   0   degeneracy:  1
+      vector  10   4   0   degeneracy:  1
+      vector  10   5   0   degeneracy:  1
+      vector  10   6   0   degeneracy:  1
+      vector  10   7   0   degeneracy:  1
+      vector  10   8   0   degeneracy:  1
+      vector  10   9   0   degeneracy:  1
+      vector  10  10   0   degeneracy:  1
+      vector  10  11   0   degeneracy:  1
+      vector  10  12   0   degeneracy:  1
+      vector  10  13   0   degeneracy:  1
+      vector  10  14   0   degeneracy:  1
+      vector  11  -2   0   degeneracy:  1
+      vector  11  -1   0   degeneracy:  1
+      vector  11   0   0   degeneracy:  1
+      vector  11   1   0   degeneracy:  1
+      vector  11   2   0   degeneracy:  1
+      vector  11   3   0   degeneracy:  1
+      vector  11   4   0   degeneracy:  1
+      vector  11   5   0   degeneracy:  1
+      vector  11   6   0   degeneracy:  1
+      vector  11   7   0   degeneracy:  1
+      vector  11   8   0   degeneracy:  1
+      vector  11   9   0   degeneracy:  1
+      vector  11  10   0   degeneracy:  1
+      vector  11  11   0   degeneracy:  1
+      vector  11  12   0   degeneracy:  1
+      vector  11  13   0   degeneracy:  1
+      vector  12   0   0   degeneracy:  1
+      vector  12   1   0   degeneracy:  1
+      vector  12   2   0   degeneracy:  1
+      vector  12   3   0   degeneracy:  1
+      vector  12   4   0   degeneracy:  1
+      vector  12   5   0   degeneracy:  1
+      vector  12   6   0   degeneracy:  1
+      vector  12   7   0   degeneracy:  1
+      vector  12   8   0   degeneracy:  1
+      vector  12   9   0   degeneracy:  1
+      vector  12  10   0   degeneracy:  1
+      vector  12  11   0   degeneracy:  1
+      vector  12  12   0   degeneracy:  1
+      vector  13   1   0   degeneracy:  1
+      vector  13   2   0   degeneracy:  1
+      vector  13   3   0   degeneracy:  1
+      vector  13   4   0   degeneracy:  1
+      vector  13   5   0   degeneracy:  1
+      vector  13   6   0   degeneracy:  1
+      vector  13   7   0   degeneracy:  1
+      vector  13   8   0   degeneracy:  1
+      vector  13   9   0   degeneracy:  1
+      vector  13  10   0   degeneracy:  1
+      vector  13  11   0   degeneracy:  1
+      vector  13  12   0   degeneracy:  1
+      vector  14   3   0   degeneracy:  1
+      vector  14   4   0   degeneracy:  1
+      vector  14   5   0   degeneracy:  1
+      vector  14   6   0   degeneracy:  1
+      vector  14   7   0   degeneracy:  1
+      vector  14   8   0   degeneracy:  1
+      vector  14   9   0   degeneracy:  1
+      vector  14  10   0   degeneracy:  1
+      vector  14  11   0   degeneracy:  1
+      vector  15   5   0   degeneracy:  1
+      vector  15   6   0   degeneracy:  1
+      vector  15   7   0   degeneracy:  1
+      vector  15   8   0   degeneracy:  1
+      vector  15   9   0   degeneracy:  1
+      vector  15  10   0   degeneracy:  1
+      vector  16   7   0   degeneracy:  1
+      vector  16   8   0   degeneracy:  1
+      vector  16   9   0   degeneracy:  1
+
+ Time to read and process       0.043 (sec)
+
+
+ Properties calculated in module  k p a t h
+ ------------------------------------------
+
+   * Energy bands in eV, coloured by spin
+
+ Reading spin matrices from wannier90.spn in get_SS_R : Created from wavecar at 2023-12-25T18:35:16.364896
+
+ Output files:
+
+   wannier90-path.kpt                                                                                                      
+
+   wannier90-bands.dat                                                                                                     
+
+   wannier90-bands.gnu                                                                                                     
+
+   wannier90-bands.py                                                                                                      
+
+ Total Execution Time           8.367 (sec)
+
+ *===========================================================================*
+ |                             TIMING INFORMATION                            |
+ *===========================================================================*
+ |    Tag                                                Ncalls      Time (s)|
+ |---------------------------------------------------------------------------|
+ |kmesh: get                                        :         1         0.425|
+ *---------------------------------------------------------------------------*
+ 
+
+ All done: postw90 exiting
+ 
+             +---------------------------------------------------+
+             |                                                   |
+             |                   WANNIER90                       |
+             |                                                   |
+             +---------------------------------------------------+
+             |                                                   |
+             |        Welcome to the Maximally-Localized         |
+             |        Generalized Wannier Functions code         |
+             |            http://www.wannier.org                 |
+             |                                                   |
+             |                                                   |
+             |  Wannier90 Developer Group:                       |
+             |    Giovanni Pizzi    (EPFL)                       |
+             |    Valerio Vitale    (Cambridge)                  |
+             |    David Vanderbilt  (Rutgers University)         |
+             |    Nicola Marzari    (EPFL)                       |
+             |    Ivo Souza         (Universidad del Pais Vasco) |
+             |    Arash A. Mostofi  (Imperial College London)    |
+             |    Jonathan R. Yates (University of Oxford)       |
+             |                                                   |
+             |  For the full list of Wannier90 3.x authors,      |
+             |  please check the code documentation and the      |
+             |  README on the GitHub page of the code            |
+             |                                                   |
+             |                                                   |
+             |  Please cite                                      |
+             |                                                   |
+             |  [ref] "Wannier90 as a community code:            |
+             |        new features and applications",            |
+             |        G. Pizzi et al., J. Phys. Cond. Matt. 32,  |
+             |        165902 (2020).                             |
+             |        http://doi.org/10.1088/1361-648X/ab51ff    |
+             |                                                   |
+             |  in any publications arising from the use of      |
+             |  this code. For the method please cite            |
+             |                                                   |
+             |  [ref] "Maximally Localized Generalised Wannier   |
+             |         Functions for Composite Energy Bands"     |
+             |         N. Marzari and D. Vanderbilt              |
+             |         Phys. Rev. B 56 12847 (1997)              |
+             |                                                   |
+             |  [ref] "Maximally Localized Wannier Functions     |
+             |         for Entangled Energy Bands"               |
+             |         I. Souza, N. Marzari and D. Vanderbilt    |
+             |         Phys. Rev. B 65 035109 (2001)             |
+             |                                                   |
+             |                                                   |
+             | Copyright (c) 1996-2020                           |
+             |        The Wannier90 Developer Group and          |
+             |        individual contributors                    |
+             |                                                   |
+             |      Release: 3.1.0        5th March    2020      |
+             |                                                   |
+             | This program is free software; you can            |
+             | redistribute it and/or modify it under the terms  |
+             | of the GNU General Public License as published by |
+             | the Free Software Foundation; either version 2 of |
+             | the License, or (at your option) any later version|
+             |                                                   |
+             | This program is distributed in the hope that it   |
+             | will be useful, but WITHOUT ANY WARRANTY; without |
+             | even the implied warranty of MERCHANTABILITY or   |
+             | FITNESS FOR A PARTICULAR PURPOSE. See the GNU     |
+             | General Public License for more details.          |
+             |                                                   |
+             | You should have received a copy of the GNU General|
+             | Public License along with this program; if not,   |
+             | write to the Free Software Foundation, Inc.,      |
+             | 675 Mass Ave, Cambridge, MA 02139, USA.           |
+             |                                                   |
+             +---------------------------------------------------+
+             |    Execution started on 25Dec2023 at 18:38:14     |
+             +---------------------------------------------------+
+ 
+ ******************************************************************************
+ * -> Using CODATA 2006 constant values                                       *
+ *    (http://physics.nist.gov/cuu/Constants/index.html)                      *
+ * -> Using Bohr value from CODATA                                            *
+ ******************************************************************************
+ 
+
+ Running in parallel on  64 CPUs
+
+ 
+                                    ------
+                                    SYSTEM
+                                    ------
+ 
+                              Lattice Vectors (Ang)
+                    a_1     3.427808   0.000000   0.000000
+                    a_2    -1.713904   2.968569   0.000000
+                    a_3     0.000000   0.000000  31.066889
+ 
+                   Unit Cell Volume:     316.12686  (Ang^3)
+ 
+                        Reciprocal-Space Vectors (Ang^-1)
+                    b_1     1.833004   1.058285   0.000000
+                    b_2    -0.000000   2.116570   0.000000
+                    b_3     0.000000   0.000000   0.202247
+  
+ *----------------------------------------------------------------------------*
+ |   Site       Fractional Coordinate          Cartesian Coordinate (Ang)     |
+ +----------------------------------------------------------------------------+
+ | Cr   1   0.00000   0.00000   0.10924   |    0.00000   0.00000   3.39361    |
+ | S    1   0.66667   0.33333   0.06911   |    1.71391   0.98952   2.14694    |
+ | Te   1   0.33333   0.66667   0.17479   |    0.00000   1.97905   5.43024    |
+ *----------------------------------------------------------------------------*
+  
+  
+ *-------------------------------- POSTW90 -----------------------------------*
+ |  Number of Wannier Functions               :                22             |
+ |  Number of electrons per state             :                 1             |
+ |  Scissor shift applied to conduction bands :             0.000             |
+ |  Number of valence bands                   :       not defined             |
+ |  Spin decomposition                        :                 T             |
+ |  Compute Spin moment                       :                 F             |
+ |  Polar angle of spin quantisation axis     :            90.000             |
+ |  Azimuthal angle of spin quantisation axis :            90.000             |
+           |  Spn file-type                   :       unformatted             |
+           |  uHu file-type                   :       unformatted             |
+ |  Fermi energy (eV)                         :            -3.023             |
+ |  Output verbosity (1=low, 5=high)          :                 3             |
+ |  Timing Level (1=low, 5=high)              :                 1             |
+ |  Optimisation (0=memory, 3=speed)          :                 3             |
+ |  Length Unit                               :               Ang             |
+ *----------------------------------------------------------------------------*
+ *------------------------ Global Smearing Parameters ------------------------*
+ |  Adaptive width smearing                   :                 T             |
+ |  Adaptive smearing factor                  :             1.414             |
+ |  Maximum allowed smearing width (eV)       :             1.000             |
+ |  Smearing Function                                             Gaussian    |
+ |  Global interpolation k-points defined     :                 F             |
+ *----------------------------------------------------------------------------*
+ *---------------------------------- DOS -------------------------------------*
+ |  Plotting Density of States                :                 F             |
+ |  Compute Wannier Projected DOS             :                 T             |
+ |  Minimum energy range for DOS plot         :            -9.381             |
+ |  Maximum energy range for DOS plot         :             1.344             |
+ |  Energy step for DOS plot                  :             0.010             |
+ |  Using global smearing parameters                                          |
+ |  Using global k-point set for interpolation                                |
+ *----------------------------------------------------------------------------*
+ *--------------------------------- KPATH ------------------------------------*
+ |  Plot Properties along a path in k-space   :                 T             |
+ |  Divisions along first kpath section       :               100             |
+ |  Plot energy bands                         :                 T             |
+ |  Plot Berry curvature                      :                 F             |
+ |  Plot orbital magnetisation contribution   :                 F             |
+ |  Plot spin Hall conductivity contribution  :                 F             |
+ |  Property used to colour code the bands    :              spin             |
+ *----------------------------------------------------------------------------*
+ |   K-space path sections:                                                   |
+ |    From:  K    0.333  0.333  0.000     To:  G    0.000  0.000  0.000       |
+ |    From:  G    0.000  0.000  0.000     To:  M    0.500  0.000  0.000       |
+ |    From:  M    0.500  0.000  0.000     To:  K    0.333  0.333  0.000       |
+ *----------------------------------------------------------------------------*
+ *--------------------------------- KSLICE -----------------------------------*
+ |  Plot Properties along a slice in k-space  :                 F             |
+ |  Fermi level used for slice                :            -3.023             |
+ |  Divisions along first kpath section       :               100             |
+ |  Plot energy contours (fermi lines)        :                 T             |
+ |  Plot Berry curvature (sum over occ states):                 F             |
+ |  Plot orbital magnetisation contribution   :                 F             |
+ |  Plot spin Hall conductivity contribution  :                 F             |
+ |  Property used to colour code the lines    :              none             |
+ |  2D slice parameters (in reduced coordinates):                             |
+ |     Corner:      0.000   0.000   0.000                                     |
+ |    Vector1:      1.000   0.000   0.000            Divisions:    50         |
+ |    Vector2:      0.000   1.000   0.000            Divisions:    50         |
+ *----------------------------------------------------------------------------*
+ *--------------------------------- BERRY ------------------------------------*
+ |  Compute Berry Phase related properties    :                 F             |
+ |  Compute Optical Conductivity and JDOS     :                 F             |
+ |  Compute Anomalous Hall Conductivity       :                 F             |
+ |  Compute Shift Current                     :                 F             |
+ |  Compute Orbital Magnetisation             :                 F             |
+ |  Compute Spin Hall Conductivity            :                 F             |
+ |  Lower frequency for optical responses     :             0.000             |
+ |  Upper frequency for optical responses     :             4.367             |
+ |  Step size for optical responses           :             0.010             |
+ |  Upper eigenvalue for optical responses    :             1.344             |
+ |  Using global smearing parameters                                          |
+ |  Using global k-point set for interpolation                                |
+ |  Adaptive refinement                       :              none             |
+ *----------------------------------------------------------------------------*
+ *--------------------------------- GYROTROPIC   ------------------------------
+ | Compute Gyrotropic properties              :                 F             |
+ | gyrotropic_task                            :          all                  |
+ | calculate the D tensor                     :                 T             |
+ | calculate the tildeD tensor                :                 T             |
+ | calculate the C tensor                     :                 T             |
+ | calculate the K tensor                     :                 T             |
+ | calculate the interbad natural optical act :                 T             |
+ | calculate the density of states            :                 T             |
+ |  Lower frequency for tildeD,NOA            :             0.000             |
+ |  Upper frequency                           :             4.367             |
+ |  Step size for frequency                   :             0.010             |
+ |  Upper eigenvalue                          :             1.344             |
+ |  Using global smearing parameters                                          |
+ |  Fixed width smearing                      :                 T             |
+ |  Smearing width                            :             0.000             |
+ |  Smearing Function                                             Gaussian    |
+ |  degen_thresh                              :             0.000             |
+ |  Using global k-point set for interpolation                                |
+ |  Adaptive refinement                       :              not              |
+ *----------------------------------------------------------------------------*
+ *------------------------------- BOLTZWANN ----------------------------------*
+ |  Compute Boltzmann transport properties    :                 F             |
+ |  3d Structure                              :                 T             |
+ |  Relaxation Time (fs)                      :            10.000             |
+ |  Minimum Value of Chemical Potential (eV)  :          -999.000             |
+ |  Maximum Value of Chemical Potential (eV)  :          -999.000             |
+ |  Step size for Chemical Potential (eV)     :             0.000             |
+ |  Minimum Value of Temperature (K)          :          -999.000             |
+ |  Maximum Value of Temperature (K)          :          -999.000             |
+ |  Step size for Temperature (K)             :             0.000             |
+ |  Using global k-point set for interpolation                                |
+ |  Step size for TDF (eV)                    :             0.001             |
+ |  TDF Smearing Function                                         Gaussian    |
+ |  TDF fixed Smearing width                  :         unsmeared             |
+ |  Compute DOS at same time                  :                 F             |
+ *----------------------------------------------------------------------------*
+ *------------------------Generic Band Interpolation--------------------------*
+ |  Compute Properties at given k-points      :                 F             |
+ |  Calculate band gradients                  :                 F             |
+ |  Write data into a single file             :                 T             |
+ *----------------------------------------------------------------------------*
+ Time to read parameters        0.077 (sec)
+
+ *---------------------------------- K-MESH ----------------------------------*
+ +----------------------------------------------------------------------------+
+ |                    Distance to Nearest-Neighbour Shells                    |
+ |                    ------------------------------------                    |
+ |          Shell             Distance (Ang^-1)          Multiplicity         |
+ |          -----             -----------------          ------------         |
+ |             1                   0.084663                      6            |
+ |             2                   0.146640                      6            |
+ |             3                   0.169326                      6            |
+ |             4                   0.202247                      2            |
+ |             5                   0.219252                     12            |
+ |             6                   0.223997                     12            |
+ |             7                   0.249814                     12            |
+ |             8                   0.253988                      6            |
+ |             9                   0.263771                     12            |
+ |            10                   0.293281                      6            |
+ |            11                   0.301792                     24            |
+ |            12                   0.305256                     12            |
+ |            13                   0.324675                     12            |
+ |            14                   0.338651                      6            |
+ |            15                   0.356255                     12            |
+ |            16                   0.366176                     24            |
+ |            17                   0.369037                     12            |
+ |            18                   0.387974                     12            |
+ |            19                   0.394447                     12            |
+ |            20                   0.404494                      2            |
+ |            21                   0.413259                     12            |
+ |            22                   0.420823                     24            |
+ |            23                   0.423314                      6            |
+ |            24                   0.430254                     12            |
+ |            25                   0.437524                     24            |
+ |            26                   0.438505                     12            |
+ |            27                   0.439921                      6            |
+ |            28                   0.447994                     12            |
+ |            29                   0.462374                     24            |
+ |            30                   0.469147                     12            |
+ |            31                   0.471383                     12            |
+ |            32                   0.477625                     12            |
+ |            33                   0.484184                     12            |
+ |            34                   0.491530                     24            |
+ |            35                   0.499629                     12            |
+ |            36                   0.506751                     24            |
+ +----------------------------------------------------------------------------+
+ | The b-vectors are chosen automatically                                     |
+ | Shell:  1 Multiplicity:  6                                                 |
+ | b-vector 1 :        0.073320    0.042331    0.000000      (Ang^-1)         |
+ | b-vector 2 :       -0.073320   -0.042331    0.000000      (Ang^-1)         |
+ | b-vector 3 :       -0.000000    0.084663    0.000000      (Ang^-1)         |
+ | b-vector 4 :       -0.073320    0.042331    0.000000      (Ang^-1)         |
+ | b-vector 5 :        0.000000   -0.084663    0.000000      (Ang^-1)         |
+ | b-vector 6 :        0.073320   -0.042331    0.000000      (Ang^-1)         |
+ | Shell:  1 w_b   46.5043193      (Ang^2)                                    |
+ | B1 condition is not satisfied: Adding another shell                        |
+ | Shell:  2 Multiplicity:  6                                                 |
+ | b-vector 1 :        0.073320    0.126994    0.000000      (Ang^-1)         |
+ | b-vector 2 :       -0.146640   -0.000000    0.000000      (Ang^-1)         |
+ | b-vector 3 :       -0.073320    0.126994    0.000000      (Ang^-1)         |
+ | b-vector 4 :        0.073320   -0.126994    0.000000      (Ang^-1)         |
+ | b-vector 5 :        0.146640    0.000000    0.000000      (Ang^-1)         |
+ | b-vector 6 :       -0.073320   -0.126994    0.000000      (Ang^-1)         |
+ | SVD found small singular value, Rejecting this shell and trying the next   |
+ | Shell:  3 Multiplicity:  6                                                 |
+ | b-vector 1 :        0.146640    0.084663    0.000000      (Ang^-1)         |
+ | b-vector 2 :       -0.146640   -0.084663    0.000000      (Ang^-1)         |
+ | b-vector 3 :       -0.000000    0.169326    0.000000      (Ang^-1)         |
+ | b-vector 4 :       -0.146640    0.084663    0.000000      (Ang^-1)         |
+ | b-vector 5 :        0.000000   -0.169326    0.000000      (Ang^-1)         |
+ | b-vector 6 :        0.146640   -0.084663    0.000000      (Ang^-1)         |
+ | This shell is linearly dependent on existing shells: Trying next shell     |
+ | Shell:  4 Multiplicity:  2                                                 |
+ | b-vector 1 :        0.000000    0.000000    0.202247      (Ang^-1)         |
+ | b-vector 2 :        0.000000    0.000000   -0.202247      (Ang^-1)         |
+ | Shell:  1 w_b   46.5043193      (Ang^2)                                    |
+ | Shell:  2 w_b   12.2237875      (Ang^2)                                    |
+ | The following shells are used:   1,  4                                     |
+ +----------------------------------------------------------------------------+
+ |                        Shell   # Nearest-Neighbours                        |
+ |                        -----   --------------------                        |
+ |                          1               6                                 |
+ |                          4               2                                 |
+ +----------------------------------------------------------------------------+
+ | Completeness relation is fully satisfied [Eq. (B1), PRB 56, 12847 (1997)]  |
+ +----------------------------------------------------------------------------+
+ |                  b_k Vectors (Ang^-1) and Weights (Ang^2)                  |
+ |                  ----------------------------------------                  |
+ |            No.         b_k(x)      b_k(y)      b_k(z)        w_b           |
+ |            ---        --------------------------------     --------        |
+ |             1         0.073320    0.042331    0.000000    46.504319        |
+ |             2        -0.073320   -0.042331    0.000000    46.504319        |
+ |             3        -0.000000    0.084663    0.000000    46.504319        |
+ |             4        -0.073320    0.042331    0.000000    46.504319        |
+ |             5         0.000000   -0.084663    0.000000    46.504319        |
+ |             6         0.073320   -0.042331    0.000000    46.504319        |
+ |             7         0.000000    0.000000    0.202247    12.223787        |
+ |             8         0.000000    0.000000   -0.202247    12.223787        |
+ +----------------------------------------------------------------------------+
+ |                           b_k Directions (Ang^-1)                          |
+ |                           -----------------------                          |
+ |            No.           x           y           z                         |
+ |            ---        --------------------------------                     |
+ |             1         0.073320    0.042331    0.000000                     |
+ |             2        -0.000000    0.084663    0.000000                     |
+ |             3        -0.073320    0.042331    0.000000                     |
+ |             4         0.000000    0.000000    0.202247                     |
+ +----------------------------------------------------------------------------+
+  
+ Time to get kmesh              0.423 (sec)
+ Reading restart information from file wannier90.chk :
+ written on 25Dec2023 at 18:36:50 ... done
+
+  625 lattice points in Wigner-Seitz supercell:
+
+      vector -16  -9   0   degeneracy:  1
+      vector -16  -8   0   degeneracy:  1
+      vector -16  -7   0   degeneracy:  1
+      vector -15 -10   0   degeneracy:  1
+      vector -15  -9   0   degeneracy:  1
+      vector -15  -8   0   degeneracy:  1
+      vector -15  -7   0   degeneracy:  1
+      vector -15  -6   0   degeneracy:  1
+      vector -15  -5   0   degeneracy:  1
+      vector -14 -11   0   degeneracy:  1
+      vector -14 -10   0   degeneracy:  1
+      vector -14  -9   0   degeneracy:  1
+      vector -14  -8   0   degeneracy:  1
+      vector -14  -7   0   degeneracy:  1
+      vector -14  -6   0   degeneracy:  1
+      vector -14  -5   0   degeneracy:  1
+      vector -14  -4   0   degeneracy:  1
+      vector -14  -3   0   degeneracy:  1
+      vector -13 -12   0   degeneracy:  1
+      vector -13 -11   0   degeneracy:  1
+      vector -13 -10   0   degeneracy:  1
+      vector -13  -9   0   degeneracy:  1
+      vector -13  -8   0   degeneracy:  1
+      vector -13  -7   0   degeneracy:  1
+      vector -13  -6   0   degeneracy:  1
+      vector -13  -5   0   degeneracy:  1
+      vector -13  -4   0   degeneracy:  1
+      vector -13  -3   0   degeneracy:  1
+      vector -13  -2   0   degeneracy:  1
+      vector -13  -1   0   degeneracy:  1
+      vector -12 -12   0   degeneracy:  1
+      vector -12 -11   0   degeneracy:  1
+      vector -12 -10   0   degeneracy:  1
+      vector -12  -9   0   degeneracy:  1
+      vector -12  -8   0   degeneracy:  1
+      vector -12  -7   0   degeneracy:  1
+      vector -12  -6   0   degeneracy:  1
+      vector -12  -5   0   degeneracy:  1
+      vector -12  -4   0   degeneracy:  1
+      vector -12  -3   0   degeneracy:  1
+      vector -12  -2   0   degeneracy:  1
+      vector -12  -1   0   degeneracy:  1
+      vector -12   0   0   degeneracy:  1
+      vector -11 -13   0   degeneracy:  1
+      vector -11 -12   0   degeneracy:  1
+      vector -11 -11   0   degeneracy:  1
+      vector -11 -10   0   degeneracy:  1
+      vector -11  -9   0   degeneracy:  1
+      vector -11  -8   0   degeneracy:  1
+      vector -11  -7   0   degeneracy:  1
+      vector -11  -6   0   degeneracy:  1
+      vector -11  -5   0   degeneracy:  1
+      vector -11  -4   0   degeneracy:  1
+      vector -11  -3   0   degeneracy:  1
+      vector -11  -2   0   degeneracy:  1
+      vector -11  -1   0   degeneracy:  1
+      vector -11   0   0   degeneracy:  1
+      vector -11   1   0   degeneracy:  1
+      vector -11   2   0   degeneracy:  1
+      vector -10 -14   0   degeneracy:  1
+      vector -10 -13   0   degeneracy:  1
+      vector -10 -12   0   degeneracy:  1
+      vector -10 -11   0   degeneracy:  1
+      vector -10 -10   0   degeneracy:  1
+      vector -10  -9   0   degeneracy:  1
+      vector -10  -8   0   degeneracy:  1
+      vector -10  -7   0   degeneracy:  1
+      vector -10  -6   0   degeneracy:  1
+      vector -10  -5   0   degeneracy:  1
+      vector -10  -4   0   degeneracy:  1
+      vector -10  -3   0   degeneracy:  1
+      vector -10  -2   0   degeneracy:  1
+      vector -10  -1   0   degeneracy:  1
+      vector -10   0   0   degeneracy:  1
+      vector -10   1   0   degeneracy:  1
+      vector -10   2   0   degeneracy:  1
+      vector -10   3   0   degeneracy:  1
+      vector -10   4   0   degeneracy:  1
+      vector  -9 -15   0   degeneracy:  1
+      vector  -9 -14   0   degeneracy:  1
+      vector  -9 -13   0   degeneracy:  1
+      vector  -9 -12   0   degeneracy:  1
+      vector  -9 -11   0   degeneracy:  1
+      vector  -9 -10   0   degeneracy:  1
+      vector  -9  -9   0   degeneracy:  1
+      vector  -9  -8   0   degeneracy:  1
+      vector  -9  -7   0   degeneracy:  1
+      vector  -9  -6   0   degeneracy:  1
+      vector  -9  -5   0   degeneracy:  1
+      vector  -9  -4   0   degeneracy:  1
+      vector  -9  -3   0   degeneracy:  1
+      vector  -9  -2   0   degeneracy:  1
+      vector  -9  -1   0   degeneracy:  1
+      vector  -9   0   0   degeneracy:  1
+      vector  -9   1   0   degeneracy:  1
+      vector  -9   2   0   degeneracy:  1
+      vector  -9   3   0   degeneracy:  1
+      vector  -9   4   0   degeneracy:  1
+      vector  -9   5   0   degeneracy:  1
+      vector  -9   6   0   degeneracy:  1
+      vector  -8 -16   0   degeneracy:  1
+      vector  -8 -15   0   degeneracy:  1
+      vector  -8 -14   0   degeneracy:  1
+      vector  -8 -13   0   degeneracy:  1
+      vector  -8 -12   0   degeneracy:  1
+      vector  -8 -11   0   degeneracy:  1
+      vector  -8 -10   0   degeneracy:  1
+      vector  -8  -9   0   degeneracy:  1
+      vector  -8  -8   0   degeneracy:  1
+      vector  -8  -7   0   degeneracy:  1
+      vector  -8  -6   0   degeneracy:  1
+      vector  -8  -5   0   degeneracy:  1
+      vector  -8  -4   0   degeneracy:  1
+      vector  -8  -3   0   degeneracy:  1
+      vector  -8  -2   0   degeneracy:  1
+      vector  -8  -1   0   degeneracy:  1
+      vector  -8   0   0   degeneracy:  1
+      vector  -8   1   0   degeneracy:  1
+      vector  -8   2   0   degeneracy:  1
+      vector  -8   3   0   degeneracy:  1
+      vector  -8   4   0   degeneracy:  1
+      vector  -8   5   0   degeneracy:  1
+      vector  -8   6   0   degeneracy:  1
+      vector  -8   7   0   degeneracy:  1
+      vector  -8   8   0   degeneracy:  1
+      vector  -7 -16   0   degeneracy:  1
+      vector  -7 -15   0   degeneracy:  1
+      vector  -7 -14   0   degeneracy:  1
+      vector  -7 -13   0   degeneracy:  1
+      vector  -7 -12   0   degeneracy:  1
+      vector  -7 -11   0   degeneracy:  1
+      vector  -7 -10   0   degeneracy:  1
+      vector  -7  -9   0   degeneracy:  1
+      vector  -7  -8   0   degeneracy:  1
+      vector  -7  -7   0   degeneracy:  1
+      vector  -7  -6   0   degeneracy:  1
+      vector  -7  -5   0   degeneracy:  1
+      vector  -7  -4   0   degeneracy:  1
+      vector  -7  -3   0   degeneracy:  1
+      vector  -7  -2   0   degeneracy:  1
+      vector  -7  -1   0   degeneracy:  1
+      vector  -7   0   0   degeneracy:  1
+      vector  -7   1   0   degeneracy:  1
+      vector  -7   2   0   degeneracy:  1
+      vector  -7   3   0   degeneracy:  1
+      vector  -7   4   0   degeneracy:  1
+      vector  -7   5   0   degeneracy:  1
+      vector  -7   6   0   degeneracy:  1
+      vector  -7   7   0   degeneracy:  1
+      vector  -7   8   0   degeneracy:  1
+      vector  -6 -15   0   degeneracy:  1
+      vector  -6 -14   0   degeneracy:  1
+      vector  -6 -13   0   degeneracy:  1
+      vector  -6 -12   0   degeneracy:  1
+      vector  -6 -11   0   degeneracy:  1
+      vector  -6 -10   0   degeneracy:  1
+      vector  -6  -9   0   degeneracy:  1
+      vector  -6  -8   0   degeneracy:  1
+      vector  -6  -7   0   degeneracy:  1
+      vector  -6  -6   0   degeneracy:  1
+      vector  -6  -5   0   degeneracy:  1
+      vector  -6  -4   0   degeneracy:  1
+      vector  -6  -3   0   degeneracy:  1
+      vector  -6  -2   0   degeneracy:  1
+      vector  -6  -1   0   degeneracy:  1
+      vector  -6   0   0   degeneracy:  1
+      vector  -6   1   0   degeneracy:  1
+      vector  -6   2   0   degeneracy:  1
+      vector  -6   3   0   degeneracy:  1
+      vector  -6   4   0   degeneracy:  1
+      vector  -6   5   0   degeneracy:  1
+      vector  -6   6   0   degeneracy:  1
+      vector  -6   7   0   degeneracy:  1
+      vector  -6   8   0   degeneracy:  1
+      vector  -6   9   0   degeneracy:  1
+      vector  -5 -15   0   degeneracy:  1
+      vector  -5 -14   0   degeneracy:  1
+      vector  -5 -13   0   degeneracy:  1
+      vector  -5 -12   0   degeneracy:  1
+      vector  -5 -11   0   degeneracy:  1
+      vector  -5 -10   0   degeneracy:  1
+      vector  -5  -9   0   degeneracy:  1
+      vector  -5  -8   0   degeneracy:  1
+      vector  -5  -7   0   degeneracy:  1
+      vector  -5  -6   0   degeneracy:  1
+      vector  -5  -5   0   degeneracy:  1
+      vector  -5  -4   0   degeneracy:  1
+      vector  -5  -3   0   degeneracy:  1
+      vector  -5  -2   0   degeneracy:  1
+      vector  -5  -1   0   degeneracy:  1
+      vector  -5   0   0   degeneracy:  1
+      vector  -5   1   0   degeneracy:  1
+      vector  -5   2   0   degeneracy:  1
+      vector  -5   3   0   degeneracy:  1
+      vector  -5   4   0   degeneracy:  1
+      vector  -5   5   0   degeneracy:  1
+      vector  -5   6   0   degeneracy:  1
+      vector  -5   7   0   degeneracy:  1
+      vector  -5   8   0   degeneracy:  1
+      vector  -5   9   0   degeneracy:  1
+      vector  -4 -14   0   degeneracy:  1
+      vector  -4 -13   0   degeneracy:  1
+      vector  -4 -12   0   degeneracy:  1
+      vector  -4 -11   0   degeneracy:  1
+      vector  -4 -10   0   degeneracy:  1
+      vector  -4  -9   0   degeneracy:  1
+      vector  -4  -8   0   degeneracy:  1
+      vector  -4  -7   0   degeneracy:  1
+      vector  -4  -6   0   degeneracy:  1
+      vector  -4  -5   0   degeneracy:  1
+      vector  -4  -4   0   degeneracy:  1
+      vector  -4  -3   0   degeneracy:  1
+      vector  -4  -2   0   degeneracy:  1
+      vector  -4  -1   0   degeneracy:  1
+      vector  -4   0   0   degeneracy:  1
+      vector  -4   1   0   degeneracy:  1
+      vector  -4   2   0   degeneracy:  1
+      vector  -4   3   0   degeneracy:  1
+      vector  -4   4   0   degeneracy:  1
+      vector  -4   5   0   degeneracy:  1
+      vector  -4   6   0   degeneracy:  1
+      vector  -4   7   0   degeneracy:  1
+      vector  -4   8   0   degeneracy:  1
+      vector  -4   9   0   degeneracy:  1
+      vector  -4  10   0   degeneracy:  1
+      vector  -3 -14   0   degeneracy:  1
+      vector  -3 -13   0   degeneracy:  1
+      vector  -3 -12   0   degeneracy:  1
+      vector  -3 -11   0   degeneracy:  1
+      vector  -3 -10   0   degeneracy:  1
+      vector  -3  -9   0   degeneracy:  1
+      vector  -3  -8   0   degeneracy:  1
+      vector  -3  -7   0   degeneracy:  1
+      vector  -3  -6   0   degeneracy:  1
+      vector  -3  -5   0   degeneracy:  1
+      vector  -3  -4   0   degeneracy:  1
+      vector  -3  -3   0   degeneracy:  1
+      vector  -3  -2   0   degeneracy:  1
+      vector  -3  -1   0   degeneracy:  1
+      vector  -3   0   0   degeneracy:  1
+      vector  -3   1   0   degeneracy:  1
+      vector  -3   2   0   degeneracy:  1
+      vector  -3   3   0   degeneracy:  1
+      vector  -3   4   0   degeneracy:  1
+      vector  -3   5   0   degeneracy:  1
+      vector  -3   6   0   degeneracy:  1
+      vector  -3   7   0   degeneracy:  1
+      vector  -3   8   0   degeneracy:  1
+      vector  -3   9   0   degeneracy:  1
+      vector  -3  10   0   degeneracy:  1
+      vector  -2 -13   0   degeneracy:  1
+      vector  -2 -12   0   degeneracy:  1
+      vector  -2 -11   0   degeneracy:  1
+      vector  -2 -10   0   degeneracy:  1
+      vector  -2  -9   0   degeneracy:  1
+      vector  -2  -8   0   degeneracy:  1
+      vector  -2  -7   0   degeneracy:  1
+      vector  -2  -6   0   degeneracy:  1
+      vector  -2  -5   0   degeneracy:  1
+      vector  -2  -4   0   degeneracy:  1
+      vector  -2  -3   0   degeneracy:  1
+      vector  -2  -2   0   degeneracy:  1
+      vector  -2  -1   0   degeneracy:  1
+      vector  -2   0   0   degeneracy:  1
+      vector  -2   1   0   degeneracy:  1
+      vector  -2   2   0   degeneracy:  1
+      vector  -2   3   0   degeneracy:  1
+      vector  -2   4   0   degeneracy:  1
+      vector  -2   5   0   degeneracy:  1
+      vector  -2   6   0   degeneracy:  1
+      vector  -2   7   0   degeneracy:  1
+      vector  -2   8   0   degeneracy:  1
+      vector  -2   9   0   degeneracy:  1
+      vector  -2  10   0   degeneracy:  1
+      vector  -2  11   0   degeneracy:  1
+      vector  -1 -13   0   degeneracy:  1
+      vector  -1 -12   0   degeneracy:  1
+      vector  -1 -11   0   degeneracy:  1
+      vector  -1 -10   0   degeneracy:  1
+      vector  -1  -9   0   degeneracy:  1
+      vector  -1  -8   0   degeneracy:  1
+      vector  -1  -7   0   degeneracy:  1
+      vector  -1  -6   0   degeneracy:  1
+      vector  -1  -5   0   degeneracy:  1
+      vector  -1  -4   0   degeneracy:  1
+      vector  -1  -3   0   degeneracy:  1
+      vector  -1  -2   0   degeneracy:  1
+      vector  -1  -1   0   degeneracy:  1
+      vector  -1   0   0   degeneracy:  1
+      vector  -1   1   0   degeneracy:  1
+      vector  -1   2   0   degeneracy:  1
+      vector  -1   3   0   degeneracy:  1
+      vector  -1   4   0   degeneracy:  1
+      vector  -1   5   0   degeneracy:  1
+      vector  -1   6   0   degeneracy:  1
+      vector  -1   7   0   degeneracy:  1
+      vector  -1   8   0   degeneracy:  1
+      vector  -1   9   0   degeneracy:  1
+      vector  -1  10   0   degeneracy:  1
+      vector  -1  11   0   degeneracy:  1
+      vector   0 -12   0   degeneracy:  1
+      vector   0 -11   0   degeneracy:  1
+      vector   0 -10   0   degeneracy:  1
+      vector   0  -9   0   degeneracy:  1
+      vector   0  -8   0   degeneracy:  1
+      vector   0  -7   0   degeneracy:  1
+      vector   0  -6   0   degeneracy:  1
+      vector   0  -5   0   degeneracy:  1
+      vector   0  -4   0   degeneracy:  1
+      vector   0  -3   0   degeneracy:  1
+      vector   0  -2   0   degeneracy:  1
+      vector   0  -1   0   degeneracy:  1
+      vector   0   0   0   degeneracy:  1
+      vector   0   1   0   degeneracy:  1
+      vector   0   2   0   degeneracy:  1
+      vector   0   3   0   degeneracy:  1
+      vector   0   4   0   degeneracy:  1
+      vector   0   5   0   degeneracy:  1
+      vector   0   6   0   degeneracy:  1
+      vector   0   7   0   degeneracy:  1
+      vector   0   8   0   degeneracy:  1
+      vector   0   9   0   degeneracy:  1
+      vector   0  10   0   degeneracy:  1
+      vector   0  11   0   degeneracy:  1
+      vector   0  12   0   degeneracy:  1
+      vector   1 -11   0   degeneracy:  1
+      vector   1 -10   0   degeneracy:  1
+      vector   1  -9   0   degeneracy:  1
+      vector   1  -8   0   degeneracy:  1
+      vector   1  -7   0   degeneracy:  1
+      vector   1  -6   0   degeneracy:  1
+      vector   1  -5   0   degeneracy:  1
+      vector   1  -4   0   degeneracy:  1
+      vector   1  -3   0   degeneracy:  1
+      vector   1  -2   0   degeneracy:  1
+      vector   1  -1   0   degeneracy:  1
+      vector   1   0   0   degeneracy:  1
+      vector   1   1   0   degeneracy:  1
+      vector   1   2   0   degeneracy:  1
+      vector   1   3   0   degeneracy:  1
+      vector   1   4   0   degeneracy:  1
+      vector   1   5   0   degeneracy:  1
+      vector   1   6   0   degeneracy:  1
+      vector   1   7   0   degeneracy:  1
+      vector   1   8   0   degeneracy:  1
+      vector   1   9   0   degeneracy:  1
+      vector   1  10   0   degeneracy:  1
+      vector   1  11   0   degeneracy:  1
+      vector   1  12   0   degeneracy:  1
+      vector   1  13   0   degeneracy:  1
+      vector   2 -11   0   degeneracy:  1
+      vector   2 -10   0   degeneracy:  1
+      vector   2  -9   0   degeneracy:  1
+      vector   2  -8   0   degeneracy:  1
+      vector   2  -7   0   degeneracy:  1
+      vector   2  -6   0   degeneracy:  1
+      vector   2  -5   0   degeneracy:  1
+      vector   2  -4   0   degeneracy:  1
+      vector   2  -3   0   degeneracy:  1
+      vector   2  -2   0   degeneracy:  1
+      vector   2  -1   0   degeneracy:  1
+      vector   2   0   0   degeneracy:  1
+      vector   2   1   0   degeneracy:  1
+      vector   2   2   0   degeneracy:  1
+      vector   2   3   0   degeneracy:  1
+      vector   2   4   0   degeneracy:  1
+      vector   2   5   0   degeneracy:  1
+      vector   2   6   0   degeneracy:  1
+      vector   2   7   0   degeneracy:  1
+      vector   2   8   0   degeneracy:  1
+      vector   2   9   0   degeneracy:  1
+      vector   2  10   0   degeneracy:  1
+      vector   2  11   0   degeneracy:  1
+      vector   2  12   0   degeneracy:  1
+      vector   2  13   0   degeneracy:  1
+      vector   3 -10   0   degeneracy:  1
+      vector   3  -9   0   degeneracy:  1
+      vector   3  -8   0   degeneracy:  1
+      vector   3  -7   0   degeneracy:  1
+      vector   3  -6   0   degeneracy:  1
+      vector   3  -5   0   degeneracy:  1
+      vector   3  -4   0   degeneracy:  1
+      vector   3  -3   0   degeneracy:  1
+      vector   3  -2   0   degeneracy:  1
+      vector   3  -1   0   degeneracy:  1
+      vector   3   0   0   degeneracy:  1
+      vector   3   1   0   degeneracy:  1
+      vector   3   2   0   degeneracy:  1
+      vector   3   3   0   degeneracy:  1
+      vector   3   4   0   degeneracy:  1
+      vector   3   5   0   degeneracy:  1
+      vector   3   6   0   degeneracy:  1
+      vector   3   7   0   degeneracy:  1
+      vector   3   8   0   degeneracy:  1
+      vector   3   9   0   degeneracy:  1
+      vector   3  10   0   degeneracy:  1
+      vector   3  11   0   degeneracy:  1
+      vector   3  12   0   degeneracy:  1
+      vector   3  13   0   degeneracy:  1
+      vector   3  14   0   degeneracy:  1
+      vector   4 -10   0   degeneracy:  1
+      vector   4  -9   0   degeneracy:  1
+      vector   4  -8   0   degeneracy:  1
+      vector   4  -7   0   degeneracy:  1
+      vector   4  -6   0   degeneracy:  1
+      vector   4  -5   0   degeneracy:  1
+      vector   4  -4   0   degeneracy:  1
+      vector   4  -3   0   degeneracy:  1
+      vector   4  -2   0   degeneracy:  1
+      vector   4  -1   0   degeneracy:  1
+      vector   4   0   0   degeneracy:  1
+      vector   4   1   0   degeneracy:  1
+      vector   4   2   0   degeneracy:  1
+      vector   4   3   0   degeneracy:  1
+      vector   4   4   0   degeneracy:  1
+      vector   4   5   0   degeneracy:  1
+      vector   4   6   0   degeneracy:  1
+      vector   4   7   0   degeneracy:  1
+      vector   4   8   0   degeneracy:  1
+      vector   4   9   0   degeneracy:  1
+      vector   4  10   0   degeneracy:  1
+      vector   4  11   0   degeneracy:  1
+      vector   4  12   0   degeneracy:  1
+      vector   4  13   0   degeneracy:  1
+      vector   4  14   0   degeneracy:  1
+      vector   5  -9   0   degeneracy:  1
+      vector   5  -8   0   degeneracy:  1
+      vector   5  -7   0   degeneracy:  1
+      vector   5  -6   0   degeneracy:  1
+      vector   5  -5   0   degeneracy:  1
+      vector   5  -4   0   degeneracy:  1
+      vector   5  -3   0   degeneracy:  1
+      vector   5  -2   0   degeneracy:  1
+      vector   5  -1   0   degeneracy:  1
+      vector   5   0   0   degeneracy:  1
+      vector   5   1   0   degeneracy:  1
+      vector   5   2   0   degeneracy:  1
+      vector   5   3   0   degeneracy:  1
+      vector   5   4   0   degeneracy:  1
+      vector   5   5   0   degeneracy:  1
+      vector   5   6   0   degeneracy:  1
+      vector   5   7   0   degeneracy:  1
+      vector   5   8   0   degeneracy:  1
+      vector   5   9   0   degeneracy:  1
+      vector   5  10   0   degeneracy:  1
+      vector   5  11   0   degeneracy:  1
+      vector   5  12   0   degeneracy:  1
+      vector   5  13   0   degeneracy:  1
+      vector   5  14   0   degeneracy:  1
+      vector   5  15   0   degeneracy:  1
+      vector   6  -9   0   degeneracy:  1
+      vector   6  -8   0   degeneracy:  1
+      vector   6  -7   0   degeneracy:  1
+      vector   6  -6   0   degeneracy:  1
+      vector   6  -5   0   degeneracy:  1
+      vector   6  -4   0   degeneracy:  1
+      vector   6  -3   0   degeneracy:  1
+      vector   6  -2   0   degeneracy:  1
+      vector   6  -1   0   degeneracy:  1
+      vector   6   0   0   degeneracy:  1
+      vector   6   1   0   degeneracy:  1
+      vector   6   2   0   degeneracy:  1
+      vector   6   3   0   degeneracy:  1
+      vector   6   4   0   degeneracy:  1
+      vector   6   5   0   degeneracy:  1
+      vector   6   6   0   degeneracy:  1
+      vector   6   7   0   degeneracy:  1
+      vector   6   8   0   degeneracy:  1
+      vector   6   9   0   degeneracy:  1
+      vector   6  10   0   degeneracy:  1
+      vector   6  11   0   degeneracy:  1
+      vector   6  12   0   degeneracy:  1
+      vector   6  13   0   degeneracy:  1
+      vector   6  14   0   degeneracy:  1
+      vector   6  15   0   degeneracy:  1
+      vector   7  -8   0   degeneracy:  1
+      vector   7  -7   0   degeneracy:  1
+      vector   7  -6   0   degeneracy:  1
+      vector   7  -5   0   degeneracy:  1
+      vector   7  -4   0   degeneracy:  1
+      vector   7  -3   0   degeneracy:  1
+      vector   7  -2   0   degeneracy:  1
+      vector   7  -1   0   degeneracy:  1
+      vector   7   0   0   degeneracy:  1
+      vector   7   1   0   degeneracy:  1
+      vector   7   2   0   degeneracy:  1
+      vector   7   3   0   degeneracy:  1
+      vector   7   4   0   degeneracy:  1
+      vector   7   5   0   degeneracy:  1
+      vector   7   6   0   degeneracy:  1
+      vector   7   7   0   degeneracy:  1
+      vector   7   8   0   degeneracy:  1
+      vector   7   9   0   degeneracy:  1
+      vector   7  10   0   degeneracy:  1
+      vector   7  11   0   degeneracy:  1
+      vector   7  12   0   degeneracy:  1
+      vector   7  13   0   degeneracy:  1
+      vector   7  14   0   degeneracy:  1
+      vector   7  15   0   degeneracy:  1
+      vector   7  16   0   degeneracy:  1
+      vector   8  -8   0   degeneracy:  1
+      vector   8  -7   0   degeneracy:  1
+      vector   8  -6   0   degeneracy:  1
+      vector   8  -5   0   degeneracy:  1
+      vector   8  -4   0   degeneracy:  1
+      vector   8  -3   0   degeneracy:  1
+      vector   8  -2   0   degeneracy:  1
+      vector   8  -1   0   degeneracy:  1
+      vector   8   0   0   degeneracy:  1
+      vector   8   1   0   degeneracy:  1
+      vector   8   2   0   degeneracy:  1
+      vector   8   3   0   degeneracy:  1
+      vector   8   4   0   degeneracy:  1
+      vector   8   5   0   degeneracy:  1
+      vector   8   6   0   degeneracy:  1
+      vector   8   7   0   degeneracy:  1
+      vector   8   8   0   degeneracy:  1
+      vector   8   9   0   degeneracy:  1
+      vector   8  10   0   degeneracy:  1
+      vector   8  11   0   degeneracy:  1
+      vector   8  12   0   degeneracy:  1
+      vector   8  13   0   degeneracy:  1
+      vector   8  14   0   degeneracy:  1
+      vector   8  15   0   degeneracy:  1
+      vector   8  16   0   degeneracy:  1
+      vector   9  -6   0   degeneracy:  1
+      vector   9  -5   0   degeneracy:  1
+      vector   9  -4   0   degeneracy:  1
+      vector   9  -3   0   degeneracy:  1
+      vector   9  -2   0   degeneracy:  1
+      vector   9  -1   0   degeneracy:  1
+      vector   9   0   0   degeneracy:  1
+      vector   9   1   0   degeneracy:  1
+      vector   9   2   0   degeneracy:  1
+      vector   9   3   0   degeneracy:  1
+      vector   9   4   0   degeneracy:  1
+      vector   9   5   0   degeneracy:  1
+      vector   9   6   0   degeneracy:  1
+      vector   9   7   0   degeneracy:  1
+      vector   9   8   0   degeneracy:  1
+      vector   9   9   0   degeneracy:  1
+      vector   9  10   0   degeneracy:  1
+      vector   9  11   0   degeneracy:  1
+      vector   9  12   0   degeneracy:  1
+      vector   9  13   0   degeneracy:  1
+      vector   9  14   0   degeneracy:  1
+      vector   9  15   0   degeneracy:  1
+      vector  10  -4   0   degeneracy:  1
+      vector  10  -3   0   degeneracy:  1
+      vector  10  -2   0   degeneracy:  1
+      vector  10  -1   0   degeneracy:  1
+      vector  10   0   0   degeneracy:  1
+      vector  10   1   0   degeneracy:  1
+      vector  10   2   0   degeneracy:  1
+      vector  10   3   0   degeneracy:  1
+      vector  10   4   0   degeneracy:  1
+      vector  10   5   0   degeneracy:  1
+      vector  10   6   0   degeneracy:  1
+      vector  10   7   0   degeneracy:  1
+      vector  10   8   0   degeneracy:  1
+      vector  10   9   0   degeneracy:  1
+      vector  10  10   0   degeneracy:  1
+      vector  10  11   0   degeneracy:  1
+      vector  10  12   0   degeneracy:  1
+      vector  10  13   0   degeneracy:  1
+      vector  10  14   0   degeneracy:  1
+      vector  11  -2   0   degeneracy:  1
+      vector  11  -1   0   degeneracy:  1
+      vector  11   0   0   degeneracy:  1
+      vector  11   1   0   degeneracy:  1
+      vector  11   2   0   degeneracy:  1
+      vector  11   3   0   degeneracy:  1
+      vector  11   4   0   degeneracy:  1
+      vector  11   5   0   degeneracy:  1
+      vector  11   6   0   degeneracy:  1
+      vector  11   7   0   degeneracy:  1
+      vector  11   8   0   degeneracy:  1
+      vector  11   9   0   degeneracy:  1
+      vector  11  10   0   degeneracy:  1
+      vector  11  11   0   degeneracy:  1
+      vector  11  12   0   degeneracy:  1
+      vector  11  13   0   degeneracy:  1
+      vector  12   0   0   degeneracy:  1
+      vector  12   1   0   degeneracy:  1
+      vector  12   2   0   degeneracy:  1
+      vector  12   3   0   degeneracy:  1
+      vector  12   4   0   degeneracy:  1
+      vector  12   5   0   degeneracy:  1
+      vector  12   6   0   degeneracy:  1
+      vector  12   7   0   degeneracy:  1
+      vector  12   8   0   degeneracy:  1
+      vector  12   9   0   degeneracy:  1
+      vector  12  10   0   degeneracy:  1
+      vector  12  11   0   degeneracy:  1
+      vector  12  12   0   degeneracy:  1
+      vector  13   1   0   degeneracy:  1
+      vector  13   2   0   degeneracy:  1
+      vector  13   3   0   degeneracy:  1
+      vector  13   4   0   degeneracy:  1
+      vector  13   5   0   degeneracy:  1
+      vector  13   6   0   degeneracy:  1
+      vector  13   7   0   degeneracy:  1
+      vector  13   8   0   degeneracy:  1
+      vector  13   9   0   degeneracy:  1
+      vector  13  10   0   degeneracy:  1
+      vector  13  11   0   degeneracy:  1
+      vector  13  12   0   degeneracy:  1
+      vector  14   3   0   degeneracy:  1
+      vector  14   4   0   degeneracy:  1
+      vector  14   5   0   degeneracy:  1
+      vector  14   6   0   degeneracy:  1
+      vector  14   7   0   degeneracy:  1
+      vector  14   8   0   degeneracy:  1
+      vector  14   9   0   degeneracy:  1
+      vector  14  10   0   degeneracy:  1
+      vector  14  11   0   degeneracy:  1
+      vector  15   5   0   degeneracy:  1
+      vector  15   6   0   degeneracy:  1
+      vector  15   7   0   degeneracy:  1
+      vector  15   8   0   degeneracy:  1
+      vector  15   9   0   degeneracy:  1
+      vector  15  10   0   degeneracy:  1
+      vector  16   7   0   degeneracy:  1
+      vector  16   8   0   degeneracy:  1
+      vector  16   9   0   degeneracy:  1
+
+ Time to read and process       0.043 (sec)
+
+
+ Properties calculated in module  k p a t h
+ ------------------------------------------
+
+   * Energy bands in eV, coloured by spin
+
+ Reading spin matrices from wannier90.spn in get_SS_R : Created from wavecar at 2023-12-25T18:35:16.364896
+
+ Output files:
+
+   wannier90-path.kpt                                                                                                      
+
+   wannier90-bands.dat                                                                                                     
+
+   wannier90-bands.gnu                                                                                                     
+
+   wannier90-bands.py                                                                                                      
+
+ Total Execution Time           8.414 (sec)
+
+ *===========================================================================*
+ |                             TIMING INFORMATION                            |
+ *===========================================================================*
+ |    Tag                                                Ncalls      Time (s)|
+ |---------------------------------------------------------------------------|
+ |kmesh: get                                        :         1         0.423|
+ *---------------------------------------------------------------------------*
+ 
+
+ All done: postw90 exiting
+ 
+             +---------------------------------------------------+
+             |                                                   |
+             |                   WANNIER90                       |
+             |                                                   |
+             +---------------------------------------------------+
+             |                                                   |
+             |        Welcome to the Maximally-Localized         |
+             |        Generalized Wannier Functions code         |
+             |            http://www.wannier.org                 |
+             |                                                   |
+             |                                                   |
+             |  Wannier90 Developer Group:                       |
+             |    Giovanni Pizzi    (EPFL)                       |
+             |    Valerio Vitale    (Cambridge)                  |
+             |    David Vanderbilt  (Rutgers University)         |
+             |    Nicola Marzari    (EPFL)                       |
+             |    Ivo Souza         (Universidad del Pais Vasco) |
+             |    Arash A. Mostofi  (Imperial College London)    |
+             |    Jonathan R. Yates (University of Oxford)       |
+             |                                                   |
+             |  For the full list of Wannier90 3.x authors,      |
+             |  please check the code documentation and the      |
+             |  README on the GitHub page of the code            |
+             |                                                   |
+             |                                                   |
+             |  Please cite                                      |
+             |                                                   |
+             |  [ref] "Wannier90 as a community code:            |
+             |        new features and applications",            |
+             |        G. Pizzi et al., J. Phys. Cond. Matt. 32,  |
+             |        165902 (2020).                             |
+             |        http://doi.org/10.1088/1361-648X/ab51ff    |
+             |                                                   |
+             |  in any publications arising from the use of      |
+             |  this code. For the method please cite            |
+             |                                                   |
+             |  [ref] "Maximally Localized Generalised Wannier   |
+             |         Functions for Composite Energy Bands"     |
+             |         N. Marzari and D. Vanderbilt              |
+             |         Phys. Rev. B 56 12847 (1997)              |
+             |                                                   |
+             |  [ref] "Maximally Localized Wannier Functions     |
+             |         for Entangled Energy Bands"               |
+             |         I. Souza, N. Marzari and D. Vanderbilt    |
+             |         Phys. Rev. B 65 035109 (2001)             |
+             |                                                   |
+             |                                                   |
+             | Copyright (c) 1996-2020                           |
+             |        The Wannier90 Developer Group and          |
+             |        individual contributors                    |
+             |                                                   |
+             |      Release: 3.1.0        5th March    2020      |
+             |                                                   |
+             | This program is free software; you can            |
+             | redistribute it and/or modify it under the terms  |
+             | of the GNU General Public License as published by |
+             | the Free Software Foundation; either version 2 of |
+             | the License, or (at your option) any later version|
+             |                                                   |
+             | This program is distributed in the hope that it   |
+             | will be useful, but WITHOUT ANY WARRANTY; without |
+             | even the implied warranty of MERCHANTABILITY or   |
+             | FITNESS FOR A PARTICULAR PURPOSE. See the GNU     |
+             | General Public License for more details.          |
+             |                                                   |
+             | You should have received a copy of the GNU General|
+             | Public License along with this program; if not,   |
+             | write to the Free Software Foundation, Inc.,      |
+             | 675 Mass Ave, Cambridge, MA 02139, USA.           |
+             |                                                   |
+             +---------------------------------------------------+
+             |    Execution started on 25Dec2023 at 18:38:23     |
+             +---------------------------------------------------+
+ 
+ ******************************************************************************
+ * -> Using CODATA 2006 constant values                                       *
+ *    (http://physics.nist.gov/cuu/Constants/index.html)                      *
+ * -> Using Bohr value from CODATA                                            *
+ ******************************************************************************
+ 
+
+ Running in parallel on  64 CPUs
+
+ 
+                                    ------
+                                    SYSTEM
+                                    ------
+ 
+                              Lattice Vectors (Ang)
+                    a_1     3.427808   0.000000   0.000000
+                    a_2    -1.713904   2.968569   0.000000
+                    a_3     0.000000   0.000000  31.066889
+ 
+                   Unit Cell Volume:     316.12686  (Ang^3)
+ 
+                        Reciprocal-Space Vectors (Ang^-1)
+                    b_1     1.833004   1.058285   0.000000
+                    b_2    -0.000000   2.116570   0.000000
+                    b_3     0.000000   0.000000   0.202247
+  
+ *----------------------------------------------------------------------------*
+ |   Site       Fractional Coordinate          Cartesian Coordinate (Ang)     |
+ +----------------------------------------------------------------------------+
+ | Cr   1   0.00000   0.00000   0.10924   |    0.00000   0.00000   3.39361    |
+ | S    1   0.66667   0.33333   0.06911   |    1.71391   0.98952   2.14694    |
+ | Te   1   0.33333   0.66667   0.17479   |    0.00000   1.97905   5.43024    |
+ *----------------------------------------------------------------------------*
+  
+  
+ *-------------------------------- POSTW90 -----------------------------------*
+ |  Number of Wannier Functions               :                22             |
+ |  Number of electrons per state             :                 1             |
+ |  Scissor shift applied to conduction bands :             0.000             |
+ |  Number of valence bands                   :       not defined             |
+ |  Spin decomposition                        :                 T             |
+ |  Compute Spin moment                       :                 F             |
+ |  Polar angle of spin quantisation axis     :             0.000             |
+ |  Azimuthal angle of spin quantisation axis :             0.000             |
+           |  Spn file-type                   :       unformatted             |
+           |  uHu file-type                   :       unformatted             |
+ |  Fermi energy (eV)                         :            -3.023             |
+ |  Output verbosity (1=low, 5=high)          :                 3             |
+ |  Timing Level (1=low, 5=high)              :                 1             |
+ |  Optimisation (0=memory, 3=speed)          :                 3             |
+ |  Length Unit                               :               Ang             |
+ *----------------------------------------------------------------------------*
+ *------------------------ Global Smearing Parameters ------------------------*
+ |  Adaptive width smearing                   :                 T             |
+ |  Adaptive smearing factor                  :             1.414             |
+ |  Maximum allowed smearing width (eV)       :             1.000             |
+ |  Smearing Function                                             Gaussian    |
+ |  Global interpolation k-points defined     :                 F             |
+ *----------------------------------------------------------------------------*
+ *---------------------------------- DOS -------------------------------------*
+ |  Plotting Density of States                :                 F             |
+ |  Compute Wannier Projected DOS             :                 T             |
+ |  Minimum energy range for DOS plot         :            -9.381             |
+ |  Maximum energy range for DOS plot         :             1.344             |
+ |  Energy step for DOS plot                  :             0.010             |
+ |  Using global smearing parameters                                          |
+ |  Using global k-point set for interpolation                                |
+ *----------------------------------------------------------------------------*
+ *--------------------------------- KPATH ------------------------------------*
+ |  Plot Properties along a path in k-space   :                 T             |
+ |  Divisions along first kpath section       :               100             |
+ |  Plot energy bands                         :                 T             |
+ |  Plot Berry curvature                      :                 F             |
+ |  Plot orbital magnetisation contribution   :                 F             |
+ |  Plot spin Hall conductivity contribution  :                 F             |
+ |  Property used to colour code the bands    :              spin             |
+ *----------------------------------------------------------------------------*
+ |   K-space path sections:                                                   |
+ |    From:  K    0.333  0.333  0.000     To:  G    0.000  0.000  0.000       |
+ |    From:  G    0.000  0.000  0.000     To:  M    0.500  0.000  0.000       |
+ |    From:  M    0.500  0.000  0.000     To:  K    0.333  0.333  0.000       |
+ *----------------------------------------------------------------------------*
+ *--------------------------------- KSLICE -----------------------------------*
+ |  Plot Properties along a slice in k-space  :                 F             |
+ |  Fermi level used for slice                :            -3.023             |
+ |  Divisions along first kpath section       :               100             |
+ |  Plot energy contours (fermi lines)        :                 T             |
+ |  Plot Berry curvature (sum over occ states):                 F             |
+ |  Plot orbital magnetisation contribution   :                 F             |
+ |  Plot spin Hall conductivity contribution  :                 F             |
+ |  Property used to colour code the lines    :              none             |
+ |  2D slice parameters (in reduced coordinates):                             |
+ |     Corner:      0.000   0.000   0.000                                     |
+ |    Vector1:      1.000   0.000   0.000            Divisions:    50         |
+ |    Vector2:      0.000   1.000   0.000            Divisions:    50         |
+ *----------------------------------------------------------------------------*
+ *--------------------------------- BERRY ------------------------------------*
+ |  Compute Berry Phase related properties    :                 F             |
+ |  Compute Optical Conductivity and JDOS     :                 F             |
+ |  Compute Anomalous Hall Conductivity       :                 F             |
+ |  Compute Shift Current                     :                 F             |
+ |  Compute Orbital Magnetisation             :                 F             |
+ |  Compute Spin Hall Conductivity            :                 F             |
+ |  Lower frequency for optical responses     :             0.000             |
+ |  Upper frequency for optical responses     :             4.367             |
+ |  Step size for optical responses           :             0.010             |
+ |  Upper eigenvalue for optical responses    :             1.344             |
+ |  Using global smearing parameters                                          |
+ |  Using global k-point set for interpolation                                |
+ |  Adaptive refinement                       :              none             |
+ *----------------------------------------------------------------------------*
+ *--------------------------------- GYROTROPIC   ------------------------------
+ | Compute Gyrotropic properties              :                 F             |
+ | gyrotropic_task                            :          all                  |
+ | calculate the D tensor                     :                 T             |
+ | calculate the tildeD tensor                :                 T             |
+ | calculate the C tensor                     :                 T             |
+ | calculate the K tensor                     :                 T             |
+ | calculate the interbad natural optical act :                 T             |
+ | calculate the density of states            :                 T             |
+ |  Lower frequency for tildeD,NOA            :             0.000             |
+ |  Upper frequency                           :             4.367             |
+ |  Step size for frequency                   :             0.010             |
+ |  Upper eigenvalue                          :             1.344             |
+ |  Using global smearing parameters                                          |
+ |  Fixed width smearing                      :                 T             |
+ |  Smearing width                            :             0.000             |
+ |  Smearing Function                                             Gaussian    |
+ |  degen_thresh                              :             0.000             |
+ |  Using global k-point set for interpolation                                |
+ |  Adaptive refinement                       :              not              |
+ *----------------------------------------------------------------------------*
+ *------------------------------- BOLTZWANN ----------------------------------*
+ |  Compute Boltzmann transport properties    :                 F             |
+ |  3d Structure                              :                 T             |
+ |  Relaxation Time (fs)                      :            10.000             |
+ |  Minimum Value of Chemical Potential (eV)  :          -999.000             |
+ |  Maximum Value of Chemical Potential (eV)  :          -999.000             |
+ |  Step size for Chemical Potential (eV)     :             0.000             |
+ |  Minimum Value of Temperature (K)          :          -999.000             |
+ |  Maximum Value of Temperature (K)          :          -999.000             |
+ |  Step size for Temperature (K)             :             0.000             |
+ |  Using global k-point set for interpolation                                |
+ |  Step size for TDF (eV)                    :             0.001             |
+ |  TDF Smearing Function                                         Gaussian    |
+ |  TDF fixed Smearing width                  :         unsmeared             |
+ |  Compute DOS at same time                  :                 F             |
+ *----------------------------------------------------------------------------*
+ *------------------------Generic Band Interpolation--------------------------*
+ |  Compute Properties at given k-points      :                 F             |
+ |  Calculate band gradients                  :                 F             |
+ |  Write data into a single file             :                 T             |
+ *----------------------------------------------------------------------------*
+ Time to read parameters        0.077 (sec)
+
+ *---------------------------------- K-MESH ----------------------------------*
+ +----------------------------------------------------------------------------+
+ |                    Distance to Nearest-Neighbour Shells                    |
+ |                    ------------------------------------                    |
+ |          Shell             Distance (Ang^-1)          Multiplicity         |
+ |          -----             -----------------          ------------         |
+ |             1                   0.084663                      6            |
+ |             2                   0.146640                      6            |
+ |             3                   0.169326                      6            |
+ |             4                   0.202247                      2            |
+ |             5                   0.219252                     12            |
+ |             6                   0.223997                     12            |
+ |             7                   0.249814                     12            |
+ |             8                   0.253988                      6            |
+ |             9                   0.263771                     12            |
+ |            10                   0.293281                      6            |
+ |            11                   0.301792                     24            |
+ |            12                   0.305256                     12            |
+ |            13                   0.324675                     12            |
+ |            14                   0.338651                      6            |
+ |            15                   0.356255                     12            |
+ |            16                   0.366176                     24            |
+ |            17                   0.369037                     12            |
+ |            18                   0.387974                     12            |
+ |            19                   0.394447                     12            |
+ |            20                   0.404494                      2            |
+ |            21                   0.413259                     12            |
+ |            22                   0.420823                     24            |
+ |            23                   0.423314                      6            |
+ |            24                   0.430254                     12            |
+ |            25                   0.437524                     24            |
+ |            26                   0.438505                     12            |
+ |            27                   0.439921                      6            |
+ |            28                   0.447994                     12            |
+ |            29                   0.462374                     24            |
+ |            30                   0.469147                     12            |
+ |            31                   0.471383                     12            |
+ |            32                   0.477625                     12            |
+ |            33                   0.484184                     12            |
+ |            34                   0.491530                     24            |
+ |            35                   0.499629                     12            |
+ |            36                   0.506751                     24            |
+ +----------------------------------------------------------------------------+
+ | The b-vectors are chosen automatically                                     |
+ | Shell:  1 Multiplicity:  6                                                 |
+ | b-vector 1 :        0.073320    0.042331    0.000000      (Ang^-1)         |
+ | b-vector 2 :       -0.073320   -0.042331    0.000000      (Ang^-1)         |
+ | b-vector 3 :       -0.000000    0.084663    0.000000      (Ang^-1)         |
+ | b-vector 4 :       -0.073320    0.042331    0.000000      (Ang^-1)         |
+ | b-vector 5 :        0.000000   -0.084663    0.000000      (Ang^-1)         |
+ | b-vector 6 :        0.073320   -0.042331    0.000000      (Ang^-1)         |
+ | Shell:  1 w_b   46.5043193      (Ang^2)                                    |
+ | B1 condition is not satisfied: Adding another shell                        |
+ | Shell:  2 Multiplicity:  6                                                 |
+ | b-vector 1 :        0.073320    0.126994    0.000000      (Ang^-1)         |
+ | b-vector 2 :       -0.146640   -0.000000    0.000000      (Ang^-1)         |
+ | b-vector 3 :       -0.073320    0.126994    0.000000      (Ang^-1)         |
+ | b-vector 4 :        0.073320   -0.126994    0.000000      (Ang^-1)         |
+ | b-vector 5 :        0.146640    0.000000    0.000000      (Ang^-1)         |
+ | b-vector 6 :       -0.073320   -0.126994    0.000000      (Ang^-1)         |
+ | SVD found small singular value, Rejecting this shell and trying the next   |
+ | Shell:  3 Multiplicity:  6                                                 |
+ | b-vector 1 :        0.146640    0.084663    0.000000      (Ang^-1)         |
+ | b-vector 2 :       -0.146640   -0.084663    0.000000      (Ang^-1)         |
+ | b-vector 3 :       -0.000000    0.169326    0.000000      (Ang^-1)         |
+ | b-vector 4 :       -0.146640    0.084663    0.000000      (Ang^-1)         |
+ | b-vector 5 :        0.000000   -0.169326    0.000000      (Ang^-1)         |
+ | b-vector 6 :        0.146640   -0.084663    0.000000      (Ang^-1)         |
+ | This shell is linearly dependent on existing shells: Trying next shell     |
+ | Shell:  4 Multiplicity:  2                                                 |
+ | b-vector 1 :        0.000000    0.000000    0.202247      (Ang^-1)         |
+ | b-vector 2 :        0.000000    0.000000   -0.202247      (Ang^-1)         |
+ | Shell:  1 w_b   46.5043193      (Ang^2)                                    |
+ | Shell:  2 w_b   12.2237875      (Ang^2)                                    |
+ | The following shells are used:   1,  4                                     |
+ +----------------------------------------------------------------------------+
+ |                        Shell   # Nearest-Neighbours                        |
+ |                        -----   --------------------                        |
+ |                          1               6                                 |
+ |                          4               2                                 |
+ +----------------------------------------------------------------------------+
+ | Completeness relation is fully satisfied [Eq. (B1), PRB 56, 12847 (1997)]  |
+ +----------------------------------------------------------------------------+
+ |                  b_k Vectors (Ang^-1) and Weights (Ang^2)                  |
+ |                  ----------------------------------------                  |
+ |            No.         b_k(x)      b_k(y)      b_k(z)        w_b           |
+ |            ---        --------------------------------     --------        |
+ |             1         0.073320    0.042331    0.000000    46.504319        |
+ |             2        -0.073320   -0.042331    0.000000    46.504319        |
+ |             3        -0.000000    0.084663    0.000000    46.504319        |
+ |             4        -0.073320    0.042331    0.000000    46.504319        |
+ |             5         0.000000   -0.084663    0.000000    46.504319        |
+ |             6         0.073320   -0.042331    0.000000    46.504319        |
+ |             7         0.000000    0.000000    0.202247    12.223787        |
+ |             8         0.000000    0.000000   -0.202247    12.223787        |
+ +----------------------------------------------------------------------------+
+ |                           b_k Directions (Ang^-1)                          |
+ |                           -----------------------                          |
+ |            No.           x           y           z                         |
+ |            ---        --------------------------------                     |
+ |             1         0.073320    0.042331    0.000000                     |
+ |             2        -0.000000    0.084663    0.000000                     |
+ |             3        -0.073320    0.042331    0.000000                     |
+ |             4         0.000000    0.000000    0.202247                     |
+ +----------------------------------------------------------------------------+
+  
+ Time to get kmesh              0.417 (sec)
+ Reading restart information from file wannier90.chk :
+ written on 25Dec2023 at 18:36:50 ... done
+
+  625 lattice points in Wigner-Seitz supercell:
+
+      vector -16  -9   0   degeneracy:  1
+      vector -16  -8   0   degeneracy:  1
+      vector -16  -7   0   degeneracy:  1
+      vector -15 -10   0   degeneracy:  1
+      vector -15  -9   0   degeneracy:  1
+      vector -15  -8   0   degeneracy:  1
+      vector -15  -7   0   degeneracy:  1
+      vector -15  -6   0   degeneracy:  1
+      vector -15  -5   0   degeneracy:  1
+      vector -14 -11   0   degeneracy:  1
+      vector -14 -10   0   degeneracy:  1
+      vector -14  -9   0   degeneracy:  1
+      vector -14  -8   0   degeneracy:  1
+      vector -14  -7   0   degeneracy:  1
+      vector -14  -6   0   degeneracy:  1
+      vector -14  -5   0   degeneracy:  1
+      vector -14  -4   0   degeneracy:  1
+      vector -14  -3   0   degeneracy:  1
+      vector -13 -12   0   degeneracy:  1
+      vector -13 -11   0   degeneracy:  1
+      vector -13 -10   0   degeneracy:  1
+      vector -13  -9   0   degeneracy:  1
+      vector -13  -8   0   degeneracy:  1
+      vector -13  -7   0   degeneracy:  1
+      vector -13  -6   0   degeneracy:  1
+      vector -13  -5   0   degeneracy:  1
+      vector -13  -4   0   degeneracy:  1
+      vector -13  -3   0   degeneracy:  1
+      vector -13  -2   0   degeneracy:  1
+      vector -13  -1   0   degeneracy:  1
+      vector -12 -12   0   degeneracy:  1
+      vector -12 -11   0   degeneracy:  1
+      vector -12 -10   0   degeneracy:  1
+      vector -12  -9   0   degeneracy:  1
+      vector -12  -8   0   degeneracy:  1
+      vector -12  -7   0   degeneracy:  1
+      vector -12  -6   0   degeneracy:  1
+      vector -12  -5   0   degeneracy:  1
+      vector -12  -4   0   degeneracy:  1
+      vector -12  -3   0   degeneracy:  1
+      vector -12  -2   0   degeneracy:  1
+      vector -12  -1   0   degeneracy:  1
+      vector -12   0   0   degeneracy:  1
+      vector -11 -13   0   degeneracy:  1
+      vector -11 -12   0   degeneracy:  1
+      vector -11 -11   0   degeneracy:  1
+      vector -11 -10   0   degeneracy:  1
+      vector -11  -9   0   degeneracy:  1
+      vector -11  -8   0   degeneracy:  1
+      vector -11  -7   0   degeneracy:  1
+      vector -11  -6   0   degeneracy:  1
+      vector -11  -5   0   degeneracy:  1
+      vector -11  -4   0   degeneracy:  1
+      vector -11  -3   0   degeneracy:  1
+      vector -11  -2   0   degeneracy:  1
+      vector -11  -1   0   degeneracy:  1
+      vector -11   0   0   degeneracy:  1
+      vector -11   1   0   degeneracy:  1
+      vector -11   2   0   degeneracy:  1
+      vector -10 -14   0   degeneracy:  1
+      vector -10 -13   0   degeneracy:  1
+      vector -10 -12   0   degeneracy:  1
+      vector -10 -11   0   degeneracy:  1
+      vector -10 -10   0   degeneracy:  1
+      vector -10  -9   0   degeneracy:  1
+      vector -10  -8   0   degeneracy:  1
+      vector -10  -7   0   degeneracy:  1
+      vector -10  -6   0   degeneracy:  1
+      vector -10  -5   0   degeneracy:  1
+      vector -10  -4   0   degeneracy:  1
+      vector -10  -3   0   degeneracy:  1
+      vector -10  -2   0   degeneracy:  1
+      vector -10  -1   0   degeneracy:  1
+      vector -10   0   0   degeneracy:  1
+      vector -10   1   0   degeneracy:  1
+      vector -10   2   0   degeneracy:  1
+      vector -10   3   0   degeneracy:  1
+      vector -10   4   0   degeneracy:  1
+      vector  -9 -15   0   degeneracy:  1
+      vector  -9 -14   0   degeneracy:  1
+      vector  -9 -13   0   degeneracy:  1
+      vector  -9 -12   0   degeneracy:  1
+      vector  -9 -11   0   degeneracy:  1
+      vector  -9 -10   0   degeneracy:  1
+      vector  -9  -9   0   degeneracy:  1
+      vector  -9  -8   0   degeneracy:  1
+      vector  -9  -7   0   degeneracy:  1
+      vector  -9  -6   0   degeneracy:  1
+      vector  -9  -5   0   degeneracy:  1
+      vector  -9  -4   0   degeneracy:  1
+      vector  -9  -3   0   degeneracy:  1
+      vector  -9  -2   0   degeneracy:  1
+      vector  -9  -1   0   degeneracy:  1
+      vector  -9   0   0   degeneracy:  1
+      vector  -9   1   0   degeneracy:  1
+      vector  -9   2   0   degeneracy:  1
+      vector  -9   3   0   degeneracy:  1
+      vector  -9   4   0   degeneracy:  1
+      vector  -9   5   0   degeneracy:  1
+      vector  -9   6   0   degeneracy:  1
+      vector  -8 -16   0   degeneracy:  1
+      vector  -8 -15   0   degeneracy:  1
+      vector  -8 -14   0   degeneracy:  1
+      vector  -8 -13   0   degeneracy:  1
+      vector  -8 -12   0   degeneracy:  1
+      vector  -8 -11   0   degeneracy:  1
+      vector  -8 -10   0   degeneracy:  1
+      vector  -8  -9   0   degeneracy:  1
+      vector  -8  -8   0   degeneracy:  1
+      vector  -8  -7   0   degeneracy:  1
+      vector  -8  -6   0   degeneracy:  1
+      vector  -8  -5   0   degeneracy:  1
+      vector  -8  -4   0   degeneracy:  1
+      vector  -8  -3   0   degeneracy:  1
+      vector  -8  -2   0   degeneracy:  1
+      vector  -8  -1   0   degeneracy:  1
+      vector  -8   0   0   degeneracy:  1
+      vector  -8   1   0   degeneracy:  1
+      vector  -8   2   0   degeneracy:  1
+      vector  -8   3   0   degeneracy:  1
+      vector  -8   4   0   degeneracy:  1
+      vector  -8   5   0   degeneracy:  1
+      vector  -8   6   0   degeneracy:  1
+      vector  -8   7   0   degeneracy:  1
+      vector  -8   8   0   degeneracy:  1
+      vector  -7 -16   0   degeneracy:  1
+      vector  -7 -15   0   degeneracy:  1
+      vector  -7 -14   0   degeneracy:  1
+      vector  -7 -13   0   degeneracy:  1
+      vector  -7 -12   0   degeneracy:  1
+      vector  -7 -11   0   degeneracy:  1
+      vector  -7 -10   0   degeneracy:  1
+      vector  -7  -9   0   degeneracy:  1
+      vector  -7  -8   0   degeneracy:  1
+      vector  -7  -7   0   degeneracy:  1
+      vector  -7  -6   0   degeneracy:  1
+      vector  -7  -5   0   degeneracy:  1
+      vector  -7  -4   0   degeneracy:  1
+      vector  -7  -3   0   degeneracy:  1
+      vector  -7  -2   0   degeneracy:  1
+      vector  -7  -1   0   degeneracy:  1
+      vector  -7   0   0   degeneracy:  1
+      vector  -7   1   0   degeneracy:  1
+      vector  -7   2   0   degeneracy:  1
+      vector  -7   3   0   degeneracy:  1
+      vector  -7   4   0   degeneracy:  1
+      vector  -7   5   0   degeneracy:  1
+      vector  -7   6   0   degeneracy:  1
+      vector  -7   7   0   degeneracy:  1
+      vector  -7   8   0   degeneracy:  1
+      vector  -6 -15   0   degeneracy:  1
+      vector  -6 -14   0   degeneracy:  1
+      vector  -6 -13   0   degeneracy:  1
+      vector  -6 -12   0   degeneracy:  1
+      vector  -6 -11   0   degeneracy:  1
+      vector  -6 -10   0   degeneracy:  1
+      vector  -6  -9   0   degeneracy:  1
+      vector  -6  -8   0   degeneracy:  1
+      vector  -6  -7   0   degeneracy:  1
+      vector  -6  -6   0   degeneracy:  1
+      vector  -6  -5   0   degeneracy:  1
+      vector  -6  -4   0   degeneracy:  1
+      vector  -6  -3   0   degeneracy:  1
+      vector  -6  -2   0   degeneracy:  1
+      vector  -6  -1   0   degeneracy:  1
+      vector  -6   0   0   degeneracy:  1
+      vector  -6   1   0   degeneracy:  1
+      vector  -6   2   0   degeneracy:  1
+      vector  -6   3   0   degeneracy:  1
+      vector  -6   4   0   degeneracy:  1
+      vector  -6   5   0   degeneracy:  1
+      vector  -6   6   0   degeneracy:  1
+      vector  -6   7   0   degeneracy:  1
+      vector  -6   8   0   degeneracy:  1
+      vector  -6   9   0   degeneracy:  1
+      vector  -5 -15   0   degeneracy:  1
+      vector  -5 -14   0   degeneracy:  1
+      vector  -5 -13   0   degeneracy:  1
+      vector  -5 -12   0   degeneracy:  1
+      vector  -5 -11   0   degeneracy:  1
+      vector  -5 -10   0   degeneracy:  1
+      vector  -5  -9   0   degeneracy:  1
+      vector  -5  -8   0   degeneracy:  1
+      vector  -5  -7   0   degeneracy:  1
+      vector  -5  -6   0   degeneracy:  1
+      vector  -5  -5   0   degeneracy:  1
+      vector  -5  -4   0   degeneracy:  1
+      vector  -5  -3   0   degeneracy:  1
+      vector  -5  -2   0   degeneracy:  1
+      vector  -5  -1   0   degeneracy:  1
+      vector  -5   0   0   degeneracy:  1
+      vector  -5   1   0   degeneracy:  1
+      vector  -5   2   0   degeneracy:  1
+      vector  -5   3   0   degeneracy:  1
+      vector  -5   4   0   degeneracy:  1
+      vector  -5   5   0   degeneracy:  1
+      vector  -5   6   0   degeneracy:  1
+      vector  -5   7   0   degeneracy:  1
+      vector  -5   8   0   degeneracy:  1
+      vector  -5   9   0   degeneracy:  1
+      vector  -4 -14   0   degeneracy:  1
+      vector  -4 -13   0   degeneracy:  1
+      vector  -4 -12   0   degeneracy:  1
+      vector  -4 -11   0   degeneracy:  1
+      vector  -4 -10   0   degeneracy:  1
+      vector  -4  -9   0   degeneracy:  1
+      vector  -4  -8   0   degeneracy:  1
+      vector  -4  -7   0   degeneracy:  1
+      vector  -4  -6   0   degeneracy:  1
+      vector  -4  -5   0   degeneracy:  1
+      vector  -4  -4   0   degeneracy:  1
+      vector  -4  -3   0   degeneracy:  1
+      vector  -4  -2   0   degeneracy:  1
+      vector  -4  -1   0   degeneracy:  1
+      vector  -4   0   0   degeneracy:  1
+      vector  -4   1   0   degeneracy:  1
+      vector  -4   2   0   degeneracy:  1
+      vector  -4   3   0   degeneracy:  1
+      vector  -4   4   0   degeneracy:  1
+      vector  -4   5   0   degeneracy:  1
+      vector  -4   6   0   degeneracy:  1
+      vector  -4   7   0   degeneracy:  1
+      vector  -4   8   0   degeneracy:  1
+      vector  -4   9   0   degeneracy:  1
+      vector  -4  10   0   degeneracy:  1
+      vector  -3 -14   0   degeneracy:  1
+      vector  -3 -13   0   degeneracy:  1
+      vector  -3 -12   0   degeneracy:  1
+      vector  -3 -11   0   degeneracy:  1
+      vector  -3 -10   0   degeneracy:  1
+      vector  -3  -9   0   degeneracy:  1
+      vector  -3  -8   0   degeneracy:  1
+      vector  -3  -7   0   degeneracy:  1
+      vector  -3  -6   0   degeneracy:  1
+      vector  -3  -5   0   degeneracy:  1
+      vector  -3  -4   0   degeneracy:  1
+      vector  -3  -3   0   degeneracy:  1
+      vector  -3  -2   0   degeneracy:  1
+      vector  -3  -1   0   degeneracy:  1
+      vector  -3   0   0   degeneracy:  1
+      vector  -3   1   0   degeneracy:  1
+      vector  -3   2   0   degeneracy:  1
+      vector  -3   3   0   degeneracy:  1
+      vector  -3   4   0   degeneracy:  1
+      vector  -3   5   0   degeneracy:  1
+      vector  -3   6   0   degeneracy:  1
+      vector  -3   7   0   degeneracy:  1
+      vector  -3   8   0   degeneracy:  1
+      vector  -3   9   0   degeneracy:  1
+      vector  -3  10   0   degeneracy:  1
+      vector  -2 -13   0   degeneracy:  1
+      vector  -2 -12   0   degeneracy:  1
+      vector  -2 -11   0   degeneracy:  1
+      vector  -2 -10   0   degeneracy:  1
+      vector  -2  -9   0   degeneracy:  1
+      vector  -2  -8   0   degeneracy:  1
+      vector  -2  -7   0   degeneracy:  1
+      vector  -2  -6   0   degeneracy:  1
+      vector  -2  -5   0   degeneracy:  1
+      vector  -2  -4   0   degeneracy:  1
+      vector  -2  -3   0   degeneracy:  1
+      vector  -2  -2   0   degeneracy:  1
+      vector  -2  -1   0   degeneracy:  1
+      vector  -2   0   0   degeneracy:  1
+      vector  -2   1   0   degeneracy:  1
+      vector  -2   2   0   degeneracy:  1
+      vector  -2   3   0   degeneracy:  1
+      vector  -2   4   0   degeneracy:  1
+      vector  -2   5   0   degeneracy:  1
+      vector  -2   6   0   degeneracy:  1
+      vector  -2   7   0   degeneracy:  1
+      vector  -2   8   0   degeneracy:  1
+      vector  -2   9   0   degeneracy:  1
+      vector  -2  10   0   degeneracy:  1
+      vector  -2  11   0   degeneracy:  1
+      vector  -1 -13   0   degeneracy:  1
+      vector  -1 -12   0   degeneracy:  1
+      vector  -1 -11   0   degeneracy:  1
+      vector  -1 -10   0   degeneracy:  1
+      vector  -1  -9   0   degeneracy:  1
+      vector  -1  -8   0   degeneracy:  1
+      vector  -1  -7   0   degeneracy:  1
+      vector  -1  -6   0   degeneracy:  1
+      vector  -1  -5   0   degeneracy:  1
+      vector  -1  -4   0   degeneracy:  1
+      vector  -1  -3   0   degeneracy:  1
+      vector  -1  -2   0   degeneracy:  1
+      vector  -1  -1   0   degeneracy:  1
+      vector  -1   0   0   degeneracy:  1
+      vector  -1   1   0   degeneracy:  1
+      vector  -1   2   0   degeneracy:  1
+      vector  -1   3   0   degeneracy:  1
+      vector  -1   4   0   degeneracy:  1
+      vector  -1   5   0   degeneracy:  1
+      vector  -1   6   0   degeneracy:  1
+      vector  -1   7   0   degeneracy:  1
+      vector  -1   8   0   degeneracy:  1
+      vector  -1   9   0   degeneracy:  1
+      vector  -1  10   0   degeneracy:  1
+      vector  -1  11   0   degeneracy:  1
+      vector   0 -12   0   degeneracy:  1
+      vector   0 -11   0   degeneracy:  1
+      vector   0 -10   0   degeneracy:  1
+      vector   0  -9   0   degeneracy:  1
+      vector   0  -8   0   degeneracy:  1
+      vector   0  -7   0   degeneracy:  1
+      vector   0  -6   0   degeneracy:  1
+      vector   0  -5   0   degeneracy:  1
+      vector   0  -4   0   degeneracy:  1
+      vector   0  -3   0   degeneracy:  1
+      vector   0  -2   0   degeneracy:  1
+      vector   0  -1   0   degeneracy:  1
+      vector   0   0   0   degeneracy:  1
+      vector   0   1   0   degeneracy:  1
+      vector   0   2   0   degeneracy:  1
+      vector   0   3   0   degeneracy:  1
+      vector   0   4   0   degeneracy:  1
+      vector   0   5   0   degeneracy:  1
+      vector   0   6   0   degeneracy:  1
+      vector   0   7   0   degeneracy:  1
+      vector   0   8   0   degeneracy:  1
+      vector   0   9   0   degeneracy:  1
+      vector   0  10   0   degeneracy:  1
+      vector   0  11   0   degeneracy:  1
+      vector   0  12   0   degeneracy:  1
+      vector   1 -11   0   degeneracy:  1
+      vector   1 -10   0   degeneracy:  1
+      vector   1  -9   0   degeneracy:  1
+      vector   1  -8   0   degeneracy:  1
+      vector   1  -7   0   degeneracy:  1
+      vector   1  -6   0   degeneracy:  1
+      vector   1  -5   0   degeneracy:  1
+      vector   1  -4   0   degeneracy:  1
+      vector   1  -3   0   degeneracy:  1
+      vector   1  -2   0   degeneracy:  1
+      vector   1  -1   0   degeneracy:  1
+      vector   1   0   0   degeneracy:  1
+      vector   1   1   0   degeneracy:  1
+      vector   1   2   0   degeneracy:  1
+      vector   1   3   0   degeneracy:  1
+      vector   1   4   0   degeneracy:  1
+      vector   1   5   0   degeneracy:  1
+      vector   1   6   0   degeneracy:  1
+      vector   1   7   0   degeneracy:  1
+      vector   1   8   0   degeneracy:  1
+      vector   1   9   0   degeneracy:  1
+      vector   1  10   0   degeneracy:  1
+      vector   1  11   0   degeneracy:  1
+      vector   1  12   0   degeneracy:  1
+      vector   1  13   0   degeneracy:  1
+      vector   2 -11   0   degeneracy:  1
+      vector   2 -10   0   degeneracy:  1
+      vector   2  -9   0   degeneracy:  1
+      vector   2  -8   0   degeneracy:  1
+      vector   2  -7   0   degeneracy:  1
+      vector   2  -6   0   degeneracy:  1
+      vector   2  -5   0   degeneracy:  1
+      vector   2  -4   0   degeneracy:  1
+      vector   2  -3   0   degeneracy:  1
+      vector   2  -2   0   degeneracy:  1
+      vector   2  -1   0   degeneracy:  1
+      vector   2   0   0   degeneracy:  1
+      vector   2   1   0   degeneracy:  1
+      vector   2   2   0   degeneracy:  1
+      vector   2   3   0   degeneracy:  1
+      vector   2   4   0   degeneracy:  1
+      vector   2   5   0   degeneracy:  1
+      vector   2   6   0   degeneracy:  1
+      vector   2   7   0   degeneracy:  1
+      vector   2   8   0   degeneracy:  1
+      vector   2   9   0   degeneracy:  1
+      vector   2  10   0   degeneracy:  1
+      vector   2  11   0   degeneracy:  1
+      vector   2  12   0   degeneracy:  1
+      vector   2  13   0   degeneracy:  1
+      vector   3 -10   0   degeneracy:  1
+      vector   3  -9   0   degeneracy:  1
+      vector   3  -8   0   degeneracy:  1
+      vector   3  -7   0   degeneracy:  1
+      vector   3  -6   0   degeneracy:  1
+      vector   3  -5   0   degeneracy:  1
+      vector   3  -4   0   degeneracy:  1
+      vector   3  -3   0   degeneracy:  1
+      vector   3  -2   0   degeneracy:  1
+      vector   3  -1   0   degeneracy:  1
+      vector   3   0   0   degeneracy:  1
+      vector   3   1   0   degeneracy:  1
+      vector   3   2   0   degeneracy:  1
+      vector   3   3   0   degeneracy:  1
+      vector   3   4   0   degeneracy:  1
+      vector   3   5   0   degeneracy:  1
+      vector   3   6   0   degeneracy:  1
+      vector   3   7   0   degeneracy:  1
+      vector   3   8   0   degeneracy:  1
+      vector   3   9   0   degeneracy:  1
+      vector   3  10   0   degeneracy:  1
+      vector   3  11   0   degeneracy:  1
+      vector   3  12   0   degeneracy:  1
+      vector   3  13   0   degeneracy:  1
+      vector   3  14   0   degeneracy:  1
+      vector   4 -10   0   degeneracy:  1
+      vector   4  -9   0   degeneracy:  1
+      vector   4  -8   0   degeneracy:  1
+      vector   4  -7   0   degeneracy:  1
+      vector   4  -6   0   degeneracy:  1
+      vector   4  -5   0   degeneracy:  1
+      vector   4  -4   0   degeneracy:  1
+      vector   4  -3   0   degeneracy:  1
+      vector   4  -2   0   degeneracy:  1
+      vector   4  -1   0   degeneracy:  1
+      vector   4   0   0   degeneracy:  1
+      vector   4   1   0   degeneracy:  1
+      vector   4   2   0   degeneracy:  1
+      vector   4   3   0   degeneracy:  1
+      vector   4   4   0   degeneracy:  1
+      vector   4   5   0   degeneracy:  1
+      vector   4   6   0   degeneracy:  1
+      vector   4   7   0   degeneracy:  1
+      vector   4   8   0   degeneracy:  1
+      vector   4   9   0   degeneracy:  1
+      vector   4  10   0   degeneracy:  1
+      vector   4  11   0   degeneracy:  1
+      vector   4  12   0   degeneracy:  1
+      vector   4  13   0   degeneracy:  1
+      vector   4  14   0   degeneracy:  1
+      vector   5  -9   0   degeneracy:  1
+      vector   5  -8   0   degeneracy:  1
+      vector   5  -7   0   degeneracy:  1
+      vector   5  -6   0   degeneracy:  1
+      vector   5  -5   0   degeneracy:  1
+      vector   5  -4   0   degeneracy:  1
+      vector   5  -3   0   degeneracy:  1
+      vector   5  -2   0   degeneracy:  1
+      vector   5  -1   0   degeneracy:  1
+      vector   5   0   0   degeneracy:  1
+      vector   5   1   0   degeneracy:  1
+      vector   5   2   0   degeneracy:  1
+      vector   5   3   0   degeneracy:  1
+      vector   5   4   0   degeneracy:  1
+      vector   5   5   0   degeneracy:  1
+      vector   5   6   0   degeneracy:  1
+      vector   5   7   0   degeneracy:  1
+      vector   5   8   0   degeneracy:  1
+      vector   5   9   0   degeneracy:  1
+      vector   5  10   0   degeneracy:  1
+      vector   5  11   0   degeneracy:  1
+      vector   5  12   0   degeneracy:  1
+      vector   5  13   0   degeneracy:  1
+      vector   5  14   0   degeneracy:  1
+      vector   5  15   0   degeneracy:  1
+      vector   6  -9   0   degeneracy:  1
+      vector   6  -8   0   degeneracy:  1
+      vector   6  -7   0   degeneracy:  1
+      vector   6  -6   0   degeneracy:  1
+      vector   6  -5   0   degeneracy:  1
+      vector   6  -4   0   degeneracy:  1
+      vector   6  -3   0   degeneracy:  1
+      vector   6  -2   0   degeneracy:  1
+      vector   6  -1   0   degeneracy:  1
+      vector   6   0   0   degeneracy:  1
+      vector   6   1   0   degeneracy:  1
+      vector   6   2   0   degeneracy:  1
+      vector   6   3   0   degeneracy:  1
+      vector   6   4   0   degeneracy:  1
+      vector   6   5   0   degeneracy:  1
+      vector   6   6   0   degeneracy:  1
+      vector   6   7   0   degeneracy:  1
+      vector   6   8   0   degeneracy:  1
+      vector   6   9   0   degeneracy:  1
+      vector   6  10   0   degeneracy:  1
+      vector   6  11   0   degeneracy:  1
+      vector   6  12   0   degeneracy:  1
+      vector   6  13   0   degeneracy:  1
+      vector   6  14   0   degeneracy:  1
+      vector   6  15   0   degeneracy:  1
+      vector   7  -8   0   degeneracy:  1
+      vector   7  -7   0   degeneracy:  1
+      vector   7  -6   0   degeneracy:  1
+      vector   7  -5   0   degeneracy:  1
+      vector   7  -4   0   degeneracy:  1
+      vector   7  -3   0   degeneracy:  1
+      vector   7  -2   0   degeneracy:  1
+      vector   7  -1   0   degeneracy:  1
+      vector   7   0   0   degeneracy:  1
+      vector   7   1   0   degeneracy:  1
+      vector   7   2   0   degeneracy:  1
+      vector   7   3   0   degeneracy:  1
+      vector   7   4   0   degeneracy:  1
+      vector   7   5   0   degeneracy:  1
+      vector   7   6   0   degeneracy:  1
+      vector   7   7   0   degeneracy:  1
+      vector   7   8   0   degeneracy:  1
+      vector   7   9   0   degeneracy:  1
+      vector   7  10   0   degeneracy:  1
+      vector   7  11   0   degeneracy:  1
+      vector   7  12   0   degeneracy:  1
+      vector   7  13   0   degeneracy:  1
+      vector   7  14   0   degeneracy:  1
+      vector   7  15   0   degeneracy:  1
+      vector   7  16   0   degeneracy:  1
+      vector   8  -8   0   degeneracy:  1
+      vector   8  -7   0   degeneracy:  1
+      vector   8  -6   0   degeneracy:  1
+      vector   8  -5   0   degeneracy:  1
+      vector   8  -4   0   degeneracy:  1
+      vector   8  -3   0   degeneracy:  1
+      vector   8  -2   0   degeneracy:  1
+      vector   8  -1   0   degeneracy:  1
+      vector   8   0   0   degeneracy:  1
+      vector   8   1   0   degeneracy:  1
+      vector   8   2   0   degeneracy:  1
+      vector   8   3   0   degeneracy:  1
+      vector   8   4   0   degeneracy:  1
+      vector   8   5   0   degeneracy:  1
+      vector   8   6   0   degeneracy:  1
+      vector   8   7   0   degeneracy:  1
+      vector   8   8   0   degeneracy:  1
+      vector   8   9   0   degeneracy:  1
+      vector   8  10   0   degeneracy:  1
+      vector   8  11   0   degeneracy:  1
+      vector   8  12   0   degeneracy:  1
+      vector   8  13   0   degeneracy:  1
+      vector   8  14   0   degeneracy:  1
+      vector   8  15   0   degeneracy:  1
+      vector   8  16   0   degeneracy:  1
+      vector   9  -6   0   degeneracy:  1
+      vector   9  -5   0   degeneracy:  1
+      vector   9  -4   0   degeneracy:  1
+      vector   9  -3   0   degeneracy:  1
+      vector   9  -2   0   degeneracy:  1
+      vector   9  -1   0   degeneracy:  1
+      vector   9   0   0   degeneracy:  1
+      vector   9   1   0   degeneracy:  1
+      vector   9   2   0   degeneracy:  1
+      vector   9   3   0   degeneracy:  1
+      vector   9   4   0   degeneracy:  1
+      vector   9   5   0   degeneracy:  1
+      vector   9   6   0   degeneracy:  1
+      vector   9   7   0   degeneracy:  1
+      vector   9   8   0   degeneracy:  1
+      vector   9   9   0   degeneracy:  1
+      vector   9  10   0   degeneracy:  1
+      vector   9  11   0   degeneracy:  1
+      vector   9  12   0   degeneracy:  1
+      vector   9  13   0   degeneracy:  1
+      vector   9  14   0   degeneracy:  1
+      vector   9  15   0   degeneracy:  1
+      vector  10  -4   0   degeneracy:  1
+      vector  10  -3   0   degeneracy:  1
+      vector  10  -2   0   degeneracy:  1
+      vector  10  -1   0   degeneracy:  1
+      vector  10   0   0   degeneracy:  1
+      vector  10   1   0   degeneracy:  1
+      vector  10   2   0   degeneracy:  1
+      vector  10   3   0   degeneracy:  1
+      vector  10   4   0   degeneracy:  1
+      vector  10   5   0   degeneracy:  1
+      vector  10   6   0   degeneracy:  1
+      vector  10   7   0   degeneracy:  1
+      vector  10   8   0   degeneracy:  1
+      vector  10   9   0   degeneracy:  1
+      vector  10  10   0   degeneracy:  1
+      vector  10  11   0   degeneracy:  1
+      vector  10  12   0   degeneracy:  1
+      vector  10  13   0   degeneracy:  1
+      vector  10  14   0   degeneracy:  1
+      vector  11  -2   0   degeneracy:  1
+      vector  11  -1   0   degeneracy:  1
+      vector  11   0   0   degeneracy:  1
+      vector  11   1   0   degeneracy:  1
+      vector  11   2   0   degeneracy:  1
+      vector  11   3   0   degeneracy:  1
+      vector  11   4   0   degeneracy:  1
+      vector  11   5   0   degeneracy:  1
+      vector  11   6   0   degeneracy:  1
+      vector  11   7   0   degeneracy:  1
+      vector  11   8   0   degeneracy:  1
+      vector  11   9   0   degeneracy:  1
+      vector  11  10   0   degeneracy:  1
+      vector  11  11   0   degeneracy:  1
+      vector  11  12   0   degeneracy:  1
+      vector  11  13   0   degeneracy:  1
+      vector  12   0   0   degeneracy:  1
+      vector  12   1   0   degeneracy:  1
+      vector  12   2   0   degeneracy:  1
+      vector  12   3   0   degeneracy:  1
+      vector  12   4   0   degeneracy:  1
+      vector  12   5   0   degeneracy:  1
+      vector  12   6   0   degeneracy:  1
+      vector  12   7   0   degeneracy:  1
+      vector  12   8   0   degeneracy:  1
+      vector  12   9   0   degeneracy:  1
+      vector  12  10   0   degeneracy:  1
+      vector  12  11   0   degeneracy:  1
+      vector  12  12   0   degeneracy:  1
+      vector  13   1   0   degeneracy:  1
+      vector  13   2   0   degeneracy:  1
+      vector  13   3   0   degeneracy:  1
+      vector  13   4   0   degeneracy:  1
+      vector  13   5   0   degeneracy:  1
+      vector  13   6   0   degeneracy:  1
+      vector  13   7   0   degeneracy:  1
+      vector  13   8   0   degeneracy:  1
+      vector  13   9   0   degeneracy:  1
+      vector  13  10   0   degeneracy:  1
+      vector  13  11   0   degeneracy:  1
+      vector  13  12   0   degeneracy:  1
+      vector  14   3   0   degeneracy:  1
+      vector  14   4   0   degeneracy:  1
+      vector  14   5   0   degeneracy:  1
+      vector  14   6   0   degeneracy:  1
+      vector  14   7   0   degeneracy:  1
+      vector  14   8   0   degeneracy:  1
+      vector  14   9   0   degeneracy:  1
+      vector  14  10   0   degeneracy:  1
+      vector  14  11   0   degeneracy:  1
+      vector  15   5   0   degeneracy:  1
+      vector  15   6   0   degeneracy:  1
+      vector  15   7   0   degeneracy:  1
+      vector  15   8   0   degeneracy:  1
+      vector  15   9   0   degeneracy:  1
+      vector  15  10   0   degeneracy:  1
+      vector  16   7   0   degeneracy:  1
+      vector  16   8   0   degeneracy:  1
+      vector  16   9   0   degeneracy:  1
+
+ Time to read and process       0.042 (sec)
+
+
+ Properties calculated in module  k p a t h
+ ------------------------------------------
+
+   * Energy bands in eV, coloured by spin
+
+ Reading spin matrices from wannier90.spn in get_SS_R : Created from wavecar at 2023-12-25T18:35:16.364896
+
+ Output files:
+
+   wannier90-path.kpt                                                                                                      
+
+   wannier90-bands.dat                                                                                                     
+
+   wannier90-bands.gnu                                                                                                     
+
+   wannier90-bands.py                                                                                                      
+
+ Total Execution Time           8.410 (sec)
+
+ *===========================================================================*
+ |                             TIMING INFORMATION                            |
+ *===========================================================================*
+ |    Tag                                                Ncalls      Time (s)|
+ |---------------------------------------------------------------------------|
+ |kmesh: get                                        :         1         0.417|
+ *---------------------------------------------------------------------------*
+ 
+
+ All done: postw90 exiting

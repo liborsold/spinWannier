@@ -1,0 +1,1211 @@
+/home/prog/usr/prod/applications/python/anaconda-py3/2020.11/envs/pmg/lib/python3.9/site-packages/pyvista/utilities/__init__.py:69: PyVistaDeprecationWarning: The `pyvista.utilities` module has been deprecated. `NORMALS` is now imported as: `from pyvista.core.utilities import NORMALS`.
+  warnings.warn(
+/home/prog/usr/prod/applications/python/anaconda-py3/2020.11/envs/pmg/lib/python3.9/site-packages/pyvista/utilities/__init__.py:69: PyVistaDeprecationWarning: The `pyvista.utilities` module has been deprecated. `generate_plane` is now imported as: `from pyvista.core.utilities import generate_plane`.
+  warnings.warn(
+/home/prog/usr/prod/applications/python/anaconda-py3/2020.11/envs/pmg/lib/python3.9/site-packages/pyvista/utilities/__init__.py:69: PyVistaDeprecationWarning: The `pyvista.utilities` module has been deprecated. `get_array` is now imported as: `from pyvista.core.utilities import get_array`.
+  warnings.warn(
+/home/prog/usr/prod/applications/python/anaconda-py3/2020.11/envs/pmg/lib/python3.9/site-packages/pyvista/utilities/__init__.py:69: PyVistaDeprecationWarning: The `pyvista.utilities` module has been deprecated. `try_callback` is now imported as: `from pyvista.core.utilities import try_callback`.
+  warnings.warn(
+PROCAR-repaired does exist
+SZ does exist
+ ____        ____
+|  _ \ _   _|  _ \ _ __ ___   ___ __ _ _ __ 
+| |_) | | | | |_) | '__/ _ \ / __/ _` | '__|
+|  __/| |_| |  __/| | | (_) | (_| (_| | |   
+|_|    \__, |_|   |_|  \___/ \___\__,_|_|
+       |___/
+A Python library for electronic structure pre/post-processing.
+
+Version 5.6.6 created on March 6th, 2022
+
+Please cite:
+ Uthpala Herath, Pedram Tavadze, Xu He, Eric Bousquet, Sobhit Singh, Francisco Muñoz and Aldo Romero.,
+ PyProcar: A Python library for electronic structure pre/post-processing.,
+ Computer Physics Communications 251 (2020):107080.
+
+
+Developers:
+- Francisco Muñoz
+- Aldo Romero
+- Sobhit Singh
+- Uthpala Herath
+- Pedram Tavadze
+- Eric Bousquet
+- Xu He
+- Reese Boucher
+- Logan Lang
+- Freddy Farah
+    
+Script initiated...
+PROCAR repaired. Run with repair=False next time.
+code           :  vasp
+input file     :  PROCAR_sz
+mode           :  parametric
+spin comp.     :  0
+atoms list     :  [0]
+orbs. list     :  [0]
+fermi energy   :  -3.02309656
+energy range   :  [-6, 11]
+colormap       :  seismic
+markersize     :  0.02
+permissive     :  False
+vmax           :  1
+vmin           :  -1
+grid enabled   :  True
+human          :  False
+savefig        :  None
+title          :  None
+outcar         :  OUTCAR
+k-grid         :  reduced
+knames         :  ['$ K$', '$ G$', '$ M$', '$ K$']
+kticks         :  [0, 50, 101, 152]
+spd shape      :  (153, 64, 1, 4, 11) [kpoints, bands, spins, atoms+1, orbitals+2]
+normalizing to :  (-1, 1)
+ ____        ____
+|  _ \ _   _|  _ \ _ __ ___   ___ __ _ _ __ 
+| |_) | | | | |_) | '__/ _ \ / __/ _` | '__|
+|  __/| |_| |  __/| | | (_) | (_| (_| | |   
+|_|    \__, |_|   |_|  \___/ \___\__,_|_|
+       |___/
+A Python library for electronic structure pre/post-processing.
+
+Version 5.6.6 created on March 6th, 2022
+
+Please cite:
+ Uthpala Herath, Pedram Tavadze, Xu He, Eric Bousquet, Sobhit Singh, Francisco Muñoz and Aldo Romero.,
+ PyProcar: A Python library for electronic structure pre/post-processing.,
+ Computer Physics Communications 251 (2020):107080.
+
+
+Developers:
+- Francisco Muñoz
+- Aldo Romero
+- Sobhit Singh
+- Uthpala Herath
+- Pedram Tavadze
+- Eric Bousquet
+- Xu He
+- Reese Boucher
+- Logan Lang
+- Freddy Farah
+    
+Script initiated...
+PROCAR repaired. Run with repair=False next time.
+code           :  vasp
+input file     :  PROCAR_sz
+mode           :  parametric
+spin comp.     :  0
+atoms list     :  [0]
+orbs. list     :  [1, 2, 3]
+fermi energy   :  -3.02309656
+energy range   :  [-6, 11]
+colormap       :  seismic
+markersize     :  0.02
+permissive     :  False
+vmax           :  1
+vmin           :  -1
+grid enabled   :  True
+human          :  False
+savefig        :  None
+title          :  None
+outcar         :  OUTCAR
+k-grid         :  reduced
+knames         :  ['$ K$', '$ G$', '$ M$', '$ K$']
+kticks         :  [0, 50, 101, 152]
+spd shape      :  (153, 64, 1, 4, 11) [kpoints, bands, spins, atoms+1, orbitals+2]
+normalizing to :  (-1, 1)
+ ____        ____
+|  _ \ _   _|  _ \ _ __ ___   ___ __ _ _ __ 
+| |_) | | | | |_) | '__/ _ \ / __/ _` | '__|
+|  __/| |_| |  __/| | | (_) | (_| (_| | |   
+|_|    \__, |_|   |_|  \___/ \___\__,_|_|
+       |___/
+A Python library for electronic structure pre/post-processing.
+
+Version 5.6.6 created on March 6th, 2022
+
+Please cite:
+ Uthpala Herath, Pedram Tavadze, Xu He, Eric Bousquet, Sobhit Singh, Francisco Muñoz and Aldo Romero.,
+ PyProcar: A Python library for electronic structure pre/post-processing.,
+ Computer Physics Communications 251 (2020):107080.
+
+
+Developers:
+- Francisco Muñoz
+- Aldo Romero
+- Sobhit Singh
+- Uthpala Herath
+- Pedram Tavadze
+- Eric Bousquet
+- Xu He
+- Reese Boucher
+- Logan Lang
+- Freddy Farah
+    
+Script initiated...
+PROCAR repaired. Run with repair=False next time.
+code           :  vasp
+input file     :  PROCAR_sz
+mode           :  parametric
+spin comp.     :  0
+atoms list     :  [0]
+orbs. list     :  [4, 5, 6, 7, 8]
+fermi energy   :  -3.02309656
+energy range   :  [-6, 11]
+colormap       :  seismic
+markersize     :  0.02
+permissive     :  False
+vmax           :  1
+vmin           :  -1
+grid enabled   :  True
+human          :  False
+savefig        :  None
+title          :  None
+outcar         :  OUTCAR
+k-grid         :  reduced
+knames         :  ['$ K$', '$ G$', '$ M$', '$ K$']
+kticks         :  [0, 50, 101, 152]
+spd shape      :  (153, 64, 1, 4, 11) [kpoints, bands, spins, atoms+1, orbitals+2]
+normalizing to :  (-1, 1)
+ ____        ____
+|  _ \ _   _|  _ \ _ __ ___   ___ __ _ _ __ 
+| |_) | | | | |_) | '__/ _ \ / __/ _` | '__|
+|  __/| |_| |  __/| | | (_) | (_| (_| | |   
+|_|    \__, |_|   |_|  \___/ \___\__,_|_|
+       |___/
+A Python library for electronic structure pre/post-processing.
+
+Version 5.6.6 created on March 6th, 2022
+
+Please cite:
+ Uthpala Herath, Pedram Tavadze, Xu He, Eric Bousquet, Sobhit Singh, Francisco Muñoz and Aldo Romero.,
+ PyProcar: A Python library for electronic structure pre/post-processing.,
+ Computer Physics Communications 251 (2020):107080.
+
+
+Developers:
+- Francisco Muñoz
+- Aldo Romero
+- Sobhit Singh
+- Uthpala Herath
+- Pedram Tavadze
+- Eric Bousquet
+- Xu He
+- Reese Boucher
+- Logan Lang
+- Freddy Farah
+    
+Script initiated...
+PROCAR repaired. Run with repair=False next time.
+code           :  vasp
+input file     :  PROCAR_sz
+mode           :  parametric
+spin comp.     :  0
+atoms list     :  [1]
+orbs. list     :  [0]
+fermi energy   :  -3.02309656
+energy range   :  [-6, 11]
+colormap       :  seismic
+markersize     :  0.02
+permissive     :  False
+vmax           :  1
+vmin           :  -1
+grid enabled   :  True
+human          :  False
+savefig        :  None
+title          :  None
+outcar         :  OUTCAR
+k-grid         :  reduced
+knames         :  ['$ K$', '$ G$', '$ M$', '$ K$']
+kticks         :  [0, 50, 101, 152]
+spd shape      :  (153, 64, 1, 4, 11) [kpoints, bands, spins, atoms+1, orbitals+2]
+normalizing to :  (-1, 1)
+ ____        ____
+|  _ \ _   _|  _ \ _ __ ___   ___ __ _ _ __ 
+| |_) | | | | |_) | '__/ _ \ / __/ _` | '__|
+|  __/| |_| |  __/| | | (_) | (_| (_| | |   
+|_|    \__, |_|   |_|  \___/ \___\__,_|_|
+       |___/
+A Python library for electronic structure pre/post-processing.
+
+Version 5.6.6 created on March 6th, 2022
+
+Please cite:
+ Uthpala Herath, Pedram Tavadze, Xu He, Eric Bousquet, Sobhit Singh, Francisco Muñoz and Aldo Romero.,
+ PyProcar: A Python library for electronic structure pre/post-processing.,
+ Computer Physics Communications 251 (2020):107080.
+
+
+Developers:
+- Francisco Muñoz
+- Aldo Romero
+- Sobhit Singh
+- Uthpala Herath
+- Pedram Tavadze
+- Eric Bousquet
+- Xu He
+- Reese Boucher
+- Logan Lang
+- Freddy Farah
+    
+Script initiated...
+PROCAR repaired. Run with repair=False next time.
+code           :  vasp
+input file     :  PROCAR_sz
+mode           :  parametric
+spin comp.     :  0
+atoms list     :  [1]
+orbs. list     :  [1, 2, 3]
+fermi energy   :  -3.02309656
+energy range   :  [-6, 11]
+colormap       :  seismic
+markersize     :  0.02
+permissive     :  False
+vmax           :  1
+vmin           :  -1
+grid enabled   :  True
+human          :  False
+savefig        :  None
+title          :  None
+outcar         :  OUTCAR
+k-grid         :  reduced
+knames         :  ['$ K$', '$ G$', '$ M$', '$ K$']
+kticks         :  [0, 50, 101, 152]
+spd shape      :  (153, 64, 1, 4, 11) [kpoints, bands, spins, atoms+1, orbitals+2]
+normalizing to :  (-1, 1)
+ ____        ____
+|  _ \ _   _|  _ \ _ __ ___   ___ __ _ _ __ 
+| |_) | | | | |_) | '__/ _ \ / __/ _` | '__|
+|  __/| |_| |  __/| | | (_) | (_| (_| | |   
+|_|    \__, |_|   |_|  \___/ \___\__,_|_|
+       |___/
+A Python library for electronic structure pre/post-processing.
+
+Version 5.6.6 created on March 6th, 2022
+
+Please cite:
+ Uthpala Herath, Pedram Tavadze, Xu He, Eric Bousquet, Sobhit Singh, Francisco Muñoz and Aldo Romero.,
+ PyProcar: A Python library for electronic structure pre/post-processing.,
+ Computer Physics Communications 251 (2020):107080.
+
+
+Developers:
+- Francisco Muñoz
+- Aldo Romero
+- Sobhit Singh
+- Uthpala Herath
+- Pedram Tavadze
+- Eric Bousquet
+- Xu He
+- Reese Boucher
+- Logan Lang
+- Freddy Farah
+    
+Script initiated...
+PROCAR repaired. Run with repair=False next time.
+code           :  vasp
+input file     :  PROCAR_sz
+mode           :  parametric
+spin comp.     :  0
+atoms list     :  [1]
+orbs. list     :  [4, 5, 6, 7, 8]
+fermi energy   :  -3.02309656
+energy range   :  [-6, 11]
+colormap       :  seismic
+markersize     :  0.02
+permissive     :  False
+vmax           :  1
+vmin           :  -1
+grid enabled   :  True
+human          :  False
+savefig        :  None
+title          :  None
+outcar         :  OUTCAR
+k-grid         :  reduced
+knames         :  ['$ K$', '$ G$', '$ M$', '$ K$']
+kticks         :  [0, 50, 101, 152]
+spd shape      :  (153, 64, 1, 4, 11) [kpoints, bands, spins, atoms+1, orbitals+2]
+normalizing to :  (-1, 1)
+ ____        ____
+|  _ \ _   _|  _ \ _ __ ___   ___ __ _ _ __ 
+| |_) | | | | |_) | '__/ _ \ / __/ _` | '__|
+|  __/| |_| |  __/| | | (_) | (_| (_| | |   
+|_|    \__, |_|   |_|  \___/ \___\__,_|_|
+       |___/
+A Python library for electronic structure pre/post-processing.
+
+Version 5.6.6 created on March 6th, 2022
+
+Please cite:
+ Uthpala Herath, Pedram Tavadze, Xu He, Eric Bousquet, Sobhit Singh, Francisco Muñoz and Aldo Romero.,
+ PyProcar: A Python library for electronic structure pre/post-processing.,
+ Computer Physics Communications 251 (2020):107080.
+
+
+Developers:
+- Francisco Muñoz
+- Aldo Romero
+- Sobhit Singh
+- Uthpala Herath
+- Pedram Tavadze
+- Eric Bousquet
+- Xu He
+- Reese Boucher
+- Logan Lang
+- Freddy Farah
+    
+Script initiated...
+PROCAR repaired. Run with repair=False next time.
+code           :  vasp
+input file     :  PROCAR_sz
+mode           :  parametric
+spin comp.     :  0
+atoms list     :  [2]
+orbs. list     :  [0]
+fermi energy   :  -3.02309656
+energy range   :  [-6, 11]
+colormap       :  seismic
+markersize     :  0.02
+permissive     :  False
+vmax           :  1
+vmin           :  -1
+grid enabled   :  True
+human          :  False
+savefig        :  None
+title          :  None
+outcar         :  OUTCAR
+k-grid         :  reduced
+knames         :  ['$ K$', '$ G$', '$ M$', '$ K$']
+kticks         :  [0, 50, 101, 152]
+spd shape      :  (153, 64, 1, 4, 11) [kpoints, bands, spins, atoms+1, orbitals+2]
+normalizing to :  (-1, 1)
+ ____        ____
+|  _ \ _   _|  _ \ _ __ ___   ___ __ _ _ __ 
+| |_) | | | | |_) | '__/ _ \ / __/ _` | '__|
+|  __/| |_| |  __/| | | (_) | (_| (_| | |   
+|_|    \__, |_|   |_|  \___/ \___\__,_|_|
+       |___/
+A Python library for electronic structure pre/post-processing.
+
+Version 5.6.6 created on March 6th, 2022
+
+Please cite:
+ Uthpala Herath, Pedram Tavadze, Xu He, Eric Bousquet, Sobhit Singh, Francisco Muñoz and Aldo Romero.,
+ PyProcar: A Python library for electronic structure pre/post-processing.,
+ Computer Physics Communications 251 (2020):107080.
+
+
+Developers:
+- Francisco Muñoz
+- Aldo Romero
+- Sobhit Singh
+- Uthpala Herath
+- Pedram Tavadze
+- Eric Bousquet
+- Xu He
+- Reese Boucher
+- Logan Lang
+- Freddy Farah
+    
+Script initiated...
+PROCAR repaired. Run with repair=False next time.
+code           :  vasp
+input file     :  PROCAR_sz
+mode           :  parametric
+spin comp.     :  0
+atoms list     :  [2]
+orbs. list     :  [1, 2, 3]
+fermi energy   :  -3.02309656
+energy range   :  [-6, 11]
+colormap       :  seismic
+markersize     :  0.02
+permissive     :  False
+vmax           :  1
+vmin           :  -1
+grid enabled   :  True
+human          :  False
+savefig        :  None
+title          :  None
+outcar         :  OUTCAR
+k-grid         :  reduced
+knames         :  ['$ K$', '$ G$', '$ M$', '$ K$']
+kticks         :  [0, 50, 101, 152]
+spd shape      :  (153, 64, 1, 4, 11) [kpoints, bands, spins, atoms+1, orbitals+2]
+normalizing to :  (-1, 1)
+ ____        ____
+|  _ \ _   _|  _ \ _ __ ___   ___ __ _ _ __ 
+| |_) | | | | |_) | '__/ _ \ / __/ _` | '__|
+|  __/| |_| |  __/| | | (_) | (_| (_| | |   
+|_|    \__, |_|   |_|  \___/ \___\__,_|_|
+       |___/
+A Python library for electronic structure pre/post-processing.
+
+Version 5.6.6 created on March 6th, 2022
+
+Please cite:
+ Uthpala Herath, Pedram Tavadze, Xu He, Eric Bousquet, Sobhit Singh, Francisco Muñoz and Aldo Romero.,
+ PyProcar: A Python library for electronic structure pre/post-processing.,
+ Computer Physics Communications 251 (2020):107080.
+
+
+Developers:
+- Francisco Muñoz
+- Aldo Romero
+- Sobhit Singh
+- Uthpala Herath
+- Pedram Tavadze
+- Eric Bousquet
+- Xu He
+- Reese Boucher
+- Logan Lang
+- Freddy Farah
+    
+Script initiated...
+PROCAR repaired. Run with repair=False next time.
+code           :  vasp
+input file     :  PROCAR_sz
+mode           :  parametric
+spin comp.     :  0
+atoms list     :  [2]
+orbs. list     :  [4, 5, 6, 7, 8]
+fermi energy   :  -3.02309656
+energy range   :  [-6, 11]
+colormap       :  seismic
+markersize     :  0.02
+permissive     :  False
+vmax           :  1
+vmin           :  -1
+grid enabled   :  True
+human          :  False
+savefig        :  None
+title          :  None
+outcar         :  OUTCAR
+k-grid         :  reduced
+knames         :  ['$ K$', '$ G$', '$ M$', '$ K$']
+kticks         :  [0, 50, 101, 152]
+spd shape      :  (153, 64, 1, 4, 11) [kpoints, bands, spins, atoms+1, orbitals+2]
+normalizing to :  (-1, 1)
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family ['Arial'] not found. Falling back to DejaVu Sans.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+/home/prog/usr/prod/applications/python/anaconda-py3/2020.11/envs/pmg/lib/python3.9/site-packages/pyvista/utilities/__init__.py:69: PyVistaDeprecationWarning: The `pyvista.utilities` module has been deprecated. `NORMALS` is now imported as: `from pyvista.core.utilities import NORMALS`.
+  warnings.warn(
+/home/prog/usr/prod/applications/python/anaconda-py3/2020.11/envs/pmg/lib/python3.9/site-packages/pyvista/utilities/__init__.py:69: PyVistaDeprecationWarning: The `pyvista.utilities` module has been deprecated. `generate_plane` is now imported as: `from pyvista.core.utilities import generate_plane`.
+  warnings.warn(
+/home/prog/usr/prod/applications/python/anaconda-py3/2020.11/envs/pmg/lib/python3.9/site-packages/pyvista/utilities/__init__.py:69: PyVistaDeprecationWarning: The `pyvista.utilities` module has been deprecated. `get_array` is now imported as: `from pyvista.core.utilities import get_array`.
+  warnings.warn(
+/home/prog/usr/prod/applications/python/anaconda-py3/2020.11/envs/pmg/lib/python3.9/site-packages/pyvista/utilities/__init__.py:69: PyVistaDeprecationWarning: The `pyvista.utilities` module has been deprecated. `try_callback` is now imported as: `from pyvista.core.utilities import try_callback`.
+  warnings.warn(
+PROCAR-repaired does exist
+PROCAR_sx does exist
+PROCAR_sy does exist
+PROCAR_sz does exist
+ ____        ____
+|  _ \ _   _|  _ \ _ __ ___   ___ __ _ _ __ 
+| |_) | | | | |_) | '__/ _ \ / __/ _` | '__|
+|  __/| |_| |  __/| | | (_) | (_| (_| | |   
+|_|    \__, |_|   |_|  \___/ \___\__,_|_|
+       |___/
+A Python library for electronic structure pre/post-processing.
+
+Version 5.6.6 created on March 6th, 2022
+
+Please cite:
+ Uthpala Herath, Pedram Tavadze, Xu He, Eric Bousquet, Sobhit Singh, Francisco Muñoz and Aldo Romero.,
+ PyProcar: A Python library for electronic structure pre/post-processing.,
+ Computer Physics Communications 251 (2020):107080.
+
+
+Developers:
+- Francisco Muñoz
+- Aldo Romero
+- Sobhit Singh
+- Uthpala Herath
+- Pedram Tavadze
+- Eric Bousquet
+- Xu He
+- Reese Boucher
+- Logan Lang
+- Freddy Farah
+    
+Script initiated...
+PROCAR repaired. Run with repair=False next time.
+code           :  vasp
+input file     :  PROCAR_sx
+mode           :  parametric
+spin comp.     :  0
+atoms list     :  [-1]
+orbs. list     :  [-1]
+fermi energy   :  -3.02309656
+energy range   :  [-6, 11]
+colormap       :  seismic
+markersize     :  0.02
+permissive     :  False
+vmax           :  1
+vmin           :  -1
+grid enabled   :  True
+human          :  False
+savefig        :  None
+title          :  None
+outcar         :  OUTCAR
+k-grid         :  reduced
+knames         :  ['$ K$', '$ G$', '$ M$', '$ K$']
+kticks         :  [0, 50, 101, 152]
+spd shape      :  (153, 64, 1, 4, 11) [kpoints, bands, spins, atoms+1, orbitals+2]
+normalizing to :  (-1, 1)
+ ____        ____
+|  _ \ _   _|  _ \ _ __ ___   ___ __ _ _ __ 
+| |_) | | | | |_) | '__/ _ \ / __/ _` | '__|
+|  __/| |_| |  __/| | | (_) | (_| (_| | |   
+|_|    \__, |_|   |_|  \___/ \___\__,_|_|
+       |___/
+A Python library for electronic structure pre/post-processing.
+
+Version 5.6.6 created on March 6th, 2022
+
+Please cite:
+ Uthpala Herath, Pedram Tavadze, Xu He, Eric Bousquet, Sobhit Singh, Francisco Muñoz and Aldo Romero.,
+ PyProcar: A Python library for electronic structure pre/post-processing.,
+ Computer Physics Communications 251 (2020):107080.
+
+
+Developers:
+- Francisco Muñoz
+- Aldo Romero
+- Sobhit Singh
+- Uthpala Herath
+- Pedram Tavadze
+- Eric Bousquet
+- Xu He
+- Reese Boucher
+- Logan Lang
+- Freddy Farah
+    
+Script initiated...
+PROCAR repaired. Run with repair=False next time.
+code           :  vasp
+input file     :  PROCAR_sy
+mode           :  parametric
+spin comp.     :  0
+atoms list     :  [-1]
+orbs. list     :  [-1]
+fermi energy   :  -3.02309656
+energy range   :  [-6, 11]
+colormap       :  seismic
+markersize     :  0.02
+permissive     :  False
+vmax           :  1
+vmin           :  -1
+grid enabled   :  True
+human          :  False
+savefig        :  None
+title          :  None
+outcar         :  OUTCAR
+k-grid         :  reduced
+knames         :  ['$ K$', '$ G$', '$ M$', '$ K$']
+kticks         :  [0, 50, 101, 152]
+spd shape      :  (153, 64, 1, 4, 11) [kpoints, bands, spins, atoms+1, orbitals+2]
+normalizing to :  (-1, 1)
+ ____        ____
+|  _ \ _   _|  _ \ _ __ ___   ___ __ _ _ __ 
+| |_) | | | | |_) | '__/ _ \ / __/ _` | '__|
+|  __/| |_| |  __/| | | (_) | (_| (_| | |   
+|_|    \__, |_|   |_|  \___/ \___\__,_|_|
+       |___/
+A Python library for electronic structure pre/post-processing.
+
+Version 5.6.6 created on March 6th, 2022
+
+Please cite:
+ Uthpala Herath, Pedram Tavadze, Xu He, Eric Bousquet, Sobhit Singh, Francisco Muñoz and Aldo Romero.,
+ PyProcar: A Python library for electronic structure pre/post-processing.,
+ Computer Physics Communications 251 (2020):107080.
+
+
+Developers:
+- Francisco Muñoz
+- Aldo Romero
+- Sobhit Singh
+- Uthpala Herath
+- Pedram Tavadze
+- Eric Bousquet
+- Xu He
+- Reese Boucher
+- Logan Lang
+- Freddy Farah
+    
+Script initiated...
+PROCAR repaired. Run with repair=False next time.
+code           :  vasp
+input file     :  PROCAR_sz
+mode           :  parametric
+spin comp.     :  0
+atoms list     :  [-1]
+orbs. list     :  [-1]
+fermi energy   :  -3.02309656
+energy range   :  [-6, 11]
+colormap       :  seismic
+markersize     :  0.02
+permissive     :  False
+vmax           :  1
+vmin           :  -1
+grid enabled   :  True
+human          :  False
+savefig        :  None
+title          :  None
+outcar         :  OUTCAR
+k-grid         :  reduced
+knames         :  ['$ K$', '$ G$', '$ M$', '$ K$']
+kticks         :  [0, 50, 101, 152]
+spd shape      :  (153, 64, 1, 4, 11) [kpoints, bands, spins, atoms+1, orbitals+2]
+normalizing to :  (-1, 1)
+findfont: Font family 'Arial' not found.
+findfont: Font family ['Arial'] not found. Falling back to DejaVu Sans.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.
+findfont: Font family 'Arial' not found.

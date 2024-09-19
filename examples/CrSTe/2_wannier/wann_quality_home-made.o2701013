@@ -1,0 +1,79 @@
+/home/lv268562/bin/python_scripts/wannier_to_tight_binding/wannier_utils.py:269: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  keys_no_spin = np.array(list(spn_dict.keys()))[:,0]
+len kpoints 153
+len H_k_W 150
+150
+51
+50 [-5.04114175 -4.55608543 -3.19531799 -3.15287507 -3.01566939 -2.1202245
+ -2.05493862 -2.01977954 -1.6804745  -1.62982897 -0.60794865  1.50544897
+  1.65936562  1.77192332  2.22700904  2.68080293  2.72066725  2.91337146
+  2.98309184  3.50289637  4.19822438  4.42201436]
+51 [-5.04114175 -4.55608543 -3.19531799 -3.15287507 -3.01566939 -2.1202245
+ -2.05493862 -2.01977954 -1.6804745  -1.62982897 -0.60794865  1.50544897
+  1.65936562  1.77192332  2.22700904  2.68080293  2.72066725  2.91337146
+  2.98309184  3.50289637  4.19822438  4.42201436]
+150
+51
+home-made_wann_quality_from_spn_Fermi_corrected.py:133: ComplexWarning: Casting complex values to real discards the imaginary part
+  data_duplicates[:NK, :] = data[:NK, :]
+home-made_wann_quality_from_spn_Fermi_corrected.py:135: ComplexWarning: Casting complex values to real discards the imaginary part
+  data_duplicates[i*NK, :] = data[i*(NK-1), :]
+home-made_wann_quality_from_spn_Fermi_corrected.py:136: ComplexWarning: Casting complex values to real discards the imaginary part
+  data_duplicates[i*NK+1:i*NK+1+NK, :] = data[1+i*(NK-1):1+i*(NK-1)+NK, :]
+home-made_wann_quality_from_spn_Fermi_corrected.py:139: ComplexWarning: Casting complex values to real discards the imaginary part
+  data_duplicates[i*NK, :] = data[i*(NK-1), :]
+home-made_wann_quality_from_spn_Fermi_corrected.py:140: ComplexWarning: Casting complex values to real discards the imaginary part
+  data_duplicates[i*NK+1:i*NK+1+NK-2, :] = data[1+i*(NK-1):1+i*(NK-1)+NK, :]
+home-made_wann_quality_from_spn_Fermi_corrected.py:141: ComplexWarning: Casting complex values to real discards the imaginary part
+  data_duplicates[-1, :] = data[0, :]
+150
+51
+150
+51
+50 [[ 3.56839183e-05 -7.22584394e-05  9.97547655e-01]
+ [-2.99581294e-05  6.24557383e-05 -9.94668971e-01]
+ [ 6.22899863e-07 -4.22208681e-06  9.99809366e-01]
+ [-1.75143520e-05  6.80249154e-06  9.97245388e-01]
+ [ 2.25646727e-05 -2.09997883e-05  9.87099212e-01]
+ [-4.21001594e-05  2.18003348e-05 -6.50557018e-01]
+ [-4.49793684e-05  2.35945360e-05  9.49454871e-02]
+ [ 6.83356769e-05 -3.09883775e-05  9.92139496e-01]
+ [-3.59919776e-05  1.86712599e-05 -9.97374284e-01]
+ [ 5.39600810e-05 -3.14535286e-05 -9.97282678e-01]
+ [ 7.31389311e-06  3.22665419e-06  9.88327606e-01]
+ [ 5.65623034e-06 -1.53810122e-06  9.88876689e-01]
+ [ 4.30029761e-05 -1.09103315e-05 -9.80677288e-01]
+ [-4.46836438e-05  7.65885293e-06  9.98818279e-01]
+ [-7.00776088e-06  3.17114510e-06 -9.99239631e-01]
+ [-5.21652249e-05  3.33175051e-05 -9.98152137e-01]
+ [ 2.16393893e-05 -1.02586308e-05 -9.94124581e-01]
+ [ 1.11518929e-05 -1.10420080e-05  8.90944983e-01]
+ [-3.42192666e-05 -5.02833605e-05 -8.25626268e-01]
+ [ 6.89629780e-06 -6.14247587e-06  9.99023142e-01]
+ [ 1.45763980e-06  2.30402247e-05 -9.87383388e-01]
+ [ 7.23751493e-06 -8.78294857e-07 -9.99903245e-01]]
+51 [[ 3.56839183e-05 -7.22584394e-05  9.97547655e-01]
+ [-2.99581294e-05  6.24557383e-05 -9.94668971e-01]
+ [ 6.22899863e-07 -4.22208681e-06  9.99809366e-01]
+ [-1.75143520e-05  6.80249154e-06  9.97245388e-01]
+ [ 2.25646727e-05 -2.09997883e-05  9.87099212e-01]
+ [-4.21001594e-05  2.18003348e-05 -6.50557018e-01]
+ [-4.49793684e-05  2.35945360e-05  9.49454871e-02]
+ [ 6.83356769e-05 -3.09883775e-05  9.92139496e-01]
+ [-3.59919776e-05  1.86712599e-05 -9.97374284e-01]
+ [ 5.39600810e-05 -3.14535286e-05 -9.97282678e-01]
+ [ 7.31389311e-06  3.22665419e-06  9.88327606e-01]
+ [ 5.65623034e-06 -1.53810122e-06  9.88876689e-01]
+ [ 4.30029761e-05 -1.09103315e-05 -9.80677288e-01]
+ [-4.46836438e-05  7.65885293e-06  9.98818279e-01]
+ [-7.00776088e-06  3.17114510e-06 -9.99239631e-01]
+ [-5.21652249e-05  3.33175051e-05 -9.98152137e-01]
+ [ 2.16393893e-05 -1.02586308e-05 -9.94124581e-01]
+ [ 1.11518929e-05 -1.10420080e-05  8.90944983e-01]
+ [-3.42192666e-05 -5.02833605e-05 -8.25626268e-01]
+ [ 6.89629780e-06 -6.14247587e-06  9.99023142e-01]
+ [ 1.45763980e-06  2.30402247e-05 -9.87383388e-01]
+ [ 7.23751493e-06 -8.78294857e-07 -9.99903245e-01]]
+Error matrix shape: (3366, 5)
+S_abs shape (3366,)
+S_abs_E shape (3366, 2)

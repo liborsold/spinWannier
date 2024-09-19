@@ -1,0 +1,15 @@
+#!/bin/bash
+#PBS -q short
+#PBS -N CT2_sc           
+#PBS -l nodes=4:ppn=16
+#PBS -l mem=128gb
+
+module load EXTRA
+module load vasp/6.2.1_mpi
+
+cd $PBS_O_WORKDIR
+
+
+mpirun  vasp_ncl
+
+qsub pyprocar.job

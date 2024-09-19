@@ -1,0 +1,13 @@
+#!/bin/bash
+#PBS -q huge
+#PBS -N CT2_sc           
+#PBS -l nodes=1:ppn=64
+#PBS -l mem=64gb
+
+module load EXTRA
+module load vasp/6.2.1_mpi
+
+cd $PBS_O_WORKDIR
+
+
+mpirun  vasp_ncl

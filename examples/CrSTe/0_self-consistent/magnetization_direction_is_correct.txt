@@ -1,0 +1,1 @@
+Final DFT ground-state magnetization direction is correct: theta = 0.000 pi, phi = 0.000 pi

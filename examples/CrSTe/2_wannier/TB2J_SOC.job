@@ -1,0 +1,15 @@
+#PBS -q mono
+#PBS -N tb2j
+#PBS -j oe             
+
+module load EXTRA
+module load python/3.8
+module load mkl/20
+conda activate tb2j # not tb2j, to prevent the old version to be activated #tb2j
+
+cd $PBS_O_WORKDIR
+
+python TB2J_wann.py --spinor --posfile POSCAR --efermi EFERMI_PLACEHOLDER --kmesh 15 15 1 --elements ELEMENT_NAMES_PLACEHOLDER --prefix_spinor wannier90 --emin -7.0 --emax 0.0
+
+cd ./TB2J_results/Vampire/
+python /home/lv268562/bin/python_scripts/curie_temp_MFA_sprkkr_anisotropic.py

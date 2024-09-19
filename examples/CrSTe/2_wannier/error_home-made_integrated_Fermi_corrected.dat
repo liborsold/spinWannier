@@ -1,0 +1,6 @@
+#                                           	RMSE_E (eV)	RMSE_Sx  	RMSE_Sy  	RMSE_Sz
+in the whole energy range                	0.026033	0.009113	0.007085	0.159005
+up to Fermi                                 	0.000447	0.008071	0.004033	0.027734
+in the frozen window (-5.687 to 3.701 eV)	0.000409	0.006987	0.003778	0.025255
+window +- 0.500 eV around Fermi level    	0.000687	0.006701	0.007754	0.018452
+window +- 0.100 eV around Fermi level    	0.000708	0.003523	0.009399	0.019635

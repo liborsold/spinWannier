@@ -1,0 +1,22 @@
+
+TB2J version 0.7.4.4
+Copyright (C) 2018-2020  TB2J group.
+This software is distributed with the 2-Clause BSD License, without any warranty. For more details, see the LICENSE file delivered with this software.
+
+
+usage: TB2J_wann.py [-h] [--path PATH] [--posfile POSFILE]
+                    [--prefix_spinor PREFIX_SPINOR] [--prefix_up PREFIX_UP]
+                    [--prefix_down PREFIX_DOWN] [--elements [ELEMENTS ...]]
+                    [--rcut RCUT] [--efermi EFERMI] [--ne NE]
+                    [--kmesh [KMESH ...]] [--emin EMIN] [--emax EMAX]
+                    [--nz NZ] [--height HEIGHT] [--nz1 NZ1] [--nz2 NZ2]
+                    [--nz3 NZ3] [--cutoff CUTOFF]
+                    [--exclude_orbs EXCLUDE_ORBS [EXCLUDE_ORBS ...]] [--plot]
+                    [--description DESCRIPTION] [--fname FNAME] [--show]
+                    [--spinor]
+TB2J_wann.py: error: argument --efermi: invalid float value: 'EFERMI_PLACEHOLDER'
+/var/spool/torque/mom_priv/jobs/2699074.summer.cluster.SC: line 15: cd: ./TB2J_results/Vampire/: No such file or directory
+Traceback (most recent call last):
+  File "/home/lv268562/bin/python_scripts/curie_temp_MFA_sprkkr_anisotropic.py", line 5, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'

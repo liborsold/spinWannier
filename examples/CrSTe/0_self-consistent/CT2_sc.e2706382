@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/lv268562/bin/python_scripts/parser_VASP_magmoms.py", line 121, in <module>
+    main()
+  File "/home/lv268562/bin/python_scripts/parser_VASP_magmoms.py", line 97, in main
+    data_x = file_parser(path, fname, parse_dict_x)
+  File "/home/lv268562/bin/python_scripts/parser_VASP_magmoms.py", line 35, in file_parser
+    flags = np.full( (n_items,), False)   # initiate flags
+AttributeError: 'module' object has no attribute 'full'

@@ -1,0 +1,16 @@
+#PBS -q mono
+#PBS -N wann_to_tb
+#PBS -j oe
+
+
+module load EXTRA
+
+cd $PBS_O_WORKDIR
+
+
+module load python/anaconda-3.11
+
+python spin_texture_interpolated.py
+
+#cd tb_model_wann90
+#python plot_2D_spin_texture.py

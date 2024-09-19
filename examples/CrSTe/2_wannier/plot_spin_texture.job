@@ -1,0 +1,31 @@
+#PBS -q huge
+#PBS -N CrTe_SOC_wann
+#PBS -j oe             
+#PBS -l nodes=1:ppn=64
+
+
+module load EXTRA
+module load wannier90/3.1.0
+
+cd $PBS_O_WORKDIR
+
+# Sx
+sed -i "s/spin_axis_polar = /spin_axis_polar = 90 #/g" wannier90.win
+sed -i "s/spin_axis_azimuth = /spin_axis_azimuth = 0 #/g" wannier90.win
+mpirun -np 32 postw90.x wannier90
+mv wannier90-bands.dat wannier90-bands_Sx.dat
+
+# Sy
+sed -i "s/spin_axis_polar = /spin_axis_polar = 90 #/g" wannier90.win
+sed -i "s/spin_axis_azimuth = /spin_axis_azimuth = 90 #/g" wannier90.win
+mpirun -np 32 postw90.x wannier90
+mv wannier90-bands.dat wannier90-bands_Sy.dat
+
+# Sz
+sed -i "s/spin_axis_polar = /spin_axis_polar = 0 #/g" wannier90.win
+sed -i "s/spin_axis_azimuth = /spin_axis_azimuth = 0 #/g" wannier90.win
+mpirun -np 32 postw90.x wannier90
+mv wannier90-bands.dat wannier90-bands_Sz.dat
+
+module load python/3.8
+python wannier90-bands_Sxyz.py

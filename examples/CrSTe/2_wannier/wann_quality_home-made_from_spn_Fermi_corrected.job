@@ -1,0 +1,15 @@
+#PBS -q mono
+#PBS -N wann_quality_home-made
+#PBS -j oe             
+
+module load EXTRA
+module load python/3.8
+
+cd $PBS_O_WORKDIR
+
+conda activate wannier
+python3 home-made_wann_quality_from_spn_Fermi_corrected.py
+
+
+
+

@@ -1,0 +1,15 @@
+#PBS -q mono
+#PBS -N gen_spn
+#PBS -j oe             
+
+module load EXTRA
+module load python/3.8
+
+cd $PBS_O_WORKDIR
+
+conda activate wannier
+
+python3 -m wannierberri.utils.vaspspn IBstart=11 NB=26
+
+# MODIFIED VASPSPN to have an option generate human-readable file by specifying formatted=True
+python3 /home/lv268562/bin/wannierberri/utils/vaspspn.py IBstart=11 NB=26 formatted=True

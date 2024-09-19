@@ -1,0 +1,94 @@
+#PBS -q mono
+#PBS -N fit_R_model_recipe
+#PBS -j oe
+
+
+module load EXTRA
+
+cd $PBS_O_WORKDIR
+
+
+module load python/3.8
+
+# --- 1D a. ---
+#  first fit 1D model large energy window (the default)
+
+sed -i "s/energy_window     = /energy_window     = [1.0, 2.5] #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/weight_RMSE_spin  = /weight_RMSE_spin  = 0.2 #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/weight_RMSE_spin_inplane = /weight_RMSE_spin_inplane = 0.1 #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/maxiter =/maxiter = 10000 #/g" fit_Rashba_model_to_bandstructure.py
+init_params_Rashba="[1.697416601863445, 0.2662482350081701, -0.008349334779739766, 0.11026042381986935, -0.053326116337001024, 0, 0, 0, 0, 0, -9.4510540868784, -0.5644960550657914, -2.0032787730758876, -0.37517583664667803, 0.28204597837205303, -1.0218962780212193, -0.5798528101518049, 0.8848164407501029, 3.2220280886801076, 2.1329091435668532] + [0]*63"
+sed -i "s/init_params_Rashba = /init_params_Rashba = $init_params_Rashba #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/estimate_importance = /estimate_importance = False #/g" fit_Rashba_model_to_bandstructure.py
+
+python fit_Rashba_model_to_bandstructure.py
+
+
+# --- 1D b. ---
+#  
+
+sed -i "s/energy_window     = /energy_window     = [0.5, 1.5] #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/weight_RMSE_spin  = /weight_RMSE_spin  = 0.2 #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/weight_RMSE_spin_inplane = /weight_RMSE_spin_inplane = 1 #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/maxiter =/maxiter = 10000 #/g" fit_Rashba_model_to_bandstructure.py
+
+. update_initial_Rashba_params.sh
+python fit_Rashba_model_to_bandstructure.py
+
+
+# --- 1D b1. ---
+#  
+
+sed -i "s/energy_window     = /energy_window     = [0.0, 1.0] #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/weight_RMSE_spin  = /weight_RMSE_spin  = 0.2 #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/weight_RMSE_spin_inplane = /weight_RMSE_spin_inplane = 10 #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/maxiter =/maxiter = 10000 #/g" fit_Rashba_model_to_bandstructure.py
+
+. update_initial_Rashba_params.sh
+python fit_Rashba_model_to_bandstructure.py
+
+
+# --- 1D b2. ---
+#  
+
+sed -i "s/energy_window     = /energy_window     = [-0.2, 0.5] #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/weight_RMSE_spin  = /weight_RMSE_spin  = 0.2 #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/weight_RMSE_spin_inplane = /weight_RMSE_spin_inplane = 10 #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/maxiter =/maxiter = 10000 #/g" fit_Rashba_model_to_bandstructure.py
+
+. update_initial_Rashba_params.sh
+python fit_Rashba_model_to_bandstructure.py
+
+# --- 1D c. ---
+#  
+
+sed -i "s/energy_window     = /energy_window     = [-0.2, 0.2] #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/weight_RMSE_spin  = /weight_RMSE_spin  = 0.2 #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/weight_RMSE_spin_inplane = /weight_RMSE_spin_inplane = 100 #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/maxiter =/maxiter = 10000 #/g" fit_Rashba_model_to_bandstructure.py
+
+. update_initial_Rashba_params.sh
+python fit_Rashba_model_to_bandstructure.py
+
+# --- 1D d. ---
+#  
+
+sed -i "s/energy_window     = /energy_window     = [-0.10, 0.10] #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/weight_RMSE_spin  = /weight_RMSE_spin  = 0.2 #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/weight_RMSE_spin_inplane = /weight_RMSE_spin_inplane = 10000 #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/maxiter =/maxiter = 50000 #/g" fit_Rashba_model_to_bandstructure.py
+
+. update_initial_Rashba_params.sh
+python fit_Rashba_model_to_bandstructure.py
+
+
+# --- 2D ---
+#  then 2D model, around Fermi, in_plane_weight low
+
+sed -i "s/fin_name          = /fin_name          = 'bands_spin_2D_30x30.pickle' #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/maxiter =/maxiter = 50000 #/g" fit_Rashba_model_to_bandstructure.py
+sed -i "s/estimate_importance = /estimate_importance = True #/g" fit_Rashba_model_to_bandstructure.py
+
+. update_initial_Rashba_params.sh
+python fit_Rashba_model_to_bandstructure.py
+
