@@ -93,13 +93,14 @@ class WannierTBmodel():
         if not exists(wann_dir+f'{seedname}.spn_formatted'):
             print(f"{seedname}.spn_formatted does not exist. Generating it from WAVECAR.")
             # generate wannier90.spn_formatted from WAVECAR
-            if not exists(sc_dir+'WAVECAR'):
+            if not exists(nsc_dir+'WAVECAR'):
                 print("WAVECAR does not exist in the self-consistent directory.")
                 print("Please provide the WAVECAR file to generate wannier90.spn_formatted.")
                 exit(1)
             else:
-                vasp_to_spn(formatted=False, fin=nsc_dir+'WAVECAR', NBout=self.NW_dis, IBstart=discard_first_bands+1, fout=wann_dir+f'{seedname}.spn')
-                vasp_to_spn(formatted=True, fin=nsc_dir+'WAVECAR', NBout=self.NW_dis, IBstart=discard_first_bands+1, fout=wann_dir+f'{seedname}.spn_formatted')
+                print('Generating wannier90.spn and wannier90.spn_formatted from WAVECAR.')
+                vasp_to_spn(formatted=False, fin=nsc_dir+'WAVECAR', fout=wann_dir+f'{seedname}.spn', NBout=self.NW_dis, IBstart=discard_first_bands+1)
+                vasp_to_spn(formatted=True, fin=nsc_dir+'WAVECAR', fout=wann_dir+f'{seedname}.spn_formatted', NBout=self.NW_dis, IBstart=discard_first_bands+1)
         
         # convert wannier90.spn_formatted to a pickled dictionary
         spn_to_dict(model_dir=wann_dir)
