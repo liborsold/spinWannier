@@ -126,7 +126,3 @@ def vasp_to_spn(fin='WAVECAR', fout='wannier90.spn', NBout=0, IBstart=1, normali
                 np.savetxt(fw, A.reshape(1, A.shape[0]))
         else:
             SPN.write_record(A)
-
-
-if __name__ == "__main__":
-    main()

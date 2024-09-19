@@ -6,7 +6,8 @@ import copy
 from spinWannier.wannier_utils import files_wann90_to_dict_pickle, eigenval_dict, load_dict, load_lattice_vectors, reciprocal_lattice_vectors, \
                             get_kpoint_path, get_2D_kpoint_mesh, interpolate_operator, unite_spn_dict, save_bands_and_spin_texture, \
                                 uniform_real_space_grid, get_DFT_kgrid, plot_bands_spin_texture, magmom_OOP_or_IP, \
-                                fermi_surface_spin_texture, plot_bands_spin_texture, u_to_dict, spn_to_dict
+                                fermi_surface_spin_texture, plot_bands_spin_texture, u_to_dict, spn_to_dict, \
+                                parse_KPOINTS_file
 from spinWannier.wannier_quality_utils import wannier_quality_calculation, get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands
 from spinWannier.vaspspn import vasp_to_spn
 class WannierTBmodel():
@@ -137,6 +138,7 @@ class WannierTBmodel():
         self.u_dis_dict = u_dis_dict
         self.spn_dict = spn_dict
         self.discard_first_bands = discard_first_bands
+        self.seedname = seedname
 
         # define constants
         self.spn_x_R_dict_name = "spn_x_R_dict.pickle"
@@ -154,7 +156,7 @@ class WannierTBmodel():
         save_folder = self.wann_dir + save_folder_in_model_dir
         if save_folder[-1] != "/": save_folder += "/"
 
-        A = load_lattice_vectors(win_file=self.wann_dir+f"{seedname}.win")
+        A = load_lattice_vectors(win_file=self.wann_dir+f"{self.seedname}.win")
         G = reciprocal_lattice_vectors(A)
 
         dimension = '2D' if kmesh_2D is True else '1D'
@@ -302,10 +304,12 @@ class WannierTBmodel():
                                 )
     
 
-    def wannier_quality(self, kpoint_matrix, NK, kpath_ticks, num_wann, \
+    def wannier_quality(self, \
                         band_for_Fermi_correction=None, kpoint_for_Fermi_correction='0.0000000E+00  0.0000000E+00  0.0000000E+00', \
                         yaxis_lim=[-10, 10]):
+        
+        kpoint_matrix, NK, kpath_ticks = parse_KPOINTS_file(self.bands_dir+"KPOINTS")
 
-        wannier_quality_calculation(kpoint_matrix, NK, kpath_ticks, num_wann, self.EF_nsc, discard_first_bands=self.discard_first_bands, sc_dir=self.sc_dir, nsc_dir=self.nsc_dir, wann_dir=self.wann_dir, \
+        wannier_quality_calculation(kpoint_matrix, NK, kpath_ticks, self.EF_nsc, num_wann=self.NW, discard_first_bands=self.discard_first_bands, sc_dir=self.sc_dir, nsc_dir=self.nsc_dir, wann_dir=self.wann_dir, \
                         bands_dir=self.bands_dir, tb_model_dir=self.tb_model_dir, band_for_Fermi_correction=band_for_Fermi_correction, kpoint_for_Fermi_correction=kpoint_for_Fermi_correction, \
                             yaxis_lim=yaxis_lim)

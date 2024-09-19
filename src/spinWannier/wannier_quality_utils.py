@@ -263,7 +263,7 @@ def get_frozen_window_min_max(wannier90winfile='wannier90.win'):
     return dis_froz_min, dis_froz_max
 
 
-def wannier_quality_calculation(kpoint_matrix, NK, kpath_ticks, num_wann, Fermi_nsc_wann, discard_first_bands=0, sc_dir='0_self-consistent', nsc_dir='1_non-self-consistent', wann_dir='2_wannier', \
+def wannier_quality_calculation(kpoint_matrix, NK, kpath_ticks, Fermi_nsc_wann, num_wann, discard_first_bands=0, sc_dir='0_self-consistent', nsc_dir='1_non-self-consistent', wann_dir='2_wannier', \
                     bands_dir='1_band_structure', tb_model_dir='2_wannier/tb_model_wann90', \
                         band_for_Fermi_correction=None, kpoint_for_Fermi_correction='0.0000000E+00  0.0000000E+00  0.0000000E+00', \
                             yaxis_lim=None):

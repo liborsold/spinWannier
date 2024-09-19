@@ -1338,3 +1338,46 @@ def interpolate_operator(operator_dict, u_dis_dict, u_dict, latt_params, recipro
         return O_mn_k_H
     
 
+def parse_KPOINTS_file(KPOINTS_file_path):
+    with open(KPOINTS_file_path, 'r') as fr:
+        lines = fr.readlines()
+        Nkpoints = int(lines[1].split()[0])
+        kpoint_matrix = []
+        kpath_ticks = []
+
+        empty_line = True
+        for i in range(4, len(lines)):
+            if lines[i].strip() == '':
+                # if two empty lines in a row, break
+                if empty_line == True:
+                    break
+                else:
+                    empty_line = True
+                    continue
+            lsplit = lines[i].split()
+            current_kpoint = tuple([float(num) for num in lsplit[:3]]) 
+            if empty_line is True:
+                kpoint_matrix.append([])
+            kpoint_matrix[-1].append(current_kpoint)
+            
+            # if there is no k-point label, just make it an empty string
+            ktick = ''
+            if '!' in lines[i]:
+                ktick = lines[i].split('!')[-1].strip()
+
+            if kpath_ticks == []:
+                # if its the first k-point label, just add it
+                kpath_ticks.append(ktick)
+            elif empty_line is False:
+                # if it's the second point of a given segment, just add it
+                kpath_ticks.append(ktick)
+            elif empty_line is True and ktick != kpath_ticks[-1]:
+                # else if this is the beginning of a new k-path segment BUT the ktick is NOT the same as the last one, 
+                # (meaning discontinuous kpath), then you need to merge the two high-symmetry point labels into one label
+                kpath_ticks[-1] = f'{kpath_ticks[-1]}|{ktick}'
+                # otherwise means they are the same and in that case do not add anything to kpath_ticks
+
+            if empty_line is True:
+                empty_line = False
+
+    return kpoint_matrix, Nkpoints, kpath_ticks
