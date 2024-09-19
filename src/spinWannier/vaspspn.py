@@ -36,39 +36,19 @@
 
 """
 
+from scipy.io import FortranFile
+import numpy as np
+import datetime
 
-def hlp():
-    from termcolor import cprint
-    cprint("vaspspn  (utility)", 'green', attrs=['bold'])
-    print(__doc__)
+class FortranFileW(FortranFile):
+
+    def __init__(self, filename):
+        print("using scipy.io to write")
+        super().__init__(filename, mode='w')
 
 
-def main():
-    import sys
-    from wannierberri.__utility import FortranFileW
-    import numpy as np
-    import datetime
+def vasp_to_spn(fin='WAVECAR', fout='wannier90.spn', NBout=0, IBstart=1, normalize='norm', formatted=False):
 
-    fin = "WAVECAR"
-    fout = "wannier90.spn"
-    NBout = 0
-    IBstart = 1
-    normalize = "norm"
-    formatted = False
-    for arg in sys.argv[1:]:
-        if arg == "-h":
-            hlp()
-            exit()
-        else:
-            k, v = arg.split("=")
-            if k == "fin": fin = v
-            elif k == "fout": fout = v
-            elif k == "NB": NBout = int(v)
-            elif k == "IBstart": IBstart = int(v)
-            elif k == "norm": normalize = v
-            elif k == "formatted": formatted = v in ['True', 'true', '.true.', '.True.', '.TRUE.', 'TRUE']
-
-    fout = fout + "_formatted" if formatted else fout
     print(fout)
     print("reading {0}\n writing to {1}".format(fin, fout))
 

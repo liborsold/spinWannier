@@ -968,6 +968,8 @@ def u_to_dict(fin="wannier90_u.mat", fout="u_dict.pickle", text_file=False, writ
     print(f"{fout} written!")
     print("Umnk keys len", len(Umnk.keys()))
 
+    return num_bands, num_wann
+
     # if write_sparse is True:
     #     with open(fin, 'r') as fr:
     #         u_dict = ast.literal_eval(fr.read())

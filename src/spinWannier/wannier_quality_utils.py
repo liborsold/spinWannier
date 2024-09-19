@@ -420,7 +420,7 @@ def wannier_quality_calculation(kpoint_matrix, NK, kpath_ticks, num_wann, Fermi_
     np.savetxt("home-made_quality_error_S_E_Fermi_corrected.dat", error_E_S_by_energy, header="E (eV)\t|Delta E| (eV)\t|Delta S_x|\t|Delta S_y|\t|Delta S_z|")
 
     # plot all the errors
-    fig, axes = plt.subplots(2, 2, figsize=[6,6])
+    fig, axes = plt.subplots(2, 2, figsize=[6,4])
 
     axes[0,0].semilogy(error_E_S_by_energy[:,0], error_E_S_by_energy[:,1], 'ko', markersize=2)
     axes[0,0].set_title(r'$E$', fontsize=14)
@@ -441,6 +441,11 @@ def wannier_quality_calculation(kpoint_matrix, NK, kpath_ticks, num_wann, Fermi_
     axes[1,1].set_xlabel(r"$E - E_\mathrm{F}$ (eV)")
 
     plt.tight_layout()
+
+    # apply ylim
+    if yaxis_lim:
+        for ax in axes.flatten():
+            ax.set_xlim(yaxis_lim)
 
     plt.savefig("ERRORS_all_home-made_Fermi_corrected.png", dpi=400)
     plt.close()

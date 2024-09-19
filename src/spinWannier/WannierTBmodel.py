@@ -6,9 +6,9 @@ import copy
 from spinWannier.wannier_utils import files_wann90_to_dict_pickle, eigenval_dict, load_dict, load_lattice_vectors, reciprocal_lattice_vectors, \
                             get_kpoint_path, get_2D_kpoint_mesh, interpolate_operator, unite_spn_dict, save_bands_and_spin_texture, \
                                 uniform_real_space_grid, get_DFT_kgrid, plot_bands_spin_texture, magmom_OOP_or_IP, \
-                                fermi_surface_spin_texture, plot_bands_spin_texture
+                                fermi_surface_spin_texture, plot_bands_spin_texture, u_to_dict, spn_to_dict
 from spinWannier.wannier_quality_utils import wannier_quality_calculation, get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands
-
+from spinWannier.vaspspn import vasp_to_spn
 class WannierTBmodel():
     """
     Calculates interpolated spin-texture on a dense k-point path.
@@ -38,7 +38,7 @@ class WannierTBmodel():
         (3) inverse Fourier transform for an arbitrary k-point (dense k-point mesh).
     """
 
-    def __init__(self, sc_dir='0_self-consistent', nsc_dir='1_non-self-consistent', wann_dir='2_wannier', \
+    def __init__(self, seedname='wannier90', sc_dir='0_self-consistent', nsc_dir='1_non-self-consistent', wann_dir='2_wannier', \
                     bands_dir='1_band_structure', tb_model_dir='2_wannier/tb_model_wann90', discard_first_bands=0, \
                     band_for_Fermi_correction=None, kpoint_for_Fermi_correction='0.0000000E+00  0.0000000E+00  0.0000000E+00'):
         """Initialize and load the model."""
@@ -52,13 +52,58 @@ class WannierTBmodel():
 
         if band_for_Fermi_correction is None: band_for_Fermi_correction = discard_first_bands + 1
 
+        # load important info from wannier90.win
+        discard_first_bands = 0
+        num_wann = -1
+        num_bands = -1
+        with open(wann_dir+f"{seedname}.win", 'r') as f:
+            for line in f:
+                if "exclude_bands" in line:
+                    # e.g. "exclude_bands = 1-10, 37-64"
+                    discard_first_bands = int(line.split('=')[1].split('-')[1].split(',')[0].strip())
+                if "num_wann" in line:
+                    num_wann = int(line.split('=')[1].split('#')[0].strip())
+                if "num_bands" in line:
+                    num_bands = int(line.split('=')[1].split('#')[0].strip())
+        
+        if num_wann == -1 or num_bands == -1:
+            print("num_wann or num_bands not found in wannier90.win !")
+            exit(1)
+        self.NW_dis = num_bands
+        self.NW = num_wann
+
         # create the save_folder if it does not exist
         if not exists(tb_model_dir): makedirs(tb_model_dir)
-
+  
         # load the model files and convert to pickle dictionaries
-        disentanglement = exists(wann_dir+'wannier90_u_dis.mat')
-        files_wann90_to_dict_pickle(model_dir=wann_dir, disentanglement=disentanglement)
-        eig_dict = eigenval_dict(eigenval_file=wann_dir+"wannier90.eig",  win_file=wann_dir+"wannier90.win")
+        disentanglement = exists(wann_dir+f'{seedname}_u_dis.mat')
+
+        # Convert wannier90 files to pickled dictionaries files
+        num_bands_from_u, num_wann_from_u = u_to_dict(fin=wann_dir+f"{seedname}_u.mat", fout=wann_dir+"u_dict.pickle", text_file=False, write_sparse=False)
+        if disentanglement is True:
+            num_bands_from_u, num_wann_from_u = u_to_dict(fin=wann_dir+f"{seedname}_u_dis.mat", fout=wann_dir+"u_dis_dict.pickle", text_file=False, write_sparse=False)
+
+        if num_bands_from_u != num_bands or num_wann_from_u != num_wann:
+            print("The number of bands or wannier functions in the u.mat files do not match the number of bands or wannier functions in the wannier90.win file.")
+            print("Please check the u.mat files.")
+            exit(1)
+
+        # check if wannier90.spn_formatted exists; if not, generated it from WAVECAR
+        if not exists(wann_dir+f'{seedname}.spn_formatted'):
+            print(f"{seedname}.spn_formatted does not exist. Generating it from WAVECAR.")
+            # generate wannier90.spn_formatted from WAVECAR
+            if not exists(sc_dir+'WAVECAR'):
+                print("WAVECAR does not exist in the self-consistent directory.")
+                print("Please provide the WAVECAR file to generate wannier90.spn_formatted.")
+                exit(1)
+            else:
+                vasp_to_spn(formatted=False, fin=nsc_dir+'WAVECAR', NBout=self.NW_dis, IBstart=discard_first_bands+1, fout=wann_dir+f'{seedname}.spn')
+                vasp_to_spn(formatted=True, fin=nsc_dir+'WAVECAR', NBout=self.NW_dis, IBstart=discard_first_bands+1, fout=wann_dir+f'{seedname}.spn_formatted')
+        
+        # convert wannier90.spn_formatted to a pickled dictionary
+        spn_to_dict(model_dir=wann_dir)
+
+        eig_dict = eigenval_dict(eigenval_file=wann_dir+f"{seedname}.eig",  win_file=wann_dir+f"{seedname}.win")
         u_dict = load_dict(fin=wann_dir+"u_dict.pickle")
         if disentanglement is True:
             u_dis_dict = load_dict(fin=wann_dir+"u_dis_dict.pickle")
@@ -68,6 +113,7 @@ class WannierTBmodel():
             for key in u_dis_dict.keys():
                 u_dis_dict[key] = np.eye(NW)
             self.NW = NW
+
         spn_dict = load_dict(fin=wann_dir+"spn_dict.pickle")
 
         # calculate the Fermi level
@@ -99,7 +145,7 @@ class WannierTBmodel():
         self.spn_R_dict_name   = "spn_R_dict.pickle"
         
         # store the real space grid
-        self.R_grid = uniform_real_space_grid(R_mesh_ijk=get_DFT_kgrid(fin=wann_dir+"wannier90.win")) #real_space_grid_from_hr_dat(fname="wannier90_hr.dat") #
+        self.R_grid = uniform_real_space_grid(R_mesh_ijk=get_DFT_kgrid(fin=wann_dir+f"{seedname}.win")) #real_space_grid_from_hr_dat(fname=f"{seedname}_hr.dat") #
 
 
     def interpolate_bands_and_spin(self, kpoint_matrix, kpath_ticks, kmesh_2D=False, kmesh_density=100, kmesh_2D_limits=[-0.5, 0.5], save_real_space_operators=True, \
@@ -108,7 +154,7 @@ class WannierTBmodel():
         save_folder = self.wann_dir + save_folder_in_model_dir
         if save_folder[-1] != "/": save_folder += "/"
 
-        A = load_lattice_vectors(win_file=self.wann_dir+"wannier90.win")
+        A = load_lattice_vectors(win_file=self.wann_dir+f"{seedname}.win")
         G = reciprocal_lattice_vectors(A)
 
         dimension = '2D' if kmesh_2D is True else '1D'
