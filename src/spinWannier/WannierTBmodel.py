@@ -304,8 +304,7 @@ class WannierTBmodel():
                                 )
     
 
-    def wannier_quality(self, \
-                        band_for_Fermi_correction=None, kpoint_for_Fermi_correction='0.0000000E+00  0.0000000E+00  0.0000000E+00', \
+    def wannier_quality(self, band_for_Fermi_correction=None, kpoint_for_Fermi_correction='0.0000000E+00  0.0000000E+00  0.0000000E+00', \
                         yaxis_lim=[-10, 10]):
         
         kpoint_matrix, NK, kpath_ticks = parse_KPOINTS_file(self.bands_dir+"KPOINTS")
