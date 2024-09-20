@@ -40,7 +40,7 @@ class WannierTBmodel():
     """
 
     def __init__(self, seedname='wannier90', sc_dir='0_self-consistent', nsc_dir='1_non-self-consistent', wann_dir='2_wannier', \
-                    bands_dir='1_band_structure', tb_model_dir='2_wannier/tb_model_wann90', \
+                    bands_dir='1_band_structure', tb_model_dir='2_wannier/tb_model_wann90', spn_formatted=False, spn_file_extension='spn', \
                     band_for_Fermi_correction=None, kpoint_for_Fermi_correction='0.0000000E+00  0.0000000E+00  0.0000000E+00'):
         """Initialize and load the model."""
 
@@ -90,20 +90,23 @@ class WannierTBmodel():
             exit(1)
 
         # check if wannier90.spn_formatted exists; if not, generated it from WAVECAR
-        if not exists(wann_dir+f'{seedname}.spn_formatted'):
-            print(f"{seedname}.spn_formatted does not exist. Generating it from WAVECAR.")
+        if not exists(wann_dir+f'{seedname}.{spn_file_extension}'):
+            print(f"{seedname}.{spn_file_extension} does not exist. Generating it from WAVECAR.")
             # generate wannier90.spn_formatted from WAVECAR
             if not exists(nsc_dir+'WAVECAR'):
                 print("WAVECAR does not exist in the self-consistent directory.")
                 print("Please provide the WAVECAR file to generate wannier90.spn_formatted.")
                 exit(1)
             else:
-                print('Generating wannier90.spn and wannier90.spn_formatted from WAVECAR.')
-                vasp_to_spn(formatted=False, fin=nsc_dir+'WAVECAR', fout=wann_dir+f'{seedname}.spn', NBout=self.NW_dis, IBstart=discard_first_bands+1)
-                vasp_to_spn(formatted=True, fin=nsc_dir+'WAVECAR', fout=wann_dir+f'{seedname}.spn_formatted', NBout=self.NW_dis, IBstart=discard_first_bands+1)
+                if spn_formatted is False:
+                    print('Generating wannier90.spn from WAVECAR.')
+                    vasp_to_spn(formatted=False, fin=nsc_dir+'WAVECAR', fout=wann_dir+f'{seedname}.spn', NBout=self.NW_dis, IBstart=discard_first_bands+1)
+                elif spn_formatted is True:
+                    print('Generating wannier90.spn_formatted from WAVECAR.')
+                    vasp_to_spn(formatted=True, fin=nsc_dir+'WAVECAR', fout=wann_dir+f'{seedname}.spn_formatted', NBout=self.NW_dis, IBstart=discard_first_bands+1)
         
         # convert wannier90.spn_formatted to a pickled dictionary
-        spn_to_dict(model_dir=wann_dir)
+        spn_to_dict(model_dir=wann_dir, fwin=f'{seedname}.win', fin=f'{seedname}.{spn_file_extension}', formatted=spn_formatted)
 
         eig_dict = eigenval_dict(eigenval_file=wann_dir+f"{seedname}.eig",  win_file=wann_dir+f"{seedname}.win")
         u_dict = load_dict(fin=wann_dir+"u_dict.pickle")

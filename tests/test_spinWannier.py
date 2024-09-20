@@ -1,7 +1,7 @@
 # import the LinearChain class from the models module within the fuNEGF package in the parallel directory
 # print the directories in path
 
-from spinWannier.wannier_utils import parse_KPOINTS_file
+from spinWannier.wannier_utils import parse_KPOINTS_file, spn_to_dict
 import numpy as np
 
 def test_parse_KPOINTS_file_1():
@@ -48,3 +48,11 @@ def test_parse_KPOINTS_file_2():
     ), "KPOINTS matrix is not parsed correctly"
     assert Nkpoints == Nkpoints_expected, "Number of kpoints is not parsed correctly"
     assert kpath_ticks == kpath_ticks_expected, "KPOINTS path ticks are not parsed correctly"
+
+
+def test_parse_spn_files_formatted_vs_binary():
+    model_dir = 'tests/test_files/'
+    Sskmn_formatted = spn_to_dict(formatted=True, model_dir=model_dir, fin="wannier90.spn_formatted")
+    Sskmn = spn_to_dict(formatted=False, model_dir=model_dir, fin="wannier90.spn")
+    print('Max difference between parsed formatted and binary files', np.max(np.abs(Sskmn - Sskmn_formatted)))
+    assert np.allclose(Sskmn, Sskmn_formatted), "The parsed formatted and binary spn files do not match!"

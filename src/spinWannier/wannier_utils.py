@@ -13,6 +13,7 @@ import pandas as pd
 import pickle
 from os.path import exists
 from cmath import exp
+from scipy.io import FortranFile
 
 
 def get_kpoint_names(fwin="wannier90.win"):
@@ -863,9 +864,14 @@ def band_with_spin_projection_under_threshold_for_kpoint(kpoint=(0.0, 0.0, 0.0),
     return lowest_band_under_threshold
 
 
-def spn_to_dict(model_dir='./', fwin="wannier90.win", fin="wannier90.spn_formatted", fout="spn_dict.pickle", text_file=False):
+def spn_to_dict(model_dir='./', fwin="wannier90.win", fin="wannier90.spn", formatted=False, fout="spn_dict.pickle", save_as_text=False):
     """Convert wannier90.spn file to a dictionary object and save as pickle. 
     If 'text_file' == True, then save as a human-readable text file."""
+
+    if formatted is True and not fin.split('.')[-1].endswith('formatted'):
+        raise Warning(f"Are you sure {fin} is a formatted (human-readable) file and not a binary FortranFile?")
+    if formatted is False and fin.split('.')[-1].endswith('formatted') == 'formatted':
+        raise Warning(f"Are you sure {fin} is a binary FortranFile and not a human-readable file?")
 
     fwin = model_dir + fwin
     fin = model_dir + fin
@@ -873,15 +879,25 @@ def spn_to_dict(model_dir='./', fwin="wannier90.win", fin="wannier90.spn_formatt
 
     spin_names = ['x', 'y', 'z']
 
-    # get number of bands and kpoints
-    with open(fin, 'r') as fr:
-        fr.readline()
-        NB = int(float(fr.readline()))
-        NK = int(float(fr.readline()))
-
-    # get the spin-projection matrices
-    with open(fin, 'r') as fr:
-        Sskmn = np.loadtxt(fr, dtype=np.complex64, skiprows=3)
+    if formatted is True:
+        # human-readable spn file ("wannier90.spn_formatted")
+        with open(fin, 'r') as fr:
+            fr.readline()
+            # get number of bands and kpoints
+            NB = int(float(fr.readline()))
+            NK = int(float(fr.readline()))
+        with open(fin, 'r') as fr:
+            # get the spin-projection matrices
+            Sskmn = np.loadtxt(fr, dtype=np.complex64, skiprows=3)
+    else:
+        # FortranFile spn file ("wannier90.spn")
+        with FortranFile(fin, 'r') as fr:
+            header = fr.read_record(dtype='c')
+            NB, NK = fr.read_record(dtype=np.int32)
+            Sskmn = []
+            for i in range(NK):
+                Sskmn.append(fr.read_record(dtype=np.complex128))
+            Sskmn = np.array(Sskmn)
 
     # get names of k-points
     kpoint_names = get_kpoint_names(fwin=fwin)
@@ -915,7 +931,7 @@ def spn_to_dict(model_dir='./', fwin="wannier90.win", fin="wannier90.spn_formatt
     #     f.close()
     # else:
 
-    if text_file is True:
+    if save_as_text is True:
         
         for kpoint, Smn in Sskmn_dict.items(): 
             Sskmn_dict[kpoint] = repr(Smn[s,:,:]).replace('\n', '').replace(', dtype=complex64)', '').replace('array(', '')
@@ -926,6 +942,8 @@ def spn_to_dict(model_dir='./', fwin="wannier90.win", fin="wannier90.spn_formatt
     else:
         with open(fout, 'ab') as fw:
             pickle.dump(Sskmn_dict, fw)
+    
+    return Sskmn
 
 
 def u_to_dict(fin="wannier90_u.mat", fout="u_dict.pickle", text_file=False, write_sparse=False):
