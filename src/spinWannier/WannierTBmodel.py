@@ -13,14 +13,16 @@ from spinWannier.vaspspn import vasp_to_spn
 class WannierTBmodel():
     """
     Calculates interpolated spin-texture on a dense k-point path.
+    Plots the spin-texture on a 2D k-point mesh (Fermi surface).
+    Calculates the quality of the Wannier functions.
 
     Needed files are
     (1) wannier90.eig
     (2) wannier90.win
-    (3) wannier90.spn_formatted
+    (3) wannier90.spn (or the WAVECAR file of VASP)
     (4) wannier90_u.mat
-    (5) wannier90_u_dis.mat
-    (6) FERMI_ENERGY.in
+    (5) wannier90_u_dis.mat (if disentanglement was performed)
+    (6) (FERMI_ENERGY.in file containing the Fermi energy value)
 
     PROCEDURE:
     Take the 
@@ -41,8 +43,25 @@ class WannierTBmodel():
 
     def __init__(self, seedname='wannier90', sc_dir='0_self-consistent', nsc_dir='1_non-self-consistent', wann_dir='2_wannier', \
                     bands_dir='1_band_structure', tb_model_dir='2_wannier/tb_model_wann90', spn_formatted=False, spn_file_extension='spn', \
+                    data_saving_format='parquet', \
                     band_for_Fermi_correction=None, kpoint_for_Fermi_correction='0.0000000E+00  0.0000000E+00  0.0000000E+00'):
-        """Initialize and load the model."""
+        """Initialize the WannierTBmodel class.
+
+        Args:
+            seedname (str, optional): Seedname of the wannier90 files. Defaults to 'wannier90'.
+            sc_dir (str, optional): Directory of the self-consistent calculation. Defaults to '0_self-consistent'.
+            nsc_dir (str, optional): Directory of the non-self-consistent calculation. Defaults to '1_non-self-consistent'.
+            wann_dir (str, optional): Directory of the wannier calculation. Defaults to '2_wannier'.
+            bands_dir (str, optional): Directory of the band structure calculation. Defaults to '1_band_structure'.
+            tb_model_dir (str, optional): Directory of the tight-binding model. Defaults to '2_wannier/tb_model_wann90'.
+            spn_formatted (bool, optional): Whether the spn file is formatted (human-readable) or not (i.e., it is binary). Defaults to False.
+            spn_file_extension (str, optional): Extension of the spn file. Defaults to 'spn'.
+            data_saving_format (str, optional): Format to save the data. Defaults to 'parquet'.
+            band_for_Fermi_correction (int, optional): Band number for Fermi correction. Defaults to None -> the lowest Wannier band wil be used.
+            kpoint_for_Fermi_correction (str, optional): K-point for Fermi correction. Defaults to '0.0000000E+00  0.0000000E+00  0.0000000E+00' (Gamma point).
+        """
+
+        self.data_saving_format = data_saving_format
 
         # ensure that directories have a backslash at the end
         if sc_dir[-1] != "/": sc_dir += "/"
@@ -156,11 +175,25 @@ class WannierTBmodel():
 
     def interpolate_bands_and_spin(self, kpoint_matrix, fout='bands_spin', kpath_ticks=None, kmesh_2D=False, kmesh_density=101, kmesh_2D_limits=[-0.5, 0.5], save_real_space_operators=True, \
                                    save_folder_in_model_dir="tb_model_wann90/", save_bands_spin_texture=True):
+        """Interpolate the bands and the spin texture on a dense k-point path or 2D mesh.
+
+        Args:
+            kpoint_matrix (list): List of k-points in the path.
+            fout (str, optional): Output file name. Defaults to 'bands_spin'.
+            kpath_ticks (list, optional): List of k-point ticks. Defaults to None.
+            kmesh_2D (bool, optional): Whether to interpolate on a 2D mesh. Defaults to False.
+            kmesh_density (int, optional): Density of the k-point mesh. Defaults to 101.
+            kmesh_2D_limits (list, optional): Limits of the 2D mesh. Defaults to [-0.5, 0.5].
+            save_real_space_operators (bool, optional): Whether to save the real space operators as dictionary files. Defaults to True.
+            save_folder_in_model_dir (str, optional): Folder to save the data in the model directory. Defaults to "tb_model_wann90/".
+            save_bands_spin_texture (bool, optional): Whether to save the bands and spin texture. Defaults to True.
+        """
         
         save_folder = self.wann_dir + save_folder_in_model_dir
         if save_folder[-1] != "/": save_folder += "/"
 
-        fout = fout + ".pickle"
+        fout = f"{fout}.{self.data_saving_format}"
+        #  !!!!!!!!!!!!!!!!!! continue
 
         A = load_lattice_vectors(win_file=self.wann_dir+f"{self.seedname}.win")
         G = reciprocal_lattice_vectors(A)

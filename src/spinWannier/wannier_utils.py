@@ -17,7 +17,13 @@ from scipy.io import FortranFile
 
 
 def get_kpoint_names(fwin="wannier90.win"):
-    """Parse wannier90.win file to get k-point names as a list of tuples."""
+    """Parse wannier90.win file to get k-point names as a list of tuples.
+    The k-point names are in the 'begin kpoints' and 'end kpoints' section.
+    Args:
+        fwin (str): The name of the wannier90.win file.
+    Returns:
+        list of tuples: The k-point names.
+    """
     kpoints = []
     reading = False
     with open(fwin, 'r') as fr:
@@ -32,7 +38,12 @@ def get_kpoint_names(fwin="wannier90.win"):
 
 
 def load_eigenvals(eigenval_file="wannier90.eig"):
-    """Return 2D list (n_kpoints X n_bands) containing the eigenvalues."""
+    """Parse the wannier90 .eig file to get the k-point and band-resolved eigenvalues.
+    Args:
+        eigenval_file (str): The name of the eigenvalues file.
+    Returns:
+        list of lists: 2D list (n_kpoints X n_bands) containing the eigenvalues.
+    """
     A = np.loadtxt(eigenval_file)
     NB = max(A[:,0])
     with open(eigenval_file, 'r') as fr:
