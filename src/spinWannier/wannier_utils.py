@@ -19,8 +19,10 @@ from scipy.io import FortranFile
 def get_kpoint_names(fwin="wannier90.win"):
     """Parse wannier90.win file to get k-point names as a list of tuples.
     The k-point names are in the 'begin kpoints' and 'end kpoints' section.
+
     Args:
         fwin (str): The name of the wannier90.win file.
+
     Returns:
         list of tuples: The k-point names.
     """
@@ -39,8 +41,10 @@ def get_kpoint_names(fwin="wannier90.win"):
 
 def load_eigenvals(eigenval_file="wannier90.eig"):
     """Parse the wannier90 .eig file to get the k-point and band-resolved eigenvalues.
+
     Args:
         eigenval_file (str): The name of the eigenvalues file.
+
     Returns:
         list of lists: 2D list (n_kpoints X n_bands) containing the eigenvalues.
     """
@@ -80,8 +84,15 @@ def eigenval_dict(eigenval_file="wannier90.eig",  win_file="wannier90.win"):
 
 def load_dict(fin="spn_dict.pickle", text_file=False):
     """If not text_file, than it's binary.
-    fin = spn_dict.pickle / hr_R_dict.pickle / u_dict.pickle / u_dis_dict.pickle
-    fin = spin_dict.dat / hr_R_dict.dat / u_dict.dat / u_dis_dict.dat 
+
+    Args:
+        fin (str): The name of the file to load:
+            spn_dict.pickle / hr_R_dict.pickle / u_dict.pickle / u_dis_dict.pickle
+            spn_dict.dat / hr_R_dict.dat / u_dict.dat / u_dis_dict.dat
+        text_file (bool): If True, load as a text file.
+    
+    Returns:
+        dict: The loaded dictionary.
     """
     if text_file is True:
         # load dictionary from a human-readable text file
@@ -122,6 +133,15 @@ def load_lattice_vectors(win_file="wannier90.win"):
 
 
 def reciprocal_lattice_vectors(real_space_lattice_vector_matrix):
+    """Return the reciprocal lattice vectors from the real-space lattice vectors.
+
+    Args:
+        real_space_lattice_vector_matrix (numpy array): The real-space lattice vectors matrix.
+
+    Returns:
+        list of numpy arrays: The reciprocal lattice vectors.
+    """
+
     A = real_space_lattice_vector_matrix
     unit_cell_volume = abs( np.dot(np.cross(A[0,:], A[1,:]), A[2,:] ) )
     G = []
@@ -131,7 +151,18 @@ def reciprocal_lattice_vectors(real_space_lattice_vector_matrix):
 
 
 def get_kpoint_path(kpoint_matrix, G, Nk):
-    """Interpolate between kpoints in the kpoint_matrix to obtain a k-point path with Nk points in each segment."""
+    """Interpolate between kpoints in the kpoint_matrix to obtain a k-point path with Nk points in each segment.
+    
+    Args:
+        kpoint_matrix (list of tuples): The k-point matrix.
+        G (numpy array): The reciprocal lattice vectors.
+        Nk (int): The number of k-points in each segment.
+        
+    Returns:
+        list of tuples: The k-points in the reciprocal space.
+        list of tuples: The k-points in the Cartesian space.
+        list of floats: The k-point distance position.
+    """
     kpoints_rec = []
     for k0, k1 in kpoint_matrix[:]:
         kpoints_rec += list(zip(    np.linspace(k0[0], k1[0], Nk),
@@ -152,7 +183,14 @@ def get_kpoint_path(kpoint_matrix, G, Nk):
 
 def uniform_real_space_grid(R_mesh_ijk = (5, 5, 1)):
     """From the maxima in each direction, make a regular mesh 
-        (-R_max_i, +R_max_i) x (-R_max_j, +R_max_j) x (-R_max_k, +R_max_k)."""
+        (-R_max_i, +R_max_i) x (-R_max_j, +R_max_j) x (-R_max_k, +R_max_k).
+        
+    Args:
+        R_mesh_ijk (tuple of 3 ints): The number of mesh points in each direction.
+        
+    Returns:
+        list of tuples: The real-space grid.
+    """
     R_grid = []
     for Ri in range(-floor((R_mesh_ijk[0]-1)/2), ceil((R_mesh_ijk[0]-1)/2) + 1):
         for Rj in range(-floor((R_mesh_ijk[1]-1)/2), ceil((R_mesh_ijk[1]-1)/2) + 1):
@@ -163,7 +201,14 @@ def uniform_real_space_grid(R_mesh_ijk = (5, 5, 1)):
 
 def real_space_grid_from_hr_dat(fname="wannier90_hr.dat"):
     """Get the real-space grid from the seedname_hr.dat file. 
-    See Pizzi 2020 Sec. 4.2."""
+    See Pizzi 2020 Sec. 4.2.
+    
+    Args:
+        fname (str): The name of the hr.dat file.
+        
+    Returns:
+        list of tuples: The real-space grid.
+    """
     with open(fname, 'r') as fr:
         Data = np.loadtxt(fr, skiprows=5)
     R_grid = Data[:, 0:3]
@@ -173,7 +218,14 @@ def real_space_grid_from_hr_dat(fname="wannier90_hr.dat"):
 
 
 def get_DFT_kgrid(fin="wannier90.win"):
-    """Get the 'mp_grid' from wannier90.win file which tells the k-grid used in the DFT calculation."""
+    """Get the 'mp_grid' from wannier90.win file which tells the k-grid used in the DFT calculation.
+    
+    Args:
+        fin (str): The name of the wannier90.win file.
+        
+    Returns:
+        tuple of 3 ints: The k-grid.
+    """
     with open(fin, 'r') as fr:
         for line in fr:
             if 'mp_grid' in line:
@@ -183,7 +235,17 @@ def get_DFT_kgrid(fin="wannier90.win"):
 
 
 def get_2D_kpoint_mesh(G, limits=[-0.5, 0.5], Nk=100):
-    """asdf"""
+    """Get a 2D mesh of k-points in the reciprocal space.
+
+    Args:
+        G (numpy array): The reciprocal lattice vectors.
+        limits (list of 2 floats): The limits of the mesh.
+        Nk (int): The number of k-points in each direction.
+
+    Returns:
+        list of tuples: The k-points in the reciprocal space.
+        list of tuples: The k-points in the Cartesian space.
+    """
     G = np.array(G)
     # reciprocal vectors in reciprocal coordinates
 
@@ -202,7 +264,14 @@ def get_2D_kpoint_mesh(G, limits=[-0.5, 0.5], Nk=100):
 
 
 def get_skiprows_hr_dat(fin="wannier90_hr.dat"):
-    """Get the number of skiprows in wannier90_hr.dat file."""
+    """Get the number of skiprows in wannier90_hr.dat file.
+    
+    Args:
+        fin (str): The name of the hr.dat file.
+
+    Returns:
+        int: The number of skiprows.
+    """
     with open(fin, 'r') as fr:
         for i, line in enumerate(fr):
             if i == 2:
@@ -213,7 +282,14 @@ def get_skiprows_hr_dat(fin="wannier90_hr.dat"):
 
 def hr_wann90_to_dict(fin_wannier90 = "wannier90_hr.dat"):
     """Convert wannier90 hr.dat to dictionary in the form that we are using: R vectors as keys 
-    and hopping as a complex number matrix as the values."""
+    and hopping as a complex number matrix as the values.
+    
+    Args:
+        fin_wannier90 (str): The name of the hr.dat file.
+        
+    Returns:
+        dict: The hopping dictionary.
+    """
 
     skiprows = get_skiprows_hr_dat(fin=fin_wannier90)
     with open(fin_wannier90, 'r') as fr:
@@ -242,7 +318,15 @@ def coerce_R_vectors_to_basic_supercell(R_tr=(-3,2,0), R_mesh_ijk=(5,5,1)):
     For (-3,2,0) this would be (2,2,0) in case of (5,5,1) grid  (adding 5 to the 'x' coordinate).
     -> Algorithm: translate the 'R' by a supercell vector (in negative and positive direction and 
     for x, y, z separately -> 8 possible translations: so searching the immediate vicinity of the R vector.
-    Return a dictionary from the 'hr_dat grid' to the uniform grid."""
+    Return a dictionary from the 'hr_dat grid' to the uniform grid.
+    
+    Args:
+        R_tr (tuple of 3 ints): The translated R vector.
+        R_mesh_ijk (tuple of 3 ints): The uniform grid.
+        
+    Returns:
+        tuple of 3 ints: The translated R vector in the uniform grid.
+    """
 
     R_grid_target = uniform_real_space_grid(R_mesh_ijk=(5,5,1))
     if R_tr in R_grid_target: 
@@ -253,7 +337,17 @@ def coerce_R_vectors_to_basic_supercell(R_tr=(-3,2,0), R_mesh_ijk=(5,5,1)):
 
 
 def dict_to_matrix(data_dict, num_wann, spin_index=False):
-    """Convert hr or spn dictionary to a matrix accepted by wannierBerri: first index is m, second n, third is the index of an R_vector from iRvec list."""
+    """Convert hr or spn dictionary to a matrix accepted by wannierBerri: first index is m, second n, third is the index of an R_vector from iRvec list.
+    
+    Args:
+        data_dict (dict): The dictionary with R vectors as keys and hopping as a complex number matrix as the values.
+        num_wann (int): The number of Wannier functions.
+        spin_index (bool): If True, the dictionary has spin index.
+        
+    Returns:
+        numpy array: The array of R vectors.
+        numpy array: The data matrix.
+    """
     S_names = ['x', 'y', 'z']
     if spin_index is True:
         # pick just the Rvec from the composed (Rvec, spin) keys
@@ -269,7 +363,17 @@ def dict_to_matrix(data_dict, num_wann, spin_index=False):
 
 def matrix_to_dict(data_matrix, Rvecs, spin_index=False, spin_names=['x','y','z']):
     """Convert data matrix (e.g. the Ham_R or SS_R file from symmetrization) into a dictionary with 
-        lattice vectors as keys and if spin_index is True then also ('x', 'y', 'z') for spin."""
+        lattice vectors as keys and if spin_index is True then also ('x', 'y', 'z') for spin.
+        
+    Args:
+        data_matrix (numpy array): The data matrix.
+        Rvecs (numpy array): The lattice vectors.
+        spin_index (bool): If True, the dictionary has spin index.
+        spin_names (list of 3 str): The spin names.
+        
+    Returns:
+        dict: The dictionary with R vectors as keys and hopping as a complex number matrix as the values.
+    """
     
     data_matrix = np.array(data_matrix)
     NR = len(Rvecs)
@@ -293,7 +397,17 @@ def matrix_to_dict(data_matrix, Rvecs, spin_index=False, spin_names=['x','y','z'
 
 def split_spn_dict(spn_dict, spin_names=['x','y','z']):
     """Split dictionary with keys as ((Rx, Ry, Rz), spin_component_name) to three dictionaries
-            with keys as (Rx, Ry, Rz)."""
+            with keys as (Rx, Ry, Rz).
+            
+    Args:
+        spn_dict (dict): The dictionary with R vectors as keys and hopping as a complex number matrix as the values.
+        spin_names (list of 3 str): The spin names.
+        
+    Returns:
+        dict: The dictionary with R vectors as keys and hopping as a complex number matrix as the values.
+        dict: The dictionary with R vectors as keys and hopping as a complex number matrix as the values.
+        dict: The dictionary with R vectors as keys and hopping as a complex number matrix as the values.
+    """
     R_keys = list(set([key[0] for key in spn_dict.keys()]))
     spn_x_dict = {}
     spn_y_dict = {}
@@ -307,7 +421,17 @@ def split_spn_dict(spn_dict, spin_names=['x','y','z']):
 
 def unite_spn_dict(spn_x_dict, spn_y_dict, spn_z_dict, spin_names=['x','y','z']):
     """Unite dictionary with keys as (Rx, Ry, Rz) to three dictionaries
-            with keys as ((Rx, Ry, Rz), spin_component_name)."""
+            with keys as ((Rx, Ry, Rz), spin_component_name).
+            
+    Args:
+        spn_x_dict (dict): The dictionary with R vectors as keys and hopping as a complex number matrix as the values.
+        spn_y_dict (dict): The dictionary with R vectors as keys and hopping as a complex number matrix as the values.
+        spn_z_dict (dict): The dictionary with R vectors as keys and hopping as a complex number matrix as the values.
+        spin_names (list of 3 str): The spin names.
+        
+    Returns:
+        dict: The dictionary with R vectors as keys and hopping as a complex number matrix as the values.
+    """
     keys_no_spin = list(spn_x_dict.keys())
     spn_dict = {}
     for key in keys_no_spin:
@@ -319,7 +443,14 @@ def unite_spn_dict(spn_x_dict, spn_y_dict, spn_z_dict, spin_names=['x','y','z'])
 
 def check_file_exists(file_name):
     """Check if file exists. If yes, add him a number in parentheses that does not exist. 
-        Return the new name."""
+        Return the new name.
+        
+    Args:
+        file_name (str): The file name.
+        
+    Returns:
+        str: The new file name.
+    """
     # Get the file name and extension
     base_name, file_extension = os.path.splitext(file_name)
     # Initialize a counter for appending to the file name
@@ -339,6 +470,9 @@ def outer(s, M):
     Args:
         s (np.array): Pauli (2 x 2) matrix sx, sy or sz 
         M (np.array): general orbital (n x n) matrix
+
+    Returns:
+        np.array: The resulting matrix.
     """
     n = len(M)
     A = np.zeros((2*n, 2*n), dtype=np.complex64)
@@ -357,6 +491,9 @@ def outer2(s, M):
     Args:
         s (np.array): Pauli (2 x 2) matrix sx, sy or sz 
         M (np.array): general orbital (n x n) matrix
+
+    Returns:
+        np.array: The resulting matrix.
     """
     return np.hstack(np.hstack(np.multiply.outer(s, M)))
 
@@ -449,7 +586,15 @@ def operator_exp_values(eigvecs, Operator):
 
 
 def real_to_W_gauge(kpoints, O_mn_R_W):
-    """Perform inverse Fourier transformation from real-space operator to k-space in Wannier gauge."""
+    """Perform inverse Fourier transformation from real-space operator to k-space in Wannier gauge.
+    
+    Args:
+        kpoints (list of tuples): The k-points.
+        O_mn_R_W (dict): The real-space operator dictionary.
+        
+    Returns:
+        dict: The k-space operator dictionary.
+    """
     O_mn_k_W = {}
     for kpoint in kpoints:
         # Eq. 18 in Qiao 2018
@@ -463,7 +608,17 @@ def real_to_W_gauge(kpoints, O_mn_R_W):
 def W_gauge_to_H_gauge(O_mn_k_W, U_mn_k={}, hamiltonian=True):
     """Transform from Wannier gauge to Hamiltonian gauge, i.e., for every k-point either diagonalize Hamiltonian
         or use the matrix from previous Hamiltonian diagonalization ('U_mn_k') to transform some other operator 
-        to H gauge."""
+        to H gauge.
+        
+    Args:
+        O_mn_k_W (dict): The k-space operator dictionary in Wannier gauge.
+        U_mn_k (dict): The unitary matrices which diagonalize the Hamiltonian for each k-point.
+        hamiltonian (bool): If True, the operator is Hamiltonian and the U_mn_k will be determined; for any other operator they have to be provided.
+        
+    Returns:
+        dict: The k-space operator dictionary in Hamiltonian gauge.
+    """
+
     if hamiltonian is True:
         U_mn_k = {}
         Eigs_k = {}
@@ -488,7 +643,10 @@ def W_gauge_to_H_gauge(O_mn_k_W, U_mn_k={}, hamiltonian=True):
         
 def save_bands_and_spin_texture_old(kpoints_rec, kpoints_cart, kpath, Eigs_k, S_mn_k_H_x, S_mn_k_H_y, S_mn_k_H_z, kmesh_2D=False, 
                                 fout='bands_spin.pickle', save_folder='./tb_model_wann90/'):
-    """Save the bands and spin texture information for given kpoints."""
+    """Save the bands and spin texture information for given kpoints.
+    
+    Args:
+        """
     bands_spin_dat = {}
     bands_spin_dat['kpoints'] = kpoints_cart
     bands_spin_dat['bands'] = [Eigs_k[kpoint] for kpoint in kpoints_rec]
@@ -504,7 +662,10 @@ def save_bands_and_spin_texture_old(kpoints_rec, kpoints_cart, kpath, Eigs_k, S_
 
 def save_bands_and_spin_texture(kpoints_rec, kpoints_cart, kpath, Eigs_k, S_mn_k_H_x, S_mn_k_H_y, S_mn_k_H_z, kmesh_2D=False, 
                                 fout='bands_spin.pickle', save_folder='./tb_model_wann90/'):
-    """Save the bands and spin texture information for given kpoints."""
+    """Save the bands and spin texture information for given kpoints.
+    
+    Args:
+        """
     bands_spin_dat = {}
     bands_spin_dat['kpoints'] = kpoints_cart
     bands_spin_dat['bands'] = Eigs_k
