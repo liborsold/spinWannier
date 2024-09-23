@@ -1,5 +1,4 @@
-"""Interpolate the spin texture to DFT bands k-point grid by home-made wannierization code.
-
+"""Utility functions for the wannier_quality method of the spinWannier.WannierTBmodel.WannierTBmodel class.
 """
 
 import pickle

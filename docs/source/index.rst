@@ -11,7 +11,7 @@ Welcome to spinWannier's documentation!
 See the `spinWannier project on GitHub <https://github.com/liborsold/spinWannier/>`_.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
    api
    classes

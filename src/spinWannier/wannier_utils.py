@@ -1,3 +1,4 @@
+"""Utility functions for the spinWannier package."""
 
 # from spin_texture_interpolated import R_grid
 import numpy as np
