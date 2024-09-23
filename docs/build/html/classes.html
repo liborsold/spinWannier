@@ -32,7 +32,82 @@
             
   <section id="classes">
 <h1>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h1>
-<p>For now, there is the LinearChain class including both the model and NEGF solver routines. This will be in future separated into a generic System class, with child classes of different specific systems (like LinearChain).</p>
+<p>For now, there is the WannierTBmodel class.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="spinWannier.WannierTBmodel.WannierTBmodel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spinWannier.WannierTBmodel.</span></span><span class="sig-name descname"><span class="pre">WannierTBmodel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seedname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sc_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0_self-consistent'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsc_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1_non-self-consistent'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wann_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2_wannier'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1_band_structure'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tb_model_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2_wannier/tb_model_wann90'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spn_formatted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spn_file_extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spn'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_saving_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'parquet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band_for_Fermi_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpoint_for_Fermi_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.WannierTBmodel.WannierTBmodel" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Calculates interpolated spin-texture on a dense k-point path.
+Plots the spin-texture on a 2D k-point mesh (Fermi surface).
+Calculates the quality of the Wannier functions.</p>
+<p>Needed files are
+(1) wannier90.eig
+(2) wannier90.win
+(3) wannier90.spn (or the WAVECAR file of VASP)
+(4) wannier90_u.mat
+(5) wannier90_u_dis.mat (if disentanglement was performed)
+(6) (FERMI_ENERGY.in file containing the Fermi energy value)</p>
+<p>PROCEDURE:
+Take the</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>spn_dict.dat  and</p></li>
+<li><p>u_dis_dict.dat  along with</p></li>
+<li><p>u_dict.dat</p></li>
+</ol>
+<p>to obtain the S_mn(W), i.e., the spn matrix in the Wannier gauge.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Then interpolate on an arbitrary k-point by performing the</dt><dd><ol class="loweralpha simple">
+<li><p>Fourier transform to real space (on the coarse DFT k-point grid) and then</p></li>
+<li><p>inverse Fourier transform with an arbitrary k-point.</p></li>
+</ol>
+</dd>
+<dt>Interpolate the Hamiltonian on a dense k-point grid:</dt><dd><ol class="arabic simple">
+<li><p>Take the diagonal Hamiltonian from DFT (the eigenvalues for the coarse k-point grid).</p></li>
+<li><p>Apply the U(dis) and U to get the Hamiltonian in Wannier gauge H_mn(W).</p></li>
+<li><p>inverse Fourier transform for an arbitrary k-point (dense k-point mesh).</p></li>
+</ol>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="spinWannier.WannierTBmodel.WannierTBmodel.interpolate_bands_and_spin">
+<span class="sig-name descname"><span class="pre">interpolate_bands_and_spin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoint_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bands_spin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpath_ticks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmesh_2D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmesh_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">101</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmesh_2D_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-0.5,</span> <span class="pre">0.5]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_real_space_operators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_folder_in_model_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tb_model_wann90/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_bands_spin_texture</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.WannierTBmodel.WannierTBmodel.interpolate_bands_and_spin" title="Link to this definition">¶</a></dt>
+<dd><p>Interpolate the bands and the spin texture on a dense k-point path or 2D mesh.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kpoint_matrix</strong> (<em>list</em>) – List of k-points in the path.</p></li>
+<li><p><strong>fout</strong> (<em>str</em><em>, </em><em>optional</em>) – Output file name. Defaults to ‘bands_spin’.</p></li>
+<li><p><strong>kpath_ticks</strong> (<em>list</em><em>, </em><em>optional</em>) – List of k-point ticks. Defaults to None.</p></li>
+<li><p><strong>kmesh_2D</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to interpolate on a 2D mesh. Defaults to False.</p></li>
+<li><p><strong>kmesh_density</strong> (<em>int</em><em>, </em><em>optional</em>) – Density of the k-point mesh. Defaults to 101.</p></li>
+<li><p><strong>kmesh_2D_limits</strong> (<em>list</em><em>, </em><em>optional</em>) – Limits of the 2D mesh. Defaults to [-0.5, 0.5].</p></li>
+<li><p><strong>save_real_space_operators</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to save the real space operators as dictionary files. Defaults to True.</p></li>
+<li><p><strong>save_folder_in_model_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Folder to save the data in the model directory. Defaults to “tb_model_wann90/”.</p></li>
+<li><p><strong>save_bands_spin_texture</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to save the bands and spin texture. Defaults to True.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spinWannier.WannierTBmodel.WannierTBmodel.plot1D_bands">
+<span class="sig-name descname"><span class="pre">plot1D_bands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spin_texture_1D_home_made.jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis_lim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-8,</span> <span class="pre">6]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.WannierTBmodel.WannierTBmodel.plot1D_bands" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spinWannier.WannierTBmodel.WannierTBmodel.plot2D_spin_texture">
+<span class="sig-name descname"><span class="pre">plot2D_spin_texture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fin_2D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bands_spin_2D'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fin_1D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bands_spin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spin_texture_2D_home_made.jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_to_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.WannierTBmodel.WannierTBmodel.plot2D_spin_texture" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spinWannier.WannierTBmodel.WannierTBmodel.wannier_quality">
+<span class="sig-name descname"><span class="pre">wannier_quality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">band_for_Fermi_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpoint_for_Fermi_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis_lim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-10,</span> <span class="pre">10]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.WannierTBmodel.WannierTBmodel.wannier_quality" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 
 

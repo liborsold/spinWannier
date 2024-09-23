@@ -10,6 +10,7 @@ Welcome to spinWannier's documentation!
    :maxdepth: 2
 
    api
+   classes
 
 
 Indices and tables

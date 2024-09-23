@@ -52,17 +52,23 @@ Take the</p>
 <div><ol class="arabic simple">
 <li><p>spn_dict.dat  and</p></li>
 <li><p>u_dis_dict.dat  along with</p></li>
+<li><p>u_dict.dat</p></li>
 </ol>
-<p>(3) u_dict.dat
-to obtain the S_mn(W), i.e., the spn matrix in the Wannier gauge.</p>
-<p>Then interpolate on an arbitrary k-point by performing the
-(a) Fourier transform to real space (on the coarse DFT k-point grid) and then
-(b) inverse Fourier transform with an arbitrary k-point.</p>
-<p>Interpolate the Hamiltonian on a dense k-point grid:
-(1) Take the diagonal Hamiltonian from DFT (the eigenvalues for the coarse k-point grid).
-(2) Apply the U(dis) and U to get the Hamiltonian in Wannier gauge H_mn(W).
-(3) inverse Fourier transform for an arbitrary k-point (dense k-point mesh).</p>
+<p>to obtain the S_mn(W), i.e., the spn matrix in the Wannier gauge.</p>
 </div></blockquote>
+<dl class="simple">
+<dt>Then interpolate on an arbitrary k-point by performing the</dt><dd><ol class="loweralpha simple">
+<li><p>Fourier transform to real space (on the coarse DFT k-point grid) and then</p></li>
+<li><p>inverse Fourier transform with an arbitrary k-point.</p></li>
+</ol>
+</dd>
+<dt>Interpolate the Hamiltonian on a dense k-point grid:</dt><dd><ol class="arabic simple">
+<li><p>Take the diagonal Hamiltonian from DFT (the eigenvalues for the coarse k-point grid).</p></li>
+<li><p>Apply the U(dis) and U to get the Hamiltonian in Wannier gauge H_mn(W).</p></li>
+<li><p>inverse Fourier transform for an arbitrary k-point (dense k-point mesh).</p></li>
+</ol>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="spinWannier.WannierTBmodel.WannierTBmodel.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seedname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sc_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0_self-consistent'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsc_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1_non-self-consistent'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wann_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2_wannier'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1_band_structure'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tb_model_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2_wannier/tb_model_wann90'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spn_formatted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spn_file_extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spn'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_saving_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'parquet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band_for_Fermi_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpoint_for_Fermi_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.WannierTBmodel.WannierTBmodel.__init__" title="Link to this definition">¶</a></dt>

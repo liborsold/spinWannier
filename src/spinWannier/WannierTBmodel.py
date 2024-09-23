@@ -29,16 +29,18 @@ class WannierTBmodel():
         (1) spn_dict.dat  and 
         (2) u_dis_dict.dat  along with 
         (3) u_dict.dat
+
         to obtain the S_mn(W), i.e., the spn matrix in the Wannier gauge.
 
-        Then interpolate on an arbitrary k-point by performing the
+    Then interpolate on an arbitrary k-point by performing the
         (a) Fourier transform to real space (on the coarse DFT k-point grid) and then
         (b) inverse Fourier transform with an arbitrary k-point.
         
-        Interpolate the Hamiltonian on a dense k-point grid: 
+    Interpolate the Hamiltonian on a dense k-point grid: 
         (1) Take the diagonal Hamiltonian from DFT (the eigenvalues for the coarse k-point grid). 
         (2) Apply the U(dis) and U to get the Hamiltonian in Wannier gauge H_mn(W).
         (3) inverse Fourier transform for an arbitrary k-point (dense k-point mesh).
+        
     """
 
     def __init__(self, seedname='wannier90', sc_dir='0_self-consistent', nsc_dir='1_non-self-consistent', wann_dir='2_wannier', \

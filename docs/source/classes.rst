@@ -3,7 +3,7 @@ Classes
 
 For now, there is the WannierTBmodel class. 
 
-.. autoclass:: spinWannier.WannierTBmodel.
+.. autoclass:: spinWannier.WannierTBmodel.WannierTBmodel
     :members:
     :undoc-members:
     :show-inheritance:
