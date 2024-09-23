@@ -1,5 +1,6 @@
 # spinWannier
-**<i>Tools for handling Wannier models with a spin operator, calculating the Wannier model quality and spin-texture plotting.</i>**
+**<i>Tools for handling Wannier models with a spin operator, calculating the Wannier model quality and spin-texture plotting.</i>** <br>
+**<i>&nbsp; See the [documentation](https://liborsold.github.io/spinWannier/).</i>**
 
 ```
 pip install spinWannier
