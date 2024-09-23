@@ -284,6 +284,12 @@ class WannierTBmodel():
     
 
     def plot1D_bands(self, fout='spin_texture_1D_home_made.jpg', yaxis_lim=[-8, 6]):
+        """Plot the bands and the spin texture on a 1D path.
+
+        Args:
+            fout (str, optional): Output figure name. Defaults to 'spin_texture_1D_home_made.jpg'.
+            yaxis_lim (list, optional): Y-axis limits. Defaults to [-8, 6].
+        """
         plot_bands_spin_texture(self.kpoints_rec['1D'], self.kpath['1D'], self.kpath_ticks, self.Eigs_k['1D'], self.S_mn_k_H_x['1D'], self.S_mn_k_H_y['1D'], self.S_mn_k_H_z['1D'], E_F=self.EF_nsc, fout=fout, yaxis_lim=yaxis_lim)
     
 
