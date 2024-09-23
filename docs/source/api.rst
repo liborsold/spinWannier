@@ -5,3 +5,4 @@ API
    :toctree: generated
 
    spinWannier.WannierTBmodel.WannierTBmodel
+   spinWannier.wannier_utils

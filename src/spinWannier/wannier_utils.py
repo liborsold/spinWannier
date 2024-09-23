@@ -60,7 +60,14 @@ def load_eigenvals(eigenval_file="wannier90.eig"):
 
 
 def eigenval_dict(eigenval_file="wannier90.eig",  win_file="wannier90.win"):
-    """Return the eigenvalues as a dictionary with the keys being the k-point tuples."""
+    """Return the eigenvalues as a dictionary with the keys being the k-point tuples.
+    
+    Args:
+        eigenval_file (str): The name of the eigenvalues file.
+        win_file (str): The name of the wannier90.win file.
+    
+    Returns:
+        dict: The eigenvalues dictionary."""
     eigenvalues = load_eigenvals(eigenval_file=eigenval_file)
     kpoints = get_kpoint_names(fwin=win_file)
     # make k-points with 10 decimal places and no minus sign before a zero
@@ -94,7 +101,14 @@ def load_dict(fin="spn_dict.pickle", text_file=False):
 
 
 def load_lattice_vectors(win_file="wannier90.win"):
-    """Return a 3x3 matrix where 1st row is the 1st lattice vector etc."""
+    """Return a 3x3 matrix where 1st row is the 1st lattice vector etc.
+    
+    Args:
+        win_file (str): The name of the wannier90.win file.
+        
+    Returns:
+        numpy array: The lattice vectors matrix.
+    """
     A = []
     with open(win_file, 'r') as fr:
         read = False
