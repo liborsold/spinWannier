@@ -40,7 +40,7 @@ class WannierTBmodel():
         (1) Take the diagonal Hamiltonian from DFT (the eigenvalues for the coarse k-point grid). 
         (2) Apply the U(dis) and U to get the Hamiltonian in Wannier gauge H_mn(W).
         (3) inverse Fourier transform for an arbitrary k-point (dense k-point mesh).
-        
+
     """
 
     def __init__(self, seedname='wannier90', sc_dir='0_self-consistent', nsc_dir='1_non-self-consistent', wann_dir='2_wannier', \
@@ -288,6 +288,14 @@ class WannierTBmodel():
     
 
     def plot2D_spin_texture(self, fin_2D='bands_spin_2D', fin_1D='bands_spin', fig_name="spin_texture_2D_home_made.jpg", E_to_cut=None):
+        """Plot the spin texture on a 2D mesh (Fermi surface).
+
+        Args:
+            fin_2D (str, optional): File name of the 2D mesh data. Defaults to 'bands_spin_2D'.
+            fin_1D (str, optional): File name of the 1D path data. Defaults to 'bands_spin'.
+            fig_name (str, optional): Output figure name. Defaults to "spin_texture_2D_home_made.jpg".
+            E_to_cut (float, optional): Energy to cut. Defaults to None.
+        """
         # ==========  USER DEFINED  ===============
         fin_1D = self.tb_model_dir+fin_1D+".pickle" #"bands_spin_model.pickle" #"./tb_model_wann90/bands_spin.pickle" #"bands_spin_model.pickle" #
         fin_2D = self.tb_model_dir+fin_2D+'.pickle' #"bands_spin_2D_model.pickle" #"./tb_model_wann90/bands_spin_2D.pickle" #"bands_spin_2D_model.pickle"
@@ -365,7 +373,13 @@ class WannierTBmodel():
 
     def wannier_quality(self, band_for_Fermi_correction=None, kpoint_for_Fermi_correction='0.0000000E+00  0.0000000E+00  0.0000000E+00', \
                         yaxis_lim=[-10, 10]):
-        
+        """Calculate the quality of the Wannier functions compared to the original DFT band structure.
+
+        Args:
+            band_for_Fermi_correction (_type_, optional): Band number for Fermi correction. Defaults to None -> the lowest Wannier band wil be used.
+            kpoint_for_Fermi_correction (_type_, optional): K-point for Fermi correction. Defaults to '0.0000000E+00  0.0000000E+00  0.0000000E+00' (Gamma point).
+            yaxis_lim (list, optional): Limits of the y-axis. Defaults to [-10, 10].
+        """
         kpoint_matrix, NK, kpath_ticks = parse_KPOINTS_file(self.bands_dir+"KPOINTS")
 
         wannier_quality_calculation(kpoint_matrix, NK, kpath_ticks, self.EF_nsc, num_wann=self.NW, discard_first_bands=self.discard_first_bands, sc_dir=self.sc_dir, nsc_dir=self.nsc_dir, wann_dir=self.wann_dir, \

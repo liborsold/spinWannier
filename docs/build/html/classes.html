@@ -13,6 +13,7 @@
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="spinWannier.WannierTBmodel.WannierTBmodel" href="generated/spinWannier.WannierTBmodel.WannierTBmodel.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -99,12 +100,33 @@ Take the</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="spinWannier.WannierTBmodel.WannierTBmodel.plot2D_spin_texture">
 <span class="sig-name descname"><span class="pre">plot2D_spin_texture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fin_2D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bands_spin_2D'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fin_1D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bands_spin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spin_texture_2D_home_made.jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_to_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.WannierTBmodel.WannierTBmodel.plot2D_spin_texture" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Plot the spin texture on a 2D mesh (Fermi surface).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fin_2D</strong> (<em>str</em><em>, </em><em>optional</em>) – File name of the 2D mesh data. Defaults to ‘bands_spin_2D’.</p></li>
+<li><p><strong>fin_1D</strong> (<em>str</em><em>, </em><em>optional</em>) – File name of the 1D path data. Defaults to ‘bands_spin’.</p></li>
+<li><p><strong>fig_name</strong> (<em>str</em><em>, </em><em>optional</em>) – Output figure name. Defaults to “spin_texture_2D_home_made.jpg”.</p></li>
+<li><p><strong>E_to_cut</strong> (<em>float</em><em>, </em><em>optional</em>) – Energy to cut. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="spinWannier.WannierTBmodel.WannierTBmodel.wannier_quality">
 <span class="sig-name descname"><span class="pre">wannier_quality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">band_for_Fermi_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpoint_for_Fermi_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis_lim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-10,</span> <span class="pre">10]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.WannierTBmodel.WannierTBmodel.wannier_quality" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Calculate the quality of the Wannier functions compared to the original DFT band structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>band_for_Fermi_correction</strong> (<em>_type_</em><em>, </em><em>optional</em>) – Band number for Fermi correction. Defaults to None -&gt; the lowest Wannier band wil be used.</p></li>
+<li><p><strong>kpoint_for_Fermi_correction</strong> (<em>_type_</em><em>, </em><em>optional</em>) – K-point for Fermi correction. Defaults to ‘0.0000000E+00  0.0000000E+00  0.0000000E+00’ (Gamma point).</p></li>
+<li><p><strong>yaxis_lim</strong> (<em>list</em><em>, </em><em>optional</em>) – Limits of the y-axis. Defaults to [-10, 10].</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -127,14 +149,19 @@ Take the</p>
 
 
 <h3>Navigation</h3>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#spinWannier.WannierTBmodel.WannierTBmodel"><code class="docutils literal notranslate"><span class="pre">WannierTBmodel</span></code></a></li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="generated/spinWannier.WannierTBmodel.WannierTBmodel.html" title="previous chapter">spinWannier.WannierTBmodel.WannierTBmodel</a></li>
   </ul></li>
 </ul>
 </div>
