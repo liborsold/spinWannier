@@ -23,7 +23,7 @@ Example of a spin-projected band structure plot by ``spinWannier`` in ``./exampl
 <center><img src="https://github.com/user-attachments/assets/b9012f49-3ba0-41b4-b3ba-26c5315982ee" alt="spin_projected_bands_example" width="950" /></center>
 
 ### Error of Wannier interpolation
-... by ``spinWannier`` in ``./examples/spinWannier_use_example.ipynb``:
+Produced by ``spinWannier`` in ``./examples/spinWannier_use_example.ipynb``:
 <center><img src="https://github.com/user-attachments/assets/e7ce96ed-044a-4b7c-bdb0-e15146a24cee" alt="spin_projected_bands_example" width="950" /></center>
 
 The same, but _integrated over k-space_, plotted as a function of energy:
