@@ -76,7 +76,7 @@ class WannierTBmodel:
         tb_model_dir="2_wannier/tb_model_wann90",
         spn_formatted=False,
         spn_file_extension="spn",
-        data_saving_format="parquet",
+        data_saving_format="npz", #"parquet",
         band_for_Fermi_correction=None,
         kpoint_for_Fermi_correction="0.0000000E+00  0.0000000E+00  0.0000000E+00",
     ):

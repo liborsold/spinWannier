@@ -876,7 +876,7 @@ def save_bands_and_spin_texture(
     S_mn_k_H_y,
     S_mn_k_H_z,
     kmesh_2D=False,
-    fout="bands_spin.pickle",
+    fout="bands_spin.npz",
     save_folder="./tb_model_wann90/",
 ):
     """Save the bands and spin texture information for given kpoints.
@@ -901,9 +901,31 @@ def save_bands_and_spin_texture(
     bands_spin_dat["Sz"] = S_mn_k_H_z
     if kmesh_2D is not True:
         bands_spin_dat["kpath"] = kpath
-    print(save_folder + fout)
-    with open(save_folder + fout, "wb") as fw:
-        pickle.dump(bands_spin_dat, fw)
+
+    # print('saving to:', save_folder + fout)
+    # with open(save_folder + fout, "wb") as fw:
+    #     pickle.dump(bands_spin_dat, fw)
+    # save as numpy's .npz file because values in the dictionary are numpy arrays
+    # np.savez(save_folder + fout, **bands_spin_dat)
+    # np.savez_compressed(save_folder + fout, **bands_spin_dat)
+
+    import h5py
+    fout = fout.split(".")[0] + ".h5"
+    # Save as HDF5
+    print('saving to:', save_folder + fout)
+    with h5py.File(save_folder + fout, 'w') as hf:
+        for key, value in bands_spin_dat.items():
+            print(key, type(value))
+            if type(value) == np.ndarray:
+                hf.create_dataset(key, data=value.astype(np.float64))
+            hf.create_dataset(key, data=value)
+    # Convert to DataFrame and save as HDF5
+    # df = pd.DataFrame(bands_spin_dat)
+    # df.to_hdf(save_folder + fout, key='df', mode='w')
+
+    #     fout = fout.split(".")[0] + ".parquet"
+    # print('saving to:', save_folder + fout)
+    # df.to_parquet(save_folder + fout)
 
 
 def plot_bands_spin_texture(
