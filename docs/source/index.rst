@@ -15,7 +15,7 @@ The `spinWannier project <https://github.com/liborsold/spinWannier/>`_ is a Pyth
 
 .. CrXY example image
 .. image::
-   ./_static/images/spinWannier_example_figure.jpg
+   ./_images/spinWannier_example_figure.jpg
    :width: 800px
    :align: center
 
