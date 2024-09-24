@@ -20,7 +20,7 @@ The `spinWannier project <https://github.com/liborsold/spinWannier/>`_ is a Pyth
    :align: center
 
 |br|
-If you find this package useful, please cite `L. Vojáček*, J. M. Dueñas* et al., Nano Letters (2024) <https://pubs.acs.org/doi/10.1021/acs.nanolett.4c03029>`_
+If you find this package useful, please cite `L. Vojáček*, J. M. Dueñas* et al., Nano Letters (2024) <https://pubs.acs.org/doi/10.1021/acs.nanolett.4c03029>`_.
 
 Quickstart
 ================
