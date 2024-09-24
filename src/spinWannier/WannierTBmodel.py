@@ -63,6 +63,7 @@ class WannierTBmodel:
             (1) Take the diagonal Hamiltonian from DFT (the eigenvalues for the coarse k-point grid).
             (2) Apply the U(dis) and U to get the Hamiltonian in Wannier gauge H_mn(W).
             (3) inverse Fourier transform for an arbitrary k-point (dense k-point mesh).
+            
     """
 
     def __init__(

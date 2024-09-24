@@ -200,50 +200,18 @@
 <div class="article-header-buttons">
 
 
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/liborsold/spinWannier" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
+<a href="https://github.com/liborsold/spinWannier" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
    title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   <i class="fab fa-github"></i>
   </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/liborsold/spinWannier/blob/master/docs/source/generated/spinWannier.wannier_utils.rst?plain=1" target="_blank"
-   class="btn btn-sm btn-source-file-button dropdown-item"
-   title="Show source"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
 
-<span class="btn__icon-container">
-  <i class="fas fa-code"></i>
-  </span>
-<span class="btn__text-container">Show source</span>
 </a>
-</li>
-      
-  </ul>
-</div>
 
 
 
@@ -367,7 +335,7 @@ document.write(`
 <td><p>Transform from Wannier gauge to Hamiltonian gauge, i.e., for every k-point either diagonalize Hamiltonian</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.band_with_spin_projection_under_threshold_for_kpoint" title="spinWannier.wannier_utils.band_with_spin_projection_under_threshold_for_kpoint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">band_with_spin_projection_under_threshold_for_kpoint</span></code></a>([...])</p></td>
-<td><p></p></td>
+<td><p>Return the lowest band with the spin projection below the threshold for 'kpoint'.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.check_file_exists" title="spinWannier.wannier_utils.check_file_exists"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_file_exists</span></code></a>(file_name)</p></td>
 <td><p>Check if file exists. If yes, add him a number in parentheses that does not exist.</p></td>
@@ -376,7 +344,7 @@ document.write(`
 <td><p>wannier90_hr.dat has sometimes the R vectors shifted (probably to facilitate the 'minimal replice' interpolation.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.coerce_to_positive_angles" title="spinWannier.wannier_utils.coerce_to_positive_angles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coerce_to_positive_angles</span></code></a>(angles)</p></td>
-<td><p>Coerce angles to be positive (i.e., in the range [0, 2pi])</p></td>
+<td><p>Coerce angles to be positive (i.e., in the range [0, 2pi]).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.convert_wann_TB_model_for_QuT" title="spinWannier.wannier_utils.convert_wann_TB_model_for_QuT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_wann_TB_model_for_QuT</span></code></a>([folder_in, ...])</p></td>
 <td><p>Convert the outputs of my wannier to TB to Joaquin's code.</p></td>
@@ -415,7 +383,7 @@ document.write(`
 <td><p>Convert wannier90 hr.dat to dictionary in the form that we are using: R vectors as keys and hopping as a complex number matrix as the values.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.interpolate_operator" title="spinWannier.wannier_utils.interpolate_operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interpolate_operator</span></code></a>(operator_dict, ...[, ...])</p></td>
-<td><p>Takes operator O (Hamiltonian, spin-operator ...) evaluated on a coarse DFT k-mesh and Hamiltonian eigenstates onto 'kpoints' using the (1) (semi)unitary transformation defined by U_dis*U from the Hamiltonian gauge (eigenstate gauge)      to the Wannier gauge, (2) performing Fourier transform to the real-space using a set of lattice vectors (3) inverse Fourier transforming to the k-space for all the k-points from 'kpoints'.</p></td>
+<td><p>Takes operator O (Hamiltonian, spin-operator ...) evaluated on a coarse DFT k-mesh and Hamiltonian eigenstates onto 'kpoints' using the</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.load_dict" title="spinWannier.wannier_utils.load_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_dict</span></code></a>([fin, text_file])</p></td>
 <td><p>If not text_file, than it's binary.</p></td>
@@ -433,7 +401,7 @@ document.write(`
 <td><p>Return 0 / 1 / 2  if spin is along x / y / z direction, respectively.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.material_name_to_latex" title="spinWannier.wannier_utils.material_name_to_latex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">material_name_to_latex</span></code></a>(material)</p></td>
-<td><p></p></td>
+<td><p>Convert the material name to LaTeX format.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.matrix_to_dict" title="spinWannier.wannier_utils.matrix_to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrix_to_dict</span></code></a>(data_matrix, Rvecs[, ...])</p></td>
 <td><p>Convert data matrix (e.g. the Ham_R or SS_R file from symmetrization) into a dictionary with</p></td>
@@ -448,7 +416,7 @@ document.write(`
 <td><p>Works for s matrix of any dimension, but slower than 'outer(s, M)' Outer product between a nxn spin matrix and a general orbital nxn M matrix, so that the spin blocks are the big blocks.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.parse_KPOINTS_file" title="spinWannier.wannier_utils.parse_KPOINTS_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_KPOINTS_file</span></code></a>(KPOINTS_file_path)</p></td>
-<td><p></p></td>
+<td><p>Parse the KPOINTS file.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.plot_bands_spin_texture" title="spinWannier.wannier_utils.plot_bands_spin_texture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_bands_spin_texture</span></code></a>(kpoints, kpath, ...)</p></td>
 <td><p>Output a figure with Sx, Sy, and Sz-projected band structure.</p></td>
@@ -466,7 +434,7 @@ document.write(`
 <td><p>Return the reciprocal lattice vectors from the real-space lattice vectors.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.replace_middle_of_cmap_with_custom_color" title="spinWannier.wannier_utils.replace_middle_of_cmap_with_custom_color"><code class="xref py py-obj docutils literal notranslate"><span class="pre">replace_middle_of_cmap_with_custom_color</span></code></a>([...])</p></td>
-<td><p></p></td>
+<td><p>Replace the middle of the colormap with a custom color.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.save_bands_and_spin_texture" title="spinWannier.wannier_utils.save_bands_and_spin_texture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_bands_and_spin_texture</span></code></a>(kpoints_rec, ...)</p></td>
 <td><p>Save the bands and spin texture information for given kpoints.</p></td>
