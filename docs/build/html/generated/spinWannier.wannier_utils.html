@@ -1,256 +1,542 @@
+
+
 <!DOCTYPE html>
 
-<html lang="en" data-content_root="../">
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>spinWannier.wannier_utils &#8212; spinWannier 0.1.4 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
-    <script src="../_static/documentation_options.js?v=fd825880"></script>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=23027dbc"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'generated/spinWannier.wannier_utils';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="spinWannier.wannier_quality_utils" href="spinWannier.wannier_quality_utils.html" />
-    <link rel="prev" title="API" href="../api.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="prev" title="Modules" href="../modules.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
   
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
   
   
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-  </head><body>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
 
-          <div class="body" role="main">
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">spinWannier 0.1.4 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../modules.html">Modules</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">spinWannier.wannier_utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spinWannier.wannier_quality_utils.html">spinWannier.wannier_quality_utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spinWannier.WannierTBmodel.html">spinWannier.WannierTBmodel</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">Functions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/generated/spinWannier.wannier_utils.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>spinWannier.wannier_utils</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section id="module-spinWannier.wannier_utils">
-<span id="spinwannier-wannier-utils"></span><h1>spinWannier.wannier_utils<a class="headerlink" href="#module-spinWannier.wannier_utils" title="Link to this heading">¶</a></h1>
+<span id="spinwannier-wannier-utils"></span><h1>spinWannier.wannier_utils<a class="headerlink" href="#module-spinWannier.wannier_utils" title="Link to this heading">#</a></h1>
 <p>Utility functions for the spinWannier package.</p>
 <p class="rubric">Functions</p>
-<table class="autosummary longtable docutils align-default">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">S_xyz_expectation_values</span></code>(eigvecs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.S_xyz_expectation_values" title="spinWannier.wannier_utils.S_xyz_expectation_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">S_xyz_expectation_values</span></code></a>(eigvecs)</p></td>
 <td><p>For a k-space Hamiltonian Hk (function of kx and ky), calculate the eigen-energies and expectation values of spin Sx, Sy, Sz, at all the k-points in 'kpoints'.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">W_gauge_to_H_gauge</span></code>(O_mn_k_W[, U_mn_k, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.W_gauge_to_H_gauge" title="spinWannier.wannier_utils.W_gauge_to_H_gauge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">W_gauge_to_H_gauge</span></code></a>(O_mn_k_W[, U_mn_k, ...])</p></td>
 <td><p>Transform from Wannier gauge to Hamiltonian gauge, i.e., for every k-point either diagonalize Hamiltonian</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">band_with_spin_projection_under_threshold_for_kpoint</span></code>([...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.band_with_spin_projection_under_threshold_for_kpoint" title="spinWannier.wannier_utils.band_with_spin_projection_under_threshold_for_kpoint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">band_with_spin_projection_under_threshold_for_kpoint</span></code></a>([...])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_file_exists</span></code>(file_name)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.check_file_exists" title="spinWannier.wannier_utils.check_file_exists"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_file_exists</span></code></a>(file_name)</p></td>
 <td><p>Check if file exists. If yes, add him a number in parentheses that does not exist.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coerce_R_vectors_to_basic_supercell</span></code>([R_tr, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.coerce_R_vectors_to_basic_supercell" title="spinWannier.wannier_utils.coerce_R_vectors_to_basic_supercell"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coerce_R_vectors_to_basic_supercell</span></code></a>([R_tr, ...])</p></td>
 <td><p>wannier90_hr.dat has sometimes the R vectors shifted (probably to facilitate the 'minimal replice' interpolation.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coerce_to_positive_angles</span></code>(angles)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.coerce_to_positive_angles" title="spinWannier.wannier_utils.coerce_to_positive_angles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coerce_to_positive_angles</span></code></a>(angles)</p></td>
 <td><p>Coerce angles to be positive (i.e., in the range [0, 2pi])</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_wann_TB_model_for_QuT</span></code>([folder_in, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.convert_wann_TB_model_for_QuT" title="spinWannier.wannier_utils.convert_wann_TB_model_for_QuT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_wann_TB_model_for_QuT</span></code></a>([folder_in, ...])</p></td>
 <td><p>Convert the outputs of my wannier to TB to Joaquin's code.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict_to_matrix</span></code>(data_dict, num_wann[, spin_index])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.dict_to_matrix" title="spinWannier.wannier_utils.dict_to_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict_to_matrix</span></code></a>(data_dict, num_wann[, spin_index])</p></td>
 <td><p>Convert hr or spn dictionary to a matrix accepted by wannierBerri: first index is m, second n, third is the index of an R_vector from iRvec list.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigenval_dict</span></code>([eigenval_file, win_file])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.eigenval_dict" title="spinWannier.wannier_utils.eigenval_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigenval_dict</span></code></a>([eigenval_file, win_file])</p></td>
 <td><p>Return the eigenvalues as a dictionary with the keys being the k-point tuples.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigenval_for_kpoint</span></code>([kpoint, band, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.eigenval_for_kpoint" title="spinWannier.wannier_utils.eigenval_for_kpoint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigenval_for_kpoint</span></code></a>([kpoint, band, ...])</p></td>
 <td><p>Return the eigenvalue at 'kpoint' and 'band'.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fermi_surface_spin_texture</span></code>(kpoints2D, ...[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.fermi_surface_spin_texture" title="spinWannier.wannier_utils.fermi_surface_spin_texture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fermi_surface_spin_texture</span></code></a>(kpoints2D, ...[, ...])</p></td>
 <td><p>Plot scatter points with a spin texture on a constant energy xy surface (probably at E=EF) if the energy difference of each given point is lower than some threshold.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">files_wann90_to_dict_pickle</span></code>([model_dir, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.files_wann90_to_dict_pickle" title="spinWannier.wannier_utils.files_wann90_to_dict_pickle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">files_wann90_to_dict_pickle</span></code></a>([model_dir, ...])</p></td>
 <td><p>Convert wannier90 files to pickled dictionaries files.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_2D_kpoint_mesh</span></code>(G[, limits, Nk])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.get_2D_kpoint_mesh" title="spinWannier.wannier_utils.get_2D_kpoint_mesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_2D_kpoint_mesh</span></code></a>(G[, limits, Nk])</p></td>
 <td><p>Get a 2D mesh of k-points in the reciprocal space.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_DFT_kgrid</span></code>([fin])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.get_DFT_kgrid" title="spinWannier.wannier_utils.get_DFT_kgrid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_DFT_kgrid</span></code></a>([fin])</p></td>
 <td><p>Get the 'mp_grid' from wannier90.win file which tells the k-grid used in the DFT calculation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_kpoint_names</span></code>([fwin])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.get_kpoint_names" title="spinWannier.wannier_utils.get_kpoint_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_kpoint_names</span></code></a>([fwin])</p></td>
 <td><p>Parse wannier90.win file to get k-point names as a list of tuples.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_kpoint_path</span></code>(kpoint_matrix, G, Nk)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.get_kpoint_path" title="spinWannier.wannier_utils.get_kpoint_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_kpoint_path</span></code></a>(kpoint_matrix, G, Nk)</p></td>
 <td><p>Interpolate between kpoints in the kpoint_matrix to obtain a k-point path with Nk points in each segment.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_skiprows_hr_dat</span></code>([fin])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.get_skiprows_hr_dat" title="spinWannier.wannier_utils.get_skiprows_hr_dat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_skiprows_hr_dat</span></code></a>([fin])</p></td>
 <td><p>Get the number of skiprows in wannier90_hr.dat file.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">hr_wann90_to_dict</span></code>([fin_wannier90])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.hr_wann90_to_dict" title="spinWannier.wannier_utils.hr_wann90_to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hr_wann90_to_dict</span></code></a>([fin_wannier90])</p></td>
 <td><p>Convert wannier90 hr.dat to dictionary in the form that we are using: R vectors as keys and hopping as a complex number matrix as the values.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">interpolate_operator</span></code>(operator_dict, ...[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.interpolate_operator" title="spinWannier.wannier_utils.interpolate_operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interpolate_operator</span></code></a>(operator_dict, ...[, ...])</p></td>
 <td><p>Takes operator O (Hamiltonian, spin-operator ...) evaluated on a coarse DFT k-mesh and Hamiltonian eigenstates onto 'kpoints' using the (1) (semi)unitary transformation defined by U_dis*U from the Hamiltonian gauge (eigenstate gauge)      to the Wannier gauge, (2) performing Fourier transform to the real-space using a set of lattice vectors (3) inverse Fourier transforming to the k-space for all the k-points from 'kpoints'.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_dict</span></code>([fin, text_file])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.load_dict" title="spinWannier.wannier_utils.load_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_dict</span></code></a>([fin, text_file])</p></td>
 <td><p>If not text_file, than it's binary.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_eigenvals</span></code>([eigenval_file])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.load_eigenvals" title="spinWannier.wannier_utils.load_eigenvals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_eigenvals</span></code></a>([eigenval_file])</p></td>
 <td><p>Parse the wannier90 .eig file to get the k-point and band-resolved eigenvalues.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_lattice_vectors</span></code>([win_file])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.load_lattice_vectors" title="spinWannier.wannier_utils.load_lattice_vectors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_lattice_vectors</span></code></a>([win_file])</p></td>
 <td><p>Return a 3x3 matrix where 1st row is the 1st lattice vector etc.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">magmom_OOP_or_IP</span></code>(INCAR_path)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.magmom_OOP_or_IP" title="spinWannier.wannier_utils.magmom_OOP_or_IP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">magmom_OOP_or_IP</span></code></a>(INCAR_path)</p></td>
 <td><p>Return True if MAGMOM in INCAR_path lies purely OOP, else return False.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">magmom_direction</span></code>(INCAR_path)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.magmom_direction" title="spinWannier.wannier_utils.magmom_direction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">magmom_direction</span></code></a>(INCAR_path)</p></td>
 <td><p>Return 0 / 1 / 2  if spin is along x / y / z direction, respectively.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">material_name_to_latex</span></code>(material)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.material_name_to_latex" title="spinWannier.wannier_utils.material_name_to_latex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">material_name_to_latex</span></code></a>(material)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrix_to_dict</span></code>(data_matrix, Rvecs[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.matrix_to_dict" title="spinWannier.wannier_utils.matrix_to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrix_to_dict</span></code></a>(data_matrix, Rvecs[, ...])</p></td>
 <td><p>Convert data matrix (e.g. the Ham_R or SS_R file from symmetrization) into a dictionary with</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">operator_exp_values</span></code>(eigvecs, Operator)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.operator_exp_values" title="spinWannier.wannier_utils.operator_exp_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">operator_exp_values</span></code></a>(eigvecs, Operator)</p></td>
 <td><p>Return the expectation values of Operator (an N x N matrix, where N is the size of the eigenvectors) for all eigenvectors.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">outer</span></code>(s, M)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.outer" title="spinWannier.wannier_utils.outer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">outer</span></code></a>(s, M)</p></td>
 <td><p>Outer product between a 2x2 spin matrix and a general orbital nxn M matrix, so that the spin blocks are the big blocks.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">outer2</span></code>(s, M)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.outer2" title="spinWannier.wannier_utils.outer2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">outer2</span></code></a>(s, M)</p></td>
 <td><p>Works for s matrix of any dimension, but slower than 'outer(s, M)' Outer product between a nxn spin matrix and a general orbital nxn M matrix, so that the spin blocks are the big blocks.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_KPOINTS_file</span></code>(KPOINTS_file_path)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.parse_KPOINTS_file" title="spinWannier.wannier_utils.parse_KPOINTS_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_KPOINTS_file</span></code></a>(KPOINTS_file_path)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_bands_spin_texture</span></code>(kpoints, kpath, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.plot_bands_spin_texture" title="spinWannier.wannier_utils.plot_bands_spin_texture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_bands_spin_texture</span></code></a>(kpoints, kpath, ...)</p></td>
 <td><p>Output a figure with Sx, Sy, and Sz-projected band structure.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_PROCAR_lines_for_kpoint</span></code>([kpoint, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.read_PROCAR_lines_for_kpoint" title="spinWannier.wannier_utils.read_PROCAR_lines_for_kpoint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_PROCAR_lines_for_kpoint</span></code></a>([kpoint, ...])</p></td>
 <td><p>Get the section of PROCAR belonging to the first occurence of 'kpoint' in PROCAR_file.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">real_space_grid_from_hr_dat</span></code>([fname])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.real_space_grid_from_hr_dat" title="spinWannier.wannier_utils.real_space_grid_from_hr_dat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">real_space_grid_from_hr_dat</span></code></a>([fname])</p></td>
 <td><p>Get the real-space grid from the seedname_hr.dat file.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">real_to_W_gauge</span></code>(kpoints, O_mn_R_W)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.real_to_W_gauge" title="spinWannier.wannier_utils.real_to_W_gauge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">real_to_W_gauge</span></code></a>(kpoints, O_mn_R_W)</p></td>
 <td><p>Perform inverse Fourier transformation from real-space operator to k-space in Wannier gauge.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">reciprocal_lattice_vectors</span></code>(...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.reciprocal_lattice_vectors" title="spinWannier.wannier_utils.reciprocal_lattice_vectors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reciprocal_lattice_vectors</span></code></a>(...)</p></td>
 <td><p>Return the reciprocal lattice vectors from the real-space lattice vectors.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">replace_middle_of_cmap_with_custom_color</span></code>([...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.replace_middle_of_cmap_with_custom_color" title="spinWannier.wannier_utils.replace_middle_of_cmap_with_custom_color"><code class="xref py py-obj docutils literal notranslate"><span class="pre">replace_middle_of_cmap_with_custom_color</span></code></a>([...])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_bands_and_spin_texture</span></code>(kpoints_rec, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.save_bands_and_spin_texture" title="spinWannier.wannier_utils.save_bands_and_spin_texture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_bands_and_spin_texture</span></code></a>(kpoints_rec, ...)</p></td>
 <td><p>Save the bands and spin texture information for given kpoints.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_bands_and_spin_texture_old</span></code>(kpoints_rec, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.save_bands_and_spin_texture_old" title="spinWannier.wannier_utils.save_bands_and_spin_texture_old"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_bands_and_spin_texture_old</span></code></a>(kpoints_rec, ...)</p></td>
 <td><p>Save the bands and spin texture information for given kpoints.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">selected_band_plot</span></code>([band])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.selected_band_plot" title="spinWannier.wannier_utils.selected_band_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">selected_band_plot</span></code></a>([band])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_spn_dict</span></code>(spn_dict[, spin_names])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.split_spn_dict" title="spinWannier.wannier_utils.split_spn_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_spn_dict</span></code></a>(spn_dict[, spin_names])</p></td>
 <td><p>Split dictionary with keys as ((Rx, Ry, Rz), spin_component_name) to three dictionaries</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">spn_to_dict</span></code>([model_dir, fwin, fin, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.spn_to_dict" title="spinWannier.wannier_utils.spn_to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spn_to_dict</span></code></a>([model_dir, fwin, fin, ...])</p></td>
 <td><p>Convert wannier90.spn file to a dictionary object and save as pickle.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">u_to_dict</span></code>([fin, fout, text_file, write_sparse])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.u_to_dict" title="spinWannier.wannier_utils.u_to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">u_to_dict</span></code></a>([fin, fout, text_file, write_sparse])</p></td>
 <td><p>Convert _u.mat from wannier90 to pickled python dictionary.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uniform_real_space_grid</span></code>([R_mesh_ijk])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.uniform_real_space_grid" title="spinWannier.wannier_utils.uniform_real_space_grid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uniform_real_space_grid</span></code></a>([R_mesh_ijk])</p></td>
 <td><p>From the maxima in each direction, make a regular mesh</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">unite_spn_dict</span></code>(spn_x_dict, spn_y_dict, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.unite_spn_dict" title="spinWannier.wannier_utils.unite_spn_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unite_spn_dict</span></code></a>(spn_x_dict, spn_y_dict, ...)</p></td>
 <td><p>Unite dictionary with keys as (Rx, Ry, Rz) to three dictionaries</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">wannier_energy_windows</span></code>(wann_bands_lims[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.wannier_energy_windows" title="spinWannier.wannier_utils.wannier_energy_windows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wannier_energy_windows</span></code></a>(wann_bands_lims[, ...])</p></td>
 <td><p>Get energy window limits for wannierization.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 </section>
 
 
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../modules.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Modules</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="spinWannier.wannier_quality_utils.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">spinWannier.wannier_quality_utils</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
           </div>
-          
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">spinWannier</a></h1>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Libor Vojáček
+</p>
 
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">spinWannier.wannier_utils</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spinWannier.wannier_quality_utils.html">spinWannier.wannier_quality_utils</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spinWannier.WannierTBmodel.WannierTBmodel.html">spinWannier.WannierTBmodel.WannierTBmodel</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../classes.html">Classes</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="../api.html">API</a><ul>
-      <li>Previous: <a href="../api.html" title="previous chapter">API</a></li>
-      <li>Next: <a href="spinWannier.wannier_quality_utils.html" title="next chapter">spinWannier.wannier_quality_utils</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &#169;2024, Libor Vojáček.
-      
-      |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
-      
-      |
-      <a href="../_sources/generated/spinWannier.wannier_utils.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
+  </div>
+  
+  <div class="footer-item">
     
 
+  <p class="copyright">
     
+      © Copyright 2024, Libor Vojáček.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

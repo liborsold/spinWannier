@@ -6,15 +6,14 @@
 Welcome to spinWannier's documentation!
 =======================================
 
-**spinWannier** is a Python package for for handling Wannier models with a spin operator, calculating the Wannier model quality and spin-texture plotting.
-
-See the `spinWannier project on GitHub <https://github.com/liborsold/spinWannier/>`_.
+The `spinWannier project <https://github.com/liborsold/spinWannier/>`_ is a Python package for handling Wannier models with a spin operator, calculating the Wannier model quality and spin-texture plotting.
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 3
 
-   api
+   modules
    classes
+   functions
 
 
 Indices and tables

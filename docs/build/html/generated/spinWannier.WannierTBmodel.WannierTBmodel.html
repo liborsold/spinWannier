@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="en" data-content_root="../">
@@ -13,8 +14,6 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Classes" href="../classes.html" />
-    <link rel="prev" title="spinWannier.wannier_quality_utils" href="spinWannier.wannier_quality_utils.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -40,23 +39,25 @@
 <dd><p>Calculates interpolated spin-texture on a dense k-point path.
 Plots the spin-texture on a 2D k-point mesh (Fermi surface).
 Calculates the quality of the Wannier functions.</p>
-<p>Needed files are
-(1) wannier90.eig
-(2) wannier90.win
-(3) wannier90.spn (or the WAVECAR file of VASP)
-(4) wannier90_u.mat
-(5) wannier90_u_dis.mat (if disentanglement was performed)
-(6) (FERMI_ENERGY.in file containing the Fermi energy value)</p>
-<p>PROCEDURE:
-Take the</p>
-<blockquote>
-<div><ol class="arabic simple">
+<dl>
+<dt>Needed files are</dt><dd><ol class="arabic simple">
+<li><p>wannier90.eig</p></li>
+<li><p>wannier90.win</p></li>
+<li><p>wannier90.spn (or the WAVECAR file of VASP)</p></li>
+<li><p>wannier90_u.mat</p></li>
+<li><p>wannier90_u_dis.mat (if disentanglement was performed)</p></li>
+<li><p>(FERMI_ENERGY.in file containing the Fermi energy value)</p></li>
+</ol>
+</dd>
+<dt>PROCEDURE:</dt><dd><dl class="simple">
+<dt>Take the</dt><dd><ol class="arabic simple">
 <li><p>spn_dict.dat  and</p></li>
 <li><p>u_dis_dict.dat  along with</p></li>
 <li><p>u_dict.dat</p></li>
 </ol>
+</dd>
+</dl>
 <p>to obtain the S_mn(W), i.e., the spn matrix in the Wannier gauge.</p>
-</div></blockquote>
 <dl class="simple">
 <dt>Then interpolate on an arbitrary k-point by performing the</dt><dd><ol class="loweralpha simple">
 <li><p>Fourier transform to real space (on the coarse DFT k-point grid) and then</p></li>
@@ -68,6 +69,8 @@ Take the</p>
 <li><p>Apply the U(dis) and U to get the Hamiltonian in Wannier gauge H_mn(W).</p></li>
 <li><p>inverse Fourier transform for an arbitrary k-point (dense k-point mesh).</p></li>
 </ol>
+</dd>
+</dl>
 </dd>
 </dl>
 <dl class="py method">
@@ -134,30 +137,16 @@ Take the</p>
 
 
 <h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="spinWannier.wannier_utils.html">spinWannier.wannier_utils</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spinWannier.wannier_quality_utils.html">spinWannier.wannier_quality_utils</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">spinWannier.WannierTBmodel.WannierTBmodel</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#spinWannier.WannierTBmodel.WannierTBmodel"><code class="docutils literal notranslate"><span class="pre">WannierTBmodel</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#spinWannier.WannierTBmodel.WannierTBmodel.__init__"><code class="docutils literal notranslate"><span class="pre">WannierTBmodel.__init__()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">Functions</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="../api.html">API</a><ul>
-      <li>Previous: <a href="spinWannier.wannier_quality_utils.html" title="previous chapter">spinWannier.wannier_quality_utils</a></li>
-      <li>Next: <a href="../classes.html" title="next chapter">Classes</a></li>
-  </ul></li>
   </ul></li>
 </ul>
 </div>

@@ -11,36 +11,33 @@ from spinWannier.wannier_utils import files_wann90_to_dict_pickle, eigenval_dict
 from spinWannier.wannier_quality_utils import wannier_quality_calculation, get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands
 from spinWannier.vaspspn import vasp_to_spn
 class WannierTBmodel():
-    """
-    Calculates interpolated spin-texture on a dense k-point path.
+    """Calculates interpolated spin-texture on a dense k-point path.
     Plots the spin-texture on a 2D k-point mesh (Fermi surface).
     Calculates the quality of the Wannier functions.
 
     Needed files are
-    (1) wannier90.eig
-    (2) wannier90.win
-    (3) wannier90.spn (or the WAVECAR file of VASP)
-    (4) wannier90_u.mat
-    (5) wannier90_u_dis.mat (if disentanglement was performed)
-    (6) (FERMI_ENERGY.in file containing the Fermi energy value)
+        (1) wannier90.eig
+        (2) wannier90.win
+        (3) wannier90.spn (or the WAVECAR file of VASP)
+        (4) wannier90_u.mat
+        (5) wannier90_u_dis.mat (if disentanglement was performed)
+        (6) (FERMI_ENERGY.in file containing the Fermi energy value)
 
     PROCEDURE:
-    Take the 
-        (1) spn_dict.dat  and 
-        (2) u_dis_dict.dat  along with 
-        (3) u_dict.dat
-
+        Take the 
+            (1) spn_dict.dat  and 
+            (2) u_dis_dict.dat  along with 
+            (3) u_dict.dat
         to obtain the S_mn(W), i.e., the spn matrix in the Wannier gauge.
 
-    Then interpolate on an arbitrary k-point by performing the
-        (a) Fourier transform to real space (on the coarse DFT k-point grid) and then
-        (b) inverse Fourier transform with an arbitrary k-point.
-        
-    Interpolate the Hamiltonian on a dense k-point grid: 
-        (1) Take the diagonal Hamiltonian from DFT (the eigenvalues for the coarse k-point grid). 
-        (2) Apply the U(dis) and U to get the Hamiltonian in Wannier gauge H_mn(W).
-        (3) inverse Fourier transform for an arbitrary k-point (dense k-point mesh).
-
+        Then interpolate on an arbitrary k-point by performing the
+            (a) Fourier transform to real space (on the coarse DFT k-point grid) and then
+            (b) inverse Fourier transform with an arbitrary k-point.
+            
+        Interpolate the Hamiltonian on a dense k-point grid: 
+            (1) Take the diagonal Hamiltonian from DFT (the eigenvalues for the coarse k-point grid). 
+            (2) Apply the U(dis) and U to get the Hamiltonian in Wannier gauge H_mn(W).
+            (3) inverse Fourier transform for an arbitrary k-point (dense k-point mesh).
     """
 
     def __init__(self, seedname='wannier90', sc_dir='0_self-consistent', nsc_dir='1_non-self-consistent', wann_dir='2_wannier', \
