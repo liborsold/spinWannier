@@ -709,6 +709,83 @@ def real_to_W_gauge(kpoints, O_mn_R_W):
     return O_mn_k_W
 
 
+def real_to_W_gauge_accelerated(kpoints, O_mn_R_W):
+    """Perform inverse Fourier transformation from real-space operator to k-space in Wannier gauge.
+
+    Args:
+        kpoints (list of tuples): The k-points.
+        O_mn_R_W (dict): The real-space operator dictionary.
+
+    Returns:
+        dict: The k-space operator dictionary.
+    """
+    # new old way
+    # # R_vectors has a shape (625, 3)
+    # R_vectors = np.array(list(O_mn_R_W.keys()))
+    # # O_mn_R_W_matrices has a shape (625, 22, 22)
+    # O_mn_R_W_matrices = np.array(list(O_mn_R_W.values()))
+    # O_mn_k_W = {}
+    # # kpoints has a shape (100000, 3)
+    # for kpoint in kpoints:
+    #     # Eq. 18 in Qiao 2018
+    #     # <<< new way using numpy >>>
+    #     O_mn_k_W[kpoint] = np.sum(np.multiply( np.exp(1j * 2 * np.pi * (R_vectors @ kpoint).reshape(-1, 1, 1)), O_mn_R_W_matrices), axis=0)
+    # return O_mn_k_W
+
+    # vectorized way
+    import time
+
+    prev_time = time.time()
+    # Assuming R_vectors has a shape (625, 3) and O_mn_R_W_matrices has a shape (625, 22, 22)
+    R_vectors = np.array(list(O_mn_R_W.keys()))  
+    O_mn_R_W_matrices = np.array(list(O_mn_R_W.values()))
+    print('   O_mn_R_W_matrices shape', O_mn_R_W_matrices.shape)
+
+    print('IF: conversion of data types', f'{time.time() - prev_time:.3f}s')
+    prev_time = time.time()
+
+    # Assuming kpoints has a shape (100000, 3)
+    # Precompute the constant term outside the loop
+    two_pi = 2 * np.pi
+
+    # Calculate dot products for all kpoints in a vectorized manner
+    # Shape: (100000, 625)
+    kpoint_dot_R = kpoints @ R_vectors.T 
+
+    print('IF: dot product kpoints and R_vectors', f'{time.time() - prev_time:.3f}s')
+    prev_time = time.time()
+
+    # Shape the exponent term: (100000, 625, 1, 1)
+    exp_term = np.exp(1j * two_pi * kpoint_dot_R).reshape(-1, R_vectors.shape[0])
+    print('   exp_term shape', exp_term.shape)
+
+    print('IF: exponent array', f'{time.time() - prev_time:.3f}s')
+    prev_time = time.time()
+
+    # Compute the sum over the R_vectors axis (axis 1)
+    #   This handles the summation over all R-vectors in a single step
+    #   Result shape: (100000, 22, 22)
+    #   -------- OBSOLETE:   
+    # O_mn_k_W_matrices = np.sum(exp_term * O_mn_R_W_matrices, axis=1)
+    #   ----- EINSTEIN SUMMATION accellerates this operation 3x
+    #   Use np.einsum for both the multiplication and summation in a single step:
+    # O_mn_k_W_matrices = np.einsum('ij,jmn->imn', exp_term, O_mn_R_W_matrices)
+    # ----- TENSORDOT accellerates the operation by another factor of 7 !!!!!!!!!!
+    O_mn_k_W_matrices = np.tensordot(exp_term, O_mn_R_W_matrices, axes=([1], [0]))
+
+
+    print('IF: sum of exponent-multiplied matrices', f'{time.time() - prev_time:.3f}s')
+    prev_time = time.time()
+
+    # Build the dictionary using a comprehension
+    # Using the fact that kpoints[i] corresponds to O_mn_k_W_matrices[i]
+    O_mn_k_W = {tuple(kpoint): O_mn_k_W_matrices[i] for i, kpoint in enumerate(kpoints)}
+
+    print('IF: comprehension - building dictionary', f'{time.time() - prev_time:.3f}s')
+
+    return O_mn_k_W
+
+
 def W_gauge_to_H_gauge(O_mn_k_W, U_mn_k={}, hamiltonian=True):
     """Transform from Wannier gauge to Hamiltonian gauge, i.e., for every k-point either diagonalize Hamiltonian
         or use the matrix from previous Hamiltonian diagonalization ('U_mn_k') to transform some other operator
@@ -2116,7 +2193,8 @@ def interpolate_operator(
     Returns:
         dict: interpolated operator matrices (values) at the given k-points (keys) in the Hamiltonian gauge; unitary matrices which diagonalize the Hamiltonian (only if hamiltonian==True). 
     """
-
+    import time
+    prev_time = time.time()
     global NW, NK
 
     A = latt_params
@@ -2139,6 +2217,10 @@ def interpolate_operator(
     # the DFT k-point grid in cartesian coordinates (units of 1/A)
     kpoints_coarse_cart = [np.array(kpoint).T @ G for kpoint in kpoints_coarse]
 
+    print('')
+    print('kpoints and preparation:', f'{time.time() - prev_time:.3f}')
+    prev_time = time.time()
+
     # (1) get the operator in the Wannier gauge (see Eg. 16 in Ryoo 2019 PRB or for instance Eq. 30 in Qiao 2018 PRB)
     #     see Eq. 16 in Qiao 2018 and express H(W) from that, use Eq. 10 for definition of U
     #     alternatively see Eq. 15 in Qiao 2018
@@ -2153,22 +2235,62 @@ def interpolate_operator(
             @ u_dict[kpoint]
         )
 
+    print('get operator in Wannier gauge:', f'{time.time() - prev_time:.3f}')
+    prev_time = time.time()
+
     # (2) Fourier transform in the range of real-space lattice vectors given by R_mesh_ijk
+    # <<< old way >>> (slow)
+    # O_mn_R_W = {}
+    # for Rijk in R_grid:
+    #     R = np.array(Rijk).T @ A
+    #     # Eq. 17 in Qiao 2018
+    #     O_mn_R_W[Rijk] = (
+    #         1
+    #         / Nq
+    #         * np.sum(
+    #             [
+    #                 exp(-1j * np.dot(R, k_cart)) * O_mn_q_W[k_direct]
+    #                 for k_cart, k_direct in zip(kpoints_coarse_cart, kpoints_coarse)
+    #             ],
+    #             axis=0,
+    #         )
+    #     )
+
+    # <<< new way >>> (fast)
+    # Assuming R_grid has shape (n, 3), kpoints_coarse_cart and kpoints_coarse are lists/arrays
+    # O_mn_q_W is a dictionary with k_direct as keys
     O_mn_R_W = {}
+
+    # Vectorizing kpoints_coarse_cart and O_mn_q_W values
+    kpoints_coarse_cart = np.array(kpoints_coarse_cart)  # Shape (Nq, 3)
+    O_mn_q_W_array = np.array([O_mn_q_W[k_direct] for k_direct in kpoints_coarse])  # Shape (Nq, 22, 22)
+
+    # Precompute the inverse of Nq once
+    Nq_inv = 1.0 / Nq
+
     for Rijk in R_grid:
-        R = np.array(Rijk).T @ A
-        # Eq. 17 in Qiao 2018
-        O_mn_R_W[Rijk] = (
-            1
-            / Nq
-            * np.sum(
-                [
-                    exp(-1j * np.dot(R, k_cart)) * O_mn_q_W[k_direct]
-                    for k_cart, k_direct in zip(kpoints_coarse_cart, kpoints_coarse)
-                ],
-                axis=0,
-            )
-        )
+        # Vectorized transformation of Rijk using A
+        R = np.array(Rijk).T @ A  # Shape (3,)
+
+        # Vectorized dot products for all kpoints_coarse_cart at once
+        # Shape of R_dot_k: (Nq,)
+        R_dot_k = np.dot(kpoints_coarse_cart, R)
+
+        # Compute the complex exponential for all kpoints_coarse_cart
+        # Shape: (Nq,)
+        exp_term = np.exp(-1j * R_dot_k)
+
+        # Now, vectorized sum over all kpoints_coarse using einsum for both multiplication and summation
+        # O_mn_q_W_array shape: (Nq, 22, 22), exp_term shape: (Nq,)
+        # The einsum expression performs: sum(exp_term[:, None, None] * O_mn_q_W_array)
+        # O_mn_R_W[Rijk] = Nq_inv * np.einsum('i,ijk->jk', exp_term, O_mn_q_W_array)
+        # TENSORDOT accelerates the operation 4 times
+        O_mn_R_W[Rijk] = Nq_inv * np.tensordot(exp_term, O_mn_q_W_array, axes=(0, 0))
+
+        
+
+    print('Fourier transform to real space:', f'{time.time() - prev_time:.3f}')
+    prev_time = time.time()
 
     # save real-space representation
     if save_real_space is True:
@@ -2189,16 +2311,24 @@ def interpolate_operator(
             with open(save_folder + real_space_fname, "w") as fw:
                 fw.write(str(O_mn_R_W_tosave).replace("'", ""))
 
+    print('save real-space representation:', f'{time.time() - prev_time:.3f}')
+    prev_time = time.time()
+
     # (3a) inverse Fourier
-    O_mn_k_W = real_to_W_gauge(kpoints, O_mn_R_W)
+    O_mn_k_W = real_to_W_gauge_accelerated(kpoints, O_mn_R_W)
+
+    print('inverse Fourier (real to W gauge):', f'{time.time() - prev_time:.3f}')
+    prev_time = time.time()
 
     # (3b) transformation to Hamiltonian gauge
     # if Hamiltonian is being calculated, perform diagonalization
     if hamiltonian is True:
         Eigs_k, U_mn_k = W_gauge_to_H_gauge(O_mn_k_W, U_mn_k={}, hamiltonian=True)
+        print('W gauge to H gauge:', f'{time.time() - prev_time:.3f}')
         return Eigs_k, U_mn_k
     else:
         O_mn_k_H = W_gauge_to_H_gauge(O_mn_k_W, U_mn_k=U_mn_k, hamiltonian=False)
+        print('W gauge to H gauge:', f'{time.time() - prev_time:.3f}')
         return O_mn_k_H
 
 
