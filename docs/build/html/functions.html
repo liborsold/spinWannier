@@ -1113,12 +1113,44 @@ If ‘text_file’ == True, then save as a human-readable text file.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.compare_eigs_bandstructure_at_exact_kpts">
 <span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">compare_eigs_bandstructure_at_exact_kpts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dft_bands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wann_bands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_kpoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_wann</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_name_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'WannierBerri_quality_error_Fermi_corrected.dat'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.compare_eigs_bandstructure_at_exact_kpts" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Compare the DFT and Wannierized band structures at the exact k-points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dft_bands</strong> (<em>np.array</em>) – DFT bands.</p></li>
+<li><p><strong>wann_bands</strong> (<em>np.array</em>) – Wannierized bands.</p></li>
+<li><p><strong>num_kpoints</strong> (<em>int</em>) – Number of k-points.</p></li>
+<li><p><strong>num_wann</strong> (<em>int</em>) – Number of Wannierized bands.</p></li>
+<li><p><strong>f_name_out</strong> (<em>str</em><em>, </em><em>optional</em>) – Output file name. Defaults to ‘WannierBerri_quality_error_Fermi_corrected.dat’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array with the DFT energy in the first column and the Wannierization error in the second column.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.duplicate_kpoints_for_home_made">
 <span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">duplicate_kpoints_for_home_made</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NK</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.duplicate_kpoints_for_home_made" title="Link to this definition">#</a></dt>
-<dd><p>duplicate also the last k-point (in  dictionary the keys are unique, so actually the data in the dictionaries where keys are k-points contain only one of each k-point, so if k-path starts and ends with the same k-point, only the first one is recorded</p>
+<dd><p>Duplicate also the last k-point (in  dictionary the keys are unique, so actually the data in the dictionaries where keys are k-points contain only one of each k-point, so if k-path starts and ends with the same k-point, only the first one is recorded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.array</em>) – Data to duplicate.</p></li>
+<li><p><strong>NK</strong> (<em>int</em>) – Number of k-points.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Duplicated data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -1145,10 +1177,16 @@ If ‘text_file’ == True, then save as a human-readable text file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>EIGENVAL_path</strong> (<em>str</em>) – Path to the EIGENVAL file.</p></li>
-<li><p><strong>target_band</strong> (<em>int</em>) – The target band (1-based indexing).</p></li>
-<li><p><strong>target_kpoint</strong> (<em>string from EIGENVAL file notation</em>) – </p></li>
+<li><p><strong>EIGENVAL_path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the EIGENVAL file. Defaults to ‘./EIGENVAL’.</p></li>
+<li><p><strong>target_band</strong> (<em>int</em><em>, </em><em>optional</em>) – Target band. Defaults to 1.</p></li>
+<li><p><strong>target_kpoint_string</strong> (<em>str</em><em>, </em><em>optional</em>) – Target k-point string. Defaults to ‘0.0000000E+00  0.0000000E+00  0.0000000E+00’.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Energy of the target_band at the target_kpoint.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1156,45 +1194,149 @@ If ‘text_file’ == True, then save as a human-readable text file.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.get_fermi">
 <span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">get_fermi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.get_fermi" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Extract Fermi energy from the DOSCAR file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the directory with the DOSCAR file. Defaults to “.”.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Fermi energy in eV.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.get_fermi_corrected_by_matching_bands">
 <span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">get_fermi_corrected_by_matching_bands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsc_calculation_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'../0_nsc_for_wann_25x25_frozmaxmargin_0.2eV'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corrected_at_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corrected_at_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sc_calculation_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'../sc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'FERMI_ENERGY_corrected.in'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.get_fermi_corrected_by_matching_bands" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Get the Fermi energy from the self-consistent calculation and correct it so that the band at the target_kpoint and target_band is at the same energy in the non-self-consistent calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the directory with the DOSCAR file. Defaults to “.”.</p></li>
+<li><p><strong>nsc_calculation_path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the non-self-consistent calculation directory. Defaults to ‘../0_nsc_for_wann_25x25_frozmaxmargin_0.2eV’.</p></li>
+<li><p><strong>corrected_at_kpoint</strong> (<em>str</em><em>, </em><em>optional</em>) – Target k-point string. Defaults to ‘0.0000000E+00  0.0000000E+00  0.0000000E+00’.</p></li>
+<li><p><strong>corrected_at_band</strong> (<em>int</em><em>, </em><em>optional</em>) – Target band. Defaults to 11.</p></li>
+<li><p><strong>sc_calculation_path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the self-consistent calculation directory. Defaults to “../sc”.</p></li>
+<li><p><strong>fout_name</strong> (<em>str</em><em>, </em><em>optional</em>) – Output file name. Defaults to “FERMI_ENERGY_corrected.in”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Corrected Fermi energy in eV.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.get_frozen_window_min_max">
 <span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">get_frozen_window_min_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wannier90winfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.win'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.get_frozen_window_min_max" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Get the frozen window min and max from the wannier90.win file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>wannier90winfile</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the wannier90.win file. Defaults to ‘wannier90.win’.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Frozen window min.
+float: Frozen window max.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.integrate_error">
 <span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">integrate_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error_by_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.integrate_error" title="Link to this definition">#</a></dt>
 <dd><p>Integrate the error in ‘f_name_in’ in the energy range [E_min, E_max] included.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>error_by_energy</strong> (<em>np.array</em>) – Error vs. energy.</p></li>
+<li><p><strong>E_min</strong> (<em>float</em><em>, </em><em>optional</em>) – Minimum energy. Defaults to -1e3.</p></li>
+<li><p><strong>E_max</strong> (<em>float</em><em>, </em><em>optional</em>) – Maximum energy. Defaults to 1e3.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array with the integrated error.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.parse_eigenval_file">
 <span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">parse_eigenval_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.parse_eigenval_file" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Parse the EIGENVAL file and return the kpoints, bands, number of kpoints, and number of bands.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fin</strong> (<em>str</em>) – Path to the EIGENVAL file.</p></li>
+<li><p><strong>spin</strong> (<em>int</em><em>, </em><em>optional</em>) – Spin index. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>kpoints.
+np.array: bands.
+int: number of kpoints.
+int: number of bands.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.plot_err_vs_bands">
 <span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">plot_err_vs_bands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpath_ticks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Eigs_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_diff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_diff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ERRORS_ALL_band_structure.jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis_lim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.plot_err_vs_bands" title="Link to this definition">#</a></dt>
 <dd><p>Output a figure with RMSE_E, RMSE_Sx, RMSE_Sy, and RMSE_Sz-projected band structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kpoints</strong> (<em>np.array</em>) – kpoints.</p></li>
+<li><p><strong>kpath</strong> (<em>np.array</em>) – kpath.</p></li>
+<li><p><strong>kpath_ticks</strong> (<em>list</em>) – kpath ticks.</p></li>
+<li><p><strong>Eigs_k</strong> (<em>dict</em>) – Eigs_k.</p></li>
+<li><p><strong>E_diff</strong> (<em>np.array</em>) – E_diff.</p></li>
+<li><p><strong>S_diff</strong> (<em>np.array</em>) – S_diff.</p></li>
+<li><p><strong>fout</strong> (<em>str</em><em>, </em><em>optional</em>) – Output file name. Defaults to ‘ERRORS_ALL_band_structure.jpg’.</p></li>
+<li><p><strong>yaxis_lim</strong> (<em>list</em><em>, </em><em>optional</em>) – y-axis limits. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.plot_err_vs_energy">
 <span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">plot_err_vs_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error_by_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Wannierization</span> <span class="pre">RMS</span> <span class="pre">error</span> <span class="pre">vs.</span> <span class="pre">energy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_name_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier_quality_error_by_energy.png'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.plot_err_vs_energy" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Plot the error vs. energy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>error_by_energy</strong> (<em>np.array</em>) – Error vs. energy.</p></li>
+<li><p><strong>Ef</strong> (<em>float</em>) – Fermi energy.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Title of the plot. Defaults to “Wannierization RMS error vs. energy”.</p></li>
+<li><p><strong>fig_name_out</strong> (<em>str</em><em>, </em><em>optional</em>) – Output file name. Defaults to “wannier_quality_error_by_energy.png”.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.wannier_quality_calculation">
 <span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">wannier_quality_calculation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoint_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NK</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpath_ticks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Fermi_nsc_wann</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_wann</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discard_first_bands</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sc_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0_self-consistent'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsc_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1_non-self-consistent'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wann_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2_wannier'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1_band_structure'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tb_model_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2_wannier/tb_model_wann90'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band_for_Fermi_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpoint_for_Fermi_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis_lim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.wannier_quality_calculation" title="Link to this definition">#</a></dt>
-<dd><p>Needed files from VASP:</p>
-<dl class="simple">
+<dd><p>Calculate the quality of the Wannierization.</p>
+<p>Needed files from VASP:</p>
+<blockquote>
+<div><dl class="simple">
 <dt>= nsc_calculation_path:</dt><dd><ul class="simple">
 <li><p>EIGENVAL</p></li>
 <li><p>DOSCAR</p></li>
@@ -1205,6 +1347,33 @@ If ‘text_file’ == True, then save as a human-readable text file.</p>
 <li><p>“Sxyz_exp_values_from_spn_file.dat” (get automatically from wannier90.spn_formatted!!)</p></li>
 <li><p>OUTCAR</p></li>
 </ul>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kpoint_matrix</strong> (<em>np.array</em>) – K-point matrix.</p></li>
+<li><p><strong>NK</strong> (<em>int</em>) – Number of k-points.</p></li>
+<li><p><strong>kpath_ticks</strong> (<em>list</em>) – K-path ticks.</p></li>
+<li><p><strong>Fermi_nsc_wann</strong> (<em>float</em>) – Fermi energy in the non-self-consistent calculation.</p></li>
+<li><p><strong>num_wann</strong> (<em>int</em>) – Number of Wannierized bands.</p></li>
+<li><p><strong>discard_first_bands</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of bands to discard. Defaults to 0.</p></li>
+<li><p><strong>sc_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the self-consistent calculation directory. Defaults to ‘0_self-consistent’.</p></li>
+<li><p><strong>nsc_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the non-self-consistent calculation directory. Defaults to ‘1_non-self-consistent’.</p></li>
+<li><p><strong>wann_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the Wannier calculation directory. Defaults to ‘2_wannier’.</p></li>
+<li><p><strong>bands_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the bands calculation directory. Defaults to ‘1_band_structure’.</p></li>
+<li><p><strong>tb_model_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the wannier90.tb_model directory. Defaults to ‘2_wannier/tb_model_wann90’.</p></li>
+<li><p><strong>band_for_Fermi_correction</strong> (<em>int</em><em>, </em><em>optional</em>) – Band for Fermi correction. Defaults to None.</p></li>
+<li><p><strong>kpoint_for_Fermi_correction</strong> (<em>str</em><em>, </em><em>optional</em>) – K-point for Fermi correction. Defaults to ‘0.0000000E+00  0.0000000E+00  0.0000000E+00’.</p></li>
+<li><p><strong>yaxis_lim</strong> (<em>list</em><em>, </em><em>optional</em>) – Y-axis limits. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Error by energy.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
 </dd>
 </dl>
 </dd></dl>

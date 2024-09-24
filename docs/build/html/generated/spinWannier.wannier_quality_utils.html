@@ -361,10 +361,10 @@ document.write(`
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_quality_utils.compare_eigs_bandstructure_at_exact_kpts" title="spinWannier.wannier_quality_utils.compare_eigs_bandstructure_at_exact_kpts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compare_eigs_bandstructure_at_exact_kpts</span></code></a>(...)</p></td>
-<td><p></p></td>
+<td><p>Compare the DFT and Wannierized band structures at the exact k-points.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_quality_utils.duplicate_kpoints_for_home_made" title="spinWannier.wannier_quality_utils.duplicate_kpoints_for_home_made"><code class="xref py py-obj docutils literal notranslate"><span class="pre">duplicate_kpoints_for_home_made</span></code></a>(data, NK)</p></td>
-<td><p>duplicate also the last k-point (in  dictionary the keys are unique, so actually the data in the dictionaries where keys are k-points contain only one of each k-point, so if k-path starts and ends with the same k-point, only the first one is recorded</p></td>
+<td><p>Duplicate also the last k-point (in  dictionary the keys are unique, so actually the data in the dictionaries where keys are k-points contain only one of each k-point, so if k-path starts and ends with the same k-point, only the first one is recorded.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_quality_utils.get_NKpoints" title="spinWannier.wannier_quality_utils.get_NKpoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_NKpoints</span></code></a>([OUTCAR])</p></td>
 <td><p>Return number of kpoints from bands calculation from OUTCAR.</p></td>
@@ -373,28 +373,28 @@ document.write(`
 <td><p>Get the energy of the target_band at the target_kpoint from the EIGENVAL file.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_quality_utils.get_fermi" title="spinWannier.wannier_quality_utils.get_fermi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_fermi</span></code></a>([path])</p></td>
-<td><p></p></td>
+<td><p>Extract Fermi energy from the DOSCAR file.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_quality_utils.get_fermi_corrected_by_matching_bands" title="spinWannier.wannier_quality_utils.get_fermi_corrected_by_matching_bands"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_fermi_corrected_by_matching_bands</span></code></a>([...])</p></td>
-<td><p></p></td>
+<td><p>Get the Fermi energy from the self-consistent calculation and correct it so that the band at the target_kpoint and target_band is at the same energy in the non-self-consistent calculation.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_quality_utils.get_frozen_window_min_max" title="spinWannier.wannier_quality_utils.get_frozen_window_min_max"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_frozen_window_min_max</span></code></a>([wannier90winfile])</p></td>
-<td><p></p></td>
+<td><p>Get the frozen window min and max from the wannier90.win file.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_quality_utils.integrate_error" title="spinWannier.wannier_quality_utils.integrate_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">integrate_error</span></code></a>(error_by_energy[, E_min, E_max])</p></td>
 <td><p>Integrate the error in 'f_name_in' in the energy range [E_min, E_max] included.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_quality_utils.parse_eigenval_file" title="spinWannier.wannier_quality_utils.parse_eigenval_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_eigenval_file</span></code></a>(fin[, spin])</p></td>
-<td><p></p></td>
+<td><p>Parse the EIGENVAL file and return the kpoints, bands, number of kpoints, and number of bands.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_quality_utils.plot_err_vs_bands" title="spinWannier.wannier_quality_utils.plot_err_vs_bands"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_err_vs_bands</span></code></a>(kpoints, kpath, ...[, ...])</p></td>
 <td><p>Output a figure with RMSE_E, RMSE_Sx, RMSE_Sy, and RMSE_Sz-projected band structure.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_quality_utils.plot_err_vs_energy" title="spinWannier.wannier_quality_utils.plot_err_vs_energy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_err_vs_energy</span></code></a>(error_by_energy, Ef[, ...])</p></td>
-<td><p></p></td>
+<td><p>Plot the error vs.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_quality_utils.wannier_quality_calculation" title="spinWannier.wannier_quality_utils.wannier_quality_calculation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wannier_quality_calculation</span></code></a>(kpoint_matrix, ...)</p></td>
-<td><p>Needed files from VASP:</p></td>
+<td><p>Calculate the quality of the Wannierization.</p></td>
 </tr>
 </tbody>
 </table>
