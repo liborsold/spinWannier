@@ -3,11 +3,22 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+=======================================
 Welcome to spinWannier's documentation!
 =======================================
 
 The `spinWannier project <https://github.com/liborsold/spinWannier/>`_ is a Python package for handling Wannier models with a spin operator, calculating the Wannier model quality and spin-texture plotting.
 
+
+Quickstart
+================
+.. code-block:: python
+   
+   pip install spinWannier
+
+
+Navigation
+================
 .. toctree::
    :maxdepth: 3
 
