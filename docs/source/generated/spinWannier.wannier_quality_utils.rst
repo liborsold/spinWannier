@@ -18,7 +18,7 @@
       get_NKpoints
       get_band_at_kpoint_from_EIGENVAL
       get_fermi
-      get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands
+      get_fermi_corrected_by_matching_bands
       get_frozen_window_min_max
       integrate_error
       parse_eigenval_file

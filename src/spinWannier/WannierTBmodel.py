@@ -8,7 +8,7 @@ from spinWannier.wannier_utils import files_wann90_to_dict_pickle, eigenval_dict
                                 uniform_real_space_grid, get_DFT_kgrid, plot_bands_spin_texture, magmom_OOP_or_IP, \
                                 fermi_surface_spin_texture, plot_bands_spin_texture, u_to_dict, spn_to_dict, \
                                 parse_KPOINTS_file, save_bands_and_spin_texture_old
-from spinWannier.wannier_quality_utils import wannier_quality_calculation, get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands
+from spinWannier.wannier_quality_utils import wannier_quality_calculation, get_fermi_corrected_by_matching_bands
 from spinWannier.vaspspn import vasp_to_spn
 class WannierTBmodel():
     """Calculates interpolated spin-texture on a dense k-point path.
@@ -141,7 +141,7 @@ class WannierTBmodel():
 
         # calculate the Fermi level
            # get Fermi for the wannier non-self-consistent calculation
-        self.EF_nsc = get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands(path=".", \
+        self.EF_nsc = get_fermi_corrected_by_matching_bands(path=".", \
                                         nsc_calculation_path=nsc_dir, \
                                         corrected_at_kpoint=kpoint_for_Fermi_correction, \
                                             corrected_at_band=band_for_Fermi_correction, sc_calculation_path=sc_dir, \

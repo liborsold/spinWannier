@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 
@@ -203,6 +202,53 @@
 
 
 
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/liborsold/spinWannier" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/liborsold/spinWannier/blob/master/docs/source/functions.rst?plain=1" target="_blank"
+   class="btn btn-sm btn-source-file-button dropdown-item"
+   title="Show source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">Show source</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
 <div class="dropdown dropdown-download-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
     <i class="fas fa-download"></i>
@@ -355,7 +401,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.get_NKpoints"><code class="docutils literal notranslate"><span class="pre">get_NKpoints()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.get_band_at_kpoint_from_EIGENVAL"><code class="docutils literal notranslate"><span class="pre">get_band_at_kpoint_from_EIGENVAL()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.get_fermi"><code class="docutils literal notranslate"><span class="pre">get_fermi()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands"><code class="docutils literal notranslate"><span class="pre">get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.get_fermi_corrected_by_matching_bands"><code class="docutils literal notranslate"><span class="pre">get_fermi_corrected_by_matching_bands()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.get_frozen_window_min_max"><code class="docutils literal notranslate"><span class="pre">get_frozen_window_min_max()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.integrate_error"><code class="docutils literal notranslate"><span class="pre">integrate_error()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.parse_eigenval_file"><code class="docutils literal notranslate"><span class="pre">parse_eigenval_file()</span></code></a></li>
@@ -1113,8 +1159,8 @@ If ‘text_file’ == True, then save as a human-readable text file.</p>
 <dd></dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsc_calculation_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'../0_nsc_for_wann_25x25_frozmaxmargin_0.2eV'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corrected_at_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corrected_at_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sc_calculation_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'../sc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'FERMI_ENERGY_corrected.in'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.get_fermi_corrected_by_matching_bands">
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">get_fermi_corrected_by_matching_bands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsc_calculation_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'../0_nsc_for_wann_25x25_frozmaxmargin_0.2eV'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corrected_at_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corrected_at_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sc_calculation_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'../sc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'FERMI_ENERGY_corrected.in'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.get_fermi_corrected_by_matching_bands" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
@@ -1251,7 +1297,7 @@ If ‘text_file’ == True, then save as a human-readable text file.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.get_NKpoints"><code class="docutils literal notranslate"><span class="pre">get_NKpoints()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.get_band_at_kpoint_from_EIGENVAL"><code class="docutils literal notranslate"><span class="pre">get_band_at_kpoint_from_EIGENVAL()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.get_fermi"><code class="docutils literal notranslate"><span class="pre">get_fermi()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands"><code class="docutils literal notranslate"><span class="pre">get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.get_fermi_corrected_by_matching_bands"><code class="docutils literal notranslate"><span class="pre">get_fermi_corrected_by_matching_bands()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.get_frozen_window_min_max"><code class="docutils literal notranslate"><span class="pre">get_frozen_window_min_max()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.integrate_error"><code class="docutils literal notranslate"><span class="pre">integrate_error()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.parse_eigenval_file"><code class="docutils literal notranslate"><span class="pre">parse_eigenval_file()</span></code></a></li>

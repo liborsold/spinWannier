@@ -44,7 +44,7 @@ def get_band_at_kpoint_from_EIGENVAL(EIGENVAL_path='./EIGENVAL', target_band=1, 
                 return energy
 
 
-def get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands(path=".", \
+def get_fermi_corrected_by_matching_bands(path=".", \
                                 nsc_calculation_path='../0_nsc_for_wann_25x25_frozmaxmargin_0.2eV', \
                                 corrected_at_kpoint='0.0000000E+00  0.0000000E+00  0.0000000E+00', \
                                     corrected_at_band=11, sc_calculation_path="../sc", \
@@ -342,7 +342,7 @@ def wannier_quality_calculation(kpoint_matrix, NK, kpath_ticks, Fermi_nsc_wann, 
     dft_bands = dft_bands[:,discard_first_bands:discard_first_bands+num_wann]
 
     # get Fermi for the bands non-self-consistent calculation
-    Fermi_nsc_bands = get_fermi_for_nsc_calculation_from_sc_calc_corrected_by_matching_bands(path=".", \
+    Fermi_nsc_bands = get_fermi_corrected_by_matching_bands(path=".", \
                                     nsc_calculation_path=bands_dir, \
                                     corrected_at_kpoint=kpoint_for_Fermi_correction, \
                                         corrected_at_band=band_for_Fermi_correction, sc_calculation_path=sc_dir, \

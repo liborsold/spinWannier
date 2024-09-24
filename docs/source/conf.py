@@ -30,10 +30,17 @@ extensions = [
 ] 
 
 templates_path = ['_templates']
+html_static_path = ['_static']
 exclude_patterns = []
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = 'sphinx_book_theme'
-html_static_path = ['_static']
+html_theme_options = {
+    "repository_url": "https://github.com/liborsold/spinWannier",
+    "use_source_button": True,
+    "use_repository_button": True,
+    "repository_branch": "master",
+    "path_to_docs": "docs/source/",
+}
