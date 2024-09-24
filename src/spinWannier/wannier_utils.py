@@ -15,6 +15,7 @@ import pickle
 from os.path import exists
 from cmath import exp
 from scipy.io import FortranFile
+import time
 
 
 def get_kpoint_names(fwin="wannier90.win"):
@@ -733,16 +734,15 @@ def real_to_W_gauge_accelerated(kpoints, O_mn_R_W):
     # return O_mn_k_W
 
     # vectorized way
-    import time
 
-    prev_time = time.time()
+    # prev_time = time.time()
     # Assuming R_vectors has a shape (625, 3) and O_mn_R_W_matrices has a shape (625, 22, 22)
     R_vectors = np.array(list(O_mn_R_W.keys()))  
     O_mn_R_W_matrices = np.array(list(O_mn_R_W.values()))
-    print('   O_mn_R_W_matrices shape', O_mn_R_W_matrices.shape)
+    # print('   O_mn_R_W_matrices shape', O_mn_R_W_matrices.shape)
 
-    print('IF: conversion of data types', f'{time.time() - prev_time:.3f}s')
-    prev_time = time.time()
+    # print('IF: conversion of data types', f'{time.time() - prev_time:.3f}s')
+    # prev_time = time.time()
 
     # Assuming kpoints has a shape (100000, 3)
     # Precompute the constant term outside the loop
@@ -752,15 +752,15 @@ def real_to_W_gauge_accelerated(kpoints, O_mn_R_W):
     # Shape: (100000, 625)
     kpoint_dot_R = kpoints @ R_vectors.T 
 
-    print('IF: dot product kpoints and R_vectors', f'{time.time() - prev_time:.3f}s')
-    prev_time = time.time()
+    # print('IF: dot product kpoints and R_vectors', f'{time.time() - prev_time:.3f}s')
+    # prev_time = time.time()
 
     # Shape the exponent term: (100000, 625, 1, 1)
     exp_term = np.exp(1j * two_pi * kpoint_dot_R).reshape(-1, R_vectors.shape[0])
-    print('   exp_term shape', exp_term.shape)
+    # print('   exp_term shape', exp_term.shape)
 
-    print('IF: exponent array', f'{time.time() - prev_time:.3f}s')
-    prev_time = time.time()
+    # print('IF: exponent array', f'{time.time() - prev_time:.3f}s')
+    # prev_time = time.time()
 
     # Compute the sum over the R_vectors axis (axis 1)
     #   This handles the summation over all R-vectors in a single step
@@ -774,14 +774,14 @@ def real_to_W_gauge_accelerated(kpoints, O_mn_R_W):
     O_mn_k_W_matrices = np.tensordot(exp_term, O_mn_R_W_matrices, axes=([1], [0]))
 
 
-    print('IF: sum of exponent-multiplied matrices', f'{time.time() - prev_time:.3f}s')
-    prev_time = time.time()
+    # print('IF: sum of exponent-multiplied matrices', f'{time.time() - prev_time:.3f}s')
+    # prev_time = time.time()
 
     # Build the dictionary using a comprehension
     # Using the fact that kpoints[i] corresponds to O_mn_k_W_matrices[i]
     O_mn_k_W = {tuple(kpoint): O_mn_k_W_matrices[i] for i, kpoint in enumerate(kpoints)}
 
-    print('IF: comprehension - building dictionary', f'{time.time() - prev_time:.3f}s')
+    # print('IF: comprehension - building dictionary', f'{time.time() - prev_time:.3f}s')
 
     return O_mn_k_W
 
@@ -876,7 +876,7 @@ def save_bands_and_spin_texture(
     S_mn_k_H_y,
     S_mn_k_H_z,
     kmesh_2D=False,
-    fout="bands_spin.npz",
+    fout="bands_spin.pickle",
     save_folder="./tb_model_wann90/",
 ):
     """Save the bands and spin texture information for given kpoints.
@@ -901,31 +901,9 @@ def save_bands_and_spin_texture(
     bands_spin_dat["Sz"] = S_mn_k_H_z
     if kmesh_2D is not True:
         bands_spin_dat["kpath"] = kpath
-
-    # print('saving to:', save_folder + fout)
-    # with open(save_folder + fout, "wb") as fw:
-    #     pickle.dump(bands_spin_dat, fw)
-    # save as numpy's .npz file because values in the dictionary are numpy arrays
-    # np.savez(save_folder + fout, **bands_spin_dat)
-    # np.savez_compressed(save_folder + fout, **bands_spin_dat)
-
-    import h5py
-    fout = fout.split(".")[0] + ".h5"
-    # Save as HDF5
-    print('saving to:', save_folder + fout)
-    with h5py.File(save_folder + fout, 'w') as hf:
-        for key, value in bands_spin_dat.items():
-            print(key, type(value))
-            if type(value) == np.ndarray:
-                hf.create_dataset(key, data=value.astype(np.float64))
-            hf.create_dataset(key, data=value)
-    # Convert to DataFrame and save as HDF5
-    # df = pd.DataFrame(bands_spin_dat)
-    # df.to_hdf(save_folder + fout, key='df', mode='w')
-
-    #     fout = fout.split(".")[0] + ".parquet"
-    # print('saving to:', save_folder + fout)
-    # df.to_parquet(save_folder + fout)
+    print(save_folder + fout)
+    with open(save_folder + fout, "wb") as fw:
+        pickle.dump(bands_spin_dat, fw)
 
 
 def plot_bands_spin_texture(
@@ -2240,7 +2218,7 @@ def interpolate_operator(
     kpoints_coarse_cart = [np.array(kpoint).T @ G for kpoint in kpoints_coarse]
 
     print('')
-    print('kpoints and preparation:', f'{time.time() - prev_time:.3f}')
+    print('kpoints and preparation:', f'{time.time() - prev_time:.3f} seconds')
     prev_time = time.time()
 
     # (1) get the operator in the Wannier gauge (see Eg. 16 in Ryoo 2019 PRB or for instance Eq. 30 in Qiao 2018 PRB)
@@ -2257,7 +2235,7 @@ def interpolate_operator(
             @ u_dict[kpoint]
         )
 
-    print('get operator in Wannier gauge:', f'{time.time() - prev_time:.3f}')
+    print('get operator in Wannier gauge:', f'{time.time() - prev_time:.3f} seconds')
     prev_time = time.time()
 
     # (2) Fourier transform in the range of real-space lattice vectors given by R_mesh_ijk
@@ -2311,7 +2289,7 @@ def interpolate_operator(
 
         
 
-    print('Fourier transform to real space:', f'{time.time() - prev_time:.3f}')
+    print('Fourier transform to real space:', f'{time.time() - prev_time:.3f} seconds')
     prev_time = time.time()
 
     # save real-space representation
@@ -2333,24 +2311,24 @@ def interpolate_operator(
             with open(save_folder + real_space_fname, "w") as fw:
                 fw.write(str(O_mn_R_W_tosave).replace("'", ""))
 
-    print('save real-space representation:', f'{time.time() - prev_time:.3f}')
+    print('save real-space representation:', f'{time.time() - prev_time:.3f} seconds')
     prev_time = time.time()
 
     # (3a) inverse Fourier
     O_mn_k_W = real_to_W_gauge_accelerated(kpoints, O_mn_R_W)
 
-    print('inverse Fourier (real to W gauge):', f'{time.time() - prev_time:.3f}')
+    print('inverse Fourier (real to W gauge):', f'{time.time() - prev_time:.3f} seconds')
     prev_time = time.time()
 
     # (3b) transformation to Hamiltonian gauge
     # if Hamiltonian is being calculated, perform diagonalization
     if hamiltonian is True:
         Eigs_k, U_mn_k = W_gauge_to_H_gauge(O_mn_k_W, U_mn_k={}, hamiltonian=True)
-        print('W gauge to H gauge:', f'{time.time() - prev_time:.3f}')
+        print('W gauge to H gauge:', f'{time.time() - prev_time:.3f} seconds')
         return Eigs_k, U_mn_k
     else:
         O_mn_k_H = W_gauge_to_H_gauge(O_mn_k_W, U_mn_k=U_mn_k, hamiltonian=False)
-        print('W gauge to H gauge:', f'{time.time() - prev_time:.3f}')
+        print('W gauge to H gauge:', f'{time.time() - prev_time:.3f} seconds')
         return O_mn_k_H
 
 

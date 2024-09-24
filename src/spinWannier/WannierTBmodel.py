@@ -443,6 +443,9 @@ class WannierTBmodel:
                 kmesh_2D=kmesh_2D,
                 fout=fout,
             )
+            
+        # clean standard output
+        print("\033[H\033[J")
 
     def plot1D_bands(self, fout="spin_texture_1D_home_made.jpg", yaxis_lim=[-8, 6], savefig=True, showfig=True):
         """Plot the bands and the spin texture on a 1D path.
