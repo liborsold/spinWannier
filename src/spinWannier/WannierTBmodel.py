@@ -257,6 +257,8 @@ class WannierTBmodel:
             R_mesh_ijk=get_DFT_kgrid(fin=wann_dir + f"{seedname}.win")
         )  # real_space_grid_from_hr_dat(fname=f"{seedname}_hr.dat") #
 
+        print("Wannier model constructed!")
+
     def interpolate_bands_and_spin(
         self,
         kpoint_matrix,
@@ -442,12 +444,14 @@ class WannierTBmodel:
                 fout=fout,
             )
 
-    def plot1D_bands(self, fout="spin_texture_1D_home_made.jpg", yaxis_lim=[-8, 6]):
+    def plot1D_bands(self, fout="spin_texture_1D_home_made.jpg", yaxis_lim=[-8, 6], savefig=True, showfig=True):
         """Plot the bands and the spin texture on a 1D path.
 
         Args:
             fout (str, optional): Output figure name. Defaults to 'spin_texture_1D_home_made.jpg'.
             yaxis_lim (list, optional): Y-axis limits. Defaults to [-8, 6].
+            savefig (bool, optional): Whether to save the figure. Defaults to True.
+            showfig (bool, optional): Whether to show the figure. Defaults to True.
         """
         plot_bands_spin_texture(
             self.kpoints_rec["1D"],
@@ -460,6 +464,8 @@ class WannierTBmodel:
             E_F=self.EF_nsc,
             fout=fout,
             yaxis_lim=yaxis_lim,
+            savefig=savefig,
+            showfig=showfig,
         )
 
     def plot2D_spin_texture(
@@ -468,6 +474,8 @@ class WannierTBmodel:
         fin_1D="bands_spin",
         fig_name="spin_texture_2D_home_made.jpg",
         E_to_cut=None,
+        savefig=True,
+        showfig=True,
     ):
         """Plot the spin texture on a 2D mesh (Fermi surface).
 
@@ -476,6 +484,8 @@ class WannierTBmodel:
             fin_1D (str, optional): File name of the 1D path data. Defaults to 'bands_spin'.
             fig_name (str, optional): Output figure name. Defaults to "spin_texture_2D_home_made.jpg".
             E_to_cut (float, optional): Energy to cut. Defaults to None.
+            savefig (bool, optional): Whether to save the figure. Defaults to True.
+            showfig (bool, optional): Whether to show the figure. Defaults to True.
         """
         # ==========  USER DEFINED  ===============
         fin_1D = self.tb_model_dir + fin_1D + "." + self.data_saving_format
@@ -568,7 +578,6 @@ class WannierTBmodel:
             E=E_to_cut_2D,
             E_F=E_F,
             E_thr=E_thr,
-            savefig=True,
             fig_name=fig_name,
             quiver_scale=quiver_scale,
             scatter_for_quiver=scatter_for_quiver,
@@ -581,6 +590,8 @@ class WannierTBmodel:
             arrow_head_width=arrow_head_width,
             arrow_linewidth=arrow_linewidth,
             contour_line_width=contour_line_width,
+            savefig=savefig,
+            showfig=showfig,
         )
 
     def wannier_quality(
@@ -588,6 +599,8 @@ class WannierTBmodel:
         band_for_Fermi_correction=None,
         kpoint_for_Fermi_correction="0.0000000E+00  0.0000000E+00  0.0000000E+00",
         yaxis_lim=[-10, 10],
+        savefig=True,
+        showfig=True,
     ):
         """Calculate the quality of the Wannier functions compared to the original DFT band structure.
 
@@ -595,6 +608,8 @@ class WannierTBmodel:
             band_for_Fermi_correction (_type_, optional): Band number for Fermi correction. Defaults to None -> the lowest Wannier band wil be used.
             kpoint_for_Fermi_correction (_type_, optional): K-point for Fermi correction. Defaults to '0.0000000E+00  0.0000000E+00  0.0000000E+00' (Gamma point).
             yaxis_lim (list, optional): Limits of the y-axis. Defaults to [-10, 10].
+            savefig (bool, optional): Whether to save the figure. Defaults to True.
+            showfig (bool, optional): Whether to show the figure. Defaults to
         """
         kpoint_matrix, NK, kpath_ticks = parse_KPOINTS_file(self.bands_dir + "KPOINTS")
 
@@ -613,4 +628,6 @@ class WannierTBmodel:
             band_for_Fermi_correction=band_for_Fermi_correction,
             kpoint_for_Fermi_correction=kpoint_for_Fermi_correction,
             yaxis_lim=yaxis_lim,
+            savefig=savefig,
+            showfig=showfig,
         )

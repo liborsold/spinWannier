@@ -170,19 +170,19 @@ def duplicate_kpoints_for_home_made(data, NK):
 
     data_duplicates = np.zeros(dimensions)
 
-    data_duplicates[:NK, :] = data[:NK, :]
+    data_duplicates[:NK, :] = np.real(data[:NK, :])
     for i in range(1, n_blocs - 1):
-        data_duplicates[i * NK, :] = data[i * (NK - 1), :]
-        data_duplicates[i * NK + 1 : i * NK + 1 + NK, :] = data[
+        data_duplicates[i * NK, :] = np.real(data[i * (NK - 1), :])
+        data_duplicates[i * NK + 1 : i * NK + 1 + NK, :] = np.real(data[
             1 + i * (NK - 1) : 1 + i * (NK - 1) + NK, :
-        ]
+        ])
     # last block different - missing last value (supposed to be the same as the first value)
     i = n_blocs - 1
-    data_duplicates[i * NK, :] = data[i * (NK - 1), :]
-    data_duplicates[i * NK + 1 : i * NK + 1 + NK - 2, :] = data[
+    data_duplicates[i * NK, :] = np.real(data[i * (NK - 1), :])
+    data_duplicates[i * NK + 1 : i * NK + 1 + NK - 2, :] = np.real(data[
         1 + i * (NK - 1) : 1 + i * (NK - 1) + NK, :
-    ]
-    data_duplicates[-1, :] = data[0, :]
+    ])
+    data_duplicates[-1, :] = np.real(data[0, :])
     return data_duplicates
 
 
@@ -265,6 +265,8 @@ def plot_err_vs_energy(
     Ef,
     title="Wannierization RMS error vs. energy",
     fig_name_out="wannier_quality_error_by_energy.png",
+    savefig=True,
+    showfig=True,
 ):
     """Plot the error vs. energy.
 
@@ -273,6 +275,8 @@ def plot_err_vs_energy(
         Ef (float): Fermi energy.
         title (str, optional): Title of the plot. Defaults to "Wannierization RMS error vs. energy".
         fig_name_out (str, optional): Output file name. Defaults to "wannier_quality_error_by_energy.png".
+        savefig (bool, optional): Save the figure. Defaults to True.
+        showfig (bool, optional): Show the figure. Defaults to True.
     """
     plt.semilogy(
         error_by_energy[:, 0] - Ef,
@@ -284,8 +288,10 @@ def plot_err_vs_energy(
     plt.title(title, fontsize=8)
     plt.xlabel(r"$E - E_\mathrm{F}$ (eV)")
     plt.ylabel(r"$\|E_\mathrm{wann} - E_\mathrm{DFT}\|$ (eV)")
-    # plt.show()
-    plt.savefig(fig_name_out, dpi=400)
+    if savefig:
+        plt.savefig(fig_name_out, dpi=400)
+    if showfig:
+        plt.show()
     plt.close()
 
 
@@ -298,6 +304,8 @@ def plot_err_vs_bands(
     S_diff,
     fout="ERRORS_ALL_band_structure.jpg",
     yaxis_lim=None,
+    savefig=True,
+    showfig=True,
 ):
     """Output a figure with RMSE_E, RMSE_Sx, RMSE_Sy, and RMSE_Sz-projected band structure.
 
@@ -310,6 +318,8 @@ def plot_err_vs_bands(
         S_diff (np.array): S_diff.
         fout (str, optional): Output file name. Defaults to 'ERRORS_ALL_band_structure.jpg'.
         yaxis_lim (list, optional): y-axis limits. Defaults to None.
+        savefig (bool, optional): Save the figure. Defaults to True.
+        showfig (bool, optional): Show the figure. Defaults to True.
     """
     NW = len(Eigs_k[list(Eigs_k.keys())[0]])
     Nk = len(kpoints) // (len(kpath_ticks) - 1)
@@ -372,15 +382,14 @@ def plot_err_vs_bands(
     plt.tight_layout()
     # plt.show()
     fout = check_file_exists(fout)
-    plt.savefig(fout, dpi=400)
+    if savefig:
+        plt.savefig(fout, dpi=400)
+    if showfig:
+        plt.show()
     plt.close()
-    print(
-        "ERROR band structure printed\n\n--------------------\n\n======================="
-    )
-    # plt.show()
-
-
-# integrate error and write it out
+    # print(
+    #     "ERROR band structure printed\n\n--------------------\n\n======================="
+    # )
 
 
 def integrate_error(error_by_energy, E_min=-1e3, E_max=1e3):
@@ -441,6 +450,8 @@ def wannier_quality_calculation(
     band_for_Fermi_correction=None,
     kpoint_for_Fermi_correction="0.0000000E+00  0.0000000E+00  0.0000000E+00",
     yaxis_lim=None,
+    savefig=True,
+    showfig=True,
 ):
     """Calculate the quality of the Wannierization.
 
@@ -470,6 +481,8 @@ def wannier_quality_calculation(
         band_for_Fermi_correction (int, optional): Band for Fermi correction. Defaults to None.
         kpoint_for_Fermi_correction (str, optional): K-point for Fermi correction. Defaults to '0.0000000E+00  0.0000000E+00  0.0000000E+00'.
         yaxis_lim (list, optional): Y-axis limits. Defaults to None.
+        savefig (bool, optional): Save the figure. Defaults to True.
+        showfig (bool, optional): Show the figure. Defaults to True.
 
     Returns:
         np.array: Error by energy.
@@ -592,20 +605,22 @@ def wannier_quality_calculation(
 
     # S_to_compare_with_duplicates = duplicate_kpoints(S_to_compare, NK)
 
-    error_by_energy = compare_eigs_bandstructure_at_exact_kpts(
-        dft_bands,
-        E_to_compare_with_duplicates,
-        num_kpoints_dft,
-        num_wann,
-        f_name_out="home-made_quality_error_Fermi_corrected.dat",
-    )
+    # error_by_energy = compare_eigs_bandstructure_at_exact_kpts(
+    #     dft_bands,
+    #     E_to_compare_with_duplicates,
+    #     num_kpoints_dft,
+    #     num_wann,
+    #     f_name_out="home-made_quality_error_Fermi_corrected.dat",
+    # )
 
-    plot_err_vs_energy(
-        error_by_energy,
-        Ef=0,
-        title="Wannierization RMS error vs. energy",
-        fig_name_out="wannier_quality_error_by_energy_home-made_Fermi_corrected.png",
-    )
+    # plot_err_vs_energy(
+    #     error_by_energy,
+    #     Ef=0,
+    #     title="Wannierization RMS error vs. energy",
+    #     fig_name_out="wannier_quality_error_by_energy_home-made_Fermi_corrected.png",
+    #     savefig=savefig,
+    #     showfig=showfig,
+    # )
 
     # ------------- COMPARE spin texture --------------------
 
@@ -639,6 +654,8 @@ def wannier_quality_calculation(
         S_diff,
         fout="ERRORS_ALL_band_structure_home-made_Fermi_corrected.jpg",
         yaxis_lim=yaxis_lim,
+        savefig=savefig,
+        showfig=showfig,
     )
 
     # E_F was already subtracted
@@ -649,7 +666,7 @@ def wannier_quality_calculation(
         [E, E_diff, S_diff[:, 0], S_diff[:, 1], S_diff[:, 2]]
     ).T
 
-    print("Error matrix shape:", error_E_S_by_energy.shape)
+    # print("Error matrix shape:", error_E_S_by_energy.shape)
 
     # order the '' matrix by energy (0th column)
     error_E_S_by_energy = error_E_S_by_energy[error_E_S_by_energy[:, 0].argsort()]
@@ -695,8 +712,10 @@ def wannier_quality_calculation(
     if yaxis_lim:
         for ax in axes.flatten():
             ax.set_xlim(yaxis_lim)
-
-    plt.savefig("ERRORS_all_home-made_Fermi_corrected.png", dpi=400)
+    if savefig is True:
+        plt.savefig("ERRORS_all_home-made_Fermi_corrected.png", dpi=400)
+    if showfig is True:
+        plt.show()
     plt.close()
 
     dis_froz_min, dis_froz_max = get_frozen_window_min_max(
@@ -750,11 +769,11 @@ def wannier_quality_calculation(
     # ------------ ABSOLUTE VALUE OF SPIN ------------------
 
     S_abs = np.linalg.norm(S_to_compare_with_duplicates.reshape(-1, 3), axis=1)
-    print("S_abs shape", S_abs.shape)
+    # print("S_abs shape", S_abs.shape)
 
     # combined matrix
     E_S_abs = np.vstack([E, S_abs]).T
-    print("S_abs_E shape", E_S_abs.shape)
+    # print("S_abs_E shape", E_S_abs.shape)
 
     # order the '' matrix by energy (0th column)
     E_S_abs = E_S_abs[E_S_abs[:, 0].argsort()]
@@ -775,7 +794,10 @@ def wannier_quality_calculation(
     ax.set_ylabel(r"|$S$|")
     ax.set_xlabel(r"$E - E_\mathrm{F}$ (eV)")
     plt.tight_layout()
-    plt.savefig(plot_title + "_vs_E_home-made_Fermi_corrected.png", dpi=400)
+    if savefig is True:
+        plt.savefig(plot_title + "_vs_E_home-made_Fermi_corrected.png", dpi=400)
+    if showfig is True:
+        plt.show()
     plt.close()
 
     # plot and save S_abs histogram
@@ -787,5 +809,8 @@ def wannier_quality_calculation(
         fontsize=8,
     )
     plt.tight_layout()
-    plt.savefig(plot_title + "_S_histogram_home-made_Fermi_corrected.png", dpi=400)
+    if savefig is True:
+        plt.savefig(plot_title + "_S_histogram_home-made_Fermi_corrected.png", dpi=400)
+    if showfig is True:
+        plt.show()
     plt.close()

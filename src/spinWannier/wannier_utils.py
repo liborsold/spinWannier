@@ -841,6 +841,8 @@ def plot_bands_spin_texture(
     fout="spin_texture_1D_home_made.jpg",
     fig_caption="Wannier interpolation",
     yaxis_lim=[-5, 5],
+    savefig=True,
+    showfig=True,
 ):
     """Output a figure with Sx, Sy, and Sz-projected band structure.
 
@@ -856,6 +858,8 @@ def plot_bands_spin_texture(
         fout (str): The name of the output file.
         fig_caption (str): The caption of the figure.
         yaxis_lim (list of 2 floats): The y-axis limits.
+        savefig (bool): If True, save the figure.
+        showfig (bool): If True, show the figure.
     """
     NW = len(Eigs_k[list(Eigs_k.keys())[0]])
     Nk = len(kpoints) // (len(kpath_ticks) - 1)
@@ -892,7 +896,7 @@ def plot_bands_spin_texture(
             sc = ax.scatter(
                 [[k_dist for i in range(NW)] for k_dist in kpath],
                 [Eigs_k[kpoint] - E_F for kpoint in kpoints],
-                c=[np.diag(S[kpoint]) for kpoint in kpoints],
+                c=[np.real(np.diag(S[kpoint])) for kpoint in kpoints],
                 cmap="coolwarm",
                 s=0.2,
                 vmin=-1,
@@ -918,7 +922,10 @@ def plot_bands_spin_texture(
     plt.tight_layout()
     # plt.show()
     fout = check_file_exists(fout)
-    plt.savefig(fout, dpi=400)
+    if savefig is True:
+        plt.savefig(fout, dpi=400)
+    if showfig is True:
+        plt.show()
     plt.close()
     # plt.show()
 
@@ -1578,8 +1585,8 @@ def u_to_dict(
         with open(fout, "wb") as fw:
             pickle.dump(Umnk, fw)
 
-    print(f"{fout} written!")
-    print("Umnk keys len", len(Umnk.keys()))
+    # print(f"{fout} written!")
+    # print("Umnk keys len", len(Umnk.keys()))
 
     return num_bands, num_wann
 
@@ -1763,7 +1770,6 @@ def fermi_surface_spin_texture(
     scatter_size=0.8,
     reduce_by_factor=1,
     kmesh_limits=None,
-    savefig=True,
     colorbar_Sx_lim=[-1, 1],
     colorbar_Sy_lim=[-1, 1],
     colorbar_Sz_lim=[-1, 1],
@@ -1777,6 +1783,8 @@ def fermi_surface_spin_texture(
     quiver_scale_units="xy",
     inset_with_units_of_arrows=True,
     color_middle=(0.85, 0.85, 0.85, 1.0),
+    savefig=True,
+    showfig=True,
 ):
     """Plot scatter points with a spin texture on a constant energy xy surface (probably at E=EF)
     if the energy difference of each given point is lower than some threshold.
@@ -1806,7 +1814,6 @@ def fermi_surface_spin_texture(
         scatter_size (float, optional): The scatter size.
         reduce_by_factor (int, optional): The reduce by factor.
         kmesh_limits (list, optional): The k-mesh limits.
-        savefig (bool, optional): If True, save the figure.
         colorbar_Sx_lim (list, optional): The colorbar limits for Sx.
         colorbar_Sy_lim (list, optional): The colorbar limits for Sy.
         colorbar_Sz_lim (list, optional): The colorbar limits for Sz.
@@ -1820,6 +1827,8 @@ def fermi_surface_spin_texture(
         quiver_scale_units (str, optional): The quiver scale units.
         inset_with_units_of_arrows (bool, optional): If True, the inset with units of arrows.
         color_middle (tuple, optional): The middle color.
+        savefig (bool, optional): If True, save the figure.
+        showfig (bool, optional): If True, show the figure.
     """
     # make the cut at 'E'
     energy_distances = np.abs(bands2D - E_F - E)
@@ -1867,13 +1876,14 @@ def fermi_surface_spin_texture(
         phi_anchors = np.linspace(
             0, 2 * np.pi, df_bands.loc[band, "n_points"], endpoint=False
         )
-        df_temp = df[df["closest_band"] == band]
+        df_temp = df.loc[df["closest_band"] == band]
         try:
+            df_temp = df_temp.copy()
             df_temp["closest_anchor"] = df_temp["phi"].apply(
                 lambda x: phi_anchors[np.argmin(np.abs(phi_anchors - x))]
             )
         except ValueError:
-            print(f"No points found at Fermi; increase the k-point meshing density!")
+            print(f"No points found near anchor; consider increasing the k-point meshing density.")
             return -1
         df_temp.loc[:, "anchor_difference"] = (
             df_temp.loc[:, "phi"] - df_temp.loc[:, "closest_anchor"]
@@ -1894,7 +1904,7 @@ def fermi_surface_spin_texture(
         print("No points found at Fermi; increase the k-point meshing density!")
         return -1
 
-    print("average Sz", np.mean(Sz_radial_filter))
+    # print("average Sz", np.mean(Sz_radial_filter))
 
     # ARROWS Sz
     if ax is None:
@@ -1998,8 +2008,9 @@ def fermi_surface_spin_texture(
 
     if savefig is True:
         plt.savefig(fig_name_all_one, dpi=400)
-        # plt.show()
-        plt.close()
+    if showfig is True:
+        plt.show()
+    plt.close()
 
     fig2, axes = plt.subplots(1, 3, figsize=[12, 4])
 
@@ -2055,9 +2066,12 @@ def fermi_surface_spin_texture(
 
     if savefig is True:
         plt.savefig(fig_name_Sxyz, dpi=400)
-        # plt.show()
+        if showfig is True:
+            plt.show()
         plt.close()
     else:
+        if showfig is True:
+            plt.show()
         plt.close()
         if plot_to_external_axis is False:
             return fig, fig2
