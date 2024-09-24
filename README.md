@@ -5,7 +5,7 @@
 pip install spinWannier
 ```
 
-If you find this package useful, please cite [L. Vojáček*, J. M. Dueñas* _et al._, Nano Letters (2024)](https://pubs.acs.org/doi/10.1021/acs.nanolett.4c03029). The underlying physics is summarized in Sec. S1.1 of the the paper's [Supplementary](https://pubs.acs.org/doi/suppl/10.1021/acs.nanolett.4c03029/suppl_file/nl4c03029_si_001.pdf).
+If you find this package useful, please cite [L. Vojáček*, J. M. Dueñas* _et al._, Nano Letters (2024)](https://pubs.acs.org/doi/10.1021/acs.nanolett.4c03029). The underlying physics is summarized in Sec. S1.1 of the paper's [Supplementary](https://pubs.acs.org/doi/suppl/10.1021/acs.nanolett.4c03029/suppl_file/nl4c03029_si_001.pdf).
 
 
 ## Usage 
