@@ -1,0 +1,2 @@
+# -3.02646295 eV = -2.98634595 + (-8.06759700 - -8.02748000) = Fermi_sc + (E_band11_nsc - E_band11_sc) ... self-consistent Fermi from CrSTe_minimal/0_self-consistent/ corrected so that band 11 at k-point 0.0000000E+00  0.0000000E+00  0.0000000E+00 is at the same energy (relative to the recpective Fermi energies) for the self-consistent (path CrSTe_minimal/0_self-consistent/) and non-self-consistent (path CrSTe_minimal/1_non-self-consistent/) calculation
+-3.02646295
