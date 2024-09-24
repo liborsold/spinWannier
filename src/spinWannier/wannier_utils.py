@@ -1884,11 +1884,15 @@ def fermi_surface_spin_texture(
         df_filtered = pd.concat([df_filtered, df_filtered_temp])
 
     # get the kx, ky, Sx, Sy, Sz values for the arrows
-    kx_radial_filter = df_filtered["kx"].values
-    ky_radial_filter = df_filtered["ky"].values
-    Sx_radial_filter = df_filtered["Sx"].values
-    Sy_radial_filter = df_filtered["Sy"].values
-    Sz_radial_filter = df_filtered["Sz"].values
+    try:
+        kx_radial_filter = df_filtered["kx"].values
+        ky_radial_filter = df_filtered["ky"].values
+        Sx_radial_filter = df_filtered["Sx"].values
+        Sy_radial_filter = df_filtered["Sy"].values
+        Sz_radial_filter = df_filtered["Sz"].values
+    except KeyError:
+        print("No points found at Fermi; increase the k-point meshing density!")
+        return -1
 
     print("average Sz", np.mean(Sz_radial_filter))
 

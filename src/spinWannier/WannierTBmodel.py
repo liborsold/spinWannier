@@ -63,7 +63,7 @@ class WannierTBmodel:
             (1) Take the diagonal Hamiltonian from DFT (the eigenvalues for the coarse k-point grid).
             (2) Apply the U(dis) and U to get the Hamiltonian in Wannier gauge H_mn(W).
             (3) inverse Fourier transform for an arbitrary k-point (dense k-point mesh).
-            
+
     """
 
     def __init__(
@@ -478,15 +478,9 @@ class WannierTBmodel:
             E_to_cut (float, optional): Energy to cut. Defaults to None.
         """
         # ==========  USER DEFINED  ===============
-        fin_1D = (
-            self.tb_model_dir + fin_1D + ".pickle"
-        )  # "bands_spin_model.pickle" #"./tb_model_wann90/bands_spin.pickle" #"bands_spin_model.pickle" #
-        fin_2D = (
-            self.tb_model_dir + fin_2D + ".pickle"
-        )  # "bands_spin_2D_model.pickle" #"./tb_model_wann90/bands_spin_2D.pickle" #"bands_spin_2D_model.pickle"
-        E_F = float(
-            np.loadtxt(self.wann_dir + "FERMI_ENERGY.in")
-        )  # -2.31797502 # for CrTe2 with EFIELD: -2.31797166
+        fin_1D = self.tb_model_dir + fin_1D + "." + self.data_saving_format
+        fin_2D = self.tb_model_dir + fin_2D + "." + self.data_saving_format
+        E_F = float(np.loadtxt(self.wann_dir + "FERMI_ENERGY.in"))
         E_to_cut_2D = E_F  # E_F # + 1.44
         kmesh_limits = None  # [-.5, .5] #None #   # unit 1/A; put 'None' if no limits should be applied
         colorbar_Sx_lim = [
