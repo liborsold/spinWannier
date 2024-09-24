@@ -18,7 +18,6 @@ The `spinWannier project <https://github.com/liborsold/spinWannier/>`_ is a Pyth
    ./_images/spinWannier_example_figure.jpg
    :width: 800px
    :align: center
-   :target: https://pubs.acs.org/doi/10.1021/acs.nanolett.4c03029
 
 |br|
 If you find this package useful, please cite `L. Vojáček*, J. M. Dueñas* et al., Nano Letters (2024) <https://pubs.acs.org/doi/10.1021/acs.nanolett.4c03029>`_
