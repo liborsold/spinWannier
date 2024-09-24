@@ -1831,7 +1831,7 @@ def fermi_surface_spin_texture(
         showfig (bool, optional): If True, show the figure.
     """
     # make the cut at 'E'
-    energy_distances = np.abs(bands2D - E_F - E)
+    energy_distances = np.abs(bands2D - E)
     include_kpoint = np.any(energy_distances <= E_thr, axis=1)
     closest_band = np.argmin(energy_distances, axis=1)[include_kpoint]
 
@@ -1926,7 +1926,7 @@ def fermi_surface_spin_texture(
                 x,
                 y,
                 z,
-                levels=[E_F + E],
+                levels=[E],
                 colors="darkgray",
                 linestyles="solid",
                 linewidths=contour_line_width,
@@ -1994,7 +1994,7 @@ def fermi_surface_spin_texture(
         divider = make_axes_locatable(ax)
         cax = divider.append_axes("right", size="5%", pad=0.05)
         cbar = fig.colorbar(sc, cax=cax, orientation="vertical")
-        cbar.set_label(r"$S_\mathrm{z}$")
+        cbar.set_label(r"$S_\mathrm{z}$", fontsize=12)
 
     if colorbar_Sz_lim:
         sc.set_clim(vmin=colorbar_Sz_lim[0], vmax=colorbar_Sz_lim[1])
@@ -2114,7 +2114,7 @@ def interpolate_operator(
         save_as_pickle (bool, optional): If True, save as pickle.
 
     Returns:
-        tuple: The eigenvalues and the Hamiltonian eigenstates.
+        dict: interpolated operator matrices (values) at the given k-points (keys) in the Hamiltonian gauge; unitary matrices which diagonalize the Hamiltonian (only if hamiltonian==True). 
     """
 
     global NW, NK

@@ -476,6 +476,8 @@ class WannierTBmodel:
         E_to_cut=None,
         savefig=True,
         showfig=True,
+        E_window=0.020,
+        n_points_for_one_angstrom_radius=60,
     ):
         """Plot the spin texture on a 2D mesh (Fermi surface).
 
@@ -486,6 +488,8 @@ class WannierTBmodel:
             E_to_cut (float, optional): Energy to cut. Defaults to None.
             savefig (bool, optional): Whether to save the figure. Defaults to True.
             showfig (bool, optional): Whether to show the figure. Defaults to True.
+            E_window (float, optional): Energy window in eV around the Fermi level where the points for Fermi surface determination will be looked for. Defaults to 0.020.
+            n_points_for_one_angstrom_radius (int, optional): Number of points for one Angstrom radius. Defaults to 180.
         """
         # ==========  USER DEFINED  ===============
         fin_1D = self.tb_model_dir + fin_1D + "." + self.data_saving_format
@@ -509,7 +513,6 @@ class WannierTBmodel:
         bands_ylim = [-6, 11]
 
         band = 8  # 160   # 1-indexed
-        E_thr = 0.005  # 0.020  # eV
         quiver_scale_magmom_OOP = (
             1.6  # quiver_scale for calculations with MAGMOM purely out-of-plane
         )
@@ -519,7 +522,6 @@ class WannierTBmodel:
         reduce_by_factor = (
             1  # take each 'reduce_by_factor' point in the '_all_in_one.jpg' plot
         )
-        n_points_for_one_angstrom_radius = 180  # 120
         arrow_linewidth = 0.005  # default 0.005 (times width of the plot)
         arrow_head_width = 2.5  # default 3
 
@@ -577,7 +579,7 @@ class WannierTBmodel:
             Sz2D,
             E=E_to_cut_2D,
             E_F=E_F,
-            E_thr=E_thr,
+            E_thr=E_window,
             fig_name=fig_name,
             quiver_scale=quiver_scale,
             scatter_for_quiver=scatter_for_quiver,

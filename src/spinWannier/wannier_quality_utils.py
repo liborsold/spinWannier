@@ -706,6 +706,7 @@ def wannier_quality_calculation(
     axes[1, 1].set_ylabel(r"|$S_{y, \mathrm{DFT}} - S_{y, \mathrm{wann}}$|")
     axes[1, 1].set_xlabel(r"$E - E_\mathrm{F}$ (eV)")
 
+    fig.suptitle("Error of Wannier interpolation", fontsize=14)
     plt.tight_layout()
 
     # apply ylim
@@ -788,11 +789,11 @@ def wannier_quality_calculation(
     # plot and save S_abs vs. E
     plot_title = "S_abs"
 
-    fig, ax = plt.subplots(1, 1, figsize=[4, 4])
+    fig, ax = plt.subplots(1, 1, figsize=[3.7, 2.5])
     ax.plot(E_S_abs[:, 0], E_S_abs[:, 1], "ko", markersize=2)
-    ax.set_title(r"|$S$|", fontsize=14)
-    ax.set_ylabel(r"|$S$|")
-    ax.set_xlabel(r"$E - E_\mathrm{F}$ (eV)")
+    ax.set_title("Interpolated spin magnitudes", fontsize=13)
+    ax.set_ylabel(r"|$S$|", fontsize=13)
+    ax.set_xlabel(r"$E - E_\mathrm{F}$ (eV)", fontsize=13)
     plt.tight_layout()
     if savefig is True:
         plt.savefig(plot_title + "_vs_E_home-made_Fermi_corrected.png", dpi=400)
@@ -801,12 +802,13 @@ def wannier_quality_calculation(
     plt.close()
 
     # plot and save S_abs histogram
-    fig, ax = plt.subplots(1, 1, figsize=[4, 4])
+    fig, ax = plt.subplots(1, 1, figsize=[3.5, 2.5])
     plt.hist(S_abs.flatten(), bins=100)
-    plt.xlabel("|S|")
+    plt.xlabel("|S|", fontsize=13)
+    plt.ylabel("counts", fontsize=13)
     plt.title(
-        f"histogram of abs values of diagonal elements of spin operator\n- in k-space (eigenvalues) home-made interpolation",
-        fontsize=8,
+        "Spin magnitude histogram", #f"histogram of abs values of diagonal elements of spin operator\n- in k-space (eigenvalues) home-made interpolation",
+        fontsize=13,
     )
     plt.tight_layout()
     if savefig is True:
