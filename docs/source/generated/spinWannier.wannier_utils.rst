@@ -47,6 +47,7 @@
       read_PROCAR_lines_for_kpoint
       real_space_grid_from_hr_dat
       real_to_W_gauge
+      real_to_W_gauge_accelerated
       reciprocal_lattice_vectors
       replace_middle_of_cmap_with_custom_color
       save_bands_and_spin_texture

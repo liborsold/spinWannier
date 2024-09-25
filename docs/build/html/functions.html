@@ -44,6 +44,7 @@
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'functions';</script>
+    <link rel="icon" href="_static/android-chrome-192x192.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Classes" href="classes.html" />
@@ -134,7 +135,7 @@
   
   
   
-    <p class="title logo__title">spinWannier 0.1.5 documentation</p>
+    <p class="title logo__title"><b>spinWannier</b> 0.1.5 documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -356,6 +357,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_utils.read_PROCAR_lines_for_kpoint"><code class="docutils literal notranslate"><span class="pre">read_PROCAR_lines_for_kpoint()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_utils.real_space_grid_from_hr_dat"><code class="docutils literal notranslate"><span class="pre">real_space_grid_from_hr_dat()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_utils.real_to_W_gauge"><code class="docutils literal notranslate"><span class="pre">real_to_W_gauge()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_utils.real_to_W_gauge_accelerated"><code class="docutils literal notranslate"><span class="pre">real_to_W_gauge_accelerated()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_utils.reciprocal_lattice_vectors"><code class="docutils literal notranslate"><span class="pre">reciprocal_lattice_vectors()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_utils.replace_middle_of_cmap_with_custom_color"><code class="docutils literal notranslate"><span class="pre">replace_middle_of_cmap_with_custom_color()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_utils.save_bands_and_spin_texture"><code class="docutils literal notranslate"><span class="pre">save_bands_and_spin_texture()</span></code></a></li>
@@ -808,7 +810,7 @@ and hopping as a complex number matrix as the values.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.interpolate_operator">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">interpolate_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operator_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u_dis_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latt_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reciprocal_latt_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">U_mn_k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hamiltonian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[(0,</span> <span class="pre">0,</span> <span class="pre">0)]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_real_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">real_space_fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hr_R_dict.dat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./tb_model_wann90/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_as_pickle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.interpolate_operator" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">interpolate_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operator_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u_dis_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latt_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reciprocal_latt_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">U_mn_k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hamiltonian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[(0,</span> <span class="pre">0,</span> <span class="pre">0)]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_real_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">real_space_fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hr_R_dict.dat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./tb_model_wann90/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_as_pickle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.interpolate_operator" title="Link to this definition">#</a></dt>
 <dd><dl class="simple">
 <dt>Takes operator O (Hamiltonian, spin-operator …) evaluated on a coarse DFT k-mesh and Hamiltonian eigenstates onto ‘kpoints’ using the</dt><dd><ol class="arabic simple">
 <li><p>(semi)unitary transformation defined by U_dis*U from the Hamiltonian gauge (eigenstate gauge)
@@ -1120,6 +1122,26 @@ See Pizzi 2020 Sec. 4.2.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.real_to_W_gauge">
 <span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">real_to_W_gauge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">O_mn_R_W</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.real_to_W_gauge" title="Link to this definition">#</a></dt>
+<dd><p>Perform inverse Fourier transformation from real-space operator to k-space in Wannier gauge.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kpoints</strong> (<em>list</em><em> of </em><em>tuples</em>) – The k-points.</p></li>
+<li><p><strong>O_mn_R_W</strong> (<em>dict</em>) – The real-space operator dictionary.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The k-space operator dictionary.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="spinWannier.wannier_utils.real_to_W_gauge_accelerated">
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">real_to_W_gauge_accelerated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">O_mn_R_W</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.real_to_W_gauge_accelerated" title="Link to this definition">#</a></dt>
 <dd><p>Perform inverse Fourier transformation from real-space operator to k-space in Wannier gauge.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1708,6 +1730,7 @@ int: number of bands.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_utils.read_PROCAR_lines_for_kpoint"><code class="docutils literal notranslate"><span class="pre">read_PROCAR_lines_for_kpoint()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_utils.real_space_grid_from_hr_dat"><code class="docutils literal notranslate"><span class="pre">real_space_grid_from_hr_dat()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_utils.real_to_W_gauge"><code class="docutils literal notranslate"><span class="pre">real_to_W_gauge()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_utils.real_to_W_gauge_accelerated"><code class="docutils literal notranslate"><span class="pre">real_to_W_gauge_accelerated()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_utils.reciprocal_lattice_vectors"><code class="docutils literal notranslate"><span class="pre">reciprocal_lattice_vectors()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_utils.replace_middle_of_cmap_with_custom_color"><code class="docutils literal notranslate"><span class="pre">replace_middle_of_cmap_with_custom_color()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_utils.save_bands_and_spin_texture"><code class="docutils literal notranslate"><span class="pre">save_bands_and_spin_texture()</span></code></a></li>

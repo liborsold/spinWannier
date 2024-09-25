@@ -44,4 +44,10 @@ html_theme_options = {
     "use_repository_button": True,
     "repository_branch": "master",
     "path_to_docs": "docs/source/",
+    "logo": {
+        "text": f"<b>spinWannier</b> {release} documentation", # "image_light": "_static/logo-light.png","image_dark": "_static/logo-light.png",
+    },
 }
+
+html_favicon = '_static/favicon/android-chrome-192x192.png'
+

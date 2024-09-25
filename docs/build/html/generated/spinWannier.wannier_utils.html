@@ -44,6 +44,7 @@
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'generated/spinWannier.wannier_utils';</script>
+    <link rel="icon" href="../_static/android-chrome-192x192.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="spinWannier.wannier_quality_utils" href="spinWannier.wannier_quality_utils.html" />
@@ -135,7 +136,7 @@
   
   
   
-    <p class="title logo__title">spinWannier 0.1.5 documentation</p>
+    <p class="title logo__title"><b>spinWannier</b> 0.1.5 documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -433,37 +434,40 @@ document.write(`
 <tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.real_to_W_gauge" title="spinWannier.wannier_utils.real_to_W_gauge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">real_to_W_gauge</span></code></a>(kpoints, O_mn_R_W)</p></td>
 <td><p>Perform inverse Fourier transformation from real-space operator to k-space in Wannier gauge.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.reciprocal_lattice_vectors" title="spinWannier.wannier_utils.reciprocal_lattice_vectors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reciprocal_lattice_vectors</span></code></a>(...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.real_to_W_gauge_accelerated" title="spinWannier.wannier_utils.real_to_W_gauge_accelerated"><code class="xref py py-obj docutils literal notranslate"><span class="pre">real_to_W_gauge_accelerated</span></code></a>(kpoints, O_mn_R_W)</p></td>
+<td><p>Perform inverse Fourier transformation from real-space operator to k-space in Wannier gauge.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.reciprocal_lattice_vectors" title="spinWannier.wannier_utils.reciprocal_lattice_vectors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reciprocal_lattice_vectors</span></code></a>(...)</p></td>
 <td><p>Return the reciprocal lattice vectors from the real-space lattice vectors.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.replace_middle_of_cmap_with_custom_color" title="spinWannier.wannier_utils.replace_middle_of_cmap_with_custom_color"><code class="xref py py-obj docutils literal notranslate"><span class="pre">replace_middle_of_cmap_with_custom_color</span></code></a>([...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.replace_middle_of_cmap_with_custom_color" title="spinWannier.wannier_utils.replace_middle_of_cmap_with_custom_color"><code class="xref py py-obj docutils literal notranslate"><span class="pre">replace_middle_of_cmap_with_custom_color</span></code></a>([...])</p></td>
 <td><p>Replace the middle of the colormap with a custom color.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.save_bands_and_spin_texture" title="spinWannier.wannier_utils.save_bands_and_spin_texture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_bands_and_spin_texture</span></code></a>(kpoints_rec, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.save_bands_and_spin_texture" title="spinWannier.wannier_utils.save_bands_and_spin_texture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_bands_and_spin_texture</span></code></a>(kpoints_rec, ...)</p></td>
 <td><p>Save the bands and spin texture information for given kpoints.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.save_bands_and_spin_texture_old" title="spinWannier.wannier_utils.save_bands_and_spin_texture_old"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_bands_and_spin_texture_old</span></code></a>(kpoints_rec, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.save_bands_and_spin_texture_old" title="spinWannier.wannier_utils.save_bands_and_spin_texture_old"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_bands_and_spin_texture_old</span></code></a>(kpoints_rec, ...)</p></td>
 <td><p>Save the bands and spin texture information for given kpoints.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.selected_band_plot" title="spinWannier.wannier_utils.selected_band_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">selected_band_plot</span></code></a>([band])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.selected_band_plot" title="spinWannier.wannier_utils.selected_band_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">selected_band_plot</span></code></a>([band])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.split_spn_dict" title="spinWannier.wannier_utils.split_spn_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_spn_dict</span></code></a>(spn_dict[, spin_names])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.split_spn_dict" title="spinWannier.wannier_utils.split_spn_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_spn_dict</span></code></a>(spn_dict[, spin_names])</p></td>
 <td><p>Split dictionary with keys as ((Rx, Ry, Rz), spin_component_name) to three dictionaries</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.spn_to_dict" title="spinWannier.wannier_utils.spn_to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spn_to_dict</span></code></a>([model_dir, fwin, fin, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.spn_to_dict" title="spinWannier.wannier_utils.spn_to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spn_to_dict</span></code></a>([model_dir, fwin, fin, ...])</p></td>
 <td><p>Convert wannier90.spn file to a dictionary object and save as pickle.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.u_to_dict" title="spinWannier.wannier_utils.u_to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">u_to_dict</span></code></a>([fin, fout, text_file, write_sparse])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.u_to_dict" title="spinWannier.wannier_utils.u_to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">u_to_dict</span></code></a>([fin, fout, text_file, write_sparse])</p></td>
 <td><p>Convert _u.mat from wannier90 to pickled python dictionary.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.uniform_real_space_grid" title="spinWannier.wannier_utils.uniform_real_space_grid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uniform_real_space_grid</span></code></a>([R_mesh_ijk])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.uniform_real_space_grid" title="spinWannier.wannier_utils.uniform_real_space_grid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uniform_real_space_grid</span></code></a>([R_mesh_ijk])</p></td>
 <td><p>From the maxima in each direction, make a regular mesh</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.unite_spn_dict" title="spinWannier.wannier_utils.unite_spn_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unite_spn_dict</span></code></a>(spn_x_dict, spn_y_dict, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.unite_spn_dict" title="spinWannier.wannier_utils.unite_spn_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unite_spn_dict</span></code></a>(spn_x_dict, spn_y_dict, ...)</p></td>
 <td><p>Unite dictionary with keys as (Rx, Ry, Rz) to three dictionaries</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.wannier_energy_windows" title="spinWannier.wannier_utils.wannier_energy_windows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wannier_energy_windows</span></code></a>(wann_bands_lims[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../functions.html#spinWannier.wannier_utils.wannier_energy_windows" title="spinWannier.wannier_utils.wannier_energy_windows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wannier_energy_windows</span></code></a>(wann_bands_lims[, ...])</p></td>
 <td><p>Get energy window limits for wannierization.</p></td>
 </tr>
 </tbody>
