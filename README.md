@@ -11,7 +11,7 @@ Example plot of Fermi-surface spin textures of CrXY (X,Y=S,Se,Te) monolayers:
 <center><img src="https://github.com/user-attachments/assets/5204849c-0fa1-419f-9955-6c55c014babe" alt="spin_texture_example" width="550" /></center>
 
 ## Usage 
-An example of use is given in ``./examples/spinWannier_use_example.ipynb``. It uses input files of a CrSTe monolayer given in ``./examples/wannier_files_CrSTe/``.
+An example of use is given in ``./examples/spinWannier_use_example.ipynb``. It uses input files of a CrSTe monolayer given in ``./examples/CrSTe/``.
 
 ### 1. Load the model from ``wannier90`` files
 ```python
