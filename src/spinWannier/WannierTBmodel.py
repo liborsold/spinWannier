@@ -79,6 +79,7 @@ class WannierTBmodel:
         data_saving_format="npz", #"parquet",
         band_for_Fermi_correction=None,
         kpoint_for_Fermi_correction="0.0000000E+00  0.0000000E+00  0.0000000E+00",
+        verbose=False,
     ):
         """Initialize the WannierTBmodel class.
 
@@ -97,6 +98,7 @@ class WannierTBmodel:
         """
 
         self.data_saving_format = data_saving_format
+        self.verbose = verbose
 
         # ensure that directories have a backslash at the end
         if sc_dir[-1] != "/":
@@ -338,6 +340,7 @@ class WannierTBmodel:
             self.S_mn_k_H_z[dimension] = bands_spin_dat["Sz"]
             return
 
+        if self.verbose: print("Interpolating the Hamiltonian...")
         self.Eigs_k[dimension], self.U_mn_k = interpolate_operator(
             self.eig_dict,
             self.u_dis_dict,
@@ -350,6 +353,7 @@ class WannierTBmodel:
             save_real_space=save_real_space_operators,
             real_space_fname="hr_R_dict.pickle",
             save_folder=save_folder,
+            verbose=self.verbose,
         )
 
         spn_dict_x = {}
@@ -360,6 +364,7 @@ class WannierTBmodel:
             spn_dict_y[k[0]] = self.spn_dict[(k[0], "y")]
             spn_dict_z[k[0]] = self.spn_dict[(k[0], "z")]
 
+        if self.verbose: print("Interpolating Sx...")
         self.S_mn_k_H_x[dimension] = interpolate_operator(
             spn_dict_x,
             self.u_dis_dict,
@@ -373,7 +378,10 @@ class WannierTBmodel:
             save_real_space=save_real_space_operators,
             real_space_fname=self.spn_x_R_dict_name,
             save_folder=save_folder,
+            verbose=self.verbose,
         )
+
+        if self.verbose: print("Interpolating Sy...")
         self.S_mn_k_H_y[dimension] = interpolate_operator(
             spn_dict_y,
             self.u_dis_dict,
@@ -387,7 +395,10 @@ class WannierTBmodel:
             save_real_space=save_real_space_operators,
             real_space_fname=self.spn_y_R_dict_name,
             save_folder=save_folder,
+            verbose=self.verbose,
         )
+
+        if self.verbose: print("Interpolating Sz...")
         self.S_mn_k_H_z[dimension] = interpolate_operator(
             spn_dict_z,
             self.u_dis_dict,
@@ -401,6 +412,7 @@ class WannierTBmodel:
             save_real_space=save_real_space_operators,
             real_space_fname=self.spn_z_R_dict_name,
             save_folder=save_folder,
+            verbose=self.verbose,
         )
 
         # unite the spn real space dictionaries to one
@@ -443,9 +455,9 @@ class WannierTBmodel:
                 kmesh_2D=kmesh_2D,
                 fout=fout,
             )
-            
+
         # clean standard output
-        print("\033[H\033[J")
+        
 
     def plot1D_bands(self, fout="spin_texture_1D_home_made.jpg", yaxis_lim=[-8, 6], savefig=True, showfig=True):
         """Plot the bands and the spin texture on a 1D path.

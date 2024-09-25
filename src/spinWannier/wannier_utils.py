@@ -2168,6 +2168,7 @@ def interpolate_operator(
     real_space_fname="hr_R_dict.dat",
     save_folder="./tb_model_wann90/",
     save_as_pickle=True,
+    verbose=False,
 ):
     """Takes operator O (Hamiltonian, spin-operator ...) evaluated on a coarse DFT k-mesh and Hamiltonian eigenstates onto 'kpoints' using the
         (1) (semi)unitary transformation defined by U_dis*U from the Hamiltonian gauge (eigenstate gauge)
@@ -2217,8 +2218,7 @@ def interpolate_operator(
     # the DFT k-point grid in cartesian coordinates (units of 1/A)
     kpoints_coarse_cart = [np.array(kpoint).T @ G for kpoint in kpoints_coarse]
 
-    print('')
-    print('kpoints and preparation:', f'{time.time() - prev_time:.3f} seconds')
+    if verbose: print('  - kpoints and preparation:\t\t', f'{time.time() - prev_time:.3f} seconds')
     prev_time = time.time()
 
     # (1) get the operator in the Wannier gauge (see Eg. 16 in Ryoo 2019 PRB or for instance Eq. 30 in Qiao 2018 PRB)
@@ -2235,7 +2235,7 @@ def interpolate_operator(
             @ u_dict[kpoint]
         )
 
-    print('get operator in Wannier gauge:', f'{time.time() - prev_time:.3f} seconds')
+    if verbose: print('  - get operator in Wannier gauge:\t', f'{time.time() - prev_time:.3f} seconds')
     prev_time = time.time()
 
     # (2) Fourier transform in the range of real-space lattice vectors given by R_mesh_ijk
@@ -2289,7 +2289,7 @@ def interpolate_operator(
 
         
 
-    print('Fourier transform to real space:', f'{time.time() - prev_time:.3f} seconds')
+    if verbose: print('  - Fourier transform to real space:\t', f'{time.time() - prev_time:.3f} seconds')
     prev_time = time.time()
 
     # save real-space representation
@@ -2311,24 +2311,24 @@ def interpolate_operator(
             with open(save_folder + real_space_fname, "w") as fw:
                 fw.write(str(O_mn_R_W_tosave).replace("'", ""))
 
-    print('save real-space representation:', f'{time.time() - prev_time:.3f} seconds')
+    if verbose: print('  - save real-space representation:\t', f'{time.time() - prev_time:.3f} seconds')
     prev_time = time.time()
 
     # (3a) inverse Fourier
     O_mn_k_W = real_to_W_gauge_accelerated(kpoints, O_mn_R_W)
 
-    print('inverse Fourier (real to W gauge):', f'{time.time() - prev_time:.3f} seconds')
+    if verbose: print('  - inverse Fourier (real to W gauge):\t', f'{time.time() - prev_time:.3f} seconds')
     prev_time = time.time()
 
     # (3b) transformation to Hamiltonian gauge
     # if Hamiltonian is being calculated, perform diagonalization
     if hamiltonian is True:
         Eigs_k, U_mn_k = W_gauge_to_H_gauge(O_mn_k_W, U_mn_k={}, hamiltonian=True)
-        print('W gauge to H gauge:', f'{time.time() - prev_time:.3f} seconds')
+        if verbose: print('  - W gauge to H gauge:              \t', f'{time.time() - prev_time:.3f} seconds\n')
         return Eigs_k, U_mn_k
     else:
         O_mn_k_H = W_gauge_to_H_gauge(O_mn_k_W, U_mn_k=U_mn_k, hamiltonian=False)
-        print('W gauge to H gauge:', f'{time.time() - prev_time:.3f} seconds')
+        if verbose: print('  - W gauge to H gauge:              \t', f'{time.time() - prev_time:.3f} seconds\n')
         return O_mn_k_H
 
 
