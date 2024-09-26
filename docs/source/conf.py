@@ -45,9 +45,7 @@ html_theme_options = {
     "repository_branch": "master",
     "path_to_docs": "docs/source/",
     "logo": {
-        "text": f"<b>spinWannier</b> {release} documentation", 
-        "image_light": "_static/logo-light.png",
-        "image_dark": "_static/logo-light.png",
+        "text": f"<b>spinWannier</b> {release} documentation", # "image_light": "_static/logo-light.png", "image_dark": "_static/logo-light.png",
     },
 }
 

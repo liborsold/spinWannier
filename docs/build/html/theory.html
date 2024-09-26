@@ -136,14 +136,6 @@
   
   
   
-    
-    
-      
-    
-    
-    <img src="_static/logo-light.png" class="logo__image only-light" alt=""/>
-    <script>document.write(`<img src="_static/logo-light.png" class="logo__image only-dark" alt=""/>`);</script>
-  
   
     <p class="title logo__title"><b>spinWannier</b> 0.1.6 documentation</p>
   
@@ -345,7 +337,7 @@ document.write(`
 \[\begin{equation}
     \mathcal{S}_{m n}^{\mathrm{W}}(\textbf{q})=\sum_{m^{\prime} n^{\prime}} V_{m^{\prime} m}^\dagger(\textbf{q}) \cdot \mathcal{S}_{m^{\prime} n^{\prime}}^\mathrm{H}(\textbf{q}) \cdot V_{n^{\prime} n}(\textbf{q}),
 \end{equation}\]</div>
-<p>where the spin operator <span class="math notranslate nohighlight">\(\hat{\mathcal{S}}\)</span> projected onto the basis of the <em>ab initio</em> eigenstates <span class="math notranslate nohighlight">\(\psi\)</span> in its matrix form <span class="math notranslate nohighlight">\(\mathcal{S}_{m^{\prime} n^{\prime}}^\mathrm{H}(\textbf{q}) = \left\langle\psi_{m^{\prime} \textbf{q}}|\hat{\mathcal{S}}| \psi_{n^{\prime} \textbf{q}}\right\rangle\)</span> is obtained with the help of the texttt{vaspspn} module of texttt{WannierBerri}~cite{tsirkin_high_2021}. Primed indices run over the (larger) space of disentanglement bands.</p>
+<p>where the spin operator <span class="math notranslate nohighlight">\(\hat{\mathcal{S}}\)</span> projected onto the basis of the <em>ab initio</em> eigenstates <span class="math notranslate nohighlight">\(\psi\)</span> in its matrix form <span class="math notranslate nohighlight">\(\mathcal{S}_{m^{\prime} n^{\prime}}^\mathrm{H}(\textbf{q}) = \left\langle\psi_{m^{\prime} \textbf{q}}|\hat{\mathcal{S}}| \psi_{n^{\prime} \textbf{q}}\right\rangle\)</span> is obtained with the help of the <code class="docutils literal notranslate"><span class="pre">vaspspn</span></code> module of <code class="docutils literal notranslate"><span class="pre">WannierBerri</span></code> (<a class="reference external" href="https://www.nature.com/articles/s41524-021-00498-5">Tsirkin, npj Comp. Mater. (2021)</a>). Primed indices run over the (larger) space of disentanglement bands.</p>
 <p>Follows the direct Fourier sum over the <em>ab initio</em> grid</p>
 <div class="math notranslate nohighlight">
 \[\begin{equation}
@@ -353,7 +345,6 @@ document.write(`
 \end{equation}\]</div>
 <p>with :math:` N_{textbf{q}} ` the number of <em>ab initio</em> grid points <span class="math notranslate nohighlight">\(\textbf{q}\)</span>.</p>
 <p>Having <span class="math notranslate nohighlight">\(\mathcal{S}_{m n}(\textbf{R})\)</span> at hand, its interpolation <span class="math notranslate nohighlight">\(\overline{\mathcal{S}}_{mn}^\mathrm{H} (\textbf{k})\)</span> to an <em>arbitrary</em> k-vector <span class="math notranslate nohighlight">\(\textbf{k}\)</span> involves an inverse Fourier sum <span class="math notranslate nohighlight">\(\overline{\mathcal{S}}_{mn}^\mathrm{W} (\textbf{k}) = \sum_\textbf{R} \mathcal{S}_{mn} (\textbf{R}) \cdot  e^{i \textbf{k} \cdot \textbf{R}}\)</span> over the real-space lattice vectors <span class="math notranslate nohighlight">\(\textbf{R}\)</span> followed by a rotation back to the Hamiltonian gauge of the original eigenstates <span class="math notranslate nohighlight">\(\overline{\mathcal{S}}_{mn}^\mathrm{H} (\textbf{k}) = (U^\dagger \cdot \mathcal{S}^\mathrm{W} \cdot U)_{mn}\)</span>, where <span class="math notranslate nohighlight">\(U_{mn}\)</span> is a unitary matrix which diagonalizes the interpolated Hamiltonian <span class="math notranslate nohighlight">\(\overline{\mathcal{H}}_{mn}^\mathrm{W} (\textbf{k}) = \sum_\textbf{R} \mathcal{H}_{mn} (\textbf{R}) \cdot  e^{i \textbf{k} \cdot \textbf{R}}\)</span>.</p>
-<p>This procedure is implemented in <code class="docutils literal notranslate"><span class="pre">spinWannier</span></code>.</p>
 <p>See the <a class="reference external" href="https://pubs.acs.org/doi/suppl/10.1021/acs.nanolett.4c03029/suppl_file/nl4c03029_si_001.pdf">Supplementary</a> of <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.nanolett.4c03029">L. Vojáček*, J. M. Dueñas* et al., Nano Letters (2024)</a>.</p>
 </section>
 
