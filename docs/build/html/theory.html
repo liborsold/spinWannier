@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Modules &#8212; spinWannier 0.1.6 documentation</title>
+    <title>Theory &#8212; spinWannier 0.1.6 documentation</title>
   
   
   
@@ -43,12 +43,13 @@
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'modules';</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'theory';</script>
     <link rel="icon" href="_static/android-chrome-192x192.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="spinWannier.wannier_utils" href="generated/spinWannier.wannier_utils.html" />
-    <link rel="prev" title="Example" href="example.html" />
+    <link rel="next" title="Example" href="example.html" />
+    <link rel="prev" title="Welcome to spinWannier’s documentation!" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -161,9 +162,9 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example.html">Example</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Modules</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">Modules</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated/spinWannier.wannier_utils.html">spinWannier.wannier_utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/spinWannier.wannier_quality_utils.html">spinWannier.wannier_quality_utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/spinWannier.WannierTBmodel.html">spinWannier.WannierTBmodel</a></li>
@@ -240,7 +241,7 @@
       
       
       
-      <li><a href="_sources/modules.rst" target="_blank"
+      <li><a href="_sources/theory.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -322,7 +323,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Modules</h1>
+    <h1>Theory</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -336,22 +337,23 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="modules">
-<h1>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h1>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/spinWannier.wannier_utils.html#module-spinWannier.wannier_utils" title="spinWannier.wannier_utils"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spinWannier.wannier_utils</span></code></a></p></td>
-<td><p>Utility functions for the spinWannier package.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/spinWannier.wannier_quality_utils.html#module-spinWannier.wannier_quality_utils" title="spinWannier.wannier_quality_utils"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spinWannier.wannier_quality_utils</span></code></a></p></td>
-<td><p>Utility functions for the wannier_quality method of the spinWannier.WannierTBmodel.WannierTBmodel class.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/spinWannier.WannierTBmodel.html#module-spinWannier.WannierTBmodel" title="spinWannier.WannierTBmodel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spinWannier.WannierTBmodel</span></code></a></p></td>
-<td><p>Contains the WannierTBmodel class for the spin-texture interpolation and plotting.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
+  <section id="theory">
+<h1>Theory<a class="headerlink" href="#theory" title="Link to this heading">#</a></h1>
+<p>Accessing the spin expectation values of the interpolated band structure with Wannier tight-binding models requires deriving the Wannier real-space spin operator.</p>
+<p>Just like any other operator that can be obtained from the <em>ab initio</em> calculation (for all the <em>ab initio</em> k-points <span class="math notranslate nohighlight">\(\textbf{q}\)</span>), the <em>spin operator</em> in the basis of <em>ab initio</em> eigenstates <span class="math notranslate nohighlight">\(\mathcal{S}_{mn}^\mathrm{H}(\textbf{q})\)</span> can be converted into its real-space representation by first applying the semi-unitary matrix <span class="math notranslate nohighlight">\(V_{m^{\prime} m}(\textbf{q})\)</span> to convert <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> from the <em>Hamiltonian</em> gauge to the <em>Wannier</em> gauge</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+    \mathcal{S}_{m n}^{\mathrm{W}}(\textbf{q})=\sum_{m^{\prime} n^{\prime}} V_{m^{\prime} m}^\dagger(\textbf{q}) \cdot \mathcal{S}_{m^{\prime} n^{\prime}}^\mathrm{H}(\textbf{q}) \cdot V_{n^{\prime} n}(\textbf{q}),
+\end{equation}\]</div>
+<p>where the spin operator <span class="math notranslate nohighlight">\(\hat{\mathcal{S}}\)</span> projected onto the basis of the <em>ab initio</em> eigenstates <span class="math notranslate nohighlight">\(\psi\)</span> in its matrix form <span class="math notranslate nohighlight">\(\mathcal{S}_{m^{\prime} n^{\prime}}^\mathrm{H}(\textbf{q}) = \left\langle\psi_{m^{\prime} \textbf{q}}|\hat{\mathcal{S}}| \psi_{n^{\prime} \textbf{q}}\right\rangle\)</span> is obtained with the help of the texttt{vaspspn} module of texttt{WannierBerri}~cite{tsirkin_high_2021}. Primed indices run over the (larger) space of disentanglement bands.</p>
+<p>Follows the direct Fourier sum over the <em>ab initio</em> grid</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+    \mathcal{S}_{m n}(\textbf{R}) \equiv \frac{1}{N_{\textbf{q}}} \sum_{\textbf{q}}  \mathcal{S}_{m n}^{\mathrm{W}}(\textbf{q}) \cdot e^{-i \textbf{q} \cdot \textbf{R}} \,,
+\end{equation}\]</div>
+<p>with :math:` N_{textbf{q}} ` the number of <em>ab initio</em> grid points <span class="math notranslate nohighlight">\(\textbf{q}\)</span>.</p>
+<p>Having <span class="math notranslate nohighlight">\(\mathcal{S}_{m n}(\textbf{R})\)</span> at hand, its interpolation <span class="math notranslate nohighlight">\(\overline{\mathcal{S}}_{mn}^\mathrm{H} (\textbf{k})\)</span> to an <em>arbitrary</em> k-vector <span class="math notranslate nohighlight">\(\textbf{k}\)</span> involves an inverse Fourier sum <span class="math notranslate nohighlight">\(\overline{\mathcal{S}}_{mn}^\mathrm{W} (\textbf{k}) = \sum_\textbf{R} \mathcal{S}_{mn} (\textbf{R}) \cdot  e^{i \textbf{k} \cdot \textbf{R}}\)</span> over the real-space lattice vectors <span class="math notranslate nohighlight">\(\textbf{R}\)</span> followed by a rotation back to the Hamiltonian gauge of the original eigenstates <span class="math notranslate nohighlight">\(\overline{\mathcal{S}}_{mn}^\mathrm{H} (\textbf{k}) = (U^\dagger \cdot \mathcal{S}^\mathrm{W} \cdot U)_{mn}\)</span>, where <span class="math notranslate nohighlight">\(U_{mn}\)</span> is a unitary matrix which diagonalizes the interpolated Hamiltonian <span class="math notranslate nohighlight">\(\overline{\mathcal{H}}_{mn}^\mathrm{W} (\textbf{k}) = \sum_\textbf{R} \mathcal{H}_{mn} (\textbf{R}) \cdot  e^{i \textbf{k} \cdot \textbf{R}}\)</span>.</p>
+<p>This procedure is implemented in <code class="docutils literal notranslate"><span class="pre">spinWannier</span></code>.</p>
 </section>
 
 
@@ -366,20 +368,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="example.html"
+       href="index.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Example</p>
+        <p class="prev-next-title">Welcome to spinWannier’s documentation!</p>
       </div>
     </a>
     <a class="right-next"
-       href="generated/spinWannier.wannier_utils.html"
+       href="example.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">spinWannier.wannier_utils</p>
+        <p class="prev-next-title">Example</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -40,8 +40,10 @@ and execute the ``./examples/spinWannier_use_example.ipynb`` Jupyter notebook to
 Navigation
 ================
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 5
 
+   theory
+   example
    modules
    classes
    functions

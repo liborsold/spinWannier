@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Modules &#8212; spinWannier 0.1.6 documentation</title>
+    <title>Example &#8212; spinWannier 0.1.6 documentation</title>
   
   
   
@@ -43,12 +43,12 @@
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'modules';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'example';</script>
     <link rel="icon" href="_static/android-chrome-192x192.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="spinWannier.wannier_utils" href="generated/spinWannier.wannier_utils.html" />
-    <link rel="prev" title="Example" href="example.html" />
+    <link rel="next" title="Modules" href="modules.html" />
+    <link rel="prev" title="Theory" href="theory.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -162,8 +162,8 @@
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example.html">Example</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Modules</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Example</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">Modules</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated/spinWannier.wannier_utils.html">spinWannier.wannier_utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/spinWannier.wannier_quality_utils.html">spinWannier.wannier_quality_utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/spinWannier.WannierTBmodel.html">spinWannier.WannierTBmodel</a></li>
@@ -240,7 +240,7 @@
       
       
       
-      <li><a href="_sources/modules.rst" target="_blank"
+      <li><a href="_sources/example.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +311,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -322,11 +324,22 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Modules</h1>
+    <h1>Example</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-model-from-wannier90-files">1. Load the model from <code class="docutils literal notranslate"><span class="pre">wannier90</span></code> files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolate-bands-and-spin-along-a-high-symmetry-path">2. Interpolate bands and spin along a high-symmetry path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolate-bands-and-spin-on-a-2d-brillouin-zone">3. Interpolate bands and spin on a 2D Brillouin zone</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-error-of-wannier-interpolation">4. Calculate the error of Wannier interpolation</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -336,22 +349,45 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="modules">
-<h1>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h1>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/spinWannier.wannier_utils.html#module-spinWannier.wannier_utils" title="spinWannier.wannier_utils"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spinWannier.wannier_utils</span></code></a></p></td>
-<td><p>Utility functions for the spinWannier package.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/spinWannier.wannier_quality_utils.html#module-spinWannier.wannier_quality_utils" title="spinWannier.wannier_quality_utils"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spinWannier.wannier_quality_utils</span></code></a></p></td>
-<td><p>Utility functions for the wannier_quality method of the spinWannier.WannierTBmodel.WannierTBmodel class.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/spinWannier.WannierTBmodel.html#module-spinWannier.WannierTBmodel" title="spinWannier.WannierTBmodel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spinWannier.WannierTBmodel</span></code></a></p></td>
-<td><p>Contains the WannierTBmodel class for the spin-texture interpolation and plotting.</p></td>
-</tr>
-</tbody>
-</table>
+  <section id="example">
+<h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
+<p>An example of use is given in <code class="docutils literal notranslate"><span class="pre">./examples/spinWannier_use_example.ipynb</span></code>. It uses input files of a CrSTe monolayer given in <code class="docutils literal notranslate"><span class="pre">./examples/CrSTe/</span></code>.</p>
+<section id="load-the-model-from-wannier90-files">
+<h2>1. Load the model from <code class="docutils literal notranslate"><span class="pre">wannier90</span></code> files<a class="headerlink" href="#load-the-model-from-wannier90-files" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spinWannier.WannierTBmodel</span> <span class="kn">import</span> <span class="n">WannierTBmodel</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">WannierTBmodel</span><span class="p">(</span><span class="n">sc_dir</span><span class="o">=</span><span class="s1">&#39;./sc&#39;</span><span class="p">,</span> <span class="n">nsc_dir</span><span class="o">=</span><span class="s1">&#39;./nsc&#39;</span><span class="p">,</span> <span class="n">wann_dir</span><span class="o">=</span><span class="s1">&#39;./wann&#39;</span><span class="p">,</span> <span class="n">bands_dir</span><span class="o">=</span><span class="s1">&#39;./bands&#39;</span><span class="p">)</span>
+</pre></div>
 </div>
+</section>
+<section id="interpolate-bands-and-spin-along-a-high-symmetry-path">
+<h2>2. Interpolate bands and spin along a high-symmetry path<a class="headerlink" href="#interpolate-bands-and-spin-along-a-high-symmetry-path" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">kpoint_matrix</span><span class="o">=</span><span class="p">[[(</span><span class="mf">0.33</span><span class="p">,</span><span class="mf">0.33</span><span class="p">,</span><span class="mf">0.00</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.00</span><span class="p">,</span><span class="mf">0.00</span><span class="p">,</span><span class="mf">0.00</span><span class="p">)],</span>
+            <span class="p">[(</span><span class="mf">0.00</span><span class="p">,</span><span class="mf">0.00</span><span class="p">,</span><span class="mf">0.00</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.50</span><span class="p">,</span><span class="mf">0.00</span><span class="p">,</span><span class="mf">0.00</span><span class="p">)],</span>
+            <span class="p">[(</span><span class="mf">0.50</span><span class="p">,</span><span class="mf">0.00</span><span class="p">,</span><span class="mf">0.00</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.33</span><span class="p">,</span><span class="mf">0.33</span><span class="p">,</span><span class="mf">0.00</span><span class="p">)]]</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">interpolate_bands_and_spin</span><span class="p">(</span><span class="n">kpoint_matrix</span><span class="p">,</span> <span class="n">kpath_ticks</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;K&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="s1">&#39;K&#39;</span><span class="p">],</span> <span class="n">kmesh_2D</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">plot1D_bands</span><span class="p">(</span><span class="n">yaxis_lim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">6.6</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">],</span> <span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">showfig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="https://github.com/user-attachments/assets/b9012f49-3ba0-41b4-b3ba-26c5315982ee"><img alt="https://github.com/user-attachments/assets/b9012f49-3ba0-41b4-b3ba-26c5315982ee" class="align-center" src="https://github.com/user-attachments/assets/b9012f49-3ba0-41b4-b3ba-26c5315982ee" style="width: 950px;" /></a>
+</section>
+<section id="interpolate-bands-and-spin-on-a-2d-brillouin-zone">
+<h2>3. Interpolate bands and spin on a 2D Brillouin zone<a class="headerlink" href="#interpolate-bands-and-spin-on-a-2d-brillouin-zone" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">interpolate_bands_and_spin</span><span class="p">(</span><span class="n">kpoint_matrix</span><span class="p">,</span> <span class="n">kmesh_2D</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">plot2D_spin_texture</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="https://github.com/user-attachments/assets/29b3987b-9b2b-4c3a-aacc-0f14681e5c89"><img alt="https://github.com/user-attachments/assets/29b3987b-9b2b-4c3a-aacc-0f14681e5c89" class="align-center" src="https://github.com/user-attachments/assets/29b3987b-9b2b-4c3a-aacc-0f14681e5c89" style="width: 400px;" /></a>
+</section>
+<section id="calculate-the-error-of-wannier-interpolation">
+<h2>4. Calculate the error of Wannier interpolation<a class="headerlink" href="#calculate-the-error-of-wannier-interpolation" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">wannier_quality</span><span class="p">(</span><span class="n">yaxis_lim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">6.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">],</span> <span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">showfig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="https://github.com/user-attachments/assets/e7ce96ed-044a-4b7c-bdb0-e15146a24cee"><img alt="https://github.com/user-attachments/assets/e7ce96ed-044a-4b7c-bdb0-e15146a24cee" class="align-center" src="https://github.com/user-attachments/assets/e7ce96ed-044a-4b7c-bdb0-e15146a24cee" style="width: 950px;" /></a>
+<p>(The same information is also plotted as a function of energy, _integrated over <a href="#id1"><span class="problematic" id="id2">k-space_</span></a>.)</p>
+<a class="reference internal image-reference" href="https://github.com/user-attachments/assets/127f78fd-be19-4342-b679-a58cd11e945d"><img alt="https://github.com/user-attachments/assets/127f78fd-be19-4342-b679-a58cd11e945d" class="align-center" src="https://github.com/user-attachments/assets/127f78fd-be19-4342-b679-a58cd11e945d" style="width: 600px;" /></a>
+</section>
 </section>
 
 
@@ -366,20 +402,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="example.html"
+       href="theory.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Example</p>
+        <p class="prev-next-title">Theory</p>
       </div>
     </a>
     <a class="right-next"
-       href="generated/spinWannier.wannier_utils.html"
+       href="modules.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">spinWannier.wannier_utils</p>
+        <p class="prev-next-title">Modules</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -389,6 +425,24 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-model-from-wannier90-files">1. Load the model from <code class="docutils literal notranslate"><span class="pre">wannier90</span></code> files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolate-bands-and-spin-along-a-high-symmetry-path">2. Interpolate bands and spin along a high-symmetry path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolate-bands-and-spin-on-a-2d-brillouin-zone">3. Interpolate bands and spin on a 2D Brillouin zone</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-error-of-wannier-interpolation">4. Calculate the error of Wannier interpolation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
