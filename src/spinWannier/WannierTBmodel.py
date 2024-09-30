@@ -271,6 +271,7 @@ class WannierTBmodel:
         kmesh_2D=False,
         kmesh_density=101,
         kmesh_2D_limits=[-0.5, 0.5],
+        force_recalculate=False,
         save_real_space_operators=True,
         save_folder_in_output_dir="tb_model_wann90/",
         save_bands_spin_texture=True,
@@ -329,7 +330,7 @@ class WannierTBmodel:
             # kpath = list(range(len(kpoints_rec)))  # just to have some path
 
         # --- only calculate if the files do not exist ---
-        if exists(save_folder + fout):
+        if exists(save_folder + fout) and force_recalculate is False:
             print(
                 f"The file {fout} already exists in f'{save_folder}'.\nSkipping the calculation, loading the data instead!\n"
             )
