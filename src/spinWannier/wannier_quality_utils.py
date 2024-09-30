@@ -449,6 +449,7 @@ def wannier_quality_calculation(
     tb_model_dir="2_wannier/tb_model_wann90",
     band_for_Fermi_correction=None,
     kpoint_for_Fermi_correction="0.0000000E+00  0.0000000E+00  0.0000000E+00",
+    output_dir = "./",
     yaxis_lim=None,
     savefig=True,
     showfig=True,
@@ -480,6 +481,7 @@ def wannier_quality_calculation(
         tb_model_dir (str, optional): Path to the wannier90.tb_model directory. Defaults to '2_wannier/tb_model_wann90'.
         band_for_Fermi_correction (int, optional): Band for Fermi correction. Defaults to None.
         kpoint_for_Fermi_correction (str, optional): K-point for Fermi correction. Defaults to '0.0000000E+00  0.0000000E+00  0.0000000E+00'.
+        output_dir (str, optional): Output directory. Defaults to './'.
         yaxis_lim (list, optional): Y-axis limits. Defaults to None.
         savefig (bool, optional): Save the figure. Defaults to True.
         showfig (bool, optional): Show the figure. Defaults to True.
@@ -672,7 +674,7 @@ def wannier_quality_calculation(
     error_E_S_by_energy = error_E_S_by_energy[error_E_S_by_energy[:, 0].argsort()]
 
     np.savetxt(
-        "home-made_quality_error_S_E_Fermi_corrected.dat",
+        output_dir + "home-made_quality_error_S_E_Fermi_corrected.dat",
         error_E_S_by_energy,
         header="E (eV)\t|Delta E| (eV)\t|Delta S_x|\t|Delta S_y|\t|Delta S_z|",
     )
@@ -714,7 +716,7 @@ def wannier_quality_calculation(
         for ax in axes.flatten():
             ax.set_xlim(yaxis_lim)
     if savefig is True:
-        plt.savefig("ERRORS_all_home-made_Fermi_corrected.png", dpi=400)
+        plt.savefig(output_dir + "ERRORS_all_home-made_Fermi_corrected.png", dpi=400)
     if showfig is True:
         plt.show()
     plt.close()
@@ -784,7 +786,7 @@ def wannier_quality_calculation(
     Sabs_median = np.median(S_abs)
     Sabs_over_one = len(S_abs[S_abs > 1.0]) / len(S_abs)
     header = f"S over 1 ratio = {Sabs_over_one:.8f}\nS mean = {Sabs_mean:.8f}\nS median = {Sabs_median:.8f}\nE (eV)\t|S|"
-    np.savetxt("home-made_Sabs_vs_E_Fermi_corrected.dat", E_S_abs, header=header)
+    np.savetxt(output_dir + "home-made_Sabs_vs_E_Fermi_corrected.dat", E_S_abs, header=header)
 
     # plot and save S_abs vs. E
     plot_title = "S_abs"
@@ -796,7 +798,7 @@ def wannier_quality_calculation(
     ax.set_xlabel(r"$E - E_\mathrm{F}$ (eV)", fontsize=13)
     plt.tight_layout()
     if savefig is True:
-        plt.savefig(plot_title + "_vs_E_home-made_Fermi_corrected.png", dpi=400)
+        plt.savefig(output_dir + plot_title + "_vs_E_home-made_Fermi_corrected.png", dpi=400)
     if showfig is True:
         plt.show()
     plt.close()
@@ -812,7 +814,7 @@ def wannier_quality_calculation(
     )
     plt.tight_layout()
     if savefig is True:
-        plt.savefig(plot_title + "_S_histogram_home-made_Fermi_corrected.png", dpi=400)
+        plt.savefig(output_dir + plot_title + "_S_histogram_home-made_Fermi_corrected.png", dpi=400)
     if showfig is True:
         plt.show()
     plt.close()

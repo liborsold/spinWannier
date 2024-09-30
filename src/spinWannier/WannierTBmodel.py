@@ -73,7 +73,8 @@ class WannierTBmodel:
         nsc_dir="1_non-self-consistent",
         wann_dir="2_wannier",
         bands_dir="1_band_structure",
-        tb_model_dir="2_wannier/tb_model_wann90",
+        output_dir = "3_wann_interp_plot_and_quality",
+        tb_model_dir_in_output_dir="tb_model_wann90",
         spn_formatted=False,
         spn_file_extension="spn",
         data_saving_format="npz", #"parquet",
@@ -89,7 +90,7 @@ class WannierTBmodel:
             nsc_dir (str, optional): Directory of the non-self-consistent calculation. Defaults to '1_non-self-consistent'.
             wann_dir (str, optional): Directory of the wannier calculation. Defaults to '2_wannier'.
             bands_dir (str, optional): Directory of the band structure calculation. Defaults to '1_band_structure'.
-            tb_model_dir (str, optional): Directory of the tight-binding model. Defaults to '2_wannier/tb_model_wann90'.
+            tb_model_dir_in_output_dir (str, optional): Directory of the tight-binding model INSIDE THE wann_dir. Defaults to 'tb_model_wann90'.
             spn_formatted (bool, optional): Whether the spn file is formatted (human-readable) or not (i.e., it is binary). Defaults to False.
             spn_file_extension (str, optional): Extension of the spn file. Defaults to 'spn'.
             data_saving_format (str, optional): Format to save the data. Defaults to 'parquet'.
@@ -101,16 +102,14 @@ class WannierTBmodel:
         self.verbose = verbose
 
         # ensure that directories have a backslash at the end
-        if sc_dir[-1] != "/":
-            sc_dir += "/"
-        if nsc_dir[-1] != "/":
-            nsc_dir += "/"
-        if wann_dir[-1] != "/":
-            wann_dir += "/"
-        if bands_dir[-1] != "/":
-            bands_dir += "/"
-        if tb_model_dir[-1] != "/":
-            tb_model_dir += "/"
+        if sc_dir[-1] != "/": sc_dir += "/"
+        if nsc_dir[-1] != "/": nsc_dir += "/"
+        if wann_dir[-1] != "/": wann_dir += "/"
+        if bands_dir[-1] != "/": bands_dir += "/"
+        if tb_model_dir_in_output_dir[-1] != "/": tb_model_dir_in_output_dir += "/"
+        if output_dir[-1] != "/": output_dir += "/"
+
+        self.output_dir = output_dir
 
         # load important info from wannier90.win
         discard_first_bands = 0
@@ -138,6 +137,9 @@ class WannierTBmodel:
         self.NW = num_wann
 
         # create the save_folder if it does not exist
+        tb_model_dir = output_dir + tb_model_dir_in_output_dir
+        if not exists(output_dir):
+            makedirs(output_dir)
         if not exists(tb_model_dir):
             makedirs(tb_model_dir)
 
@@ -198,7 +200,7 @@ class WannierTBmodel:
                         IBstart=discard_first_bands + 1,
                     )
 
-        # convert wannier90.spn_formatted to a pickled dictionary
+        # convert wannier90.spn to a pickled dictionary
         spn_to_dict(
             model_dir=wann_dir,
             fwin=f"{seedname}.win",
@@ -270,7 +272,7 @@ class WannierTBmodel:
         kmesh_density=101,
         kmesh_2D_limits=[-0.5, 0.5],
         save_real_space_operators=True,
-        save_folder_in_model_dir="tb_model_wann90/",
+        save_folder_in_output_dir="tb_model_wann90/",
         save_bands_spin_texture=True,
     ):
         """Interpolate the bands and the spin texture on a dense k-point path or 2D mesh.
@@ -283,11 +285,11 @@ class WannierTBmodel:
             kmesh_density (int, optional): Density of the k-point mesh. Defaults to 101.
             kmesh_2D_limits (list, optional): Limits of the 2D mesh. Defaults to [-0.5, 0.5].
             save_real_space_operators (bool, optional): Whether to save the real space operators as dictionary files. Defaults to True.
-            save_folder_in_model_dir (str, optional): Folder to save the data in the model directory. Defaults to "tb_model_wann90/".
+            save_folder_in_output_dir (str, optional): Folder to save the data in the model directory. Defaults to "tb_model_wann90/".
             save_bands_spin_texture (bool, optional): Whether to save the bands and spin texture. Defaults to True.
         """
 
-        save_folder = self.wann_dir + save_folder_in_model_dir
+        save_folder = self.output_dir + save_folder_in_output_dir
         if save_folder[-1] != "/":
             save_folder += "/"
 
@@ -463,7 +465,7 @@ class WannierTBmodel:
         """Plot the bands and the spin texture on a 1D path.
 
         Args:
-            fout (str, optional): Output figure name. Defaults to 'spin_texture_1D_home_made.jpg'.
+            fout (str, optional): Output figure name. Defaults to 'spin_texture_1D_home_made.jpg'. Will be saved to the 'output_dir' directory.
             yaxis_lim (list, optional): Y-axis limits. Defaults to [-8, 6].
             savefig (bool, optional): Whether to save the figure. Defaults to True.
             showfig (bool, optional): Whether to show the figure. Defaults to True.
@@ -477,7 +479,7 @@ class WannierTBmodel:
             self.S_mn_k_H_y["1D"],
             self.S_mn_k_H_z["1D"],
             E_F=self.EF_nsc,
-            fout=fout,
+            fout=self.output_dir + fout,
             yaxis_lim=yaxis_lim,
             savefig=savefig,
             showfig=showfig,
@@ -493,6 +495,7 @@ class WannierTBmodel:
         showfig=True,
         E_window=0.020,
         n_points_for_one_angstrom_radius=60,
+        quiver_scale=1.6,
     ):
         """Plot the spin texture on a 2D mesh (Fermi surface).
 
@@ -529,7 +532,7 @@ class WannierTBmodel:
 
         band = 8  # 160   # 1-indexed
         quiver_scale_magmom_OOP = (
-            1.6  # quiver_scale for calculations with MAGMOM purely out-of-plane
+            quiver_scale  # quiver_scale for calculations with MAGMOM purely out-of-plane
         )
         quiver_scale_magmom_IP = (
             10  # quiver_scale for calculations with MAGMOM purely in-plane
@@ -595,7 +598,7 @@ class WannierTBmodel:
             E=E_to_cut_2D,
             E_F=E_F,
             E_thr=E_window,
-            fig_name=fig_name,
+            fig_name=self.output_dir + fig_name,
             quiver_scale=quiver_scale,
             scatter_for_quiver=scatter_for_quiver,
             scatter_size_quiver=scatter_size_quiver,
@@ -644,6 +647,7 @@ class WannierTBmodel:
             tb_model_dir=self.tb_model_dir,
             band_for_Fermi_correction=band_for_Fermi_correction,
             kpoint_for_Fermi_correction=kpoint_for_Fermi_correction,
+            output_dir=self.output_dir,
             yaxis_lim=yaxis_lim,
             savefig=savefig,
             showfig=showfig,
