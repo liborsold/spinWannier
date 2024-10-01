@@ -343,7 +343,7 @@ document.write(`
                   
   <section id="example">
 <h1>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
-<p>An example of use is given in <code class="docutils literal notranslate"><span class="pre">./examples/spinWannier_use_example.ipynb</span></code>. It uses input files of a CrSTe monolayer given in <code class="docutils literal notranslate"><span class="pre">./examples/CrSTe/</span></code>.</p>
+<p>An example of use is given in <code class="docutils literal notranslate"><span class="pre">./examples/spinWannier_use_example.ipynb</span></code>. It uses input files of a CrSeTe monolayer given in <code class="docutils literal notranslate"><span class="pre">./examples/CrSeTe/</span></code>.</p>
 <section id="load-the-model-from-wannier90-files">
 <h2>1. Load the model from <code class="docutils literal notranslate"><span class="pre">wannier90</span></code> files<a class="headerlink" href="#load-the-model-from-wannier90-files" title="Link to this heading">#</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spinWannier.WannierTBmodel</span> <span class="kn">import</span> <span class="n">WannierTBmodel</span>
@@ -361,7 +361,7 @@ document.write(`
 <span class="n">model</span><span class="o">.</span><span class="n">plot1D_bands</span><span class="p">(</span><span class="n">yaxis_lim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">6.6</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">],</span> <span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">showfig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="https://github.com/user-attachments/assets/b9012f49-3ba0-41b4-b3ba-26c5315982ee"><img alt="https://github.com/user-attachments/assets/b9012f49-3ba0-41b4-b3ba-26c5315982ee" class="align-center" src="https://github.com/user-attachments/assets/b9012f49-3ba0-41b4-b3ba-26c5315982ee" style="width: 950px;" /></a>
+<a class="reference internal image-reference" href="https://github.com/user-attachments/assets/0172a2a3-450a-4a39-b223-2c629f1259e1"><img alt="https://github.com/user-attachments/assets/0172a2a3-450a-4a39-b223-2c629f1259e1" class="align-center" src="https://github.com/user-attachments/assets/0172a2a3-450a-4a39-b223-2c629f1259e1" style="width: 950px;" /></a>
 </section>
 <section id="interpolate-bands-and-spin-on-a-2d-brillouin-zone">
 <h2>3. Interpolate bands and spin on a 2D Brillouin zone<a class="headerlink" href="#interpolate-bands-and-spin-on-a-2d-brillouin-zone" title="Link to this heading">#</a></h2>
@@ -369,16 +369,22 @@ document.write(`
 <span class="n">model</span><span class="o">.</span><span class="n">plot2D_spin_texture</span><span class="p">()</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="https://github.com/user-attachments/assets/29b3987b-9b2b-4c3a-aacc-0f14681e5c89"><img alt="https://github.com/user-attachments/assets/29b3987b-9b2b-4c3a-aacc-0f14681e5c89" class="align-center" src="https://github.com/user-attachments/assets/29b3987b-9b2b-4c3a-aacc-0f14681e5c89" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="https://github.com/user-attachments/assets/f6b3f554-6801-4650-85e1-bb09d679b94b"><img alt="https://github.com/user-attachments/assets/f6b3f554-6801-4650-85e1-bb09d679b94b" class="align-center" src="https://github.com/user-attachments/assets/f6b3f554-6801-4650-85e1-bb09d679b94b" style="width: 950px;" /></a>
+<p>(In-plane spin projection as arrows, out-of-plane spin color-coded.)</p>
+<a class="reference internal image-reference" href="https://github.com/user-attachments/assets/a336f039-1b9c-401d-a8d3-06e22ad259d8"><img alt="https://github.com/user-attachments/assets/a336f039-1b9c-401d-a8d3-06e22ad259d8" class="align-center" src="https://github.com/user-attachments/assets/a336f039-1b9c-401d-a8d3-06e22ad259d8" style="width: 400px;" /></a>
 </section>
 <section id="calculate-the-error-of-wannier-interpolation">
 <h2>4. Calculate the error of Wannier interpolation<a class="headerlink" href="#calculate-the-error-of-wannier-interpolation" title="Link to this heading">#</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">wannier_quality</span><span class="p">(</span><span class="n">yaxis_lim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">6.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">],</span> <span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">showfig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="https://github.com/user-attachments/assets/e7ce96ed-044a-4b7c-bdb0-e15146a24cee"><img alt="https://github.com/user-attachments/assets/e7ce96ed-044a-4b7c-bdb0-e15146a24cee" class="align-center" src="https://github.com/user-attachments/assets/e7ce96ed-044a-4b7c-bdb0-e15146a24cee" style="width: 950px;" /></a>
-<p>(The same information is also plotted as a function of energy, _integrated over <a href="#id1"><span class="problematic" id="id2">k-space_</span></a>.)</p>
-<a class="reference internal image-reference" href="https://github.com/user-attachments/assets/127f78fd-be19-4342-b679-a58cd11e945d"><img alt="https://github.com/user-attachments/assets/127f78fd-be19-4342-b679-a58cd11e945d" class="align-center" src="https://github.com/user-attachments/assets/127f78fd-be19-4342-b679-a58cd11e945d" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="https://github.com/user-attachments/assets/d36a58e1-f9a1-4c1b-aab3-329f5c537378"><img alt="https://github.com/user-attachments/assets/d36a58e1-f9a1-4c1b-aab3-329f5c537378" class="align-center" src="https://github.com/user-attachments/assets/d36a58e1-f9a1-4c1b-aab3-329f5c537378" style="width: 950px;" /></a>
+<p>(The same information is also plotted as a function of energy, _integrated over k-space.)</p>
+<a class="reference internal image-reference" href="https://github.com/user-attachments/assets/ad971762-005e-40a5-ba48-9d9504e77d69"><img alt="https://github.com/user-attachments/assets/ad971762-005e-40a5-ba48-9d9504e77d69" class="align-center" src="https://github.com/user-attachments/assets/ad971762-005e-40a5-ba48-9d9504e77d69" style="width: 550px;" /></a>
+<p>(Spin magnitudes, _integrated over k-space.)</p>
+<a class="reference internal image-reference" href="https://github.com/user-attachments/assets/7200a663-1d5a-4dc8-a504-70a509115194"><img alt="https://github.com/user-attachments/assets/7200a663-1d5a-4dc8-a504-70a509115194" class="align-center" src="https://github.com/user-attachments/assets/7200a663-1d5a-4dc8-a504-70a509115194" style="width: 350px;" /></a>
+<p>(Their histogram, with most values close to 1, as expected.)</p>
+<a class="reference internal image-reference" href="https://github.com/user-attachments/assets/3ee421ca-689c-4dae-b443-4707668fc9c6"><img alt="https://github.com/user-attachments/assets/3ee421ca-689c-4dae-b443-4707668fc9c6" class="align-center" src="https://github.com/user-attachments/assets/3ee421ca-689c-4dae-b443-4707668fc9c6" style="width: 350px;" /></a>
 </section>
 </section>
 

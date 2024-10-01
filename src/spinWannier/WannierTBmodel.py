@@ -6,6 +6,7 @@ import pickle
 from os import makedirs
 from os.path import exists
 import copy
+from sys import exit
 from spinWannier.wannier_utils import (
     files_wann90_to_dict_pickle,
     eigenval_dict,
@@ -122,10 +123,13 @@ class WannierTBmodel:
                     discard_first_bands = int(
                         line.split("=")[1].split("-")[1].split(",")[0].strip()
                     )
+                    if verbose: print(f"Excluding the first {discard_first_bands} bands (read from {wann_dir + seedname}.win)")
                 if "num_wann" in line:
                     num_wann = int(line.split("=")[1].split("#")[0].strip())
+                    if verbose: print(f"Number of Wannier functions: {num_wann} (read from {wann_dir + seedname}.win)")
                 if "num_bands" in line:
                     num_bands = int(line.split("=")[1].split("#")[0].strip())
+                    if verbose: print(f"Number of bands: {num_bands} (read from {wann_dir + seedname}.win)")
 
         if band_for_Fermi_correction is None:
             band_for_Fermi_correction = discard_first_bands + 1
@@ -140,11 +144,15 @@ class WannierTBmodel:
         tb_model_dir = output_dir + tb_model_dir_in_output_dir
         if not exists(output_dir):
             makedirs(output_dir)
+            if verbose: print(f"Created the output directory: {output_dir}")
         if not exists(tb_model_dir):
             makedirs(tb_model_dir)
+            if verbose: print(f"Created the tb_model directory: {tb_model_dir}")
 
         # load the model files and convert to pickle dictionaries
         disentanglement = exists(wann_dir + f"{seedname}_u_dis.mat")
+        if verbose and disentanglement: print(f"Disentanglement is ON (u_dis.mat exists).")
+        if verbose and not disentanglement: print(f"Disentanglement is OFF (u_dis.mat does not exist).")
 
         # Convert wannier90 files to pickled dictionaries files
         num_bands_from_u, num_wann_from_u = u_to_dict(
@@ -175,9 +183,9 @@ class WannierTBmodel:
             )
             # generate wannier90.spn_formatted from WAVECAR
             if not exists(nsc_dir + "WAVECAR"):
-                print("WAVECAR does not exist in the self-consistent directory.")
+                print(f"WAVECAR does not exist in {nsc_dir}.")
                 print(
-                    "Please provide the WAVECAR file to generate wannier90.spn_formatted."
+                    f"Please provide the WAVECAR file to generate {seedname}.{spn_file_extension}."
                 )
                 exit(1)
             else:
@@ -226,14 +234,16 @@ class WannierTBmodel:
 
         # calculate the Fermi level
         # get Fermi for the wannier non-self-consistent calculation
+        EF_nsc_fout = "FERMI_ENERGY_corrected.in"
         self.EF_nsc = get_fermi_corrected_by_matching_bands(
             path=".",
             nsc_calculation_path=nsc_dir,
             corrected_at_kpoint=kpoint_for_Fermi_correction,
             corrected_at_band=band_for_Fermi_correction,
             sc_calculation_path=sc_dir,
-            fout_name="FERMI_ENERGY_corrected.in",
+            fout_name=EF_nsc_fout,
         )
+        if verbose: print(f'Calculated Fermi level: {self.EF_nsc:.3f} eV saved to {nsc_dir}{EF_nsc_fout}')
 
         # store paths to directories
         self.sc_dir = sc_dir
@@ -633,6 +643,9 @@ class WannierTBmodel:
             showfig (bool, optional): Whether to show the figure. Defaults to
         """
         kpoint_matrix, NK, kpath_ticks = parse_KPOINTS_file(self.bands_dir + "KPOINTS")
+        if self.verbose: print(f"K-point matrix: {kpoint_matrix} (read from {self.bands_dir}KPOINTS)")
+        if self.verbose: print(f"Number of k-points: {NK} (read from {self.bands_dir}KPOINTS)")
+        if self.verbose: print(f"K-point ticks: {kpath_ticks} (read from {self.bands_dir}KPOINTS)")
 
         wannier_quality_calculation(
             kpoint_matrix,

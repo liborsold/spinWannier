@@ -180,7 +180,7 @@ def duplicate_kpoints_for_home_made(data, NK):
     i = n_blocs - 1
     data_duplicates[i * NK, :] = np.real(data[i * (NK - 1), :])
     data_duplicates[i * NK + 1 : i * NK + 1 + NK - 2, :] = np.real(data[
-        1 + i * (NK - 1) : 1 + i * (NK - 1) + NK, :
+        1 + i * (NK - 1) : 1 + i * (NK - 1) + NK - 2, :
     ])
     data_duplicates[-1, :] = np.real(data[0, :])
     return data_duplicates

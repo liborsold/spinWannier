@@ -1,7 +1,7 @@
 Example
 =======================
 
-An example of use is given in ``./examples/spinWannier_use_example.ipynb``. It uses input files of a CrSTe monolayer given in ``./examples/CrSTe/``.
+An example of use is given in ``./examples/spinWannier_use_example.ipynb``. It uses input files of a CrSeTe monolayer given in ``./examples/CrSeTe/``.
 
 1. Load the model from ``wannier90`` files
 --------------------------------------------------------
@@ -24,7 +24,7 @@ An example of use is given in ``./examples/spinWannier_use_example.ipynb``. It u
     model.plot1D_bands(yaxis_lim=[-6.6, 7.5], savefig=True, showfig=True)
 
 .. image::
-   https://github.com/user-attachments/assets/b9012f49-3ba0-41b4-b3ba-26c5315982ee
+   https://github.com/user-attachments/assets/0172a2a3-450a-4a39-b223-2c629f1259e1
    :width: 950px
    :align: center
 
@@ -36,7 +36,14 @@ An example of use is given in ``./examples/spinWannier_use_example.ipynb``. It u
     model.plot2D_spin_texture()
 
 .. image::
-   https://github.com/user-attachments/assets/29b3987b-9b2b-4c3a-aacc-0f14681e5c89
+   https://github.com/user-attachments/assets/f6b3f554-6801-4650-85e1-bb09d679b94b
+   :width: 950px
+   :align: center
+
+(In-plane spin projection as arrows, out-of-plane spin color-coded.)
+
+.. image::
+   https://github.com/user-attachments/assets/a336f039-1b9c-401d-a8d3-06e22ad259d8
    :width: 400px
    :align: center
 
@@ -47,13 +54,27 @@ An example of use is given in ``./examples/spinWannier_use_example.ipynb``. It u
     model.wannier_quality(yaxis_lim=[-6.5, 7.5], savefig=True, showfig=True)
 
 .. image::
-   https://github.com/user-attachments/assets/e7ce96ed-044a-4b7c-bdb0-e15146a24cee
+   https://github.com/user-attachments/assets/d36a58e1-f9a1-4c1b-aab3-329f5c537378
    :width: 950px
    :align: center
 
-(The same information is also plotted as a function of energy, _integrated over k-space_.)
+(The same information is also plotted as a function of energy, _integrated over k-space.)
 
 .. image::
-   https://github.com/user-attachments/assets/127f78fd-be19-4342-b679-a58cd11e945d
-   :width: 600px
+   https://github.com/user-attachments/assets/ad971762-005e-40a5-ba48-9d9504e77d69
+   :width: 550px
+   :align: center
+
+(Spin magnitudes, _integrated over k-space.)
+
+.. image::
+   https://github.com/user-attachments/assets/7200a663-1d5a-4dc8-a504-70a509115194
+   :width: 350px
+   :align: center
+
+(Their histogram, with most values close to 1, as expected.)
+
+.. image::
+   https://github.com/user-attachments/assets/3ee421ca-689c-4dae-b443-4707668fc9c6
+   :width: 350px
    :align: center
