@@ -22,7 +22,7 @@ Follows the direct Fourier sum over the *ab initio* grid
         \mathcal{S}_{m n}(\textbf{R}) \equiv \frac{1}{N_{\textbf{q}}} \sum_{\textbf{q}}  \mathcal{S}_{m n}^{\mathrm{W}}(\textbf{q}) \cdot e^{-i \textbf{q} \cdot \textbf{R}} \,,
     \end{equation}
 
-with :math:` N_{\textbf{q}} ` the number of *ab initio* grid points :math:`\textbf{q}`.
+with :math:`N_{\textbf{q}}` the number of *ab initio* grid points :math:`\textbf{q}`.
 
 
 Having :math:`\mathcal{S}_{m n}(\textbf{R})` at hand, its interpolation :math:`\overline{\mathcal{S}}_{mn}^\mathrm{H} (\textbf{k})` to an *arbitrary* k-vector :math:`\textbf{k}` involves an inverse Fourier sum :math:`\overline{\mathcal{S}}_{mn}^\mathrm{W} (\textbf{k}) = \sum_\textbf{R} \mathcal{S}_{mn} (\textbf{R}) \cdot  e^{i \textbf{k} \cdot \textbf{R}}` over the real-space lattice vectors :math:`\textbf{R}` followed by a rotation back to the Hamiltonian gauge of the original eigenstates :math:`\overline{\mathcal{S}}_{mn}^\mathrm{H} (\textbf{k}) = (U^\dagger \cdot \mathcal{S}^\mathrm{W} \cdot U)_{mn}`, where :math:`U_{mn}` is a unitary matrix which diagonalizes the interpolated Hamiltonian :math:`\overline{\mathcal{H}}_{mn}^\mathrm{W} (\textbf{k}) = \sum_\textbf{R} \mathcal{H}_{mn} (\textbf{R}) \cdot  e^{i \textbf{k} \cdot \textbf{R}}`.
