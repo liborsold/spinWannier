@@ -49,13 +49,13 @@ model.wannier_quality(yaxis_lim=[-6.5, 7.5], savefig=True, showfig=True)
 <center><img src="https://github.com/user-attachments/assets/d36a58e1-f9a1-4c1b-aab3-329f5c537378" alt="spin_projected_bands_example" width="950" /></center>
 
 (The same information is also plotted as a function of energy, _integrated over k-space_.)
-<center><img src="https://github.com/user-attachments/assets/ad971762-005e-40a5-ba48-9d9504e77d69" alt="spin_projected_bands_example" width="600" /></center>
+<center><img src="https://github.com/user-attachments/assets/ad971762-005e-40a5-ba48-9d9504e77d69" alt="spin_projected_bands_example" width="550" /></center>
 
 (Spin magnitudes, _integrated over k-space_.)
-<center><img src="https://github.com/user-attachments/assets/7200a663-1d5a-4dc8-a504-70a509115194" alt="spin_magnitudes" width="400" /></center>
+<center><img src="https://github.com/user-attachments/assets/7200a663-1d5a-4dc8-a504-70a509115194" alt="spin_magnitudes" width="350" /></center>
 
 (Their histogram, with most values close to 1, as expected.)
-<center><img src="https://github.com/user-attachments/assets/3ee421ca-689c-4dae-b443-4707668fc9c6" alt="spin_magnitudes_histogram" width="400" /></center>
+<center><img src="https://github.com/user-attachments/assets/3ee421ca-689c-4dae-b443-4707668fc9c6" alt="spin_magnitudes_histogram" width="350" /></center>
 
 
 
