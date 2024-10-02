@@ -718,7 +718,7 @@ def real_to_W_gauge_accelerated(kpoints, O_mn_R_W):
         O_mn_R_W (dict): The real-space operator dictionary.
 
     Returns:
-        dict: The k-space operator dictionary.
+        numpy array: Array of O_mn matrices.
     """
     # new old way
     # # R_vectors has a shape (625, 3)
@@ -779,21 +779,21 @@ def real_to_W_gauge_accelerated(kpoints, O_mn_R_W):
 
     # Build the dictionary using a comprehension
     # Using the fact that kpoints[i] corresponds to O_mn_k_W_matrices[i]
-    O_mn_k_W = {tuple(kpoint): O_mn_k_W_matrices[i] for i, kpoint in enumerate(kpoints)}
+    # O_mn_k_W = {tuple(kpoint): O_mn_k_W_matrices[i] for i, kpoint in enumerate(kpoints)}
 
     # print('IF: comprehension - building dictionary', f'{time.time() - prev_time:.3f}s')
 
-    return O_mn_k_W
+    return O_mn_k_W_matrices
 
 
-def W_gauge_to_H_gauge(O_mn_k_W, U_mn_k={}, hamiltonian=True):
+def W_gauge_to_H_gauge(kpoints, O_mn_k_W_matrices, U_mn_k_matrices=[], hamiltonian=True):
     """Transform from Wannier gauge to Hamiltonian gauge, i.e., for every k-point either diagonalize Hamiltonian
         or use the matrix from previous Hamiltonian diagonalization ('U_mn_k') to transform some other operator
         to H gauge.
 
     Args:
-        O_mn_k_W (dict): The k-space operator dictionary in Wannier gauge.
-        U_mn_k (dict): The unitary matrices which diagonalize the Hamiltonian for each k-point.
+        O_mn_k_W (numpy array): The array (at all k-points) of k-space operators in Wannier gauge.
+        U_mn_k (numpy array): The unitary matrices which diagonalize the Hamiltonian for each k-point.
         hamiltonian (bool): If True, the operator is Hamiltonian and the U_mn_k will be determined; for any other operator they have to be provided.
 
     Returns:
@@ -801,25 +801,25 @@ def W_gauge_to_H_gauge(O_mn_k_W, U_mn_k={}, hamiltonian=True):
     """
 
     if hamiltonian is True:
-        U_mn_k = {}
-        Eigs_k = {}
-        for kpoint, O_mn in O_mn_k_W.items():
+        U_mn_k_matrices = []
+        Eigs_k = []
+        for kpoint, O_mn in zip(kpoints, O_mn_k_W_matrices):
             # (A) get by reverse multiplication than in step (1): works only for k-points which are in the coarse grid
             # O_mn_k_H[kpoint] = u_dis_dict[kpoint] @ u_dict[kpoint] @ O_mn @ u_dict[kpoint].conj().T @ u_dis_dict[kpoint].conj().T
             # (B)
             w, U_mn = np.linalg.eigh(O_mn)
-            Eigs_k[kpoint] = w
-            U_mn_k[kpoint] = U_mn
+            Eigs_k.append(w)
+            U_mn_k_matrices.append(U_mn)
         # return a list of (NW x NW) U_mn matrices for each of the kpoints
-        return Eigs_k, U_mn_k
+        return np.array(Eigs_k), np.array(U_mn_k_matrices)
     # if any other operator than Hamiltonian, you need to transform with the unitary matrices obtained
     #   during the Hamiltonian diagonalization
     else:
-        O_mn_k_H = {}
-        for kpoint, O_mn in O_mn_k_W.items():
-            O_mn_k_H[kpoint] = U_mn_k[kpoint].conj().T @ O_mn @ U_mn_k[kpoint]
+        O_mn_k_H = []
+        for O_mn, U_mn in zip(O_mn_k_W_matrices, U_mn_k_matrices):
+            O_mn_k_H.append(U_mn.conj().T @ O_mn @ U_mn)
         # return a list of (NW x NW) O_mn matrices for each of the kpoints
-        return O_mn_k_H
+        return np.array(O_mn_k_H)
 
 
 def save_bands_and_spin_texture_old(
@@ -914,6 +914,7 @@ def plot_bands_spin_texture(
     S_mn_k_H_x,
     S_mn_k_H_y,
     S_mn_k_H_z,
+    NW,
     E_F=0,
     fout="spin_texture_1D_home_made.jpg",
     fig_caption="Wannier interpolation",
@@ -938,11 +939,10 @@ def plot_bands_spin_texture(
         savefig (bool): If True, save the figure.
         showfig (bool): If True, show the figure.
     """
-    NW = len(Eigs_k[list(Eigs_k.keys())[0]])
     Nk = len(kpoints) // (len(kpath_ticks) - 1)
 
     # if spin information missing, plot just bands
-    if S_mn_k_H_x == {}:
+    if S_mn_k_H_x is None:
         fig, ax = plt.subplots(1, 1, figsize=[3, 4.5])
         ax.axhline(linestyle="--", color="k")
         ax.set_ylim(yaxis_lim)
@@ -950,7 +950,7 @@ def plot_bands_spin_texture(
         ax.set_ylabel(r"$E - E_\mathrm{F}$ (eV)", fontsize=13)
         sc = ax.scatter(
             [[k_dist for i in range(NW)] for k_dist in kpath],
-            [Eigs_k[kpoint] - E_F for kpoint in kpoints],
+            [Eigs_k[i] - E_F for i in range(len(kpoints))],
             c="b",
             s=0.2,
         )
@@ -971,9 +971,9 @@ def plot_bands_spin_texture(
             secax.tick_params(labelsize=9)  # axis='both', which='major',
             secax.set_xlabel(r"$k$-distance (1/$\mathrm{\AA}$)", fontsize=10)
             sc = ax.scatter(
-                [[k_dist for i in range(NW)] for k_dist in kpath],
-                [Eigs_k[kpoint] - E_F for kpoint in kpoints],
-                c=[np.real(np.diag(S[kpoint])) for kpoint in kpoints],
+                [[k_dist for j in range(NW)] for k_dist in kpath],
+                [Eigs_k[j] - E_F for j in range(len(kpoints))],
+                c=[np.real(np.diag(S[i])) for i in range(len(kpoints))],
                 cmap="coolwarm",
                 s=0.2,
                 vmin=-1,
@@ -2287,8 +2287,6 @@ def interpolate_operator(
         # TENSORDOT accelerates the operation 4 times
         O_mn_R_W[Rijk] = Nq_inv * np.tensordot(exp_term, O_mn_q_W_array, axes=(0, 0))
 
-        
-
     if verbose: print('  - Fourier transform to real space:\t', f'{time.time() - prev_time:.3f} seconds')
     prev_time = time.time()
 
@@ -2315,7 +2313,7 @@ def interpolate_operator(
     prev_time = time.time()
 
     # (3a) inverse Fourier
-    O_mn_k_W = real_to_W_gauge_accelerated(kpoints, O_mn_R_W)
+    O_mn_k_W_matrices = real_to_W_gauge_accelerated(kpoints, O_mn_R_W)
 
     if verbose: print('  - inverse Fourier (real to W gauge):\t', f'{time.time() - prev_time:.3f} seconds')
     prev_time = time.time()
@@ -2323,11 +2321,11 @@ def interpolate_operator(
     # (3b) transformation to Hamiltonian gauge
     # if Hamiltonian is being calculated, perform diagonalization
     if hamiltonian is True:
-        Eigs_k, U_mn_k = W_gauge_to_H_gauge(O_mn_k_W, U_mn_k={}, hamiltonian=True)
+        Eigs_k, U_mn_k = W_gauge_to_H_gauge(kpoints, O_mn_k_W_matrices, U_mn_k_matrices=[], hamiltonian=True)
         if verbose: print('  - W gauge to H gauge:              \t', f'{time.time() - prev_time:.3f} seconds\n')
         return Eigs_k, U_mn_k
     else:
-        O_mn_k_H = W_gauge_to_H_gauge(O_mn_k_W, U_mn_k=U_mn_k, hamiltonian=False)
+        O_mn_k_H = W_gauge_to_H_gauge(kpoints, O_mn_k_W_matrices, U_mn_k_matrices=U_mn_k, hamiltonian=False)
         if verbose: print('  - W gauge to H gauge:              \t', f'{time.time() - prev_time:.3f} seconds\n')
         return O_mn_k_H
 

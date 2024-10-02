@@ -7,6 +7,8 @@ from os import makedirs
 from os.path import exists
 import copy
 from sys import exit
+import shutil
+import matplotlib.pyplot as plt
 from spinWannier.wannier_utils import (
     files_wann90_to_dict_pickle,
     eigenval_dict,
@@ -23,15 +25,23 @@ from spinWannier.wannier_utils import (
     plot_bands_spin_texture,
     magmom_OOP_or_IP,
     fermi_surface_spin_texture,
-    plot_bands_spin_texture,
     u_to_dict,
     spn_to_dict,
     parse_KPOINTS_file,
     save_bands_and_spin_texture_old,
 )
 from spinWannier.wannier_quality_utils import (
-    wannier_quality_calculation,
+    get_fermi,
     get_fermi_corrected_by_matching_bands,
+    get_band_at_kpoint_from_EIGENVAL,
+    compare_eigs_bandstructure_at_exact_kpts,
+    duplicate_kpoints_for_home_made,
+    get_NKpoints,
+    parse_eigenval_file,
+    plot_err_vs_bands,
+    plot_err_vs_energy,
+    integrate_error,
+    get_frozen_window_min_max,
 )
 from spinWannier.vaspspn import vasp_to_spn
 
@@ -101,6 +111,7 @@ class WannierTBmodel:
 
         self.data_saving_format = data_saving_format
         self.verbose = verbose
+        self.kpoint_for_Fermi_correction = kpoint_for_Fermi_correction
 
         # ensure that directories have a backslash at the end
         if sc_dir[-1] != "/": sc_dir += "/"
@@ -259,6 +270,19 @@ class WannierTBmodel:
         self.spn_dict = spn_dict
         self.discard_first_bands = discard_first_bands
         self.seedname = seedname
+        self.band_for_Fermi_correction = band_for_Fermi_correction
+
+        # split the spn_dict into x, y, z components
+        spn_dict_x = {}
+        spn_dict_y = {}
+        spn_dict_z = {}
+        for k, v in spn_dict.items():
+            spn_dict_x[k[0]] = spn_dict[(k[0], "x")]
+            spn_dict_y[k[0]] = spn_dict[(k[0], "y")]
+            spn_dict_z[k[0]] = spn_dict[(k[0], "z")]
+        self.spn_dict_x = spn_dict_x
+        self.spn_dict_y = spn_dict_y
+        self.spn_dict_z = spn_dict_z
 
         # define constants
         self.spn_x_R_dict_name = "spn_x_R_dict.pickle"
@@ -369,17 +393,9 @@ class WannierTBmodel:
             verbose=self.verbose,
         )
 
-        spn_dict_x = {}
-        spn_dict_y = {}
-        spn_dict_z = {}
-        for k, v in self.spn_dict.items():
-            spn_dict_x[k[0]] = self.spn_dict[(k[0], "x")]
-            spn_dict_y[k[0]] = self.spn_dict[(k[0], "y")]
-            spn_dict_z[k[0]] = self.spn_dict[(k[0], "z")]
-
         if self.verbose: print("Interpolating Sx...")
         self.S_mn_k_H_x[dimension] = interpolate_operator(
-            spn_dict_x,
+            self.spn_dict_x,
             self.u_dis_dict,
             self.u_dict,
             hamiltonian=False,
@@ -396,7 +412,7 @@ class WannierTBmodel:
 
         if self.verbose: print("Interpolating Sy...")
         self.S_mn_k_H_y[dimension] = interpolate_operator(
-            spn_dict_y,
+            self.spn_dict_y,
             self.u_dis_dict,
             self.u_dict,
             hamiltonian=False,
@@ -413,7 +429,7 @@ class WannierTBmodel:
 
         if self.verbose: print("Interpolating Sz...")
         self.S_mn_k_H_z[dimension] = interpolate_operator(
-            spn_dict_z,
+            self.spn_dict_z,
             self.u_dis_dict,
             self.u_dict,
             hamiltonian=False,
@@ -489,6 +505,7 @@ class WannierTBmodel:
             self.S_mn_k_H_x["1D"],
             self.S_mn_k_H_y["1D"],
             self.S_mn_k_H_z["1D"],
+            NW=self.NW,
             E_F=self.EF_nsc,
             fout=self.output_dir + fout,
             yaxis_lim=yaxis_lim,
@@ -625,10 +642,442 @@ class WannierTBmodel:
             showfig=showfig,
         )
 
+        
+    def wannier_quality_calculation(
+        self,
+        kpoint_matrix,
+        NK,
+        kpath_ticks,
+        yaxis_lim=None,
+        savefig=True,
+        showfig=True,
+    ):
+        """Calculate the quality of the Wannierization.
+
+        Needed files from VASP:
+
+            = nsc_calculation_path:
+                - EIGENVAL
+                - DOSCAR
+
+            = dft_bands_folder:
+                - EIGENVAL
+                - "Sxyz_exp_values_from_spn_file.dat" (get automatically from wannier90.spn_formatted!!)
+                - OUTCAR
+
+        Args:
+            kpoint_matrix (np.array): K-point matrix.
+            NK (int): Number of k-points.
+            kpath_ticks (list): K-path ticks.
+            Fermi_nsc_wann (float): Fermi energy in the non-self-consistent calculation.
+            yaxis_lim (list, optional): Y-axis limits. Defaults to None.
+            savefig (bool, optional): Save the figure. Defaults to True.
+            showfig (bool, optional): Show the figure. Defaults to True.
+
+        Returns:
+            np.array: Error by energy.
+        """
+
+        # ================================================== CONSTANTS ==================================================================
+
+        labels = ["G", "K", "M", "G"]
+
+        S_DFT_fname = "Sxyz_exp_values_from_spn_file.dat"
+        hr_R_name = self.tb_model_dir + "/hr_R_dict.pickle"  # "hr_R_dict_sym.pickle"
+        spn_R_name = self.tb_model_dir + "/spn_R_dict.pickle"
+
+        deltaE_around_EF = (
+            0.5  # eV; integrate error in this +- window around E_F for plotting
+        )
+        deltaE2_around_EF = (
+            0.1  # eV; integrate error in this +- window around E_F for plotting
+        )
+
+        # =============================================================================================================================
+
+        # DFT bands for comparison
+        dft_kpoints, dft_bands, num_kpoints_dft, num_bands = parse_eigenval_file(
+            self.bands_dir + "/EIGENVAL"
+        )
+        dft_bands = dft_bands[:, self.discard_first_bands : self.discard_first_bands + self.NW]
+        print('NW', self.NW)
+        print('dft_bands_shape', dft_bands.shape)
+
+        # ======================== GET HOME-MADE SPIN TEXTURE ================================
+        A = load_lattice_vectors(win_file=f"{self.wann_dir}/wannier90.win")
+        G = reciprocal_lattice_vectors(A)
+        kpoints, kpoints_cart, kpath = get_kpoint_path(kpoint_matrix, G, Nk=NK)
+
+
+        if self.verbose: print("Interpolating the Hamiltonian for Wannier quality...")
+        Eigs_k, U_mn_k = interpolate_operator(
+            self.eig_dict,
+            self.u_dis_dict,
+            self.u_dict,
+            hamiltonian=True,
+            latt_params=A,
+            reciprocal_latt_params=G,
+            R_grid=self.R_grid,
+            kpoints=kpoints,
+            save_real_space=False,
+            save_folder=self.output_dir,
+            verbose=self.verbose,
+        )
+
+        # take all elements from Eigs_k and subtract EF_nsc
+        Eigs_k -= self.EF_nsc
+        print("Eigs_k.shape", Eigs_k.shape)
+
+        if self.verbose: print("Interpolating Sx for Wannier quality...")
+        S_mn_k_H_x = interpolate_operator(
+            self.spn_dict_x,
+            self.u_dis_dict,
+            self.u_dict,
+            hamiltonian=False,
+            U_mn_k=U_mn_k,
+            latt_params=A,
+            reciprocal_latt_params=G,
+            R_grid=self.R_grid,
+            kpoints=kpoints,
+            save_real_space=False,
+            save_folder=self.output_dir,
+            verbose=self.verbose,
+        )
+        print("S_mn_k.shape", S_mn_k_H_x.shape)
+
+        if self.verbose: print("Interpolating Sy for Wannier quality...")
+        S_mn_k_H_y = interpolate_operator(
+            self.spn_dict_y,
+            self.u_dis_dict,
+            self.u_dict,
+            hamiltonian=False,
+            U_mn_k=U_mn_k,
+            latt_params=A,
+            reciprocal_latt_params=G,
+            R_grid=self.R_grid,
+            kpoints=kpoints,
+            save_real_space=False,
+            save_folder=self.output_dir,
+            verbose=self.verbose,
+        )
+
+        if self.verbose: print("Interpolating Sz for Wannier quality...")
+        S_mn_k_H_z = interpolate_operator(
+            self.spn_dict_z,
+            self.u_dis_dict,
+            self.u_dict,
+            hamiltonian=False,
+            U_mn_k=U_mn_k,
+            latt_params=A,
+            reciprocal_latt_params=G,
+            R_grid=self.R_grid,
+            kpoints=kpoints,
+            save_real_space=False,
+            save_folder=self.output_dir,
+            verbose=self.verbose,
+        )
+
+        # # interpolate Hamiltonian
+        # with open(hr_R_name, "rb") as fr:
+        #     hr_R_dict = pickle.load(fr)
+
+        # H_k_W = real_to_W_gauge(kpoints, hr_R_dict)
+        # Eigs_k, U_mn_k = W_gauge_to_H_gauge(H_k_W, U_mn_k={}, hamiltonian=True)
+
+        # shutil.copyfile(
+        #     nsc_dir + "/FERMI_ENERGY_corrected.in", "./FERMI_ENERGY_corrected.in"
+        # )
+        # E_F = Fermi_nsc_wann
+        # # take all elements from Eigs_k and subtract Fermi_nsc_wann
+        # for key in Eigs_k.keys():
+        #     Eigs_k[key] -= Fermi_nsc_wann
+
+        # # interpolate spin operator
+        # with open(spn_R_name, "rb") as fr:
+        #     spn_R_dict = pickle.load(fr)
+
+        # S_mn_R_x, S_mn_R_y, S_mn_R_z = split_spn_dict(
+        #     spn_R_dict, spin_names=["x", "y", "z"]
+        # )
+
+        # Sx_k_W = real_to_W_gauge(kpoints, S_mn_R_x)
+        # Sy_k_W = real_to_W_gauge(kpoints, S_mn_R_y)
+        # Sz_k_W = real_to_W_gauge(kpoints, S_mn_R_z)
+
+        # # print('len kpoints', len(kpoints))
+        # # print('len H_k_W', len(list(H_k_W.keys())))
+
+        # S_mn_k_H_x = W_gauge_to_H_gauge(Sx_k_W, U_mn_k=U_mn_k, hamiltonian=False)
+        # S_mn_k_H_y = W_gauge_to_H_gauge(Sy_k_W, U_mn_k=U_mn_k, hamiltonian=False)
+        # S_mn_k_H_z = W_gauge_to_H_gauge(Sz_k_W, U_mn_k=U_mn_k, hamiltonian=False)
+
+        # =====================================================================================
+
+        # get Fermi for the bands non-self-consistent calculation
+        Fermi_nsc_bands = get_fermi_corrected_by_matching_bands(
+            path=".",
+            nsc_calculation_path=self.bands_dir,
+            corrected_at_kpoint=self.kpoint_for_Fermi_correction,
+            corrected_at_band=self.band_for_Fermi_correction,
+            sc_calculation_path=self.sc_dir,
+            fout_name="FERMI_ENERGY_corrected.in",
+        )
+        dft_bands -= Fermi_nsc_bands
+
+        # make 2D again: (NKpoints, num_wann)
+        # E_to_compare = np.array([Eigs_k[key] for key in Eigs_k.keys()])
+        # print("E_to_compare_shape", E_to_compare.shape)
+        # E_to_compare_with_duplicates = duplicate_kpoints_for_home_made(E_to_compare, NK)
+        # print("E_to_compare_with_duplicates_shape", E_to_compare_with_duplicates.shape)
+
+        # above NOT NECESSARY SINCE NOW NUMPY ARRAYS PRODUCED DURING INTERPOLATION, NOT DICTIONARIES
+        E_to_compare_with_duplicates = Eigs_k
+
+        # print("50", E_to_compare_with_duplicates[50,:])
+        # print("51", E_to_compare_with_duplicates[51,:])
+
+        # S_mn_k_H_x_to_compare = duplicate_kpoints_for_home_made(
+        #     np.array([np.diag(S_mn_k_H_x[key]) for key in S_mn_k_H_x.keys()]), NK
+        # )
+        # S_mn_k_H_y_to_compare = duplicate_kpoints_for_home_made(
+        #     np.array([np.diag(S_mn_k_H_y[key]) for key in S_mn_k_H_y.keys()]), NK
+        # )
+        # S_mn_k_H_z_to_compare = duplicate_kpoints_for_home_made(
+        #     np.array([np.diag(S_mn_k_H_z[key]) for key in S_mn_k_H_z.keys()]), NK
+        # )
+
+        S_mn_k_H_x_to_compare = np.array([np.diag(S_mn) for S_mn in S_mn_k_H_x])
+        S_mn_k_H_y_to_compare = np.array([np.diag(S_mn) for S_mn in S_mn_k_H_y])
+        S_mn_k_H_z_to_compare = np.array([np.diag(S_mn) for S_mn in S_mn_k_H_z])
+
+        # print('k-points from dict keys', list(S_mn_k_H_x.keys()))
+
+        S_to_compare_with_duplicates = np.array(
+            [S_mn_k_H_x_to_compare, S_mn_k_H_y_to_compare, S_mn_k_H_z_to_compare]
+        )
+        S_shape = S_to_compare_with_duplicates.shape
+
+        # make the spin axis the last instead of the first one
+        S_to_compare_with_duplicates = S_to_compare_with_duplicates.swapaxes(0, 1)
+        S_to_compare_with_duplicates = S_to_compare_with_duplicates.swapaxes(1, 2)
+
+        # S_to_compare_with_duplicates = duplicate_kpoints(S_to_compare, NK)
+
+        # error_by_energy = compare_eigs_bandstructure_at_exact_kpts(
+        #     dft_bands,
+        #     E_to_compare_with_duplicates,
+        #     num_kpoints_dft,
+        #     num_wann,
+        #     f_name_out="home-made_quality_error_Fermi_corrected.dat",
+        # )
+
+        # plot_err_vs_energy(
+        #     error_by_energy,
+        #     Ef=0,
+        #     title="Wannierization RMS error vs. energy",
+        #     fig_name_out="wannier_quality_error_by_energy_home-made_Fermi_corrected.png",
+        #     savefig=savefig,
+        #     showfig=showfig,
+        # )
+
+        # ------------- COMPARE spin texture --------------------
+
+        # load spin expectation values and select relevant bands
+        S_DFT = np.loadtxt(f"{self.bands_dir}/{S_DFT_fname}")
+        # select relevant bands
+        NK = get_NKpoints(OUTCAR=f"{self.bands_dir}/OUTCAR")
+        S_DFT = S_DFT.reshape(NK, -1, 3)
+        S_DFT_to_compare = S_DFT[:, self.discard_first_bands : self.discard_first_bands + self.NW, :]
+
+        # print("S_to_compare dimensions", S_to_compare_with_duplicates.shape)
+        # print("S_to_compare", S_to_compare)
+
+        # print("50", S_to_compare_with_duplicates[50,:,:])
+        # print("51", S_to_compare_with_duplicates[51,:,:])
+
+        S_diff = np.abs(
+            S_DFT_to_compare.reshape(-1, 3) - S_to_compare_with_duplicates.reshape(-1, 3)
+        )
+        E_diff = np.abs(dft_bands.reshape(-1) - E_to_compare_with_duplicates.reshape(-1))
+
+        # print('!!!!!!!!!!!Fermi_nsc_wann', Fermi_nsc_wann)
+
+        # plot error-colored band structure
+        plot_err_vs_bands(
+            kpoints,
+            kpath,
+            kpath_ticks,
+            Eigs_k,
+            E_diff,
+            S_diff,
+            fout="ERRORS_ALL_band_structure_home-made_Fermi_corrected.jpg",
+            yaxis_lim=yaxis_lim,
+            savefig=savefig,
+            showfig=showfig,
+        )
+
+        # E_F was already subtracted
+        E = dft_bands.reshape(-1)
+
+        # make final matrix
+        error_E_S_by_energy = np.vstack(
+            [E, E_diff, S_diff[:, 0], S_diff[:, 1], S_diff[:, 2]]
+        ).T
+
+        # print("Error matrix shape:", error_E_S_by_energy.shape)
+
+        # order the '' matrix by energy (0th column)
+        error_E_S_by_energy = error_E_S_by_energy[error_E_S_by_energy[:, 0].argsort()]
+
+        np.savetxt(
+            self.output_dir + "home-made_quality_error_S_E_Fermi_corrected.dat",
+            error_E_S_by_energy,
+            header="E (eV)\t|Delta E| (eV)\t|Delta S_x|\t|Delta S_y|\t|Delta S_z|",
+        )
+
+        # plot all the errors
+        fig, axes = plt.subplots(2, 2, figsize=[6, 4])
+
+        axes[0, 0].semilogy(
+            error_E_S_by_energy[:, 0], error_E_S_by_energy[:, 1], "ko", markersize=2
+        )
+        axes[0, 0].set_title(r"$E$", fontsize=14)
+        axes[0, 0].set_ylabel(r"|$E_\mathrm{DFT} - E_\mathrm{wann}$| (eV)")
+
+        axes[0, 1].semilogy(
+            error_E_S_by_energy[:, 0], error_E_S_by_energy[:, 4], "bo", markersize=2
+        )
+        axes[0, 1].set_title(r"$S_z$", fontsize=14)
+        axes[0, 1].set_ylabel(r"|$S_{z, \mathrm{DFT}} - S_{z, \mathrm{wann}}$|")
+
+        axes[1, 0].semilogy(
+            error_E_S_by_energy[:, 0], error_E_S_by_energy[:, 2], "ro", markersize=2
+        )
+        axes[1, 0].set_title(r"$S_x$", fontsize=14)
+        axes[1, 0].set_ylabel(r"|$S_{x, \mathrm{DFT}} - S_{x, \mathrm{wann}}$|")
+        axes[1, 0].set_xlabel(r"$E - E_\mathrm{F}$ (eV)")
+
+        axes[1, 1].semilogy(
+            error_E_S_by_energy[:, 0], error_E_S_by_energy[:, 3], "go", markersize=2
+        )
+        axes[1, 1].set_title(r"$S_y$", fontsize=14)
+        axes[1, 1].set_ylabel(r"|$S_{y, \mathrm{DFT}} - S_{y, \mathrm{wann}}$|")
+        axes[1, 1].set_xlabel(r"$E - E_\mathrm{F}$ (eV)")
+
+        fig.suptitle("Error of Wannier interpolation", fontsize=14)
+        plt.tight_layout()
+
+        # apply ylim
+        if yaxis_lim:
+            for ax in axes.flatten():
+                ax.set_xlim(yaxis_lim)
+        if savefig is True:
+            plt.savefig(self.output_dir + "ERRORS_all_home-made_Fermi_corrected.png", dpi=400)
+        if showfig is True:
+            plt.show()
+        plt.close()
+
+        dis_froz_min, dis_froz_max = get_frozen_window_min_max(
+            wannier90winfile=f"{self.wann_dir}/wannier90.win"
+        )
+
+        Fermi_sc = float(np.loadtxt(f"{self.sc_dir}/FERMI_ENERGY.in"))
+        mean_error_whole_range = integrate_error(error_E_S_by_energy, E_min=-1e6, E_max=1e6)
+        mean_error_up_to_Fermi = integrate_error(error_E_S_by_energy, E_min=-1e6, E_max=0)
+        mean_error_frozen_window = integrate_error(
+            error_E_S_by_energy,
+            E_min=dis_froz_min - self.EF_nsc,
+            E_max=dis_froz_max - self.EF_nsc,
+        )
+        mean_error_around_Fermi = integrate_error(
+            error_E_S_by_energy, E_min=-deltaE_around_EF, E_max=deltaE_around_EF
+        )
+        mean_error_around_Fermi2 = integrate_error(
+            error_E_S_by_energy, E_min=-deltaE2_around_EF, E_max=deltaE_around_EF
+        )
+
+        with open("error_home-made_integrated_Fermi_corrected.dat", "w") as fw:
+            fw.write(
+                "#                                           \tRMSE_E (eV)\tRMSE_Sx  \tRMSE_Sy  \tRMSE_Sz\n"
+            )
+            fw.write(
+                f"in the whole energy range                \t"
+                + "\t".join([f"{val:.6f}" for val in mean_error_whole_range])
+                + "\n"
+            )
+            fw.write(
+                f"up to Fermi                                 \t"
+                + "\t".join([f"{val:.6f}" for val in mean_error_up_to_Fermi])
+                + "\n"
+            )
+            fw.write(
+                f"in the frozen window ({dis_froz_min-Fermi_nsc_wann:.3f} to {dis_froz_max-Fermi_sc:.3f} eV)\t"
+                + "\t".join([f"{val:.6f}" for val in mean_error_frozen_window])
+                + "\n"
+            )
+            fw.write(
+                f"window +- {deltaE_around_EF:.3f} eV around Fermi level    \t"
+                + "\t".join([f"{val:.6f}" for val in mean_error_around_Fermi])
+                + "\n"
+            )
+            fw.write(
+                f"window +- {deltaE2_around_EF:.3f} eV around Fermi level    \t"
+                + "\t".join([f"{val:.6f}" for val in mean_error_around_Fermi2])
+            )
+
+        # ------------ ABSOLUTE VALUE OF SPIN ------------------
+
+        S_abs = np.linalg.norm(S_to_compare_with_duplicates.reshape(-1, 3), axis=1)
+        # print("S_abs shape", S_abs.shape)
+
+        # combined matrix
+        E_S_abs = np.vstack([E, S_abs]).T
+        # print("S_abs_E shape", E_S_abs.shape)
+
+        # order the '' matrix by energy (0th column)
+        E_S_abs = E_S_abs[E_S_abs[:, 0].argsort()]
+
+        # save txt file, with statistics
+        Sabs_mean = np.mean(S_abs)
+        Sabs_median = np.median(S_abs)
+        Sabs_over_one = len(S_abs[S_abs > 1.0]) / len(S_abs)
+        header = f"S over 1 ratio = {Sabs_over_one:.8f}\nS mean = {Sabs_mean:.8f}\nS median = {Sabs_median:.8f}\nE (eV)\t|S|"
+        np.savetxt(self.output_dir + "home-made_Sabs_vs_E_Fermi_corrected.dat", E_S_abs, header=header)
+
+        # plot and save S_abs vs. E
+        plot_title = "S_abs"
+
+        fig, ax = plt.subplots(1, 1, figsize=[3.7, 2.5])
+        ax.plot(E_S_abs[:, 0], E_S_abs[:, 1], "ko", markersize=2)
+        ax.set_title("Interpolated spin magnitudes", fontsize=13)
+        ax.set_ylabel(r"|$S$|", fontsize=13)
+        ax.set_xlabel(r"$E - E_\mathrm{F}$ (eV)", fontsize=13)
+        plt.tight_layout()
+        if savefig is True:
+            plt.savefig(self.output_dir + plot_title + "_vs_E_home-made_Fermi_corrected.png", dpi=400)
+        if showfig is True:
+            plt.show()
+        plt.close()
+
+        # plot and save S_abs histogram
+        fig, ax = plt.subplots(1, 1, figsize=[3.5, 2.5])
+        plt.hist(S_abs.flatten(), bins=100)
+        plt.xlabel("|S|", fontsize=13)
+        plt.ylabel("counts", fontsize=13)
+        plt.title(
+            "Spin magnitude histogram", #f"histogram of abs values of diagonal elements of spin operator\n- in k-space (eigenvalues) home-made interpolation",
+            fontsize=13,
+        )
+        plt.tight_layout()
+        if savefig is True:
+            plt.savefig(self.output_dir + plot_title + "_S_histogram_home-made_Fermi_corrected.png", dpi=400)
+        if showfig is True:
+            plt.show()
+        plt.close()
+
+
     def wannier_quality(
         self,
-        band_for_Fermi_correction=None,
-        kpoint_for_Fermi_correction="0.0000000E+00  0.0000000E+00  0.0000000E+00",
         yaxis_lim=[-10, 10],
         savefig=True,
         showfig=True,
@@ -647,21 +1096,10 @@ class WannierTBmodel:
         if self.verbose: print(f"Number of k-points: {NK} (read from {self.bands_dir}KPOINTS)")
         if self.verbose: print(f"K-point ticks: {kpath_ticks} (read from {self.bands_dir}KPOINTS)")
 
-        wannier_quality_calculation(
+        self.wannier_quality_calculation(
             kpoint_matrix,
             NK,
             kpath_ticks,
-            self.EF_nsc,
-            num_wann=self.NW,
-            discard_first_bands=self.discard_first_bands,
-            sc_dir=self.sc_dir,
-            nsc_dir=self.nsc_dir,
-            wann_dir=self.wann_dir,
-            bands_dir=self.bands_dir,
-            tb_model_dir=self.tb_model_dir,
-            band_for_Fermi_correction=band_for_Fermi_correction,
-            kpoint_for_Fermi_correction=kpoint_for_Fermi_correction,
-            output_dir=self.output_dir,
             yaxis_lim=yaxis_lim,
             savefig=savefig,
             showfig=showfig,
