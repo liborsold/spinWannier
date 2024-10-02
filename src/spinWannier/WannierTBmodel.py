@@ -247,7 +247,6 @@ class WannierTBmodel:
         # get Fermi for the wannier non-self-consistent calculation
         EF_nsc_fout = "FERMI_ENERGY_corrected.in"
         self.EF_nsc = get_fermi_corrected_by_matching_bands(
-            path=".",
             nsc_calculation_path=nsc_dir,
             corrected_at_kpoint=kpoint_for_Fermi_correction,
             corrected_at_band=band_for_Fermi_correction,
@@ -814,15 +813,14 @@ class WannierTBmodel:
         # =====================================================================================
 
         # get Fermi for the bands non-self-consistent calculation
-        Fermi_nsc_bands = get_fermi_corrected_by_matching_bands(
-            path=".",
+        Fermi_dft_bands = get_fermi_corrected_by_matching_bands(
             nsc_calculation_path=self.bands_dir,
             corrected_at_kpoint=self.kpoint_for_Fermi_correction,
             corrected_at_band=self.band_for_Fermi_correction,
             sc_calculation_path=self.sc_dir,
             fout_name="FERMI_ENERGY_corrected.in",
         )
-        dft_bands -= Fermi_nsc_bands
+        dft_bands -= Fermi_dft_bands
 
         # make 2D again: (NKpoints, num_wann)
         # E_to_compare = np.array([Eigs_k[key] for key in Eigs_k.keys()])
