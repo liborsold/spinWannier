@@ -62,6 +62,27 @@ def get_band_at_kpoint_from_EIGENVAL(
                 energy = float(lines[i + target_band].split()[1])
                 return energy
 
+def vasp_calc_collinear(EIGENVAL_path="./EIGENVAL"):
+    """
+    Get the N_eig from the EIGENVAL file.
+
+    Args:
+        EIGENVAL_path (str, optional): Path to the EIGENVAL file. Defaults to './EIGENVAL'.
+
+    Returns:
+        int: N_eig (1 - non-spin-polarized, 2 - spin-polarized).
+    """
+    with open(EIGENVAL_path, "r") as fr:
+        for i, line in enumerate(fr):
+            if i == 0:
+                N_eig = int(line.split()[3])
+                if N_eig == 2:
+                    return True
+                elif N_eig == 1:
+                    return False
+                else:
+                    raise ValueError(f"The 4th number on the first line of the EIGENVAL file {EIGENVAL_path} is neither 1 (non-collinear) nor 2 (collinear)!")
+            
 
 def get_fermi_corrected_by_matching_bands(
     path=".",
@@ -87,14 +108,28 @@ def get_fermi_corrected_by_matching_bands(
 
     Fermi_sc = get_fermi(sc_calculation_path)
 
+    collinear_sc = vasp_calc_collinear(EIGENVAL_path=sc_calculation_path+"/EIGENVAL")
+    collinear_nsc = vasp_calc_collinear(EIGENVAL_path=nsc_calculation_path+"/EIGENVAL") 
+    if collinear_sc != collinear_nsc:
+        corrected_at_band_sc = corrected_at_band//2 + corrected_at_band%2 if collinear_sc else corrected_at_band
+        corrected_at_band_nsc = corrected_at_band//2 + corrected_at_band%2 if collinear_nsc else corrected_at_band
+
+        sc_is = 'collinear' if collinear_sc else 'non-collinear'
+        nsc_is = 'collinear' if collinear_nsc else 'non-collinear'
+        print(f'!! The self-consistent calculation in {sc_calculation_path} is {sc_is}, while the non-self-consistent calculation in {nsc_calculation_path} is {nsc_is}.\n \
+              The band index for correction of sc is now {corrected_at_band_sc} and for nsc is {corrected_at_band_nsc}.')
+    else:
+        corrected_at_band_sc = corrected_at_band
+        corrected_at_band_nsc = corrected_at_band
+
     sc_band = get_band_at_kpoint_from_EIGENVAL(
         EIGENVAL_path=sc_calculation_path + "/EIGENVAL",
-        target_band=corrected_at_band,
+        target_band=corrected_at_band_sc,
         target_kpoint_string=corrected_at_kpoint,
     )
     nsc_band = get_band_at_kpoint_from_EIGENVAL(
         EIGENVAL_path=nsc_calculation_path + "/EIGENVAL",
-        target_band=corrected_at_band,
+        target_band=corrected_at_band_nsc,
         target_kpoint_string=corrected_at_kpoint,
     )
 
@@ -104,7 +139,7 @@ def get_fermi_corrected_by_matching_bands(
 
     with open(nsc_calculation_path + "/" + fout_name, "w") as fw:
         fw.write(
-            f"# {Fermi_nsc:.8f} eV = {Fermi_sc:.8f} + ({nsc_band:.8f} - {sc_band:.8f}) = Fermi_sc + (E_band{corrected_at_band}_nsc - E_band{corrected_at_band}_sc) ... self-consistent Fermi from {sc_calculation_path} corrected so that band {corrected_at_band} at k-point {corrected_at_kpoint} is at the same energy (relative to the recpective Fermi energies) for the self-consistent (path {sc_calculation_path}) and non-self-consistent (path {nsc_calculation_path}) calculation\n{Fermi_nsc:.8f}"
+            f"# {Fermi_nsc:.8f} eV = {Fermi_sc:.8f} + ({nsc_band:.8f} - {sc_band:.8f}) = Fermi_sc + (E_band{corrected_at_band_nsc}_nsc - E_band{corrected_at_band_sc}_sc) ... self-consistent Fermi from {sc_calculation_path} corrected so that band {corrected_at_band_nsc} of non-self-consistent calculation and {corrected_at_band_sc} of self-consistent calculation at k-point {corrected_at_kpoint} is at the same energy (relative to the recpective Fermi energies) for the self-consistent (path {sc_calculation_path}) and non-self-consistent (path {nsc_calculation_path}) calculation\n{Fermi_nsc:.8f}"
         )
 
     return float(Fermi_nsc)
@@ -300,6 +335,7 @@ def plot_err_vs_bands(
     Eigs_k,
     E_diff,
     S_diff,
+    NW,
     fout="ERRORS_ALL_band_structure.jpg",
     yaxis_lim=None,
     savefig=True,
@@ -319,7 +355,6 @@ def plot_err_vs_bands(
         savefig (bool, optional): Save the figure. Defaults to True.
         showfig (bool, optional): Show the figure. Defaults to True.
     """
-    NW = len(Eigs_k[list(Eigs_k.keys())[0]])
     Nk = len(kpoints) // (len(kpath_ticks) - 1)
 
     fig, axes = plt.subplots(2, 2, figsize=[9, 6])
@@ -343,7 +378,7 @@ def plot_err_vs_bands(
             vmax = 0.05
         sc = ax.scatter(
             [[k_dist for i in range(NW)] for k_dist in kpath],
-            [Eigs_k[kpoint] for kpoint in kpoints],
+            [Eigs_k[i] for i in range(len(kpoints))],
             c=S.reshape(-1, NW),
             cmap="YlOrRd",
             s=0.2,

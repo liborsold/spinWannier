@@ -850,6 +850,8 @@ class WannierTBmodel:
         S_mn_k_H_y_to_compare = np.array([np.diag(S_mn) for S_mn in S_mn_k_H_y])
         S_mn_k_H_z_to_compare = np.array([np.diag(S_mn) for S_mn in S_mn_k_H_z])
 
+        print("S_mn_k_H_x_to_compare.shape", S_mn_k_H_x_to_compare.shape)
+
         # print('k-points from dict keys', list(S_mn_k_H_x.keys()))
 
         S_to_compare_with_duplicates = np.array(
@@ -887,7 +889,9 @@ class WannierTBmodel:
         # select relevant bands
         NK = get_NKpoints(OUTCAR=f"{self.bands_dir}/OUTCAR")
         S_DFT = S_DFT.reshape(NK, -1, 3)
-        S_DFT_to_compare = S_DFT[:, self.discard_first_bands : self.discard_first_bands + self.NW, :]
+        # S_DFT_to_compare = S_DFT[:, self.discard_first_bands : self.discard_first_bands + self.NW, :]
+        S_DFT_to_compare = S_DFT[:, :, :]
+        print('S_DFT_to_compare.shape', S_DFT_to_compare.shape)
 
         # print("S_to_compare dimensions", S_to_compare_with_duplicates.shape)
         # print("S_to_compare", S_to_compare)
@@ -910,7 +914,8 @@ class WannierTBmodel:
             Eigs_k,
             E_diff,
             S_diff,
-            fout="ERRORS_ALL_band_structure_home-made_Fermi_corrected.jpg",
+            NW=self.NW,
+            fout=self.output_dir + "ERRORS_ALL_band_structure_home-made_Fermi_corrected.jpg",
             yaxis_lim=yaxis_lim,
             savefig=savefig,
             showfig=showfig,
@@ -996,7 +1001,7 @@ class WannierTBmodel:
             error_E_S_by_energy, E_min=-deltaE2_around_EF, E_max=deltaE_around_EF
         )
 
-        with open("error_home-made_integrated_Fermi_corrected.dat", "w") as fw:
+        with open(self.output_dir + "error_home-made_integrated_Fermi_corrected.dat", "w") as fw:
             fw.write(
                 "#                                           \tRMSE_E (eV)\tRMSE_Sx  \tRMSE_Sy  \tRMSE_Sz\n"
             )
@@ -1011,7 +1016,7 @@ class WannierTBmodel:
                 + "\n"
             )
             fw.write(
-                f"in the frozen window ({dis_froz_min-Fermi_nsc_wann:.3f} to {dis_froz_max-Fermi_sc:.3f} eV)\t"
+                f"in the frozen window ({dis_froz_min-self.EF_nsc:.3f} to {dis_froz_max-Fermi_sc:.3f} eV)\t"
                 + "\t".join([f"{val:.6f}" for val in mean_error_frozen_window])
                 + "\n"
             )

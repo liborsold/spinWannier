@@ -2380,4 +2380,7 @@ def parse_KPOINTS_file(KPOINTS_file_path):
             if empty_line is True:
                 empty_line = False
 
+    # in kpath_ticks, replace GAMMA with Γ
+    kpath_ticks = [tick.replace("GAMMA", "Γ") for tick in kpath_ticks]
+
     return kpoint_matrix, Nkpoints, kpath_ticks
