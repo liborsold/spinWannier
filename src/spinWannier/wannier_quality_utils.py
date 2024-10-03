@@ -85,7 +85,6 @@ def vasp_calc_collinear(EIGENVAL_path="./EIGENVAL"):
             
 
 def get_fermi_corrected_by_matching_bands(
-    path=".",
     nsc_calculation_path="../0_nsc_for_wann_25x25_frozmaxmargin_0.2eV",
     corrected_at_kpoint="0.0000000E+00  0.0000000E+00  0.0000000E+00",
     corrected_at_band=11,
