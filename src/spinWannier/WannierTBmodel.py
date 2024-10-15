@@ -80,6 +80,7 @@ class WannierTBmodel:
     def __init__(
         self,
         seedname="wannier90",
+        spin_polarized=True,
         sc_dir="0_self-consistent",
         nsc_dir="1_non-self-consistent",
         wann_dir="2_wannier",
@@ -97,6 +98,7 @@ class WannierTBmodel:
 
         Args:
             seedname (str, optional): Seedname of the wannier90 files. Defaults to 'wannier90'.
+            spin_polarized (bool, optional): Whether the calculation is spin-polarized or not. Defaults to True.
             sc_dir (str, optional): Directory of the self-consistent calculation. Defaults to '0_self-consistent'.
             nsc_dir (str, optional): Directory of the non-self-consistent calculation. Defaults to '1_non-self-consistent'.
             wann_dir (str, optional): Directory of the wannier calculation. Defaults to '2_wannier'.
@@ -112,6 +114,7 @@ class WannierTBmodel:
         self.data_saving_format = data_saving_format
         self.verbose = verbose
         self.kpoint_for_Fermi_correction = kpoint_for_Fermi_correction
+        self.spin_polarized = spin_polarized
 
         # ensure that directories have a backslash at the end
         if sc_dir[-1] != "/": sc_dir += "/"
@@ -187,45 +190,48 @@ class WannierTBmodel:
             print("Please check the u.mat files.")
             exit(1)
 
-        # check if wannier90.spn_formatted exists; if not, generated it from WAVECAR
-        if not exists(wann_dir + f"{seedname}.{spn_file_extension}"):
-            print(
-                f"{seedname}.{spn_file_extension} does not exist. Generating it from WAVECAR."
-            )
-            # generate wannier90.spn_formatted from WAVECAR
-            if not exists(nsc_dir + "WAVECAR"):
-                print(f"WAVECAR does not exist in {nsc_dir}.")
-                print(
-                    f"Please provide the WAVECAR file to generate {seedname}.{spn_file_extension}."
-                )
-                exit(1)
-            else:
-                if spn_formatted is False:
-                    print("Generating wannier90.spn from WAVECAR.")
-                    vasp_to_spn(
-                        formatted=False,
-                        fin=nsc_dir + "WAVECAR",
-                        fout=wann_dir + f"{seedname}.spn",
-                        NBout=self.NW_dis,
-                        IBstart=discard_first_bands + 1,
+            if spin_polarized is True:
+                # check if wannier90.spn_formatted exists; if not, generated it from WAVECAR
+                if not exists(wann_dir + f"{seedname}.{spn_file_extension}"):
+                    print(
+                        f"{seedname}.{spn_file_extension} does not exist. Generating it from WAVECAR."
                     )
-                elif spn_formatted is True:
-                    print("Generating wannier90.spn_formatted from WAVECAR.")
-                    vasp_to_spn(
-                        formatted=True,
-                        fin=nsc_dir + "WAVECAR",
-                        fout=wann_dir + f"{seedname}.spn_formatted",
-                        NBout=self.NW_dis,
-                        IBstart=discard_first_bands + 1,
-                    )
+                    # generate wannier90.spn_formatted from WAVECAR
+                    if not exists(nsc_dir + "WAVECAR"):
+                        print(f"WAVECAR does not exist in {nsc_dir}.")
+                        print(
+                            f"Please provide the WAVECAR file to generate {seedname}.{spn_file_extension}."
+                        )
+                        exit(1)
+                    else:
+                        if spn_formatted is False:
+                            print("Generating wannier90.spn from WAVECAR.")
+                            vasp_to_spn(
+                                formatted=False,
+                                fin=nsc_dir + "WAVECAR",
+                                fout=wann_dir + f"{seedname}.spn",
+                                NBout=self.NW_dis,
+                                IBstart=discard_first_bands + 1,
+                            )
+                        elif spn_formatted is True:
+                            print("Generating wannier90.spn_formatted from WAVECAR.")
+                            vasp_to_spn(
+                                formatted=True,
+                                fin=nsc_dir + "WAVECAR",
+                                fout=wann_dir + f"{seedname}.spn_formatted",
+                                NBout=self.NW_dis,
+                                IBstart=discard_first_bands + 1,
+                            )
 
-        # convert wannier90.spn to a pickled dictionary
-        spn_to_dict(
-            model_dir=wann_dir,
-            fwin=f"{seedname}.win",
-            fin=f"{seedname}.{spn_file_extension}",
-            formatted=spn_formatted,
-        )
+                # convert wannier90.spn to a pickled dictionary
+                spn_to_dict(
+                    model_dir=wann_dir,
+                    fwin=f"{seedname}.win",
+                    fin=f"{seedname}.{spn_file_extension}",
+                    formatted=spn_formatted,
+                )
+                
+                spn_dict = load_dict(fin=wann_dir + "spn_dict.pickle")
 
         eig_dict = eigenval_dict(
             eigenval_file=wann_dir + f"{seedname}.eig",
@@ -240,8 +246,6 @@ class WannierTBmodel:
             for key in u_dis_dict.keys():
                 u_dis_dict[key] = np.eye(NW)
             self.NW = NW
-
-        spn_dict = load_dict(fin=wann_dir + "spn_dict.pickle")
 
         # calculate the Fermi level
         # get Fermi for the wannier non-self-consistent calculation
@@ -266,28 +270,29 @@ class WannierTBmodel:
         self.eig_dict = eig_dict
         self.u_dict = u_dict
         self.u_dis_dict = u_dis_dict
-        self.spn_dict = spn_dict
         self.discard_first_bands = discard_first_bands
         self.seedname = seedname
         self.band_for_Fermi_correction = band_for_Fermi_correction
+        
+        if spin_polarized:
+            self.spn_dict = spn_dict
+            # split the spn_dict into x, y, z components
+            spn_dict_x = {}
+            spn_dict_y = {}
+            spn_dict_z = {}
+            for k, v in spn_dict.items():
+                spn_dict_x[k[0]] = spn_dict[(k[0], "x")]
+                spn_dict_y[k[0]] = spn_dict[(k[0], "y")]
+                spn_dict_z[k[0]] = spn_dict[(k[0], "z")]
+            self.spn_dict_x = spn_dict_x
+            self.spn_dict_y = spn_dict_y
+            self.spn_dict_z = spn_dict_z
 
-        # split the spn_dict into x, y, z components
-        spn_dict_x = {}
-        spn_dict_y = {}
-        spn_dict_z = {}
-        for k, v in spn_dict.items():
-            spn_dict_x[k[0]] = spn_dict[(k[0], "x")]
-            spn_dict_y[k[0]] = spn_dict[(k[0], "y")]
-            spn_dict_z[k[0]] = spn_dict[(k[0], "z")]
-        self.spn_dict_x = spn_dict_x
-        self.spn_dict_y = spn_dict_y
-        self.spn_dict_z = spn_dict_z
-
-        # define constants
-        self.spn_x_R_dict_name = "spn_x_R_dict.pickle"
-        self.spn_y_R_dict_name = "spn_y_R_dict.pickle"
-        self.spn_z_R_dict_name = "spn_z_R_dict.pickle"
-        self.spn_R_dict_name = "spn_R_dict.pickle"
+            # define constants
+            self.spn_x_R_dict_name = "spn_x_R_dict.pickle"
+            self.spn_y_R_dict_name = "spn_y_R_dict.pickle"
+            self.spn_z_R_dict_name = "spn_z_R_dict.pickle"
+            self.spn_R_dict_name = "spn_R_dict.pickle"
 
         # store the real space grid
         self.R_grid = uniform_real_space_grid(
@@ -391,100 +396,101 @@ class WannierTBmodel:
             save_folder=save_folder,
             verbose=self.verbose,
         )
-
-        if self.verbose: print("Interpolating Sx...")
-        self.S_mn_k_H_x[dimension] = interpolate_operator(
-            self.spn_dict_x,
-            self.u_dis_dict,
-            self.u_dict,
-            hamiltonian=False,
-            U_mn_k=self.U_mn_k,
-            latt_params=A,
-            reciprocal_latt_params=G,
-            R_grid=self.R_grid,
-            kpoints=self.kpoints_rec[dimension],
-            save_real_space=save_real_space_operators,
-            real_space_fname=self.spn_x_R_dict_name,
-            save_folder=save_folder,
-            verbose=self.verbose,
-        )
-
-        if self.verbose: print("Interpolating Sy...")
-        self.S_mn_k_H_y[dimension] = interpolate_operator(
-            self.spn_dict_y,
-            self.u_dis_dict,
-            self.u_dict,
-            hamiltonian=False,
-            U_mn_k=self.U_mn_k,
-            latt_params=A,
-            reciprocal_latt_params=G,
-            R_grid=self.R_grid,
-            kpoints=self.kpoints_rec[dimension],
-            save_real_space=save_real_space_operators,
-            real_space_fname=self.spn_y_R_dict_name,
-            save_folder=save_folder,
-            verbose=self.verbose,
-        )
-
-        if self.verbose: print("Interpolating Sz...")
-        self.S_mn_k_H_z[dimension] = interpolate_operator(
-            self.spn_dict_z,
-            self.u_dis_dict,
-            self.u_dict,
-            hamiltonian=False,
-            U_mn_k=self.U_mn_k,
-            latt_params=A,
-            reciprocal_latt_params=G,
-            R_grid=self.R_grid,
-            kpoints=self.kpoints_rec[dimension],
-            save_real_space=save_real_space_operators,
-            real_space_fname=self.spn_z_R_dict_name,
-            save_folder=save_folder,
-            verbose=self.verbose,
-        )
-
-        # unite the spn real space dictionaries to one
-        with open(save_folder + self.spn_x_R_dict_name, "rb") as fxr:
-            spn_x_dict = pickle.load(fxr)
-        with open(save_folder + self.spn_y_R_dict_name, "rb") as fyr:
-            spn_y_dict = pickle.load(fyr)
-        with open(save_folder + self.spn_z_R_dict_name, "rb") as fzr:
-            spn_z_dict = pickle.load(fzr)
-
-        with open(save_folder + self.spn_R_dict_name, "wb") as fw:
-            spn_dict = unite_spn_dict(
-                spn_x_dict, spn_y_dict, spn_z_dict, spin_names=["x", "y", "z"]
-            )
-            pickle.dump(spn_dict, fw)
-
-        if save_bands_spin_texture is True and kmesh_2D is False:
-            save_bands_and_spin_texture(
-                self.kpoints_rec[dimension],
-                self.kpoints_cart[dimension],
-                self.kpath[dimension],
-                self.Eigs_k[dimension],
-                self.S_mn_k_H_x[dimension],
-                self.S_mn_k_H_y[dimension],
-                self.S_mn_k_H_z[dimension],
+        
+        if self.spin_polarized:
+            if self.verbose: print("Interpolating Sx...")
+            self.S_mn_k_H_x[dimension] = interpolate_operator(
+                self.spn_dict_x,
+                self.u_dis_dict,
+                self.u_dict,
+                hamiltonian=False,
+                U_mn_k=self.U_mn_k,
+                latt_params=A,
+                reciprocal_latt_params=G,
+                R_grid=self.R_grid,
+                kpoints=self.kpoints_rec[dimension],
+                save_real_space=save_real_space_operators,
+                real_space_fname=self.spn_x_R_dict_name,
                 save_folder=save_folder,
-                kmesh_2D=kmesh_2D,
-                fout=fout,
-            )
-        elif save_bands_spin_texture is True and kmesh_2D is True:
-            save_bands_and_spin_texture_old(
-                self.kpoints_rec[dimension],
-                self.kpoints_cart[dimension],
-                self.kpath[dimension],
-                self.Eigs_k[dimension],
-                self.S_mn_k_H_x[dimension],
-                self.S_mn_k_H_y[dimension],
-                self.S_mn_k_H_z[dimension],
-                save_folder=save_folder,
-                kmesh_2D=kmesh_2D,
-                fout=fout,
+                verbose=self.verbose,
             )
 
-        # clean standard output
+            if self.verbose: print("Interpolating Sy...")
+            self.S_mn_k_H_y[dimension] = interpolate_operator(
+                self.spn_dict_y,
+                self.u_dis_dict,
+                self.u_dict,
+                hamiltonian=False,
+                U_mn_k=self.U_mn_k,
+                latt_params=A,
+                reciprocal_latt_params=G,
+                R_grid=self.R_grid,
+                kpoints=self.kpoints_rec[dimension],
+                save_real_space=save_real_space_operators,
+                real_space_fname=self.spn_y_R_dict_name,
+                save_folder=save_folder,
+                verbose=self.verbose,
+            )
+
+            if self.verbose: print("Interpolating Sz...")
+            self.S_mn_k_H_z[dimension] = interpolate_operator(
+                self.spn_dict_z,
+                self.u_dis_dict,
+                self.u_dict,
+                hamiltonian=False,
+                U_mn_k=self.U_mn_k,
+                latt_params=A,
+                reciprocal_latt_params=G,
+                R_grid=self.R_grid,
+                kpoints=self.kpoints_rec[dimension],
+                save_real_space=save_real_space_operators,
+                real_space_fname=self.spn_z_R_dict_name,
+                save_folder=save_folder,
+                verbose=self.verbose,
+            )
+
+            # unite the spn real space dictionaries to one
+            with open(save_folder + self.spn_x_R_dict_name, "rb") as fxr:
+                spn_x_dict = pickle.load(fxr)
+            with open(save_folder + self.spn_y_R_dict_name, "rb") as fyr:
+                spn_y_dict = pickle.load(fyr)
+            with open(save_folder + self.spn_z_R_dict_name, "rb") as fzr:
+                spn_z_dict = pickle.load(fzr)
+
+            with open(save_folder + self.spn_R_dict_name, "wb") as fw:
+                spn_dict = unite_spn_dict(
+                    spn_x_dict, spn_y_dict, spn_z_dict, spin_names=["x", "y", "z"]
+                )
+                pickle.dump(spn_dict, fw)
+
+            if save_bands_spin_texture is True and kmesh_2D is False:
+                save_bands_and_spin_texture(
+                    self.kpoints_rec[dimension],
+                    self.kpoints_cart[dimension],
+                    self.kpath[dimension],
+                    self.Eigs_k[dimension],
+                    self.S_mn_k_H_x[dimension],
+                    self.S_mn_k_H_y[dimension],
+                    self.S_mn_k_H_z[dimension],
+                    save_folder=save_folder,
+                    kmesh_2D=kmesh_2D,
+                    fout=fout,
+                )
+            elif save_bands_spin_texture is True and kmesh_2D is True:
+                save_bands_and_spin_texture_old(
+                    self.kpoints_rec[dimension],
+                    self.kpoints_cart[dimension],
+                    self.kpath[dimension],
+                    self.Eigs_k[dimension],
+                    self.S_mn_k_H_x[dimension],
+                    self.S_mn_k_H_y[dimension],
+                    self.S_mn_k_H_z[dimension],
+                    save_folder=save_folder,
+                    kmesh_2D=kmesh_2D,
+                    fout=fout,
+                )
+
+            # clean standard output
         
 
     def plot1D_bands(self, fout="spin_texture_1D_home_made.jpg", yaxis_lim=[-8, 6], savefig=True, showfig=True):

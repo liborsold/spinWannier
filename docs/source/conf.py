@@ -4,7 +4,6 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 # INCLUDE package in path 
-
 import os 
 import sys
 sys.path.insert(0, os.path.abspath('../../src/'))
@@ -51,3 +50,6 @@ html_theme_options = {
 
 html_favicon = '_static/favicon/android-chrome-192x192.png'
 
+# html_sidebars = {
+#     "**": ["navbar-logo.html", "icon-links.html", "sbt-sidebar-nav.html"]
+# }

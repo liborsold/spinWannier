@@ -24,7 +24,7 @@
       parse_eigenval_file
       plot_err_vs_bands
       plot_err_vs_energy
-      wannier_quality_calculation
+      vasp_calc_collinear
    
    
 

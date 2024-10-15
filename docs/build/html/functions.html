@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="./" >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Functions &#8212; spinWannier 0.1.7 documentation</title>
   
@@ -14,37 +15,39 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="_static/documentation_options.js?v=3476fdda"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'functions';</script>
-    <link rel="icon" href="_static/android-chrome-192x192.png"/>
+    <link rel="shortcut icon" href="_static/android-chrome-192x192.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Classes" href="classes.html" />
@@ -57,23 +60,19 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -95,20 +94,12 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -123,9 +114,6 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
-
-  
-    
   
 
 <a class="navbar-brand logo" href="index.html">
@@ -134,32 +122,20 @@
   
   
   
-  
     <p class="title logo__title"><b>spinWannier</b> 0.1.7 documentation</p>
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example.html">Example</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">Modules</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">Modules</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated/spinWannier.wannier_utils.html">spinWannier.wannier_utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/spinWannier.wannier_quality_utils.html">spinWannier.wannier_quality_utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/spinWannier.WannierTBmodel.html">spinWannier.WannierTBmodel</a></li>
 </ul>
-</details></li>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Functions</a></li>
 </ul>
@@ -177,7 +153,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -186,14 +162,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -283,28 +259,26 @@
 </button>
 
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
 `);
 </script>
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -382,7 +356,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.parse_eigenval_file"><code class="docutils literal notranslate"><span class="pre">parse_eigenval_file()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.plot_err_vs_bands"><code class="docutils literal notranslate"><span class="pre">plot_err_vs_bands()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.plot_err_vs_energy"><code class="docutils literal notranslate"><span class="pre">plot_err_vs_energy()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.wannier_quality_calculation"><code class="docutils literal notranslate"><span class="pre">wannier_quality_calculation()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.vasp_calc_collinear"><code class="docutils literal notranslate"><span class="pre">vasp_calc_collinear()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -392,15 +366,15 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
   <section id="functions">
-<h1>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h1>
+<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">#</a></h1>
 <p>Support functions for spinWannier.</p>
-<p id="module-spinWannier.wannier_utils">Utility functions for the spinWannier package.</p>
-<dl class="py function">
+<p>Utility functions for the spinWannier package.</p>
+<span class="target" id="module-spinWannier.wannier_utils"></span><dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.S_xyz_expectation_values">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">S_xyz_expectation_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eigvecs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.S_xyz_expectation_values" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">S_xyz_expectation_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eigvecs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.S_xyz_expectation_values" title="Permalink to this definition">#</a></dt>
 <dd><p>For a k-space Hamiltonian Hk (function of kx and ky), calculate the eigen-energies and expectation values of spin Sx, Sy, Sz, at all the k-points in ‘kpoints’.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -420,7 +394,7 @@ document.write(`
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.W_gauge_to_H_gauge">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">W_gauge_to_H_gauge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">O_mn_k_W</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">U_mn_k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hamiltonian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.W_gauge_to_H_gauge" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">W_gauge_to_H_gauge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">O_mn_k_W_matrices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">U_mn_k_matrices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hamiltonian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.W_gauge_to_H_gauge" title="Permalink to this definition">#</a></dt>
 <dd><dl class="simple">
 <dt>Transform from Wannier gauge to Hamiltonian gauge, i.e., for every k-point either diagonalize Hamiltonian</dt><dd><p>or use the matrix from previous Hamiltonian diagonalization (‘U_mn_k’) to transform some other operator
 to H gauge.</p>
@@ -429,8 +403,8 @@ to H gauge.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>O_mn_k_W</strong> (<em>dict</em>) – The k-space operator dictionary in Wannier gauge.</p></li>
-<li><p><strong>U_mn_k</strong> (<em>dict</em>) – The unitary matrices which diagonalize the Hamiltonian for each k-point.</p></li>
+<li><p><strong>O_mn_k_W</strong> (<em>numpy array</em>) – The array (at all k-points) of k-space operators in Wannier gauge.</p></li>
+<li><p><strong>U_mn_k</strong> (<em>numpy array</em>) – The unitary matrices which diagonalize the Hamiltonian for each k-point.</p></li>
 <li><p><strong>hamiltonian</strong> (<em>bool</em>) – If True, the operator is Hamiltonian and the U_mn_k will be determined; for any other operator they have to be provided.</p></li>
 </ul>
 </dd>
@@ -445,7 +419,7 @@ to H gauge.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.band_with_spin_projection_under_threshold_for_kpoint">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">band_with_spin_projection_under_threshold_for_kpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbital_characters_considered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{0:</span> <span class="pre">[4,</span> <span class="pre">5,</span> <span class="pre">6,</span> <span class="pre">7,</span> <span class="pre">8],</span> <span class="pre">1:</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3],</span> <span class="pre">2:</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PROCAR_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PROCAR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_ions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_lowest_bands</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.band_with_spin_projection_under_threshold_for_kpoint" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">band_with_spin_projection_under_threshold_for_kpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbital_characters_considered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{0:</span> <span class="pre">[4,</span> <span class="pre">5,</span> <span class="pre">6,</span> <span class="pre">7,</span> <span class="pre">8],</span> <span class="pre">1:</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3],</span> <span class="pre">2:</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PROCAR_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PROCAR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_ions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_lowest_bands</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.band_with_spin_projection_under_threshold_for_kpoint" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the lowest band with the spin projection below the threshold for ‘kpoint’.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -469,7 +443,7 @@ to H gauge.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.check_file_exists">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">check_file_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.check_file_exists" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">check_file_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.check_file_exists" title="Permalink to this definition">#</a></dt>
 <dd><dl class="simple">
 <dt>Check if file exists. If yes, add him a number in parentheses that does not exist.</dt><dd><p>Return the new name.</p>
 </dd>
@@ -489,7 +463,7 @@ to H gauge.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.coerce_R_vectors_to_basic_supercell">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">coerce_R_vectors_to_basic_supercell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">R_tr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(-3,</span> <span class="pre">2,</span> <span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_mesh_ijk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(5,</span> <span class="pre">5,</span> <span class="pre">1)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.coerce_R_vectors_to_basic_supercell" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">coerce_R_vectors_to_basic_supercell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">R_tr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(-3,</span> <span class="pre">2,</span> <span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_mesh_ijk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(5,</span> <span class="pre">5,</span> <span class="pre">1)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.coerce_R_vectors_to_basic_supercell" title="Permalink to this definition">#</a></dt>
 <dd><p>wannier90_hr.dat has sometimes the R vectors shifted (probably to facilitate the
 ‘minimal replice’ interpolation. Therefore, given some uniform grid centered at zero
 (e.g. 5x5x1) and a translated R vectors from hr_dat file (e.g. (-3,2,0) ), we would like to get
@@ -516,7 +490,7 @@ Return a dictionary from the ‘hr_dat grid’ to the uniform grid.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.coerce_to_positive_angles">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">coerce_to_positive_angles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angles</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.coerce_to_positive_angles" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">coerce_to_positive_angles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angles</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.coerce_to_positive_angles" title="Permalink to this definition">#</a></dt>
 <dd><p>Coerce angles to be positive (i.e., in the range [0, 2pi]).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -533,7 +507,7 @@ Return a dictionary from the ‘hr_dat grid’ to the uniform grid.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.convert_wann_TB_model_for_QuT">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">convert_wann_TB_model_for_QuT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_in</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seedname_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'system'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">winfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.win'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wann_centres_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90_centres.xyz'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hr_R_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hr_R_dict.pickle'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spn_R_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spn_R_dict.pickle'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.convert_wann_TB_model_for_QuT" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">convert_wann_TB_model_for_QuT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_in</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seedname_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'system'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">winfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.win'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wann_centres_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90_centres.xyz'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hr_R_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hr_R_dict.pickle'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spn_R_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spn_R_dict.pickle'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.convert_wann_TB_model_for_QuT" title="Permalink to this definition">#</a></dt>
 <dd><dl class="simple">
 <dt>Convert the outputs of my wannier to TB to Joaquin’s code.</dt><dd><dl class="simple">
 <dt>Generates files</dt><dd><p>{system_name}_Mx{Mx:d}My{My:d}Mz{Mz:d}_E{E:.2f}.uc        ….   unit cell
@@ -559,7 +533,7 @@ Return a dictionary from the ‘hr_dat grid’ to the uniform grid.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.dict_to_matrix">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">dict_to_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_wann</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spin_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.dict_to_matrix" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">dict_to_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_wann</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spin_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.dict_to_matrix" title="Permalink to this definition">#</a></dt>
 <dd><p>Convert hr or spn dictionary to a matrix accepted by wannierBerri: first index is m, second n, third is the index of an R_vector from iRvec list.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -581,7 +555,7 @@ numpy array: The data matrix.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.eigenval_dict">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">eigenval_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eigenval_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.eig'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.win'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.eigenval_dict" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">eigenval_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eigenval_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.eig'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.win'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.eigenval_dict" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the eigenvalues as a dictionary with the keys being the k-point tuples.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -601,7 +575,7 @@ numpy array: The data matrix.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.eigenval_for_kpoint">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">eigenval_for_kpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eigenval_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.eig'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.win'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.eigenval_for_kpoint" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">eigenval_for_kpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eigenval_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.eig'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.win'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.eigenval_for_kpoint" title="Permalink to this definition">#</a></dt>
 <dd><dl class="simple">
 <dt>Return the eigenvalue at ‘kpoint’ and ‘band’.</dt><dd><p>!! kpoint must be one from the kpoints in the wannier90.win  file !!</p>
 </dd>
@@ -626,7 +600,7 @@ numpy array: The data matrix.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.fermi_surface_spin_texture">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">fermi_surface_spin_texture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints2D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands2D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Sx2D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Sy2D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Sz2D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_thr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiver_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scatter_for_quiver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scatter_size_quiver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scatter_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce_by_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmesh_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar_Sx_lim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-1,</span> <span class="pre">1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar_Sy_lim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-1,</span> <span class="pre">1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar_Sz_lim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-1,</span> <span class="pre">1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_points_for_one_angstrom_radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">120</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylim_margin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contour_for_quiver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contour_line_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrow_linewidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.005</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrow_head_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiver_angles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiver_scale_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inset_with_units_of_arrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_middle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.85,</span> <span class="pre">0.85,</span> <span class="pre">0.85,</span> <span class="pre">1.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">showfig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.fermi_surface_spin_texture" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">fermi_surface_spin_texture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints2D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands2D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Sx2D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Sy2D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Sz2D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_thr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiver_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scatter_for_quiver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scatter_size_quiver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scatter_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce_by_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmesh_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar_Sx_lim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-1,</span> <span class="pre">1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar_Sy_lim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-1,</span> <span class="pre">1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar_Sz_lim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-1,</span> <span class="pre">1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_points_for_one_angstrom_radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">120</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylim_margin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contour_for_quiver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contour_line_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrow_linewidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.005</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrow_head_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiver_angles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiver_scale_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inset_with_units_of_arrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_middle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.85,</span> <span class="pre">0.85,</span> <span class="pre">0.85,</span> <span class="pre">1.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">showfig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.fermi_surface_spin_texture" title="Permalink to this definition">#</a></dt>
 <dd><p>Plot scatter points with a spin texture on a constant energy xy surface (probably at E=EF)
 if the energy difference of each given point is lower than some threshold.
 If there is more such points, grab the one with minimum difference from the energy surface.</p>
@@ -677,7 +651,7 @@ bands2D: 2D array of shape (Nkpoints, Nbands)</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.files_wann90_to_dict_pickle">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">files_wann90_to_dict_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disentanglement</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.files_wann90_to_dict_pickle" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">files_wann90_to_dict_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disentanglement</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.files_wann90_to_dict_pickle" title="Permalink to this definition">#</a></dt>
 <dd><p>Convert wannier90 files to pickled dictionaries files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -697,7 +671,7 @@ bands2D: 2D array of shape (Nkpoints, Nbands)</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.get_2D_kpoint_mesh">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">get_2D_kpoint_mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-0.5,</span> <span class="pre">0.5]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.get_2D_kpoint_mesh" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">get_2D_kpoint_mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-0.5,</span> <span class="pre">0.5]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.get_2D_kpoint_mesh" title="Permalink to this definition">#</a></dt>
 <dd><p>Get a 2D mesh of k-points in the reciprocal space.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -719,7 +693,7 @@ list of tuples: The k-points in the Cartesian space.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.get_DFT_kgrid">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">get_DFT_kgrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.win'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.get_DFT_kgrid" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">get_DFT_kgrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.win'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.get_DFT_kgrid" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the ‘mp_grid’ from wannier90.win file which tells the k-grid used in the DFT calculation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -736,7 +710,7 @@ list of tuples: The k-points in the Cartesian space.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.get_kpoint_names">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">get_kpoint_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fwin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.win'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.get_kpoint_names" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">get_kpoint_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fwin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.win'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.get_kpoint_names" title="Permalink to this definition">#</a></dt>
 <dd><p>Parse wannier90.win file to get k-point names as a list of tuples.
 The k-point names are in the ‘begin kpoints’ and ‘end kpoints’ section.</p>
 <dl class="field-list simple">
@@ -754,7 +728,7 @@ The k-point names are in the ‘begin kpoints’ and ‘end kpoints’ section.<
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.get_kpoint_path">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">get_kpoint_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoint_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.get_kpoint_path" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">get_kpoint_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoint_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.get_kpoint_path" title="Permalink to this definition">#</a></dt>
 <dd><p>Interpolate between kpoints in the kpoint_matrix to obtain a k-point path with Nk points in each segment.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -777,7 +751,7 @@ list of floats: The k-point distance position.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.get_skiprows_hr_dat">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">get_skiprows_hr_dat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90_hr.dat'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.get_skiprows_hr_dat" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">get_skiprows_hr_dat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90_hr.dat'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.get_skiprows_hr_dat" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the number of skiprows in wannier90_hr.dat file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -794,7 +768,7 @@ list of floats: The k-point distance position.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.hr_wann90_to_dict">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">hr_wann90_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fin_wannier90</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90_hr.dat'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.hr_wann90_to_dict" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">hr_wann90_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fin_wannier90</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90_hr.dat'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.hr_wann90_to_dict" title="Permalink to this definition">#</a></dt>
 <dd><p>Convert wannier90 hr.dat to dictionary in the form that we are using: R vectors as keys
 and hopping as a complex number matrix as the values.</p>
 <dl class="field-list simple">
@@ -812,7 +786,7 @@ and hopping as a complex number matrix as the values.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.interpolate_operator">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">interpolate_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operator_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u_dis_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latt_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reciprocal_latt_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">U_mn_k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hamiltonian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[(0,</span> <span class="pre">0,</span> <span class="pre">0)]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_real_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">real_space_fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hr_R_dict.dat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./tb_model_wann90/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_as_pickle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.interpolate_operator" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">interpolate_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operator_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u_dis_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latt_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reciprocal_latt_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">U_mn_k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hamiltonian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[(0,</span> <span class="pre">0,</span> <span class="pre">0)]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_real_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">real_space_fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hr_R_dict.dat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./tb_model_wann90/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_as_pickle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.interpolate_operator" title="Permalink to this definition">#</a></dt>
 <dd><dl class="simple">
 <dt>Takes operator O (Hamiltonian, spin-operator …) evaluated on a coarse DFT k-mesh and Hamiltonian eigenstates onto ‘kpoints’ using the</dt><dd><ol class="arabic simple">
 <li><p>(semi)unitary transformation defined by U_dis*U from the Hamiltonian gauge (eigenstate gauge)
@@ -851,7 +825,7 @@ to the Wannier gauge,</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.load_dict">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">load_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spn_dict.pickle'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.load_dict" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">load_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spn_dict.pickle'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.load_dict" title="Permalink to this definition">#</a></dt>
 <dd><p>If not text_file, than it’s binary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -873,7 +847,7 @@ spn_dict.dat / hr_R_dict.dat / u_dict.dat / u_dis_dict.dat</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.load_eigenvals">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">load_eigenvals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eigenval_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.eig'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.load_eigenvals" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">load_eigenvals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eigenval_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.eig'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.load_eigenvals" title="Permalink to this definition">#</a></dt>
 <dd><p>Parse the wannier90 .eig file to get the k-point and band-resolved eigenvalues.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -890,7 +864,7 @@ spn_dict.dat / hr_R_dict.dat / u_dict.dat / u_dis_dict.dat</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.load_lattice_vectors">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">load_lattice_vectors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">win_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.win'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.load_lattice_vectors" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">load_lattice_vectors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">win_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.win'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.load_lattice_vectors" title="Permalink to this definition">#</a></dt>
 <dd><p>Return a 3x3 matrix where 1st row is the 1st lattice vector etc.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -907,7 +881,7 @@ spn_dict.dat / hr_R_dict.dat / u_dict.dat / u_dis_dict.dat</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.magmom_OOP_or_IP">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">magmom_OOP_or_IP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">INCAR_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.magmom_OOP_or_IP" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">magmom_OOP_or_IP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">INCAR_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.magmom_OOP_or_IP" title="Permalink to this definition">#</a></dt>
 <dd><p>Return True if MAGMOM in INCAR_path lies purely OOP, else return False.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -924,7 +898,7 @@ spn_dict.dat / hr_R_dict.dat / u_dict.dat / u_dis_dict.dat</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.magmom_direction">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">magmom_direction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">INCAR_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.magmom_direction" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">magmom_direction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">INCAR_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.magmom_direction" title="Permalink to this definition">#</a></dt>
 <dd><p>Return 0 / 1 / 2  if spin is along x / y / z direction, respectively.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -941,7 +915,7 @@ spn_dict.dat / hr_R_dict.dat / u_dict.dat / u_dis_dict.dat</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.material_name_to_latex">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">material_name_to_latex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.material_name_to_latex" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">material_name_to_latex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.material_name_to_latex" title="Permalink to this definition">#</a></dt>
 <dd><p>Convert the material name to LaTeX format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -958,7 +932,7 @@ spn_dict.dat / hr_R_dict.dat / u_dict.dat / u_dis_dict.dat</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.matrix_to_dict">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">matrix_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rvecs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spin_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spin_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['x',</span> <span class="pre">'y',</span> <span class="pre">'z']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.matrix_to_dict" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">matrix_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rvecs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spin_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spin_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['x',</span> <span class="pre">'y',</span> <span class="pre">'z']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.matrix_to_dict" title="Permalink to this definition">#</a></dt>
 <dd><dl class="simple">
 <dt>Convert data matrix (e.g. the Ham_R or SS_R file from symmetrization) into a dictionary with</dt><dd><p>lattice vectors as keys and if spin_index is True then also (‘x’, ‘y’, ‘z’) for spin.</p>
 </dd>
@@ -983,7 +957,7 @@ spn_dict.dat / hr_R_dict.dat / u_dict.dat / u_dis_dict.dat</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.operator_exp_values">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">operator_exp_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eigvecs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Operator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.operator_exp_values" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">operator_exp_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eigvecs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Operator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.operator_exp_values" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the expectation values of Operator (an N x N matrix, where N is the size of the eigenvectors) for all eigenvectors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1000,7 +974,7 @@ spn_dict.dat / hr_R_dict.dat / u_dict.dat / u_dis_dict.dat</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.outer">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">outer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.outer" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">outer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.outer" title="Permalink to this definition">#</a></dt>
 <dd><p>Outer product between a 2x2 spin matrix and a general orbital nxn M matrix,
 so that the spin blocks are the big blocks.</p>
 <dl class="field-list simple">
@@ -1021,7 +995,7 @@ so that the spin blocks are the big blocks.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.outer2">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">outer2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.outer2" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">outer2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.outer2" title="Permalink to this definition">#</a></dt>
 <dd><p>Works for s matrix of any dimension, but slower than ‘outer(s, M)’
 Outer product between a nxn spin matrix and a general orbital nxn M matrix,
 so that the spin blocks are the big blocks.</p>
@@ -1043,7 +1017,7 @@ so that the spin blocks are the big blocks.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.parse_KPOINTS_file">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">parse_KPOINTS_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">KPOINTS_file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.parse_KPOINTS_file" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">parse_KPOINTS_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">KPOINTS_file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.parse_KPOINTS_file" title="Permalink to this definition">#</a></dt>
 <dd><p>Parse the KPOINTS file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1060,7 +1034,7 @@ so that the spin blocks are the big blocks.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.plot_bands_spin_texture">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">plot_bands_spin_texture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpath_ticks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Eigs_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spin_texture_1D_home_made.jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_caption</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Wannier</span> <span class="pre">interpolation'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis_lim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-5,</span> <span class="pre">5]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">showfig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.plot_bands_spin_texture" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">plot_bands_spin_texture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpath_ticks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Eigs_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NW</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spin_texture_1D_home_made.jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_caption</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Wannier</span> <span class="pre">interpolation'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis_lim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-5,</span> <span class="pre">5]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">showfig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.plot_bands_spin_texture" title="Permalink to this definition">#</a></dt>
 <dd><p>Output a figure with Sx, Sy, and Sz-projected band structure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1085,7 +1059,7 @@ so that the spin blocks are the big blocks.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.read_PROCAR_lines_for_kpoint">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">read_PROCAR_lines_for_kpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PROCAR_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PROCAR'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.read_PROCAR_lines_for_kpoint" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">read_PROCAR_lines_for_kpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PROCAR_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PROCAR'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.read_PROCAR_lines_for_kpoint" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the section of PROCAR belonging to the first occurence of ‘kpoint’ in PROCAR_file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1105,7 +1079,7 @@ so that the spin blocks are the big blocks.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.real_space_grid_from_hr_dat">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">real_space_grid_from_hr_dat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90_hr.dat'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.real_space_grid_from_hr_dat" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">real_space_grid_from_hr_dat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90_hr.dat'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.real_space_grid_from_hr_dat" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the real-space grid from the seedname_hr.dat file.
 See Pizzi 2020 Sec. 4.2.</p>
 <dl class="field-list simple">
@@ -1123,7 +1097,7 @@ See Pizzi 2020 Sec. 4.2.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.real_to_W_gauge">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">real_to_W_gauge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">O_mn_R_W</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.real_to_W_gauge" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">real_to_W_gauge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">O_mn_R_W</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.real_to_W_gauge" title="Permalink to this definition">#</a></dt>
 <dd><p>Perform inverse Fourier transformation from real-space operator to k-space in Wannier gauge.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1143,7 +1117,7 @@ See Pizzi 2020 Sec. 4.2.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.real_to_W_gauge_accelerated">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">real_to_W_gauge_accelerated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">O_mn_R_W</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.real_to_W_gauge_accelerated" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">real_to_W_gauge_accelerated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">O_mn_R_W</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.real_to_W_gauge_accelerated" title="Permalink to this definition">#</a></dt>
 <dd><p>Perform inverse Fourier transformation from real-space operator to k-space in Wannier gauge.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1153,17 +1127,17 @@ See Pizzi 2020 Sec. 4.2.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The k-space operator dictionary.</p>
+<dd class="field-even"><p>Array of O_mn matrices.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p>numpy array</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.reciprocal_lattice_vectors">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">reciprocal_lattice_vectors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">real_space_lattice_vector_matrix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.reciprocal_lattice_vectors" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">reciprocal_lattice_vectors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">real_space_lattice_vector_matrix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.reciprocal_lattice_vectors" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the reciprocal lattice vectors from the real-space lattice vectors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1180,7 +1154,7 @@ See Pizzi 2020 Sec. 4.2.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.replace_middle_of_cmap_with_custom_color">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">replace_middle_of_cmap_with_custom_color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color_middle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.85,</span> <span class="pre">0.85,</span> <span class="pre">0.85,</span> <span class="pre">1.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">middle_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.replace_middle_of_cmap_with_custom_color" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">replace_middle_of_cmap_with_custom_color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color_middle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.85,</span> <span class="pre">0.85,</span> <span class="pre">0.85,</span> <span class="pre">1.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">middle_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.replace_middle_of_cmap_with_custom_color" title="Permalink to this definition">#</a></dt>
 <dd><p>Replace the middle of the colormap with a custom color.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1200,7 +1174,7 @@ See Pizzi 2020 Sec. 4.2.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.save_bands_and_spin_texture">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">save_bands_and_spin_texture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints_rec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpoints_cart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Eigs_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmesh_2D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bands_spin.pickle'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./tb_model_wann90/'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.save_bands_and_spin_texture" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">save_bands_and_spin_texture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints_rec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpoints_cart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Eigs_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmesh_2D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bands_spin.pickle'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./tb_model_wann90/'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.save_bands_and_spin_texture" title="Permalink to this definition">#</a></dt>
 <dd><p>Save the bands and spin texture information for given kpoints.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1222,7 +1196,7 @@ See Pizzi 2020 Sec. 4.2.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.save_bands_and_spin_texture_old">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">save_bands_and_spin_texture_old</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints_rec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpoints_cart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Eigs_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmesh_2D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bands_spin.pickle'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./tb_model_wann90/'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.save_bands_and_spin_texture_old" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">save_bands_and_spin_texture_old</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints_rec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpoints_cart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Eigs_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_mn_k_H_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmesh_2D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bands_spin.pickle'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./tb_model_wann90/'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.save_bands_and_spin_texture_old" title="Permalink to this definition">#</a></dt>
 <dd><p>Save the bands and spin texture information for given kpoints.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1244,12 +1218,12 @@ See Pizzi 2020 Sec. 4.2.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.selected_band_plot">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">selected_band_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.selected_band_plot" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">selected_band_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.selected_band_plot" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.split_spn_dict">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">split_spn_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spn_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spin_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['x',</span> <span class="pre">'y',</span> <span class="pre">'z']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.split_spn_dict" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">split_spn_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spn_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spin_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['x',</span> <span class="pre">'y',</span> <span class="pre">'z']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.split_spn_dict" title="Permalink to this definition">#</a></dt>
 <dd><dl class="simple">
 <dt>Split dictionary with keys as ((Rx, Ry, Rz), spin_component_name) to three dictionaries</dt><dd><p>with keys as (Rx, Ry, Rz).</p>
 </dd>
@@ -1274,7 +1248,7 @@ dict: The dictionary with R vectors as keys and hopping as a complex number matr
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.spn_to_dict">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">spn_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.win'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.spn'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formatted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spn_dict.pickle'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_as_text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.spn_to_dict" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">spn_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.win'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.spn'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formatted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spn_dict.pickle'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_as_text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.spn_to_dict" title="Permalink to this definition">#</a></dt>
 <dd><p>Convert wannier90.spn file to a dictionary object and save as pickle.
 If ‘text_file’ == True, then save as a human-readable text file.</p>
 <dl class="field-list simple">
@@ -1299,7 +1273,7 @@ If ‘text_file’ == True, then save as a human-readable text file.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.u_to_dict">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">u_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90_u.mat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'u_dict.pickle'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_sparse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.u_to_dict" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">u_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90_u.mat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'u_dict.pickle'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_sparse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.u_to_dict" title="Permalink to this definition">#</a></dt>
 <dd><p>Convert _u.mat from wannier90 to pickled python dictionary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1321,7 +1295,7 @@ If ‘text_file’ == True, then save as a human-readable text file.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.uniform_real_space_grid">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">uniform_real_space_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">R_mesh_ijk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(5,</span> <span class="pre">5,</span> <span class="pre">1)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.uniform_real_space_grid" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">uniform_real_space_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">R_mesh_ijk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(5,</span> <span class="pre">5,</span> <span class="pre">1)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.uniform_real_space_grid" title="Permalink to this definition">#</a></dt>
 <dd><dl class="simple">
 <dt>From the maxima in each direction, make a regular mesh</dt><dd><p>(-R_max_i, +R_max_i) x (-R_max_j, +R_max_j) x (-R_max_k, +R_max_k).</p>
 </dd>
@@ -1341,7 +1315,7 @@ If ‘text_file’ == True, then save as a human-readable text file.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.unite_spn_dict">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">unite_spn_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spn_x_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spn_y_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spn_z_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spin_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['x',</span> <span class="pre">'y',</span> <span class="pre">'z']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.unite_spn_dict" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">unite_spn_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spn_x_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spn_y_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spn_z_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spin_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['x',</span> <span class="pre">'y',</span> <span class="pre">'z']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.unite_spn_dict" title="Permalink to this definition">#</a></dt>
 <dd><dl class="simple">
 <dt>Unite dictionary with keys as (Rx, Ry, Rz) to three dictionaries</dt><dd><p>with keys as ((Rx, Ry, Rz), spin_component_name).</p>
 </dd>
@@ -1366,7 +1340,7 @@ If ‘text_file’ == True, then save as a human-readable text file.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_utils.wannier_energy_windows">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">wannier_energy_windows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wann_bands_lims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eigenval_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.eig'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.wannier_energy_windows" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_utils.</span></span><span class="sig-name descname"><span class="pre">wannier_energy_windows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wann_bands_lims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eigenval_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.eig'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_utils.wannier_energy_windows" title="Permalink to this definition">#</a></dt>
 <dd><p>Get energy window limits for wannierization.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1385,10 +1359,10 @@ If ‘text_file’ == True, then save as a human-readable text file.</p>
 </dl>
 </dd></dl>
 
-<p id="module-spinWannier.wannier_quality_utils">Utility functions for the wannier_quality method of the spinWannier.WannierTBmodel.WannierTBmodel class.</p>
-<dl class="py function">
+<p>Utility functions for the wannier_quality method of the spinWannier.WannierTBmodel.WannierTBmodel class.</p>
+<span class="target" id="module-spinWannier.wannier_quality_utils"></span><dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.compare_eigs_bandstructure_at_exact_kpts">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">compare_eigs_bandstructure_at_exact_kpts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dft_bands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wann_bands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_kpoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_wann</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_name_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'WannierBerri_quality_error_Fermi_corrected.dat'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.compare_eigs_bandstructure_at_exact_kpts" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">compare_eigs_bandstructure_at_exact_kpts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dft_bands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wann_bands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_kpoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_wann</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_name_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'WannierBerri_quality_error_Fermi_corrected.dat'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.compare_eigs_bandstructure_at_exact_kpts" title="Permalink to this definition">#</a></dt>
 <dd><p>Compare the DFT and Wannierized band structures at the exact k-points.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1411,7 +1385,7 @@ If ‘text_file’ == True, then save as a human-readable text file.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.duplicate_kpoints_for_home_made">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">duplicate_kpoints_for_home_made</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NK</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.duplicate_kpoints_for_home_made" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">duplicate_kpoints_for_home_made</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NK</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.duplicate_kpoints_for_home_made" title="Permalink to this definition">#</a></dt>
 <dd><p>Duplicate also the last k-point (in  dictionary the keys are unique, so actually the data in the dictionaries where keys are k-points contain only one of each k-point, so if k-path starts and ends with the same k-point, only the first one is recorded.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1431,7 +1405,7 @@ If ‘text_file’ == True, then save as a human-readable text file.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.get_NKpoints">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">get_NKpoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">OUTCAR</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'OUTCAR'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.get_NKpoints" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">get_NKpoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">OUTCAR</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'OUTCAR'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.get_NKpoints" title="Permalink to this definition">#</a></dt>
 <dd><p>Return number of kpoints from bands calculation from OUTCAR.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1448,7 +1422,7 @@ If ‘text_file’ == True, then save as a human-readable text file.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.get_band_at_kpoint_from_EIGENVAL">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">get_band_at_kpoint_from_EIGENVAL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">EIGENVAL_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./EIGENVAL'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_kpoint_string</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.get_band_at_kpoint_from_EIGENVAL" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">get_band_at_kpoint_from_EIGENVAL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">EIGENVAL_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./EIGENVAL'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_kpoint_string</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.get_band_at_kpoint_from_EIGENVAL" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the energy of the target_band at the target_kpoint from the EIGENVAL file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1469,7 +1443,7 @@ If ‘text_file’ == True, then save as a human-readable text file.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.get_fermi">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">get_fermi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.get_fermi" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">get_fermi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.get_fermi" title="Permalink to this definition">#</a></dt>
 <dd><p>Extract Fermi energy from the DOSCAR file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1486,7 +1460,7 @@ If ‘text_file’ == True, then save as a human-readable text file.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.get_fermi_corrected_by_matching_bands">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">get_fermi_corrected_by_matching_bands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsc_calculation_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'../0_nsc_for_wann_25x25_frozmaxmargin_0.2eV'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corrected_at_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corrected_at_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sc_calculation_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'../sc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'FERMI_ENERGY_corrected.in'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.get_fermi_corrected_by_matching_bands" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">get_fermi_corrected_by_matching_bands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsc_calculation_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'../0_nsc_for_wann_25x25_frozmaxmargin_0.2eV'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corrected_at_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corrected_at_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sc_calculation_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'../sc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'FERMI_ENERGY_corrected.in'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.get_fermi_corrected_by_matching_bands" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the Fermi energy from the self-consistent calculation and correct it so that the band at the target_kpoint and target_band is at the same energy in the non-self-consistent calculation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1510,7 +1484,7 @@ If ‘text_file’ == True, then save as a human-readable text file.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.get_frozen_window_min_max">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">get_frozen_window_min_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wannier90winfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.win'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.get_frozen_window_min_max" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">get_frozen_window_min_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wannier90winfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier90.win'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.get_frozen_window_min_max" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the frozen window min and max from the wannier90.win file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1528,7 +1502,7 @@ float: Frozen window max.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.integrate_error">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">integrate_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error_by_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.integrate_error" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">integrate_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error_by_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.integrate_error" title="Permalink to this definition">#</a></dt>
 <dd><p>Integrate the error in ‘f_name_in’ in the energy range [E_min, E_max] included.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1549,7 +1523,7 @@ float: Frozen window max.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.parse_eigenval_file">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">parse_eigenval_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.parse_eigenval_file" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">parse_eigenval_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.parse_eigenval_file" title="Permalink to this definition">#</a></dt>
 <dd><p>Parse the EIGENVAL file and return the kpoints, bands, number of kpoints, and number of bands.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1572,7 +1546,7 @@ int: number of bands.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.plot_err_vs_bands">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">plot_err_vs_bands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpath_ticks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Eigs_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_diff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_diff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ERRORS_ALL_band_structure.jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis_lim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">showfig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.plot_err_vs_bands" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">plot_err_vs_bands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpath_ticks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Eigs_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_diff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_diff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NW</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ERRORS_ALL_band_structure.jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis_lim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">showfig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.plot_err_vs_bands" title="Permalink to this definition">#</a></dt>
 <dd><p>Output a figure with RMSE_E, RMSE_Sx, RMSE_Sy, and RMSE_Sz-projected band structure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1594,7 +1568,7 @@ int: number of bands.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.plot_err_vs_energy">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">plot_err_vs_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error_by_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Wannierization</span> <span class="pre">RMS</span> <span class="pre">error</span> <span class="pre">vs.</span> <span class="pre">energy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_name_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier_quality_error_by_energy.png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">showfig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.plot_err_vs_energy" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">plot_err_vs_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error_by_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Wannierization</span> <span class="pre">RMS</span> <span class="pre">error</span> <span class="pre">vs.</span> <span class="pre">energy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_name_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wannier_quality_error_by_energy.png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">showfig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.plot_err_vs_energy" title="Permalink to this definition">#</a></dt>
 <dd><p>Plot the error vs. energy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1611,52 +1585,18 @@ int: number of bands.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.wannier_quality_calculation">
-<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">wannier_quality_calculation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kpoint_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NK</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpath_ticks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Fermi_nsc_wann</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_wann</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discard_first_bands</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sc_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0_self-consistent'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsc_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1_non-self-consistent'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wann_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2_wannier'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1_band_structure'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tb_model_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2_wannier/tb_model_wann90'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band_for_Fermi_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpoint_for_Fermi_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00</span>&#160; <span class="pre">0.0000000E+00'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis_lim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">showfig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.wannier_quality_calculation" title="Link to this definition">#</a></dt>
-<dd><p>Calculate the quality of the Wannierization.</p>
-<p>Needed files from VASP:</p>
-<blockquote>
-<div><dl class="simple">
-<dt>= nsc_calculation_path:</dt><dd><ul class="simple">
-<li><p>EIGENVAL</p></li>
-<li><p>DOSCAR</p></li>
-</ul>
-</dd>
-<dt>= dft_bands_folder:</dt><dd><ul class="simple">
-<li><p>EIGENVAL</p></li>
-<li><p>“Sxyz_exp_values_from_spn_file.dat” (get automatically from wannier90.spn_formatted!!)</p></li>
-<li><p>OUTCAR</p></li>
-</ul>
-</dd>
-</dl>
-</div></blockquote>
+<dt class="sig sig-object py" id="spinWannier.wannier_quality_utils.vasp_calc_collinear">
+<span class="sig-prename descclassname"><span class="pre">spinWannier.wannier_quality_utils.</span></span><span class="sig-name descname"><span class="pre">vasp_calc_collinear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">EIGENVAL_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./EIGENVAL'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#spinWannier.wannier_quality_utils.vasp_calc_collinear" title="Permalink to this definition">#</a></dt>
+<dd><p>Get the N_eig from the EIGENVAL file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>kpoint_matrix</strong> (<em>np.array</em>) – K-point matrix.</p></li>
-<li><p><strong>NK</strong> (<em>int</em>) – Number of k-points.</p></li>
-<li><p><strong>kpath_ticks</strong> (<em>list</em>) – K-path ticks.</p></li>
-<li><p><strong>Fermi_nsc_wann</strong> (<em>float</em>) – Fermi energy in the non-self-consistent calculation.</p></li>
-<li><p><strong>num_wann</strong> (<em>int</em>) – Number of Wannierized bands.</p></li>
-<li><p><strong>discard_first_bands</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of bands to discard. Defaults to 0.</p></li>
-<li><p><strong>sc_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the self-consistent calculation directory. Defaults to ‘0_self-consistent’.</p></li>
-<li><p><strong>nsc_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the non-self-consistent calculation directory. Defaults to ‘1_non-self-consistent’.</p></li>
-<li><p><strong>wann_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the Wannier calculation directory. Defaults to ‘2_wannier’.</p></li>
-<li><p><strong>bands_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the bands calculation directory. Defaults to ‘1_band_structure’.</p></li>
-<li><p><strong>tb_model_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the wannier90.tb_model directory. Defaults to ‘2_wannier/tb_model_wann90’.</p></li>
-<li><p><strong>band_for_Fermi_correction</strong> (<em>int</em><em>, </em><em>optional</em>) – Band for Fermi correction. Defaults to None.</p></li>
-<li><p><strong>kpoint_for_Fermi_correction</strong> (<em>str</em><em>, </em><em>optional</em>) – K-point for Fermi correction. Defaults to ‘0.0000000E+00  0.0000000E+00  0.0000000E+00’.</p></li>
-<li><p><strong>output_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Output directory. Defaults to ‘./’.</p></li>
-<li><p><strong>yaxis_lim</strong> (<em>list</em><em>, </em><em>optional</em>) – Y-axis limits. Defaults to None.</p></li>
-<li><p><strong>savefig</strong> (<em>bool</em><em>, </em><em>optional</em>) – Save the figure. Defaults to True.</p></li>
-<li><p><strong>showfig</strong> (<em>bool</em><em>, </em><em>optional</em>) – Show the figure. Defaults to True.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>EIGENVAL_path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the EIGENVAL file. Defaults to ‘./EIGENVAL’.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Error by energy.</p>
+<dd class="field-even"><p>N_eig (1 - non-spin-polarized, 2 - spin-polarized).</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>np.array</p>
+<dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1669,10 +1609,11 @@ int: number of bands.</p>
 
               
               
-              
-              
-                <footer class="prev-next-footer d-print-none">
+                <footer class="bd-footer-article">
                   
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="classes.html"
@@ -1683,7 +1624,10 @@ int: number of bands.</p>
         <p class="prev-next-title">Classes</p>
       </div>
     </a>
+</div></div>
+  
 </div>
+
                 </footer>
               
             </div>
@@ -1691,7 +1635,6 @@ int: number of bands.</p>
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1756,7 +1699,7 @@ int: number of bands.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.parse_eigenval_file"><code class="docutils literal notranslate"><span class="pre">parse_eigenval_file()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.plot_err_vs_bands"><code class="docutils literal notranslate"><span class="pre">plot_err_vs_bands()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.plot_err_vs_energy"><code class="docutils literal notranslate"><span class="pre">plot_err_vs_energy()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.wannier_quality_calculation"><code class="docutils literal notranslate"><span class="pre">wannier_quality_calculation()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinWannier.wannier_quality_utils.vasp_calc_collinear"><code class="docutils literal notranslate"><span class="pre">vasp_calc_collinear()</span></code></a></li>
 </ul>
   </nav></div>
 
@@ -1778,7 +1721,6 @@ By Libor Vojáček
   
   <div class="footer-item">
     
-
   <p class="copyright">
     
       © Copyright 2024, Libor Vojáček.
@@ -1805,8 +1747,8 @@ By Libor Vojáček
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
   <footer class="bd-footer">
   </footer>
