@@ -4,11 +4,6 @@
 .. automodule:: spinWannier.wannier_utils
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -60,15 +55,3 @@
       unite_spn_dict
       wannier_energy_windows
    
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-

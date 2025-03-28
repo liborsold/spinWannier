@@ -4,11 +4,6 @@
 .. automodule:: spinWannier.wannier_quality_utils
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -26,15 +21,3 @@
       plot_err_vs_energy
       vasp_calc_collinear
    
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-
