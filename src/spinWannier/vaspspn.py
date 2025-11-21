@@ -55,7 +55,7 @@ def vasp_to_spn(fin='WAVECAR', fout='wannier90.spn', NBout=0, IBstart=1, normali
     WAV = open(fin, "rb")
     RECL = 3
 
-    def record(irec, cnt=np.Inf, dtype=float):
+    def record(irec, cnt=np.inf, dtype=float):
         WAV.seek(irec * RECL)
         return np.fromfile(WAV, dtype=dtype, count=min(RECL, cnt))
 

@@ -117,12 +117,12 @@ class WannierTBmodel:
         self.spin_polarized = spin_polarized
 
         # ensure that directories have a backslash at the end
-        if sc_dir[-1] != "/": sc_dir += "/"
-        if nsc_dir[-1] != "/": nsc_dir += "/"
-        if wann_dir[-1] != "/": wann_dir += "/"
-        if bands_dir[-1] != "/": bands_dir += "/"
-        if tb_model_dir_in_output_dir[-1] != "/": tb_model_dir_in_output_dir += "/"
-        if output_dir[-1] != "/": output_dir += "/"
+        if sc_dir is not None and sc_dir[-1] != "/": sc_dir += "/"
+        if nsc_dir is not None and nsc_dir[-1] != "/": nsc_dir += "/"
+        if wann_dir is not None and wann_dir[-1] != "/": wann_dir += "/"
+        if bands_dir is not None and bands_dir[-1] != "/": bands_dir += "/"
+        if tb_model_dir_in_output_dir is not None and tb_model_dir_in_output_dir[-1] != "/": tb_model_dir_in_output_dir += "/"
+        if output_dir is not None and output_dir[-1] != "/": output_dir += "/"
 
         self.output_dir = output_dir
 
@@ -183,55 +183,55 @@ class WannierTBmodel:
                 write_sparse=False,
             )
 
-        if num_bands_from_u != num_bands or num_wann_from_u != num_wann:
-            print(
-                "The number of bands or wannier functions in the u.mat files do not match the number of bands or wannier functions in the wannier90.win file."
-            )
-            print("Please check the u.mat files.")
-            exit(1)
+        # if num_bands_from_u != num_bands or num_wann_from_u != num_wann:
+        #     print(
+        #         f"Discrepancy in the number of bands {num_bands_from_u} != {num_bands} or the wannier functions {num_wann_from_u} != {num_wann} between the dis_u.mat file and the wannier90.win file, respectively."
+        #     )
+        #     print("Please check the u.mat and u_dis.mat files.")
+        #     exit(1)
 
-            if spin_polarized is True:
-                # check if wannier90.spn_formatted exists; if not, generated it from WAVECAR
-                if not exists(wann_dir + f"{seedname}.{spn_file_extension}"):
-                    print(
-                        f"{seedname}.{spn_file_extension} does not exist. Generating it from WAVECAR."
-                    )
-                    # generate wannier90.spn_formatted from WAVECAR
-                    if not exists(nsc_dir + "WAVECAR"):
-                        print(f"WAVECAR does not exist in {nsc_dir}.")
-                        print(
-                            f"Please provide the WAVECAR file to generate {seedname}.{spn_file_extension}."
-                        )
-                        exit(1)
-                    else:
-                        if spn_formatted is False:
-                            print("Generating wannier90.spn from WAVECAR.")
-                            vasp_to_spn(
-                                formatted=False,
-                                fin=nsc_dir + "WAVECAR",
-                                fout=wann_dir + f"{seedname}.spn",
-                                NBout=self.NW_dis,
-                                IBstart=discard_first_bands + 1,
-                            )
-                        elif spn_formatted is True:
-                            print("Generating wannier90.spn_formatted from WAVECAR.")
-                            vasp_to_spn(
-                                formatted=True,
-                                fin=nsc_dir + "WAVECAR",
-                                fout=wann_dir + f"{seedname}.spn_formatted",
-                                NBout=self.NW_dis,
-                                IBstart=discard_first_bands + 1,
-                            )
-
-                # convert wannier90.spn to a pickled dictionary
-                spn_to_dict(
-                    model_dir=wann_dir,
-                    fwin=f"{seedname}.win",
-                    fin=f"{seedname}.{spn_file_extension}",
-                    formatted=spn_formatted,
+        if spin_polarized is True:
+            # check if wannier90.spn_formatted exists; if not, generated it from WAVECAR
+            if not exists(wann_dir + f"{seedname}.{spn_file_extension}"):
+                print(
+                    f"{seedname}.{spn_file_extension} does not exist. Generating it from WAVECAR."
                 )
-                
-                spn_dict = load_dict(fin=wann_dir + "spn_dict.pickle")
+                # generate wannier90.spn_formatted from WAVECAR
+                if not exists(nsc_dir + "WAVECAR"):
+                    print(f"WAVECAR does not exist in {nsc_dir}.")
+                    print(
+                        f"Please provide the WAVECAR file to generate {seedname}.{spn_file_extension}."
+                    )
+                    exit(1)
+                else:
+                    if spn_formatted is False:
+                        print("Generating wannier90.spn from WAVECAR.")
+                        vasp_to_spn(
+                            formatted=False,
+                            fin=nsc_dir + "WAVECAR",
+                            fout=wann_dir + f"{seedname}.spn",
+                            NBout=self.NW_dis,
+                            IBstart=discard_first_bands + 1,
+                        )
+                    elif spn_formatted is True:
+                        print("Generating wannier90.spn_formatted from WAVECAR.")
+                        vasp_to_spn(
+                            formatted=True,
+                            fin=nsc_dir + "WAVECAR",
+                            fout=wann_dir + f"{seedname}.spn_formatted",
+                            NBout=self.NW_dis,
+                            IBstart=discard_first_bands + 1,
+                        )
+
+            # convert wannier90.spn to a pickled dictionary
+            spn_to_dict(
+                model_dir=wann_dir,
+                fwin=f"{seedname}.win",
+                fin=f"{seedname}.{spn_file_extension}",
+                formatted=spn_formatted,
+            )
+            
+            spn_dict = load_dict(fin=wann_dir + "spn_dict.pickle")
 
         eig_dict = eigenval_dict(
             eigenval_file=wann_dir + f"{seedname}.eig",
@@ -250,14 +250,20 @@ class WannierTBmodel:
         # calculate the Fermi level
         # get Fermi for the wannier non-self-consistent calculation
         EF_nsc_fout = "FERMI_ENERGY_corrected.in"
-        self.EF_nsc = get_fermi_corrected_by_matching_bands(
-            nsc_calculation_path=nsc_dir,
-            corrected_at_kpoint=kpoint_for_Fermi_correction,
-            corrected_at_band=band_for_Fermi_correction,
-            sc_calculation_path=sc_dir,
-            fout_name=EF_nsc_fout,
-        )
-        if verbose: print(f'Calculated Fermi level: {self.EF_nsc:.3f} eV saved to {nsc_dir}{EF_nsc_fout}')
+        if sc_dir is None or nsc_dir is None:
+            print("sc_dir or nsc_dir is None. Skipping Fermi level calculation.")
+            self.EF_nsc = float(np.loadtxt(wann_dir + "FERMI_ENERGY.in"))
+            if verbose: print(f"Fermi level read from {wann_dir + 'FERMI_ENERGY.in'}: {self.EF_nsc:.3f} eV")
+        else:
+            if verbose: print("Calculating the Fermi level corrected by matching bands...")
+            self.EF_nsc = get_fermi_corrected_by_matching_bands(
+                nsc_calculation_path=nsc_dir,
+                corrected_at_kpoint=kpoint_for_Fermi_correction,
+                corrected_at_band=band_for_Fermi_correction,
+                sc_calculation_path=sc_dir,
+                fout_name=EF_nsc_fout,
+            )
+            if verbose: print(f'Calculated Fermi level: {self.EF_nsc:.3f} eV saved to {nsc_dir}{EF_nsc_fout}')
 
         # store paths to directories
         self.sc_dir = sc_dir
@@ -463,7 +469,7 @@ class WannierTBmodel:
                 )
                 pickle.dump(spn_dict, fw)
 
-            if save_bands_spin_texture is True and kmesh_2D is False:
+            if save_bands_spin_texture is True: # and kmesh_2D is False:
                 save_bands_and_spin_texture(
                     self.kpoints_rec[dimension],
                     self.kpoints_cart[dimension],
@@ -476,19 +482,19 @@ class WannierTBmodel:
                     kmesh_2D=kmesh_2D,
                     fout=fout,
                 )
-            elif save_bands_spin_texture is True and kmesh_2D is True:
-                save_bands_and_spin_texture_old(
-                    self.kpoints_rec[dimension],
-                    self.kpoints_cart[dimension],
-                    self.kpath[dimension],
-                    self.Eigs_k[dimension],
-                    self.S_mn_k_H_x[dimension],
-                    self.S_mn_k_H_y[dimension],
-                    self.S_mn_k_H_z[dimension],
-                    save_folder=save_folder,
-                    kmesh_2D=kmesh_2D,
-                    fout=fout,
-                )
+            # elif save_bands_spin_texture is True and kmesh_2D is True:
+            #     save_bands_and_spin_texture_old(
+            #         self.kpoints_rec[dimension],
+            #         self.kpoints_cart[dimension],
+            #         self.kpath[dimension],
+            #         self.Eigs_k[dimension],
+            #         self.S_mn_k_H_x[dimension],
+            #         self.S_mn_k_H_y[dimension],
+            #         self.S_mn_k_H_z[dimension],
+            #         save_folder=save_folder,
+            #         kmesh_2D=kmesh_2D,
+            #         fout=fout,
+            #     )
 
             # clean standard output
         
@@ -597,8 +603,12 @@ class WannierTBmodel:
         kpoints2D = np.array(bands_spin_dat["kpoints"])
         bands2D = np.array(bands_spin_dat["bands"])
         Sx2D = np.array(bands_spin_dat["Sx"])
+        # take the real part of the diagonal over axes 1 and 2
+        Sx2D = np.real(np.diagonal(Sx2D, axis1=1, axis2=2))
         Sy2D = np.array(bands_spin_dat["Sy"])
+        Sy2D = np.real(np.diagonal(Sy2D, axis1=1, axis2=2))
         Sz2D = np.array(bands_spin_dat["Sz"])
+        Sz2D = np.real(np.diagonal(Sz2D, axis1=1, axis2=2))
         # S = np.linalg.norm([Sx2D, Sy2D, Sz2D], axis=0)
 
         # load 1D the data

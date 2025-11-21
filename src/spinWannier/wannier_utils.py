@@ -850,6 +850,13 @@ def save_bands_and_spin_texture_old(
     """
     bands_spin_dat = {}
     bands_spin_dat["kpoints"] = kpoints_cart
+    print('type(Eigs_k)', type(Eigs_k))
+    print('Eigs_k.shape', Eigs_k.shape)
+    print('type(S_mn_k_H_x)', type(S_mn_k_H_x))
+    print('S_mn_k_H_x.shape', S_mn_k_H_x.shape)
+    # print('Eigs_k.keys()', Eigs_k.keys())
+    # print('type(Eigs_k.keys()[0])')
+    print('kpoints_rec', kpoints_rec)
     bands_spin_dat["bands"] = [Eigs_k[kpoint] for kpoint in kpoints_rec]
     bands_spin_dat["Sx"] = [
         np.diagonal(S_mn_k_H_x[kpoint]).real for kpoint in kpoints_rec
@@ -1498,11 +1505,11 @@ def spn_to_dict(
     """
 
     if formatted is True and not fin.split(".")[-1].endswith("formatted"):
-        raise Warning(
+        print(
             f"Are you sure {fin} is a formatted (human-readable) file and not a binary FortranFile?"
         )
     if formatted is False and fin.split(".")[-1].endswith("formatted") == "formatted":
-        raise Warning(
+        print(
             f"Are you sure {fin} is a binary FortranFile and not a human-readable file?"
         )
 
@@ -1513,24 +1520,44 @@ def spn_to_dict(
     spin_names = ["x", "y", "z"]
 
     if formatted is True:
-        # human-readable spn file ("wannier90.spn_formatted")
         with open(fin, "r") as fr:
-            fr.readline()
-            # get number of bands and kpoints
-            NB = int(float(fr.readline()))
-            NK = int(float(fr.readline()))
-        with open(fin, "r") as fr:
-            # get the spin-projection matrices
-            Sskmn = np.loadtxt(fr, dtype=np.complex64, skiprows=3)
+            first_line = fr.readline()
+        if "from wavecar" in first_line:
+            # human-readable spn file ("wannier90.spn_formatted")
+            with open(fin, "r") as fr:
+                fr.readline()
+                # get number of bands and kpoints
+                NB = int(float(fr.readline()))
+                NK = int(float(fr.readline()))
+            with open(fin, "r") as fr:
+                # get the spin-projection matrices
+                Sskmn = np.loadtxt(fr, dtype=np.complex64, skiprows=3)
+        elif "by VASP" in first_line:
+            with open(fin, "r") as fr:
+                fr.readline()
+                # get number of bands and kpoints
+                second_line = fr.readline()
+                NB = int(second_line.split()[0])
+                NK = int(second_line.split()[1])
+            with open(fin, "r") as fr:
+                # get the spin-projection matrices
+                Sskmn_real_imag = np.loadtxt(fr, dtype=np.float64, skiprows=2)
+                Sskmn = Sskmn_real_imag[:, 0] + 1j * Sskmn_real_imag[:, 1]
+                Sskmn = Sskmn.reshape((NK, int(3 * NB * (NB + 1) / 2)))
+        else:
+            raise Warning(f"Unknown formating of the formatted spn file {fin} (neither custom _formatted.spn nor VASP generated).")
     else:
         # FortranFile spn file ("wannier90.spn")
-        with FortranFile(fin, "r") as fr:
-            header = fr.read_record(dtype="c")
-            NB, NK = fr.read_record(dtype=np.int32)
-            Sskmn = []
-            for i in range(NK):
-                Sskmn.append(fr.read_record(dtype=np.complex128))
-            Sskmn = np.array(Sskmn)
+        try:
+            with FortranFile(fin, "r") as fr:
+                header = fr.read_record(dtype="c")
+                NB, NK = fr.read_record(dtype=np.int32)
+                Sskmn = []
+                for i in range(NK):
+                    Sskmn.append(fr.read_record(dtype=np.complex128))
+                Sskmn = np.array(Sskmn)
+        except Exception as e:
+            raise Warning(f"Are you sure the file {fin} is a binary and not a formatted (human-readable) file?")
 
     # get names of k-points
     kpoint_names = get_kpoint_names(fwin=fwin)
@@ -1544,7 +1571,6 @@ def spn_to_dict(
         for n in range(NB):
             for m in range(n + 1):
                 for s in range(3):
-
                     Smn[s, m, n] = Sskmn[ik, int(3 * (n * (n + 1) / 2 + m) + s)]
                     # hermitian conjugate
                     Smn[s, n, m] = np.conj(Smn[s, m, n])
